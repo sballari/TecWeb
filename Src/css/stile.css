@@ -1,64 +1,125 @@
-/*
 *{
     margin: 0;
     padding: 0;
     border: 0;
-}
-#header{
-    height: 10%;
-}
-#logo{
-    float: left;
-    width: 2em;
     
 }
 
-#menu{
-    background-color: #333;
+#logo {
+	overflow: hidden;
+	max-height: 10em;
+	max-width: 20%;
+	float: left;
+}
 
+#menu {
+	
+	float: left;
+	overflow: hidden;
+	width: 70%;
+	margin-left: 10%;
+
+	
+	}
+#header{
+	border: 1px solid;
+	height: 10em;
+	background-color: lightyellow;
+	border-radius: 10px; 
+}
+
+#menu li a {
+	display: block;
+	padding:1em;
+	color: brown;
+	text-align: center;
+	text-decoration: none;
+}
+
+#menu li {
+	float:left;
 }
 
 #menu ul {
-    list-style-type: none;
-    overflow:hidden;
-}
-#menu li{
-    float:left;
-    
-    
+	list-style-type: none;
+	overflow: hidden;
+
 }
 
-#menu li a{
-    display: block;
-    color:white;
-    text-align: center;
-    width: 10em;
-    height: 3em;
-    text-decoration: none;
+#menu li a:hover {
+    background-color:antiquewhite;
+	border-bottom: 2px solid brown;
+
+} 
+
+
+#header h1{
+	padding: 0.5em;
+	text-align: center;
+	color: black;
 }
 
-#menu li a:hover{
-    background-color:#111;
+#content {
+	float: left;
+	font-size: 1.05em;
+}
+
+#contatti {
+	float: left;
+	background-color: lightyellow;
+}
+
+#contatti ul {
+	list-style-type: circle;
+}
+
+#footer {
+	float: left;
+	background-color: lightyellow;
+}
+
+#menu input[type=text] {
+	box-sizing: border-box;
+	margin-top: 1.1em;
+	margin-left: 1em;
+	width: 100%;
+	border: 1px solid brown;
+	border-radius: 4px;
+	
+}
+
+.contentElement {
+	padding: 1em;
+	overflow: hidden;
+	background-color: lightyellow;
+}
+
+.contentElement h2 {
+	text-align: center;
+	padding: 0.5em;
+}
+
+.contentElement img {
+	max-width: 40%;
+}
+
+.contentElement p {
+	margin: 1em;
 }
 
 
+.contentElement.Left img {
+	float: left;
+	padding-right:  0.6em;
+	margin-right: 0.6em;
+	border-right: 2px solid black;
 
-input[type=text]{
-    width:10em;
-    box-sizing: border-box;
-    border = 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-    background-color: white;
-    background-image:url("img\search-icon.png");
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding:1em 2em 1em 2em;
-    -webkit-transition:width 0.4s ease-in-out;
-    transition:width 0.4s ease-in-out;
 }
 
-input[type=text]:focus{
-    width:100%;
+.contentElement.Right img {
+	float: right;
+	padding-left: 0.6em;
+	border-left: 2px solid black;
+	margin-left: 0.6em;
 }
-*/
+
