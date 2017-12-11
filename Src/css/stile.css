@@ -57,7 +57,7 @@
 #menu li a:hover {
 
   background-color:antiquewhite;
-	
+
 
 }
 
@@ -138,4 +138,33 @@
 	padding-left: 0.6em;
 	border-left: 2px solid black;
 	margin-left: 0.6em;
+}
+#internalNavBar  {
+  width: 20%;
+  border: 1px solid brown;
+  float:left;
+}
+#internalNavBar ul {
+    list-style-type: none;
+    background-color: lightyellow;
+}
+
+#internalNavBar li a {
+    display: block;
+    color: brown;
+    padding: 1em 3em;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+#internalNavBar li a:hover {
+    background-color: antiquewhite;
+    color: brown;
+}
+
+.Loginform {
+  border: 1px solid brown;
+  margin: 1em;
+  padding: 1em;
+
 }
