@@ -4,6 +4,10 @@
     border: 0;
     background-color: lightyellow;
 }
+/*html{
+max-width: 1024px;
+
+}*/
 
 #logo {
 	overflow: hidden;
@@ -25,7 +29,6 @@
 #header{
 	border: 1px solid;
 	height: 10em;
-	background-color: lightyellow;
 	border-radius: 10px;
   width: 100%;
 }
@@ -72,7 +75,7 @@
 	float: left;
 	font-size: 1.05em;
   float: right;
-  width: 78%;
+  width: 79%;
 }
 
 #contatti {
@@ -142,6 +145,8 @@
 	margin-left: 0.6em;
 }
 #internalNavBar  {
+  margin-left: 0.5em;
+  margin-top: 1em;
   width: 20%;
   border: 1px solid brown;
   float:left;
@@ -164,7 +169,7 @@
     color: brown;
 }
 
-.Loginform {
+#LoginForm {
   border: 1px solid brown;
   margin: 1em;
   padding: 1em;
