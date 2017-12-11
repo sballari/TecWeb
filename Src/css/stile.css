@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     border: 0;
-
+    background-color: lightyellow;
 }
 
 #logo {
@@ -71,12 +71,14 @@
 #content {
 	float: left;
 	font-size: 1.05em;
-
+  float: right;
+  width: 78%;
 }
 
 #contatti {
 	float: left;
-  padding: 1em;
+  margin: 1em;
+
 	background-color: lightyellow;
   width: 100%;
 }
@@ -108,7 +110,7 @@
 .contentElement {
 	padding: 1em;
 	overflow: hidden;
-	background-color: lightyellow;
+
 }
 
 .contentElement h2 {
