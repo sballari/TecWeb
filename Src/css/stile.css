@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     border: 0;
-    
+
 }
 
 #logo {
@@ -13,27 +13,35 @@
 }
 
 #menu {
-	
+
 	float: left;
 	overflow: hidden;
 	width: 70%;
 	margin-left: 10%;
+  border:1px solid brown;
 
-	
+
 	}
 #header{
 	border: 1px solid;
 	height: 10em;
 	background-color: lightyellow;
-	border-radius: 10px; 
+	border-radius: 10px;
+  width: 100%;
 }
 
 #menu li a {
 	display: block;
 	padding:1em;
 	color: brown;
-	text-align: center;
+  text-align: center;
 	text-decoration: none;
+}
+#menu li span {
+	float:left;
+  padding:1em;
+  background-color: brown;
+  color: white;
 }
 
 #menu li {
@@ -47,10 +55,11 @@
 }
 
 #menu li a:hover {
-    background-color:antiquewhite;
-	border-bottom: 2px solid brown;
 
-} 
+  background-color:antiquewhite;
+	
+
+}
 
 
 #header h1{
@@ -62,22 +71,30 @@
 #content {
 	float: left;
 	font-size: 1.05em;
+
 }
 
 #contatti {
 	float: left;
+  padding: 1em;
 	background-color: lightyellow;
+  width: 100%;
 }
 
 #contatti ul {
 	list-style-type: circle;
+  padding-left: 1.5em;
+
 }
 
 #footer {
 	float: left;
 	background-color: lightyellow;
+  width: 100%;
 }
-
+#footer{
+  border-top: 1px solid;
+}
 #menu input[type=text] {
 	box-sizing: border-box;
 	margin-top: 1.1em;
@@ -85,7 +102,7 @@
 	width: 100%;
 	border: 1px solid brown;
 	border-radius: 4px;
-	
+
 }
 
 .contentElement {
@@ -122,4 +139,3 @@
 	border-left: 2px solid black;
 	margin-left: 0.6em;
 }
-
