@@ -16,23 +16,23 @@ function __construct($imgPath, $desc, $ingr, $type, $name){
   $name=$name;
 }
 
-function getImage() {
+public function getImage() {
   return $this->$imagePath;
 }
 
-function getDesc() {
+public function getDesc() {
   return $this->desc;
 }
 
-function getIngredients() {
+public function getIngredients() {
   return $this->ingredientes;
 }
 
-function getType() {
+public function getType() {
   return $this->type;
 }
 
-function getName() {
+public function getName() {
   return $this->name;
 }
 

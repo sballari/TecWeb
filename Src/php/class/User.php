@@ -1,5 +1,6 @@
 <?php
 
+
 class User{
   private $name;
   private $surname;
@@ -14,16 +15,16 @@ class User{
     $surname=$s;
   }
 
-  function getSurname(){
+  public function getSurname(){
     return $this->surname;
   }
-  function getName(){
+  public function getName(){
     return $this->name;
   }
-  function getEmail(){
+  public function getEmail(){
     return $this->email;
   }
-  function getPassword(){
+  public function getPassword(){
     return $this->password;
   }
 }
