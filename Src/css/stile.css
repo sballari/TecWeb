@@ -25,8 +25,7 @@ body{
 #menu {
 	overflow: hidden;
 	width: 78%;
-  border:1px solid brown;
-
+  	border:1px solid brown;
 
 	}
 #header{
@@ -114,7 +113,15 @@ body{
 	box-sizing: border-box;
 	border: 1px solid brown;
 	border-radius: 4px;
+	padding: 1px;
+	line-height:46px;
+	vertical-align: center;
+	display:block;
+	overflow: hidden;
+}
 
+#menu input[type=text]:focus {
+    background-color: lightblue;
 }
 
 .contentElement {
@@ -167,6 +174,11 @@ body{
     color: brown;
     padding: 1em 3em;
     text-decoration: none;
+}
+
+#internalNavBar li a.active {
+	background-color: brown;
+  	color: white;
 }
 
 /* Change the link color on hover */
