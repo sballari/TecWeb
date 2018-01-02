@@ -5,15 +5,14 @@ class Product {
   private $desc;
   private $ingredientes;
   private $type;
-  privete $name;
+  private $name;
 }
 function __construct($imgPath, $desc, $ingr, $type, $name){
-  global $imagePaht, $desc, $ingredientes, $type, $name;
-  $imgPath=$imgPath;
-  $desc=$desc;
-  $ingredientes=$ingr;
-  $type=$type;
-  $name=$name;
+  $this->imgPath=$imgPath;
+  $this->desc=$desc;
+  $this->ingredientes=$ingr;
+  $this->type=$type;
+  $this->name=$name;
 }
 
 public function getImage() {

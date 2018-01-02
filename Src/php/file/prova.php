@@ -1,9 +1,11 @@
 <?php
-include "DBmanager.php";
-$dbM = new DBmanager("127.0.0.1","utente","password","squittydb" );
-//$dbM->connect();
-//$dbM->disconnect();
+//include "../class/DBmanager.php";
+include "../class/Factory.php";
+		
+$dbM = new DBmanager("localhost","root","","squittydb" );
 $dbM->connect();
-echo var_dump($dbM->getStatus());
-echo var_dump($dbM->submitQuery("SHOW TABLES;"));
+$fact = new Factory($dbM);
+//$arr = $fact->getUserList();
+//print_r($arr);
+
 ?>
