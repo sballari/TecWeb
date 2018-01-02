@@ -22,43 +22,43 @@
 
 abstract class Request {
   private $reiceveRequestDate; //DateTime
-  private $status;
-  private $user;
+  private $status; //string
+  private $user; //User
   private $receveRequestHour; //DateTime
   private $deliveryDate; //DateTime
-	private $type;
-
-  function __construct($reiceveRequestDate,$status,$user,$receveHour,$deliveryDate) {
-    $this->requestDate= $requestDate;
+/*
+ *PRE: I formati di data e ora devono essere stringhe codificate con la sequente specifica
+ *http://php.net/manual/en/datetime.formats.time.php
+*/
+  function __construct($reiceveRequestDate,$status,User $user,$reiceveHour,$deliveryDate) {
+    $this->requestDate= new DateTime($requestDate);
     $this->status=$status;
     $this->user=$user;
-    $this->receveHour=$receveHour;
-    $this->deliveryDate=$deliveryDate;
+    $this->receveHour= new DateTime($receveHour);
+    $this->deliveryDate=new DateTime($deliveryDate);
+		$this->type = $tp;
   }
 
-  public abstract function getType() {
-    //the type can be "al minuto", "all'ingrosso", "servizio";
-		return $this->type;
-  }
+  public abstract function getType();
 
   public function getReiceveRequestDate() {
-		
+		$this->ReiceveRequestDate->format('d/m/o');
   }
 
   public function getStatus() {
-
+		return $this->status;
   }
 
   public function getUser() {
-
+		return $this->user;
   }
 
   public function getReiceveRequestHour() {
-
+		$this->ReiceveRequestHour->format('H:i');
   }
 
   public function getDeliveryDate() {
-
+		$this->deliveryDate->format('d/m/o');
   }
 
 }

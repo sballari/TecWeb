@@ -41,6 +41,25 @@ class Factory {
       else return false;
 	}
 	
-    
+	function getRequest(User $user){
+		if ($this->dbM->getStatus()==true){
+				$tipoUtente = $user->getType();
+				$email = $user->getEmail();
+			
+         switch($tipoUtente){
+					 case "Servizi":
+						 $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio WHERE utente = ".$email);
+						 
+					 break;
+					 case "All'ingrosso":
+						 $result = $this->dbM->submitQuery("SELECT * FROM ordine_all'ingrosso WHERE utente = ".$email);
+					 break;
+					 case "Al minuto":
+						 $result = $this->dbM->submitQuery("SELECT * FROM prenotazione WHERE utente = ".$email);
+					 break;					 
+				 }
+			
+       }
+      else return false;    
 }
 ?>
