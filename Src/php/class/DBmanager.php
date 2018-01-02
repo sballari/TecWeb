@@ -19,24 +19,20 @@ class DBmanager {
   }
   
   function connect() {
-    global $conn, $servername, $password, $username, $dbname, $status;
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) $status=false;
-    else $status=true;
-    return $status;
+    $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+    if ($this->conn->connect_error) $this->status=false;
+    else $this->status=true;
+    return $this->status;
   }
 
   function submitQuery(string $query) {
-    global $conn, $status;
-    if ($status) return $conn->query($query);
+    if ($this->status) return $this->conn->query($query);
     else return false;
   }
 
   function disconnect() {
-    global $conn, $status;
-    $status = false;
-    return $conn->close();
+    $this->status = false;
+    return $this->conn->close();
   }
 }
 ?>

@@ -21,27 +21,28 @@
 //date("01-12:00-59:sa") es: 06:05:00pm
 
 abstract class Request {
-  private int $reiceveRequestDate; //DateTime
+  private $reiceveRequestDate; //DateTime
   private $status;
   private $user;
-  private int $receveRequestHour; //DateTime
-  private int $deliveryDate; //DateTime
+  private $receveRequestHour; //DateTime
+  private $deliveryDate; //DateTime
+	private $type;
 
   function __construct($reiceveRequestDate,$status,$user,$receveHour,$deliveryDate) {
-    global   $requestDate, $status, $user, $receveHour, $deliveryDate;
-    $requestDate= $requestDate;
-    $status=$status;
-    $user=$user;
-    $receveHour=$receveHour;
-    $deliveryDate=$deliveryDate;
+    $this->requestDate= $requestDate;
+    $this->status=$status;
+    $this->user=$user;
+    $this->receveHour=$receveHour;
+    $this->deliveryDate=$deliveryDate;
   }
 
   public abstract function getType() {
-    //the type can be "al minuto", "all'ingrosso", "al dettaglio";
+    //the type can be "al minuto", "all'ingrosso", "servizio";
+		return $this->type;
   }
 
   public function getReiceveRequestDate() {
-
+		
   }
 
   public function getStatus() {

@@ -6,13 +6,15 @@ class User{
   private $surname;
   private $password;
   private $email;
+  private $type;//"All'ingrosso", "Serizi","Al minuto"
 
-  function __construct($e,$p,$n,$s) {
-    global $name,$surname,$password,$email;
-    $email=$e;
-    $password=$p;
-    $name=$n;
-    $surname=$s;
+  function __construct($e,$p,$n,$s,$tp) {
+    
+    $this->email=$e;
+    $this->password=$p;
+    $this->name=$n;
+    $this->surname=$s;
+    $this->type = $tp;
   }
 
   public function getSurname(){
@@ -26,6 +28,9 @@ class User{
   }
   public function getPassword(){
     return $this->password;
+  }
+  public function getType(){
+      return $this->type;
   }
 }
 
