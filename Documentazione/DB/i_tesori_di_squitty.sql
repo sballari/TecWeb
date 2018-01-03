@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2017 at 09:05 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Jan 03, 2018 at 05:06 PM
+-- Server version: 10.1.29-MariaDB
+-- PHP Version: 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `i_tesori_di_squitty`
+-- Database: `squittydb`
 --
 
 -- --------------------------------------------------------
@@ -75,35 +75,6 @@ INSERT INTO `composizione_al_minuto` (`prenotazione`, `prodotto`, `nr_prodotti`)
 (9, 'pancakes my way', 5),
 (10, 'red velvet cupcakes con copertura al formaggio ', 8),
 (11, 'semifreddo di formaggio e fragole', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `composizione_servizi`
---
-
-CREATE TABLE `composizione_servizi` (
-  `richiesta_servizio` int(11) NOT NULL,
-  `prodotto` varchar(100) NOT NULL,
-  `nr_prodotti` tinyint(3) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `composizione_servizi`
---
-
-INSERT INTO `composizione_servizi` (`richiesta_servizio`, `prodotto`, `nr_prodotti`) VALUES
-(1, 'cheesecake all arancia', 1),
-(1, 'cupcakes speziati con frosting al formaggio', 30),
-(1, 'palline di formaggio ai gusti vari', 30),
-(1, 'red velvet cupcakes con copertura al formaggio ', 30),
-(2, 'cuore di formaggio per la mamma', 1),
-(2, 'kasekuchen torta di formaggio quark tedesca', 4),
-(2, 'red velvet cupcakes con copertura al formaggio ', 16),
-(3, 'cheesecake alla crema di formaggio e topping ai frutti di bosco', 3),
-(3, 'crostata di pere e formaggio con cioccolato', 12),
-(4, 'cupcakes speziati con frosting al formaggio', 80),
-(4, 'kasekuchen torta di formaggio quark tedesca', 15);
 
 -- --------------------------------------------------------
 
@@ -173,30 +144,35 @@ INSERT INTO `prenotazione` (`codice`, `data_effetuazione`, `stato_ordine`, `data
 CREATE TABLE `prodotto` (
   `nome` varchar(100) NOT NULL,
   `ingredienti` varchar(150) NOT NULL,
-  `tipoProdotto` enum('Al minuto','All''ingrosso','Servizio','') NOT NULL
+  `tipoProdotto` enum('Al minuto','All''ingrosso','Servizio','') NOT NULL,
+  `imagePath` varchar(535) NOT NULL DEFAULT 'img/prodotti/tiramisu.jpeg',
+  `descrizione` varchar(535) NOT NULL DEFAULT 'il nostro fantastico tiramiusu'' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `prodotto`
 --
 
-INSERT INTO `prodotto` (`nome`, `ingredienti`, `tipoProdotto`) VALUES
-('cheesecake all arancia', 'biscotti, burro, cannella, mascarpone, formaggio spalmabile, zucchero, colla di pesce, arance, gelatina per torte.', 'Al minuto'),
-('cheesecake alla crema di formaggio e topping ai frutti di bosco', 'biscotti, burro, mascarpone, philadelphia, panna, zucchero, colla di pesce, frutti di bosco.', 'Al minuto'),
-('confezione 2kg crema al cioccolato', 'cioccolato, olio, latte', 'All\'ingrosso'),
-('confezione 3kg crema ganache', 'panna, cioccolato, burro.', 'All\'ingrosso'),
-('confezione 3kg crema pasticcera', 'tuorlo d\'uovo, zucchero, latte, farina', 'All\'ingrosso'),
-('confezione 3kg mousse di cioccolato', 'panna montata, uova, cioccolato', 'All\'ingrosso'),
-('confezione 5kg pasta sfoglia', 'farina, acqua, burro', 'All\'ingrosso'),
-('crostata di pere e formaggio con cioccolato', 'Farina, zucchero, burro, essenca di vanigla, lievito, formaggio philadelphia light, yogurt, uova, nocciole, pere, cioccolate fondente e con latte.', 'Al minuto'),
-('cuore di formaggio per la mamma', 'Farina, latte, zucchero, uova, biscotti, burro, miele, mascrpone, ricotta, cioccolato fondente.', 'Al minuto'),
-('cupcakes speziati con frosting al formaggio', 'farina, lievito, sale, raso di noce moscata, cannella, olio, zucchero, uova, latte, philadelphia, burro, aroma di vaniglia, ', 'Al minuto'),
-('kasekuchen torta di formaggio quark tedesca', 'Farina, zucchero, uova, vaniglia, latte, burro, quark cheese, biscotti.', 'Al minuto'),
-('muffin formaggio fresco e yogurt greco per una tombola scolastica', 'farina, lievito, uova, zucchero, burro, arance, yogurt, formaggio spalmabile', 'Al minuto'),
-('palline di formaggio ai gusti vari', 'ricotta, pecorino grattugiato, emmenthal, groviera, gorgonzola dolce, erba cipollina, gherigli di noce, paprika dolce, semi di papavero e sesamo.', 'Al minuto'),
-('pancakes my way', 'farina di grano saraceno, uova, zucchero, burro, latte, lievito, sale, miele, crema di cioccolato e nocciole, marmellata.', 'Al minuto'),
-('red velvet cupcakes con copertura al formaggio ', 'farina, sale, cacao, burro, zucchero, uovo, vaniglia, buttermilk, colorante alimentare, aceto bianco, bicarbonato di sodio, philadelphia, panna. ', 'Al minuto'),
-('semifreddo di formaggio e fragole', 'latte, mascarpone, fragole, formaggio spalmabile (philaddelphia), succo di limone, zucchero a velo.', 'Al minuto');
+INSERT INTO `prodotto` (`nome`, `ingredienti`, `tipoProdotto`, `imagePath`, `descrizione`) VALUES
+('Catering con fornitura', '', 'Servizio', 'img/prodotti/tiramisu.jpeg', 'Hai solo la location? Nessun problema... pensiamo a tutto noi.'),
+('cheesecake all arancia', 'biscotti, burro, cannella, mascarpone, formaggio spalmabile, zucchero, colla di pesce, arance, gelatina per torte.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('cheesecake alla crema di formaggio e topping ai frutti di bosco', 'biscotti, burro, mascarpone, philadelphia, panna, zucchero, colla di pesce, frutti di bosco.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 2kg crema al cioccolato', 'cioccolato, olio, latte', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg crema ganache', 'panna, cioccolato, burro.', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg crema pasticcera', 'tuorlo d\'uovo, zucchero, latte, farina', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg mousse di cioccolato', 'panna montata, uova, cioccolato', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 5kg pasta sfoglia', 'farina, acqua, burro', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('crostata di pere e formaggio con cioccolato', 'Farina, zucchero, burro, essenca di vanigla, lievito, formaggio philadelphia light, yogurt, uova, nocciole, pere, cioccolate fondente e con latte.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('cuore di formaggio per la mamma', 'Farina, latte, zucchero, uova, biscotti, burro, miele, mascrpone, ricotta, cioccolato fondente.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('cupcakes speziati con frosting al formaggio', 'farina, lievito, sale, raso di noce moscata, cannella, olio, zucchero, uova, latte, philadelphia, burro, aroma di vaniglia, ', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('kasekuchen torta di formaggio quark tedesca', 'Farina, zucchero, uova, vaniglia, latte, burro, quark cheese, biscotti.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('muffin formaggio fresco e yogurt greco per una tombola scolastica', 'farina, lievito, uova, zucchero, burro, arance, yogurt, formaggio spalmabile', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('palline di formaggio ai gusti vari', 'ricotta, pecorino grattugiato, emmenthal, groviera, gorgonzola dolce, erba cipollina, gherigli di noce, paprika dolce, semi di papavero e sesamo.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('pancakes my way', 'farina di grano saraceno, uova, zucchero, burro, latte, lievito, sale, miele, crema di cioccolato e nocciole, marmellata.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('red velvet cupcakes con copertura al formaggio ', 'farina, sale, cacao, burro, zucchero, uovo, vaniglia, buttermilk, colorante alimentare, aceto bianco, bicarbonato di sodio, philadelphia, panna. ', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('semifreddo di formaggio e fragole', 'latte, mascarpone, fragole, formaggio spalmabile (philaddelphia), succo di limone, zucchero a velo.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('Solo catering', '', 'Servizio', 'img/prodotti/tiramisu.jpeg', 'Il nostro famosissimo servizio di catering, ormai una garanzia. Favolosi camerieri vestiti in giallo Grana Padano, pronti ad allietare ogni tua festa.'),
+('Solo fornitura', '', 'Servizio', 'img/prodotti/tiramisu.jpeg', 'Hai gi&agrave; la tua squadra di camerieri? Ti mancano solo dei favolosi dolci al formaggio? Questa &egrave; l\'opzione giusta per te!');
 
 -- --------------------------------------------------------
 
@@ -212,18 +188,19 @@ CREATE TABLE `richiesta_servizio` (
   `risorse_necessarie` varchar(100) NOT NULL,
   `personale_richiesto` tinyint(3) UNSIGNED NOT NULL,
   `indirizzo_evento` varchar(50) NOT NULL,
-  `utente` varchar(30) NOT NULL
+  `utente` varchar(30) NOT NULL,
+  `Prodotto_servizio` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `richiesta_servizio`
 --
 
-INSERT INTO `richiesta_servizio` (`codice`, `data_effetuazione`, `stato_ordine`, `data_ora_evento`, `risorse_necessarie`, `personale_richiesto`, `indirizzo_evento`, `utente`) VALUES
-(1, '2017-12-05', 'in_lavorazione', '2018-03-03 11:00:00', '5 tavole, 30 sedie, decorazione per festa di compleanno', 5, 'Padova, Via Roma 34/B', 'carlo.bianchi@gmail.com'),
-(2, '2017-12-11', 'in_lavorazione', '2018-02-24 16:00:00', '4 tavole, 16 sedie, decorazione anniversario di matrimonio.', 2, 'Padova, Via Giacomo Leopardi 67', 'dario.verdi@gmail.com'),
-(3, '2017-12-04', 'passato', '2017-12-09 10:00:00', '3 tavole, 12 sedie', 2, 'Padova, Via Roma 15', 'fabio.bruni@gmail.com'),
-(4, '2017-12-11', 'in_lavorazione', '2018-02-27 16:00:00', '15 tavole, 80 sedie, decorazione bianco festivo ', 10, 'Padova, Via Altinate 67', 'piero.neri@gmail.com');
+INSERT INTO `richiesta_servizio` (`codice`, `data_effetuazione`, `stato_ordine`, `data_ora_evento`, `risorse_necessarie`, `personale_richiesto`, `indirizzo_evento`, `utente`, `Prodotto_servizio`) VALUES
+(1, '2017-12-05', 'in_lavorazione', '2018-03-03 11:00:00', '5 tavole, 30 sedie, decorazione per festa di compleanno', 5, 'Padova, Via Roma 34/B', 'carlo.bianchi@gmail.com', 'Solo catering'),
+(2, '2017-12-11', 'in_lavorazione', '2018-02-24 16:00:00', '4 tavole, 16 sedie, decorazione anniversario di matrimonio.', 2, 'Padova, Via Giacomo Leopardi 67', 'dario.verdi@gmail.com', 'Solo catering'),
+(3, '2017-12-04', 'passato', '2017-12-09 10:00:00', '3 tavole, 12 sedie', 2, 'Padova, Via Roma 15', 'fabio.bruni@gmail.com', 'Solo catering'),
+(4, '2017-12-11', 'in_lavorazione', '2018-02-27 16:00:00', '15 tavole, 80 sedie, decorazione bianco festivo ', 10, 'Padova, Via Altinate 67', 'piero.neri@gmail.com', 'Solo Catering');
 
 -- --------------------------------------------------------
 
@@ -235,33 +212,34 @@ CREATE TABLE `utente` (
   `email` varchar(30) NOT NULL,
   `nome` varchar(30) NOT NULL,
   `cognome` varchar(30) NOT NULL,
-  `tipo_utente` enum('Al minuto','All''ingrosso','Servizi','') NOT NULL
+  `tipo_utente` enum('Al minuto','All''ingrosso','Servizi','') NOT NULL,
+  `password` varchar(30) NOT NULL DEFAULT 'pass'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `utente`
 --
 
-INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`) VALUES
-('anna.pietro@gmail.com', 'Anna', 'Pietro', 'All\'ingrosso'),
-('carlo.bianchi@gmail.com', 'Carlo', 'Bianchi', 'Servizi'),
-('cristina.polletto@gmail.com', 'Cristina', 'Polletto', 'Al minuto'),
-('daniele.perosi@gmail.com', 'Daniele', 'Perosi', 'Al minuto'),
-('dario.verdi@gmail.com', 'Dario', 'Verdi', 'Servizi'),
-('fabio.bruni@gmail.com', 'Fabio', 'Bruni', 'Servizi'),
-('francesco.bellorini@gmail.com', 'Francesco', 'Bellorini', 'Al minuto'),
-('giorgia.pellegrino@gmail.com', 'Giorgia', 'Pellegrino', 'Al minuto'),
-('lorenzo.maroncelli@gmail.com', 'Lorenzo', 'Maroncelli', 'Al minuto'),
-('luca.monti@gmail.com', 'Luca', 'Monti', 'All\'ingrosso'),
-('luigi.rossetti@gmail.com', 'Luigi', 'Rossetti', 'All\'ingrosso'),
-('marco.loredan@gmail.com', 'Marco', 'Loredan', 'Al minuto'),
-('mario.gialli@gmail.com', 'Mario', 'Gialli', 'All\'ingrosso'),
-('matteo.marzolo@gmail.com', 'Matteo', 'Marzolo', 'Al minuto'),
-('piero.neri@gmail.com', 'Piero', 'Neri', 'All\'ingrosso'),
-('samuele.boccaccio@gmail.com', 'Samuele', 'Boccaccio', 'Al minuto'),
-('sara.rosso@gmail.com', 'Sara', 'Rosso', 'Al minuto'),
-('sebastiano.rovetta@gmail.com', 'Sebastiano ', 'Rovetta', 'Al minuto'),
-('silvia.rossi@gmail.com', 'Silvia', 'Rossi', 'Al minuto');
+INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`) VALUES
+('anna.pietro@gmail.com', 'Anna', 'Pietro', 'All\'ingrosso', '\"pass\"'),
+('carlo.bianchi@gmail.com', 'Carlo', 'Bianchi', 'Servizi', '\"pass\"'),
+('cristina.polletto@gmail.com', 'Cristina', 'Polletto', 'Al minuto', '\"pass\"'),
+('daniele.perosi@gmail.com', 'Daniele', 'Perosi', 'Al minuto', '\"pass\"'),
+('dario.verdi@gmail.com', 'Dario', 'Verdi', 'Servizi', '\"pass\"'),
+('fabio.bruni@gmail.com', 'Fabio', 'Bruni', 'Servizi', '\"pass\"'),
+('francesco.bellorini@gmail.com', 'Francesco', 'Bellorini', 'Al minuto', '\"pass\"'),
+('giorgia.pellegrino@gmail.com', 'Giorgia', 'Pellegrino', 'Al minuto', '\"pass\"'),
+('lorenzo.maroncelli@gmail.com', 'Lorenzo', 'Maroncelli', 'Al minuto', '\"pass\"'),
+('luca.monti@gmail.com', 'Luca', 'Monti', 'All\'ingrosso', '\"pass\"'),
+('luigi.rossetti@gmail.com', 'Luigi', 'Rossetti', 'All\'ingrosso', '\"pass\"'),
+('marco.loredan@gmail.com', 'Marco', 'Loredan', 'Al minuto', '\"pass\"'),
+('mario.gialli@gmail.com', 'Mario', 'Gialli', 'All\'ingrosso', '\"pass\"'),
+('matteo.marzolo@gmail.com', 'Matteo', 'Marzolo', 'Al minuto', '\"pass\"'),
+('piero.neri@gmail.com', 'Piero', 'Neri', 'All\'ingrosso', '\"pass\"'),
+('samuele.boccaccio@gmail.com', 'Samuele', 'Boccaccio', 'Al minuto', '\"pass\"'),
+('sara.rosso@gmail.com', 'Sara', 'Rosso', 'Al minuto', '\"pass\"'),
+('sebastiano.rovetta@gmail.com', 'Sebastiano ', 'Rovetta', 'Al minuto', '\"pass\"'),
+('silvia.rossi@gmail.com', 'Silvia', 'Rossi', 'Al minuto', '\"pass\"');
 
 --
 -- Indexes for dumped tables
@@ -279,13 +257,6 @@ ALTER TABLE `composizione_all'ingrosso`
 --
 ALTER TABLE `composizione_al_minuto`
   ADD PRIMARY KEY (`prenotazione`,`prodotto`),
-  ADD KEY `prodotto` (`prodotto`);
-
---
--- Indexes for table `composizione_servizi`
---
-ALTER TABLE `composizione_servizi`
-  ADD PRIMARY KEY (`richiesta_servizio`,`prodotto`),
   ADD KEY `prodotto` (`prodotto`);
 
 --
@@ -313,7 +284,8 @@ ALTER TABLE `prodotto`
 --
 ALTER TABLE `richiesta_servizio`
   ADD PRIMARY KEY (`codice`),
-  ADD KEY `richiesta_servizio_ibfk_1` (`utente`);
+  ADD KEY `richiesta_servizio_ibfk_1` (`utente`),
+  ADD KEY `tipo_servizio` (`Prodotto_servizio`);
 
 --
 -- Indexes for table `utente`
@@ -336,12 +308,6 @@ ALTER TABLE `composizione_all'ingrosso`
 --
 ALTER TABLE `composizione_al_minuto`
   MODIFY `prenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `composizione_servizi`
---
-ALTER TABLE `composizione_servizi`
-  MODIFY `richiesta_servizio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ordine_all'ingrosso`
@@ -380,13 +346,6 @@ ALTER TABLE `composizione_al_minuto`
   ADD CONSTRAINT `composizione_al_minuto_ibfk_3` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazione` (`codice`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `composizione_servizi`
---
-ALTER TABLE `composizione_servizi`
-  ADD CONSTRAINT `composizione_servizi_ibfk_1` FOREIGN KEY (`richiesta_servizio`) REFERENCES `richiesta_servizio` (`codice`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `composizione_servizi_ibfk_2` FOREIGN KEY (`prodotto`) REFERENCES `prodotto` (`nome`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `ordine_all'ingrosso`
 --
 ALTER TABLE `ordine_all'ingrosso`
@@ -402,7 +361,8 @@ ALTER TABLE `prenotazione`
 -- Constraints for table `richiesta_servizio`
 --
 ALTER TABLE `richiesta_servizio`
-  ADD CONSTRAINT `richiesta_servizio_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `richiesta_servizio_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `richiesta_servizio_ibfk_2` FOREIGN KEY (`Prodotto_servizio`) REFERENCES `prodotto` (`nome`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
