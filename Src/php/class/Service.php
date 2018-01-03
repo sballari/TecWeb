@@ -8,12 +8,12 @@ class Service extends Request {
 	private $resources; //string
 	private $adress; //string
 	private DateTime $eventStartHour;
-		
 
-	function __construct(Product $service, int $staffNumber, $resources, $adress, $startHour,
-											$reiceveRequestDate,$status,User $user,$reiceveHour,$deliveryDate){
-		 
-		 parent::__construct($reiceveRequestDate,$status,$user,$reiceveHour,$deliveryDate);
+
+	function __construct(Product $service, int $staffNumber, $resources, $adress,
+											$reiceveRequestDateTime,$status,User $user,$deliveryDateTime){
+
+		 parent::__construct($reiceveRequestDateTime,$status,$user,$deliveryDateTime);
 		 $this->serviceProd = $service;
 	   $this->staffNumber = $staffNumber; //int
 	   $this->resources = $resources; //string

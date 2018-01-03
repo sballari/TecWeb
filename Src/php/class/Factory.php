@@ -42,16 +42,36 @@ class Factory {
       }
       else return false;
 	}
+  private function getProduct($key){
+    if ($this->dbM->getStatus()==true){
+      $result = $this->dbM->submitQuery("SELECT * FROM Prodotto WHERE nome='".$key."'");
+      $product = $result->fetch_assoc()
+      return new Product ( $product['imagePath'],
+                           $product['descrizione'],
+                           $product['ingredienti'],
+                           $product['tipoProdotto'],
+                           $product['nome']);
+    }
+  }
 
 	function getRequest(User $user){
+    require_once("Service.php");
 		if ($this->dbM->getStatus()==true){
 				$tipoUtente = $user->getType();
-				$email = $user->getEmail();
+				$email = "'".$user->getEmail()."'";
 
          switch($tipoUtente){
 					 case "Servizi":
 						 $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio WHERE utente = ".$email);
-
+             $s= $result->fetch_assoc();
+             new Service( $this->getProduct($s['Prodotto_servizio']),
+                          $s['personale_richiesto'],
+                          $s['risorse_necessarie'],
+                          $s['indirizzo_evento'],
+                          $s['data_effettuazione'],   //da vedere Bene
+                          $s['stato_ordine']
+                          //getUser
+                          $s['data_ora_evento']);
 					 break;
 					 case "All'ingrosso":
 						 $result = $this->dbM->submitQuery("SELECT * FROM ordine_all'ingrosso WHERE utente = ".$email);

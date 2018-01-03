@@ -21,22 +21,19 @@
 //date("01-12:00-59:sa") es: 06:05:00pm
 
 abstract class Request {
-  private $reiceveRequestDate; //DateTime
+  private $reiceveRequestDateTime; //DateTime
   private $status; //string
   private $user; //User
-  private $receveRequestHour; //DateTime
-  private $deliveryDate; //DateTime
+  private $deliveryDateTime; //DateTime
 /*
  *PRE: I formati di data e ora devono essere stringhe codificate con la sequente specifica
  *http://php.net/manual/en/datetime.formats.time.php
 */
-  function __construct($reiceveRequestDate,$status,User $user,$reiceveHour,$deliveryDate) {
-    $this->requestDate= new DateTime($requestDate);
+  function __construct($reiceveRequestDate,$status,User $user,$deliveryDateTime) {
+    $this->reiceveRequestDateTime= new DateTime($reiceveDateTime);
     $this->status=$status;
     $this->user=$user;
-    $this->receveHour= new DateTime($receveHour);
-    $this->deliveryDate=new DateTime($deliveryDate);
-		$this->type = $tp;
+    $this->deliveryDateTime=new DateTime($deliveryDateTime);
   }
 
   public abstract function getType();
