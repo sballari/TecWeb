@@ -6,33 +6,34 @@ class Product {
   private $ingredientes;
   private $type;
   private $name;
-}
-function __construct($imgPath, $desc, $ingr, $type, $name){
-  $this->imgPath=$imgPath;
-  $this->desc=$desc;
-  $this->ingredientes=$ingr;
-  $this->type=$type;
-  $this->name=$name;
-}
 
-public function getImage() {
-  return $this->$imagePath;
-}
+  function __construct($imgPath, $desc, $ingr, $type, $name){
+    $this->imagePath=$imgPath;
+    $this->desc=$desc;
+    $this->ingredientes=$ingr;
+    $this->type=$type;
+    $this->name=$name;
+  }
 
-public function getDesc() {
-  return $this->desc;
-}
+  public function getImage() {
+    return $this->imagePath;
+  }
 
-public function getIngredients() {
-  return $this->ingredientes;
-}
+  public function getDesc() {
+    return $this->desc;
+  }
 
-public function getType() {
-  return $this->type;
-}
+  public function getIngredients() {
+    return $this->ingredientes;
+  }
 
-public function getName() {
-  return $this->name;
+  public function getType() {
+    return $this->type;
+  }
+
+  public function getName() {
+    return $this->name;
+  }
 }
 
 ?>

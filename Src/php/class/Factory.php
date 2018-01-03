@@ -1,7 +1,7 @@
 <?php
 include "DBmanager.php";
 include "User.php";
-include "Product.php"
+include "Product.php";
 class Factory {
   private $dbM;
 
@@ -12,54 +12,57 @@ class Factory {
   function getUserList(){
       if ($this->dbM->getStatus()==true){
           $result = $this->dbM->submitQuery("SELECT * FROM utente");
-          $arrUsr = array(); 
-          while ($arr = $result->fetch_assoc()){           
+          $arrUsr = array();
+          while ($arr = $result->fetch_assoc()){
               $arrUsr[] =new User ($arr['email'],
                                    $arr['password'],
                                    $arr['nome'],
                                    $arr['cognome'],
-                                   $arr['tipo_utente']);  
+                                   $arr['tipo_utente']);
           }
 					return $arrUsr;
       }
       else return false;
   }
-	
-	function getProductList(){
+
+	function getProductList($typeP){
+    //typeP can be "Al minuto", "All'ingrosso", "Servizi"
+      if ($typeP != "Al minuto" && $typeP != "All'ingrosso" && $typeP!="Servizi") return false;
 			if ($this->dbM->getStatus()==true){
-          $result = $this->dbM->submitQuery("SELECT * FROM prodotto");
-          $arrUsr = array(); 
-          while ($arr = $result->fetch_assoc()){           
+          $result = $this->dbM->submitQuery("SELECT * FROM prodotto WHERE tipoProdotto='".$typeP."'");
+          $arrUsr = array();
+          while ($arr = $result->fetch_assoc()){
               $arrPrd[] =new Product ($arr['imagePath'],
                                    $arr['descrizione'],
                                    $arr['ingredienti'],
                                    $arr['tipoProdotto'],
-                                   $arr['nome']);  
+                                   $arr['nome']);
           }
 					return $arrPrd;
       }
       else return false;
 	}
-	
+
 	function getRequest(User $user){
 		if ($this->dbM->getStatus()==true){
 				$tipoUtente = $user->getType();
 				$email = $user->getEmail();
-			
+
          switch($tipoUtente){
 					 case "Servizi":
 						 $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio WHERE utente = ".$email);
-						 
+
 					 break;
 					 case "All'ingrosso":
 						 $result = $this->dbM->submitQuery("SELECT * FROM ordine_all'ingrosso WHERE utente = ".$email);
 					 break;
 					 case "Al minuto":
 						 $result = $this->dbM->submitQuery("SELECT * FROM prenotazione WHERE utente = ".$email);
-					 break;					 
+					 break;
 				 }
-			
+
        }
-      else return false;    
+      else return false;
+}
 }
 ?>

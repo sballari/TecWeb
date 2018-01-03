@@ -1,5 +1,5 @@
 <?php
-class{
+class {
 function createheader(String page){
 echo "<div id="header">";
        echo "<img id="logo" src="img/logo.jpg" alt="logo i tesori di Squitty">";
@@ -66,11 +66,11 @@ echo "<div id="header">";
         echo "</div>";
 	echo "</div>";
 	}
-	
-	
+
+
 	function generatelogin( String type){
-	
-	
+
+
 	session_start();
 	if((!isset($_POST['email'])) || (!isset($_post['password'])))
 	{
@@ -89,10 +89,10 @@ echo "<div id="header">";
         echo "</fieldset>";
     echo "</form>";
 	echo "</div>";
-	
+
 	else
 	{
-		
+
 		if(file_exists("Authenticator.php"))
 		{
 			require_once "Authenticator.php";
@@ -108,22 +108,21 @@ echo "<div id="header">";
 		{
 			echo "Wrong email or password!";
 			echo "Insert your data again. Please remember that password must contain at least 8 caracters and at most 12 caracters.";
-			
+
 		}
 		else
 		{
 			header("Location: http://www.itesoridisquitty.it/account.php");
-			
+
 		}
-	
+
 }
 	}
 
-	
-	
-	
-	
-	
-	
-	?>
 
+
+
+
+
+
+	?>
