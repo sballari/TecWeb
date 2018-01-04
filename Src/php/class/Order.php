@@ -1,19 +1,21 @@
 <?php
-include "Request.php"
+include "Request.php";
 
 abstract class Order extends Request {
 	private $products = array();
 
-  function __construct($reiceveRequestDate,$status,User $user,$reiceveHour,$deliveryDate) {
-	  parent::__construct($reiceveRequestDate,$status,$user,$reiceveHour,$deliveryDate);
+  function __construct($reiceveRequestDateTime,$status,User $user,$deliveryDateTime,$key) {
+	  parent::__construct($reiceveRequestDateTime,$status,$user,$deliveryDateTime,$key);
   }
 	function getProducts(){
 		return $products;
 	}
 	function insertProduct(Product $prod){
-		products[] = $prod; 
+		$products[] = $prod;
 	}
-	
+	function insertProducts($arrayP){
+		array_merge($this->products, $arrayP);
+	}
 
 
 }

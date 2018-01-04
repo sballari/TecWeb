@@ -1,19 +1,20 @@
 <?php
-include "Order.php"
+include "Order.php";
 class RetailOrder extends Order{
 	private $userNote;//string
-	
-	function __construct($reiceveRequestDate,$status,User $user,$reiceveHour,$deliveryDate){
-		parent::__construct($reiceveRequestDate,$status,$user,$reiceveHour,$deliveryDate);
-		
+
+	function __construct($reiceveRequestDateTime,$status,User $user,$userNote,$deliveryDate,$key){
+		parent::__construct($reiceveRequestDateTime ,$status,$user,$deliveryDate,$key);
+		$this->userNote=$userNote;
+
 	}
 	function getUserNote(){
 		return $this->userNote;
 	}
 
-	
+
 	function getType(){
-		return "al minuto";
+		return "Al minuto";
 	}
 
 }

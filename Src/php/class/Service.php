@@ -1,14 +1,12 @@
 <?php
-include "Request.php"
-include "Product.php"
+include "Request.php";
+require_once("Product.php");
 
 class Service extends Request {
-  private Product $serviceProd;
+  private $serviceProd;
 	private $staffNumber; //int
 	private $resources; //string
 	private $adress; //string
-	private DateTime $eventStartHour;
-
 
 	function __construct(Product $service, int $staffNumber, $resources, $adress,
 											$reiceveRequestDateTime,$status,User $user,$deliveryDateTime){
@@ -17,8 +15,7 @@ class Service extends Request {
 		 $this->serviceProd = $service;
 	   $this->staffNumber = $staffNumber; //int
 	   $this->resources = $resources; //string
-	   $this->adress = $adress; //string
-	   $this->eventStartHour = new DateTime($startHour);
+	   $this->adress = $adress; //string x
 	}
 	function getService(){
 		return $this->serviceProd;
@@ -26,8 +23,8 @@ class Service extends Request {
 	function getStaffNumber(){
 		return $this->staffNumber;
 	}
+  return "Servizio";
 	function getType(){
-		return "servizio";
 	}
 	function getLocationAdress(){
 		return $this->adress;
