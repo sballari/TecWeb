@@ -25,15 +25,17 @@ abstract class Request {
   private $status; //string
   private $user; //User
   private $deliveryDateTime; //DateTime
+  private $key; // NULL means that the object isn't create from DB input, but from user input
 /*
  *PRE: I formati di data e ora devono essere stringhe codificate con la sequente specifica
  *http://php.net/manual/en/datetime.formats.time.php
 */
-  function __construct($reiceveRequestDate,$status,User $user,$deliveryDateTime) {
-    $this->reiceveRequestDateTime= new DateTime($reiceveDateTime);
+  function __construct($reiceveRequestDateTime,$status,User $user,$deliveryDateTime, $key) {
+    $this->reiceveRequestDateTime= new DateTime($reiceveRequestDateTime);
     $this->status=$status;
     $this->user=$user;
     $this->deliveryDateTime=new DateTime($deliveryDateTime);
+    $this->key = $key;
   }
 
   public abstract function getType();
@@ -57,7 +59,9 @@ abstract class Request {
   public function getDeliveryDate() {
 		$this->deliveryDate->format('d/m/o');
   }
-
+  public function getKey(){
+    return $this->key;
+  }
 }
 
 ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2018 at 05:06 PM
+-- Generation Time: Jan 04, 2018 at 02:20 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -25,20 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `composizione_all'ingrosso`
+-- Table structure for table `composizione_all_ingrosso`
 --
 
-CREATE TABLE `composizione_all'ingrosso` (
-  `ordine_all'ingrosso` int(11) NOT NULL,
+CREATE TABLE `composizione_all_ingrosso` (
+  `ordine_all_ingrosso` int(11) NOT NULL,
   `prodotto` varchar(100) NOT NULL,
   `nr_prodotti` smallint(5) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `composizione_all'ingrosso`
+-- Dumping data for table `composizione_all_ingrosso`
 --
 
-INSERT INTO `composizione_all'ingrosso` (`ordine_all'ingrosso`, `prodotto`, `nr_prodotti`) VALUES
+INSERT INTO `composizione_all_ingrosso` (`ordine_all_ingrosso`, `prodotto`, `nr_prodotti`) VALUES
 (1, 'confezione 2kg crema al cioccolato', 3),
 (1, 'confezione 3kg crema pasticcera', 4),
 (2, 'confezione 3kg crema ganache', 2),
@@ -79,12 +79,12 @@ INSERT INTO `composizione_al_minuto` (`prenotazione`, `prodotto`, `nr_prodotti`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ordine_all'ingrosso`
+-- Table structure for table `ordine_all_ingrosso`
 --
 
-CREATE TABLE `ordine_all'ingrosso` (
+CREATE TABLE `ordine_all_ingrosso` (
   `codice` int(11) NOT NULL,
-  `data_effetuazione` date NOT NULL,
+  `data_effettuazione` datetime NOT NULL,
   `stato_ordine` enum('in_lavorazione','passato','','') NOT NULL,
   `data_ora_consegna` datetime NOT NULL,
   `indirizzo_consegna` varchar(50) NOT NULL,
@@ -93,15 +93,15 @@ CREATE TABLE `ordine_all'ingrosso` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `ordine_all'ingrosso`
+-- Dumping data for table `ordine_all_ingrosso`
 --
 
-INSERT INTO `ordine_all'ingrosso` (`codice`, `data_effetuazione`, `stato_ordine`, `data_ora_consegna`, `indirizzo_consegna`, `periodicita`, `utente`) VALUES
-(1, '2017-11-15', 'in_lavorazione', '2017-12-29 08:00:00', 'Padova, Via Umberto 1 97/A', NULL, 'anna.pietro@gmail.com'),
-(2, '2017-12-12', 'in_lavorazione', '2018-02-28 07:30:00', 'Padova, Via Galileo Galileo 5', 'settimanale', 'luca.monti@gmail.com'),
-(3, '2017-11-09', 'passato', '2017-12-07 15:00:00', 'Padova, Via del Santo 51', NULL, 'luigi.rossetti@gmail.com'),
-(4, '2017-12-12', 'in_lavorazione', '2018-02-23 08:00:00', 'Padova, Via M. Cesarotti', 'mensile', 'mario.gialli@gmail.com'),
-(5, '2017-12-11', 'in_lavorazione', '2018-01-29 15:00:00', 'Padova, Via A. Manzoni 59', 'mensile', 'piero.neri@gmail.com');
+INSERT INTO `ordine_all_ingrosso` (`codice`, `data_effettuazione`, `stato_ordine`, `data_ora_consegna`, `indirizzo_consegna`, `periodicita`, `utente`) VALUES
+(1, '2017-11-15 00:00:00', 'in_lavorazione', '2017-12-29 08:00:00', 'Padova, Via Umberto 1 97/A', NULL, 'anna.pietro@gmail.com'),
+(2, '2017-12-12 00:00:00', 'in_lavorazione', '2018-02-28 07:30:00', 'Padova, Via Galileo Galileo 5', 'settimanale', 'luca.monti@gmail.com'),
+(3, '2017-11-09 00:00:00', 'passato', '2017-12-07 15:00:00', 'Padova, Via del Santo 51', NULL, 'luigi.rossetti@gmail.com'),
+(4, '2017-12-12 00:00:00', 'in_lavorazione', '2018-02-23 08:00:00', 'Padova, Via M. Cesarotti', 'mensile', 'mario.gialli@gmail.com'),
+(5, '2017-12-11 00:00:00', 'in_lavorazione', '2018-01-29 15:00:00', 'Padova, Via A. Manzoni 59', 'mensile', 'piero.neri@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ INSERT INTO `ordine_all'ingrosso` (`codice`, `data_effetuazione`, `stato_ordine`
 
 CREATE TABLE `prenotazione` (
   `codice` int(11) NOT NULL,
-  `data_effetuazione` date NOT NULL,
+  `data_effettuazione` datetime NOT NULL,
   `stato_ordine` enum('in_lavorazione','passato','','') NOT NULL,
   `data_ora_ritiro` datetime NOT NULL,
   `descrizione_utente` varchar(100) DEFAULT NULL,
@@ -122,18 +122,18 @@ CREATE TABLE `prenotazione` (
 -- Dumping data for table `prenotazione`
 --
 
-INSERT INTO `prenotazione` (`codice`, `data_effetuazione`, `stato_ordine`, `data_ora_ritiro`, `descrizione_utente`, `utente`) VALUES
-(1, '2017-11-04', 'passato', '2017-11-06 09:30:00', NULL, 'cristina.polletto@gmail.com'),
-(2, '2017-10-13', 'passato', '2017-11-02 11:00:00', 'confezione regalo', 'daniele.perosi@gmail.com'),
-(3, '2017-12-12', 'in_lavorazione', '2018-02-15 15:00:00', NULL, 'francesco.bellorini@gmail.com'),
-(4, '2017-12-11', 'in_lavorazione', '2018-02-22 13:20:00', 'confezione regalo', 'giorgia.pellegrino@gmail.com'),
-(5, '2017-09-14', 'passato', '2017-11-08 10:00:00', NULL, 'lorenzo.maroncelli@gmail.com'),
-(6, '2017-10-26', 'passato', '2017-12-06 14:00:00', NULL, 'marco.loredan@gmail.com'),
-(7, '2017-12-10', 'in_lavorazione', '2018-03-02 09:00:00', NULL, 'matteo.marzolo@gmail.com'),
-(8, '2017-12-12', 'in_lavorazione', '2018-01-26 15:00:00', 'confezione regalo', 'samuele.boccaccio@gmail.com'),
-(9, '2017-12-04', 'passato', '2017-12-08 17:00:00', NULL, 'sara.rosso@gmail.com'),
-(10, '2017-12-11', 'in_lavorazione', '2018-01-27 09:50:00', 'confezione regalo', 'sebastiano.rovetta@gmail.com'),
-(11, '2017-12-02', 'in_lavorazione', '2018-01-29 16:40:00', NULL, 'silvia.rossi@gmail.com');
+INSERT INTO `prenotazione` (`codice`, `data_effettuazione`, `stato_ordine`, `data_ora_ritiro`, `descrizione_utente`, `utente`) VALUES
+(1, '2017-11-04 00:00:00', 'passato', '2017-11-06 09:30:00', NULL, 'cristina.polletto@gmail.com'),
+(2, '2017-10-13 00:00:00', 'passato', '2017-11-02 11:00:00', 'confezione regalo', 'daniele.perosi@gmail.com'),
+(3, '2017-12-12 00:00:00', 'in_lavorazione', '2018-02-15 15:00:00', NULL, 'francesco.bellorini@gmail.com'),
+(4, '2017-12-11 00:00:00', 'in_lavorazione', '2018-02-22 13:20:00', 'confezione regalo', 'giorgia.pellegrino@gmail.com'),
+(5, '2017-09-14 00:00:00', 'passato', '2017-11-08 10:00:00', NULL, 'lorenzo.maroncelli@gmail.com'),
+(6, '2017-10-26 00:00:00', 'passato', '2017-12-06 14:00:00', NULL, 'marco.loredan@gmail.com'),
+(7, '2017-12-10 00:00:00', 'in_lavorazione', '2018-03-02 09:00:00', NULL, 'matteo.marzolo@gmail.com'),
+(8, '2017-12-12 00:00:00', 'in_lavorazione', '2018-01-26 15:00:00', 'confezione regalo', 'samuele.boccaccio@gmail.com'),
+(9, '2017-12-04 00:00:00', 'passato', '2017-12-08 17:00:00', NULL, 'sara.rosso@gmail.com'),
+(10, '2017-12-11 00:00:00', 'in_lavorazione', '2018-01-27 09:50:00', 'confezione regalo', 'sebastiano.rovetta@gmail.com'),
+(11, '2017-12-02 00:00:00', 'in_lavorazione', '2018-01-29 16:40:00', NULL, 'silvia.rossi@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ INSERT INTO `prodotto` (`nome`, `ingredienti`, `tipoProdotto`, `imagePath`, `des
 
 CREATE TABLE `richiesta_servizio` (
   `codice` int(11) NOT NULL,
-  `data_effetuazione` date NOT NULL,
+  `data_effettuazione` datetime NOT NULL,
   `stato_ordine` enum('in_lavorazione','passato','','') NOT NULL,
   `data_ora_evento` datetime NOT NULL,
   `risorse_necessarie` varchar(100) NOT NULL,
@@ -196,11 +196,11 @@ CREATE TABLE `richiesta_servizio` (
 -- Dumping data for table `richiesta_servizio`
 --
 
-INSERT INTO `richiesta_servizio` (`codice`, `data_effetuazione`, `stato_ordine`, `data_ora_evento`, `risorse_necessarie`, `personale_richiesto`, `indirizzo_evento`, `utente`, `Prodotto_servizio`) VALUES
-(1, '2017-12-05', 'in_lavorazione', '2018-03-03 11:00:00', '5 tavole, 30 sedie, decorazione per festa di compleanno', 5, 'Padova, Via Roma 34/B', 'carlo.bianchi@gmail.com', 'Solo catering'),
-(2, '2017-12-11', 'in_lavorazione', '2018-02-24 16:00:00', '4 tavole, 16 sedie, decorazione anniversario di matrimonio.', 2, 'Padova, Via Giacomo Leopardi 67', 'dario.verdi@gmail.com', 'Solo catering'),
-(3, '2017-12-04', 'passato', '2017-12-09 10:00:00', '3 tavole, 12 sedie', 2, 'Padova, Via Roma 15', 'fabio.bruni@gmail.com', 'Solo catering'),
-(4, '2017-12-11', 'in_lavorazione', '2018-02-27 16:00:00', '15 tavole, 80 sedie, decorazione bianco festivo ', 10, 'Padova, Via Altinate 67', 'piero.neri@gmail.com', 'Solo Catering');
+INSERT INTO `richiesta_servizio` (`codice`, `data_effettuazione`, `stato_ordine`, `data_ora_evento`, `risorse_necessarie`, `personale_richiesto`, `indirizzo_evento`, `utente`, `Prodotto_servizio`) VALUES
+(1, '2017-12-05 00:00:00', 'in_lavorazione', '2018-03-03 11:00:00', '5 tavole, 30 sedie, decorazione per festa di compleanno', 5, 'Padova, Via Roma 34/B', 'carlo.bianchi@gmail.com', 'Solo catering'),
+(2, '2017-12-11 00:00:00', 'in_lavorazione', '2018-02-24 16:00:00', '4 tavole, 16 sedie, decorazione anniversario di matrimonio.', 2, 'Padova, Via Giacomo Leopardi 67', 'dario.verdi@gmail.com', 'Solo catering'),
+(3, '2017-12-04 00:00:00', 'passato', '2017-12-09 10:00:00', '3 tavole, 12 sedie', 2, 'Padova, Via Roma 15', 'fabio.bruni@gmail.com', 'Solo catering'),
+(4, '2017-12-11 00:00:00', 'in_lavorazione', '2018-02-27 16:00:00', '15 tavole, 80 sedie, decorazione bianco festivo ', 10, 'Padova, Via Altinate 67', 'piero.neri@gmail.com', 'Solo Catering');
 
 -- --------------------------------------------------------
 
@@ -246,10 +246,10 @@ INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`) VAL
 --
 
 --
--- Indexes for table `composizione_all'ingrosso`
+-- Indexes for table `composizione_all_ingrosso`
 --
-ALTER TABLE `composizione_all'ingrosso`
-  ADD PRIMARY KEY (`ordine_all'ingrosso`,`prodotto`),
+ALTER TABLE `composizione_all_ingrosso`
+  ADD PRIMARY KEY (`ordine_all_ingrosso`,`prodotto`),
   ADD KEY `prodotto` (`prodotto`);
 
 --
@@ -260,9 +260,9 @@ ALTER TABLE `composizione_al_minuto`
   ADD KEY `prodotto` (`prodotto`);
 
 --
--- Indexes for table `ordine_all'ingrosso`
+-- Indexes for table `ordine_all_ingrosso`
 --
-ALTER TABLE `ordine_all'ingrosso`
+ALTER TABLE `ordine_all_ingrosso`
   ADD PRIMARY KEY (`codice`),
   ADD KEY `ordine_all'ingrosso_ibfk_1` (`utente`);
 
@@ -298,10 +298,10 @@ ALTER TABLE `utente`
 --
 
 --
--- AUTO_INCREMENT for table `composizione_all'ingrosso`
+-- AUTO_INCREMENT for table `composizione_all_ingrosso`
 --
-ALTER TABLE `composizione_all'ingrosso`
-  MODIFY `ordine_all'ingrosso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `composizione_all_ingrosso`
+  MODIFY `ordine_all_ingrosso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `composizione_al_minuto`
@@ -310,9 +310,9 @@ ALTER TABLE `composizione_al_minuto`
   MODIFY `prenotazione` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `ordine_all'ingrosso`
+-- AUTO_INCREMENT for table `ordine_all_ingrosso`
 --
-ALTER TABLE `ordine_all'ingrosso`
+ALTER TABLE `ordine_all_ingrosso`
   MODIFY `codice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
@@ -332,11 +332,11 @@ ALTER TABLE `richiesta_servizio`
 --
 
 --
--- Constraints for table `composizione_all'ingrosso`
+-- Constraints for table `composizione_all_ingrosso`
 --
-ALTER TABLE `composizione_all'ingrosso`
-  ADD CONSTRAINT `composizione_all'ingrosso_ibfk_1` FOREIGN KEY (`ordine_all'ingrosso`) REFERENCES `ordine_all'ingrosso` (`codice`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `composizione_all'ingrosso_ibfk_2` FOREIGN KEY (`prodotto`) REFERENCES `prodotto` (`nome`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `composizione_all_ingrosso`
+  ADD CONSTRAINT `composizione_all_ingrosso_ibfk_1` FOREIGN KEY (`ordine_all_ingrosso`) REFERENCES `ordine_all_ingrosso` (`codice`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `composizione_all_ingrosso_ibfk_2` FOREIGN KEY (`prodotto`) REFERENCES `prodotto` (`nome`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `composizione_al_minuto`
@@ -346,10 +346,10 @@ ALTER TABLE `composizione_al_minuto`
   ADD CONSTRAINT `composizione_al_minuto_ibfk_3` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazione` (`codice`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `ordine_all'ingrosso`
+-- Constraints for table `ordine_all_ingrosso`
 --
-ALTER TABLE `ordine_all'ingrosso`
-  ADD CONSTRAINT `ordine_all'ingrosso_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
+ALTER TABLE `ordine_all_ingrosso`
+  ADD CONSTRAINT `ordine_all_ingrosso_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utente` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `prenotazione`
