@@ -17,7 +17,7 @@ class DBmanager {
   function getStatus(){
     return $this->status;
   }
-  
+
   function connect() {
     $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
     if ($this->conn->connect_error) $this->status=false;
@@ -34,5 +34,9 @@ class DBmanager {
     $this->status = false;
     return $this->conn->close();
   }
+
+  // function no(){
+  //   return $this->conn;
+  // }
 }
 ?>

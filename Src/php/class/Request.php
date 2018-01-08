@@ -41,7 +41,7 @@ abstract class Request {
   public abstract function getType();
 
   public function getReiceveRequestDate() {
-		$this->ReiceveRequestDate->format('d/m/o');
+		return $this->reiceveRequestDateTime->format('d/m/o');
   }
 
   public function getStatus() {
@@ -53,11 +53,11 @@ abstract class Request {
   }
 
   public function getReiceveRequestHour() {
-		$this->ReiceveRequestHour->format('H:i');
+		return $this->reiceveRequestDateTime->format('H:i');
   }
 
   public function getDeliveryDate() {
-		$this->deliveryDate->format('d/m/o');
+		return $this->deliveryDateTime->format('d/m/o');
   }
   public function getKey(){
     return $this->key;

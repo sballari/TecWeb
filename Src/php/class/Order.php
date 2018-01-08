@@ -8,10 +8,10 @@ abstract class Order extends Request {
 	  parent::__construct($reiceveRequestDateTime,$status,$user,$deliveryDateTime,$key);
   }
 	function getProducts(){
-		return $products;
+		return $this->products;
 	}
 	function insertProduct(Product $prod){
-		$products[] = $prod;
+		$this->products[] = $prod;
 	}
 	function insertProducts($arrayP){
 		array_merge($this->products, $arrayP);
