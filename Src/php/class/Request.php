@@ -43,6 +43,9 @@ abstract class Request {
   public function getReiceveRequestDate() {
 		return $this->reiceveRequestDateTime->format('d/m/o');
   }
+  public function getReiceveRequestDateTime(){
+    return $this->reiceveRequestDateTime;
+  }
 
   public function getStatus() {
 		return $this->status;

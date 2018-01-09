@@ -35,8 +35,8 @@ class DBmanager {
     return $this->conn->close();
   }
 
-  // function no(){
-  //   return $this->conn;
-  // }
+  function no(){
+  return $this->conn;
+  }
 }
 ?>

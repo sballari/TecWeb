@@ -44,30 +44,32 @@ class Manipulator{
     else return false;
   }
 
-  function addProductToOrder($prodKey, $orderKey, $orderType){
-    if ($orderType == "All'ingrosso"){
+  private function addProductToOrder($prodKey, $orderKey, $orderType){
+    if ($orderType == "Al minuto" ){
       $table1 = "composizione_al_minuto";
       $forK = "prenotazione";
     }
-    if ($orderType == "Al minuto"){
+    if ($orderType == "All'ingrosso"){
       $table1 = "composizione_all_ingrosso";
       $forK = "ordine_all_ingrosso";
     }
     if ($orderType == "Servizio") return false;
-    $queryVerify = "SELECT count AS 'N', 'nr_prodotti' FROM ".$table1." WHERE
-                    ".$forK." = '".$orderKey."' & prodotto='".$prodKey."';";
+    $queryVerify = "SELECT nr_prodotti,count(*) AS 'N' FROM ".$table1." WHERE
+                    ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."';";
     $result = $this->dbM->submitQuery($queryVerify)->fetch_assoc(); // QUERY SBAGLIATA
     $number = $result["N"];
-    $newNumber = $result["nr_prodotti"]+1;
+    $newNumber = (int)$result["nr_prodotti"]+1;
+
     if ($number == 0) {
       $query = "INSERT INTO `".$table1."` (`".$forK."`, `prodotto`, `nr_prodotti`)
                     VALUES (".$orderKey.", '".$prodKey."', 1);";
 
     }
     else {
-      $query = "UPDATE `".$table1."` SET 'nr_prodotti' = `".$newNumber."`
-                     WHERE ".$forK." = '".$orderKey."' & prodotto='".$prodKey."';";
+      $query = "UPDATE `".$table1."` SET `nr_prodotti` = '".$newNumber."'
+                     WHERE ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."';";
     }
+
     return $this->dbM->submitQuery($query);
   }
 
@@ -85,21 +87,41 @@ class Manipulator{
                      '".$request->getUserNote()."',
                      '".$request->getUser()->getEmail()."')";
 
-          if ($this->dbM->submitQuery($query)){
+          if ($this->dbM->submitQuery($query)){ //inserimento request ok
                 $products = $request->getProducts(); //ottengo i prodotti
                 $allOk = $this->dbM->submitQuery("SET @profile_id = LAST_INSERT_ID();");
                 foreach ($products as $prod) {
-                  $queryComp = "INSERT INTO `composizione_al_minuto` (`prenotazione`, `prodotto`, `nr_prodotti`)
-                                VALUES (@profile_id, '".$prod->getName()."', '".$request->getN($productKey)."',
-                                 '".$request->getUserNote()."', '".$request->getUser()->getEmail()."')";
-                  $allOk = $this->dbM->submitQuery($queryComp);
+                  $this->addProductToOrder($prod->getName(), "@profile_id", "Al minuto");
                 }
                 $allOk = $this->dbM->submitQuery("COMMIT;"); //fine transazione atomica
                 return $allOk;
           }
           else {$allOk=false; return $allOk;}
         break;
-        //case 2
+        case "All'ingrosso":
+          $allOk = $this->dbM->submitQuery("START TRANSACTION;"); //inizio transazione atomica
+          $query = "INSERT INTO `ordine_all_ingrosso` (`data_effettuazione`,
+                        `stato_ordine`, `data_ora_consegna`,
+                        `indirizzo_consegna`, `periodicita`,
+                         `utente`)
+                    VALUES ('".$request->getReiceveRequestDate()."',
+                     '".$request->getStatus()."',
+                     '".$request->getDeliveryDate()."',
+                     '".$request->getDeliveryAdress()."',
+                     '".$request->getPeriodicity()."',
+                     '".$request->getUser()->getEmail()."')";
+
+          if ($this->dbM->submitQuery($query)){ //inserimento request ok
+                $products = $request->getProducts(); //ottengo i prodotti
+                $allOk = $this->dbM->submitQuery("SET @profile_id = LAST_INSERT_ID();");
+                foreach ($products as $prod) {
+                  $this->addProductToOrder($prod->getName(), "@profile_id", "Al minuto");
+                }
+                $allOk = $this->dbM->submitQuery("COMMIT;"); //fine transazione atomica
+                return $allOk;
+          }
+          else {$allOk=false; return $allOk;}
+        break;
         //case 3
     }
   }
