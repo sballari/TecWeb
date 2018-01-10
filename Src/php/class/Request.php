@@ -31,7 +31,8 @@ abstract class Request {
  *http://php.net/manual/en/datetime.formats.time.php
 */
   function __construct($reiceveRequestDateTime,$status,User $user,$deliveryDateTime, $key) {
-    $this->reiceveRequestDateTime= new DateTime($reiceveRequestDateTime);
+    try{$this->reiceveRequestDateTime = new DateTime($reiceveRequestDateTime);}
+    catch(Exception $e) {echo $e->getMessage(); exit(1);}
     $this->status=$status;
     $this->user=$user;
     $this->deliveryDateTime=new DateTime($deliveryDateTime);
@@ -43,8 +44,17 @@ abstract class Request {
   public function getReiceveRequestDate() {
 		return $this->reiceveRequestDateTime->format('d/m/o');
   }
+
+  public function getReiceveRequestHour() {
+    return $this->reiceveRequestDateTime->format('H:i');
+  }
+  
   public function getReiceveRequestDateTime(){
-    return $this->reiceveRequestDateTime;
+    return $this->reiceveRequestDateTime->format('Y-m-d H:i:s');
+  }
+
+  public function getDeliveryDateTime(){
+    return $this->deliveryDateTime->format('Y-m-d H:i:s');
   }
 
   public function getStatus() {
@@ -55,16 +65,13 @@ abstract class Request {
 		return $this->user;
   }
 
-  public function getReiceveRequestHour() {
-		return $this->reiceveRequestDateTime->format('H:i');
-  }
-
   public function getDeliveryDate() {
 		return $this->deliveryDateTime->format('d/m/o');
   }
   public function getKey(){
     return $this->key;
   }
+
 }
 
 ?>

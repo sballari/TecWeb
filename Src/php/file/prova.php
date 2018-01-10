@@ -3,6 +3,8 @@
 include "../class/Factory.php";
 include "../class/Manipulator.php";
 include "../class/RetailOrder.php";
+include "../class/MassiveOrder.php";
+
 
 $dbM = new DBmanager("localhost","root","","squittydb" );
 $dbM->connect();
@@ -10,12 +12,15 @@ $dbM->connect();
 //$serviceList = $fact->getRequestList("cristina.polletto@gmail.com");
 //echo $serviceList[0]->getUserNote();
 $man=new Manipulator($dbM);
-$user=new User("tullio.vardanega@gmail.com","orcaloca","tullio","vardanega","Al minuto");
-//echo var_dump($man->insertUser($user));
-$prod=new Product("img/prodotti/tiramisu.jpep","pot","vovi e scroto","Al minuto","salame alla scroto");
+$user=new User("tullio2@gmail.com","b","b","b","All_ingrosso");
+//echo var_dump($man->insertUser($user))."\n";
+$prod=new Product("img/prodotti/tiramisu.jpep","pot","vovi e scroto","All_ingrosso","salame 30cm");
 //echo var_dump($man->insertProduct($prod));
-$prenotazione=new RetailOrder("2018-01-08 00:00:00","in_lavorazione",$user,"banana","2018-01-10 00:00:00",null);
+$prenotazione=new MassiveOrder("Via sborina 13","settimanale","2018-01-08T00:00:00+01:00","in_lavorazione",$user,"2018-01-10T00:00:00",null);
+//__construct($devAdr, $periodicity,$reiceveRequestDateTime,$status,User $user,$deliveryDateTime,$key)
+$prenotazione->insertProduct($prod);
 $prenotazione->insertProduct($prod);
 echo var_dump($man->insertRequest($prenotazione));
+echo mysqli_error($dbM->no());
 //echo var_dump($man->addProductToOrder("salame alla merda",1,"Al minuto"));
 ?>

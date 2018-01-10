@@ -1,5 +1,5 @@
 <?php
-include "Order.php";
+require_once("Order.php");
 class MassiveOrder extends Order{
 	private $deliveryAdress; //string
 	private $periodicity; //string "settimanale","mensile" periodicita' di deliveryDate
@@ -16,7 +16,7 @@ class MassiveOrder extends Order{
 	}
 
 	function getType(){
-		return "All'ingrosso";
+		return "All_ingrosso";
 	}
 
 }

@@ -10,8 +10,9 @@ class Manipulator{
       require_once("User.php");
       if($this->dbM->getStatus()==true){
         $query = "INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`)
-                  VALUES ('".$user->getEmail()."', '".$user->getName()."', '".$user->getType()."',
+                  VALUES ('".$user->getEmail()."', '".$user->getName()."', '".$user->getSurname()."',
                    '".$user->getType()."', '".$user->getPassword()."')";
+        echo $query;
         return $this->dbM->submitQuery($query);
       }
       else return false;
@@ -49,7 +50,7 @@ class Manipulator{
       $table1 = "composizione_al_minuto";
       $forK = "prenotazione";
     }
-    if ($orderType == "All'ingrosso"){
+    if ($orderType == "All_ingrosso"){
       $table1 = "composizione_all_ingrosso";
       $forK = "ordine_all_ingrosso";
     }
@@ -81,9 +82,9 @@ class Manipulator{
         case "Al minuto":
           $allOk = $this->dbM->submitQuery("START TRANSACTION;"); //inizio transazione atomica
           $query = "INSERT INTO `prenotazione` (`data_effettuazione`, `stato_ordine`, `data_ora_ritiro`, `descrizione_utente`, `utente`)
-                    VALUES ('".$request->getReiceveRequestDate()."',
+                    VALUES ('".$request->getReiceveRequestDateTime()."',
                      '".$request->getStatus()."',
-                     '".$request->getDeliveryDate()."',
+                     '".$request->getDeliveryDateTime()."',
                      '".$request->getUserNote()."',
                      '".$request->getUser()->getEmail()."')";
 
@@ -98,31 +99,45 @@ class Manipulator{
           }
           else {$allOk=false; return $allOk;}
         break;
-        case "All'ingrosso":
+        case "All_ingrosso":
           $allOk = $this->dbM->submitQuery("START TRANSACTION;"); //inizio transazione atomica
           $query = "INSERT INTO `ordine_all_ingrosso` (`data_effettuazione`,
                         `stato_ordine`, `data_ora_consegna`,
                         `indirizzo_consegna`, `periodicita`,
                          `utente`)
-                    VALUES ('".$request->getReiceveRequestDate()."',
+                    VALUES ('".$request->getReiceveRequestDateTime()."',
                      '".$request->getStatus()."',
-                     '".$request->getDeliveryDate()."',
+                     '".$request->getDeliveryDateTime()."',
                      '".$request->getDeliveryAdress()."',
                      '".$request->getPeriodicity()."',
                      '".$request->getUser()->getEmail()."')";
-
+          echo $query;
           if ($this->dbM->submitQuery($query)){ //inserimento request ok
                 $products = $request->getProducts(); //ottengo i prodotti
                 $allOk = $this->dbM->submitQuery("SET @profile_id = LAST_INSERT_ID();");
                 foreach ($products as $prod) {
-                  $this->addProductToOrder($prod->getName(), "@profile_id", "Al minuto");
+                  $this->addProductToOrder($prod->getName(), "@profile_id", "All_ingrosso");
                 }
                 $allOk = $this->dbM->submitQuery("COMMIT;"); //fine transazione atomica
                 return $allOk;
           }
           else {$allOk=false; return $allOk;}
         break;
-        //case 3
+        case "Servizio":
+        $query = "INSERT INTO `richiesta_servizio` (`data_effettuazione`,
+                      `stato_ordine`, `data_ora_evento`,
+                      `risorse_necessarie`, `personale_richiesto`,
+                       ,`indirizzo_evento`,`utente`,`Prodotto_servizio`)
+                  VALUES ('".$request->getReiceveRequestDateTime()."',
+                   '".$request->getStatus()."',
+                   '".$request->getDeliveryDateTime()."',
+                   '".$request->getResourceNeeded()."',
+                   '".$request->getStaffNumber()."',
+                   '".$request->getDeliveryAdress()."',
+                   '".$request->getUser()->getEmail().",
+                   '".$request->getService()."')";
+        return $this->dbM->submitQuery($query);
+        break;
     }
   }
     else return false;
