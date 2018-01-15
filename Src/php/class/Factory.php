@@ -25,7 +25,7 @@ class Factory {
       else return false;
   }
 
- private function getUser($key){
+ public function getUser($key){
    if ($this->dbM->getStatus()==true){
      $result = $this->dbM->submitQuery("SELECT * FROM utente WHERE email='".$key."'");
      $us = $result->fetch_assoc();

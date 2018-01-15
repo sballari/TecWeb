@@ -4,6 +4,7 @@ include "../class/Factory.php";
 include "../class/Manipulator.php";
 include "../class/RetailOrder.php";
 include "../class/MassiveOrder.php";
+include "../class/Authenticator.php";
 
 
 $dbM = new DBmanager("localhost","root","","squittydb" );
@@ -20,7 +21,13 @@ $prenotazione=new MassiveOrder("Via sborina 13","settimanale","2018-01-08T00:00:
 //__construct($devAdr, $periodicity,$reiceveRequestDateTime,$status,User $user,$deliveryDateTime,$key)
 $prenotazione->insertProduct($prod);
 $prenotazione->insertProduct($prod);
-echo var_dump($man->insertRequest($prenotazione));
-echo mysqli_error($dbM->no());
+$aut = new Authenticator($dbM);
+
+
+
+echo var_dump($aut->validateUser("silvia.rossi@gmail.com", "pass"));
+
+//echo var_dump($man->insertRequest($prenotazione));
+//echo mysqli_error($dbM->no());
 //echo var_dump($man->addProductToOrder("salame alla merda",1,"Al minuto"));
 ?>
