@@ -1,14 +1,14 @@
 <?php
 
 class CommonHtmlElement{
-	
+
 	function _construct()
 	{
 	}
 
 	public function createheader($page){
 		echo "<div id='header'>";
-			echo "<img  id='logo' src='img/logo.jpg' alt='logo i tesori di Squitty'>";
+			echo "<img  id='logo' src='../../img/logo.jpg' alt='logo i tesori di Squitty'>";
 			echo "<h1>I tesori di <span lang='en'>Squitty</span></h1>";
 			echo "<div id='menu' >";
 				switch($page){
@@ -73,11 +73,11 @@ class CommonHtmlElement{
 			echo "</div>";
 		echo "</div>";
 	}
-	
-	
+
+
 	public function generatelogin($type){
-	
-	
+
+
 		session_start();
 		if((!isset($_POST['email'])) || (!isset($_POST['password'])))
 		{
@@ -99,7 +99,7 @@ class CommonHtmlElement{
 		}
 		else
 		{
-		
+
 			if(file_exists("Authenticator.php"))
 			{
 				require_once "Authenticator.php";
@@ -115,17 +115,16 @@ class CommonHtmlElement{
 			{
 				echo "Wrong email or password!";
 				echo "Insert your data again. Please remember that password must contain at least 8 caracters and at most 12 caracters.";
-			
+
 			}
 			else
 			{
 				header("Location: http://www.itesoridisquitty.it/account.php");
-			
+
 			}
-	
+
 		}
 	}
 
 }
 	?>
-

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2018 at 02:20 PM
+-- Generation Time: Jan 15, 2018 at 10:17 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -123,7 +123,7 @@ CREATE TABLE `prenotazione` (
 --
 
 INSERT INTO `prenotazione` (`codice`, `data_effettuazione`, `stato_ordine`, `data_ora_ritiro`, `descrizione_utente`, `utente`) VALUES
-(1, '2017-11-04 00:00:00', 'passato', '2017-11-06 09:30:00', NULL, 'cristina.polletto@gmail.com'),
+(1, '2017-11-04 00:00:00', 'passato', '2017-11-06 09:30:00', NULL, 'cristina.polletto@gmail.it'),
 (2, '2017-10-13 00:00:00', 'passato', '2017-11-02 11:00:00', 'confezione regalo', 'daniele.perosi@gmail.com'),
 (3, '2017-12-12 00:00:00', 'in_lavorazione', '2018-02-15 15:00:00', NULL, 'francesco.bellorini@gmail.com'),
 (4, '2017-12-11 00:00:00', 'in_lavorazione', '2018-02-22 13:20:00', 'confezione regalo', 'giorgia.pellegrino@gmail.com'),
@@ -144,7 +144,7 @@ INSERT INTO `prenotazione` (`codice`, `data_effettuazione`, `stato_ordine`, `dat
 CREATE TABLE `prodotto` (
   `nome` varchar(100) NOT NULL,
   `ingredienti` varchar(150) NOT NULL,
-  `tipoProdotto` enum('Al minuto','All''ingrosso','Servizio','') NOT NULL,
+  `tipoProdotto` enum('Al minuto','All_ingrosso','Servizio') NOT NULL,
   `imagePath` varchar(535) NOT NULL DEFAULT 'img/prodotti/tiramisu.jpeg',
   `descrizione` varchar(535) NOT NULL DEFAULT 'il nostro fantastico tiramiusu'' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -157,11 +157,11 @@ INSERT INTO `prodotto` (`nome`, `ingredienti`, `tipoProdotto`, `imagePath`, `des
 ('Catering con fornitura', '', 'Servizio', 'img/prodotti/tiramisu.jpeg', 'Hai solo la location? Nessun problema... pensiamo a tutto noi.'),
 ('cheesecake all arancia', 'biscotti, burro, cannella, mascarpone, formaggio spalmabile, zucchero, colla di pesce, arance, gelatina per torte.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
 ('cheesecake alla crema di formaggio e topping ai frutti di bosco', 'biscotti, burro, mascarpone, philadelphia, panna, zucchero, colla di pesce, frutti di bosco.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
-('confezione 2kg crema al cioccolato', 'cioccolato, olio, latte', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
-('confezione 3kg crema ganache', 'panna, cioccolato, burro.', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
-('confezione 3kg crema pasticcera', 'tuorlo d\'uovo, zucchero, latte, farina', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
-('confezione 3kg mousse di cioccolato', 'panna montata, uova, cioccolato', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
-('confezione 5kg pasta sfoglia', 'farina, acqua, burro', 'All\'ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 2kg crema al cioccolato', 'cioccolato, olio, latte', 'All_ingrosso', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg crema ganache', 'panna, cioccolato, burro.', '', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg crema pasticcera', 'tuorlo d\'uovo, zucchero, latte, farina', '', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 3kg mousse di cioccolato', 'panna montata, uova, cioccolato', '', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
+('confezione 5kg pasta sfoglia', 'farina, acqua, burro', '', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
 ('crostata di pere e formaggio con cioccolato', 'Farina, zucchero, burro, essenca di vanigla, lievito, formaggio philadelphia light, yogurt, uova, nocciole, pere, cioccolate fondente e con latte.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
 ('cuore di formaggio per la mamma', 'Farina, latte, zucchero, uova, biscotti, burro, miele, mascrpone, ricotta, cioccolato fondente.', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
 ('cupcakes speziati con frosting al formaggio', 'farina, lievito, sale, raso di noce moscata, cannella, olio, zucchero, uova, latte, philadelphia, burro, aroma di vaniglia, ', 'Al minuto', 'img/prodotti/tiramisu.jpeg', 'il nostro fantastico tiramiusu\' gioia per gli occhi e indescrivibile piacer. Vieni a provarlo anche tu nei nostri negozi in giro per il mondo !!!'),
@@ -223,7 +223,7 @@ CREATE TABLE `utente` (
 INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`) VALUES
 ('anna.pietro@gmail.com', 'Anna', 'Pietro', 'All\'ingrosso', '\"pass\"'),
 ('carlo.bianchi@gmail.com', 'Carlo', 'Bianchi', 'Servizi', '\"pass\"'),
-('cristina.polletto@gmail.com', 'Cristina', 'Polletto', 'Al minuto', '\"pass\"'),
+('cristina.polletto@gmail.it', 'Cristina', 'Polletto', 'Al minuto', '\"pass\"'),
 ('daniele.perosi@gmail.com', 'Daniele', 'Perosi', 'Al minuto', '\"pass\"'),
 ('dario.verdi@gmail.com', 'Dario', 'Verdi', 'Servizi', '\"pass\"'),
 ('fabio.bruni@gmail.com', 'Fabio', 'Bruni', 'Servizi', '\"pass\"'),
@@ -239,7 +239,8 @@ INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`) VAL
 ('samuele.boccaccio@gmail.com', 'Samuele', 'Boccaccio', 'Al minuto', '\"pass\"'),
 ('sara.rosso@gmail.com', 'Sara', 'Rosso', 'Al minuto', '\"pass\"'),
 ('sebastiano.rovetta@gmail.com', 'Sebastiano ', 'Rovetta', 'Al minuto', '\"pass\"'),
-('silvia.rossi@gmail.com', 'Silvia', 'Rossi', 'Al minuto', '\"pass\"');
+('silvia.rossi@gmail.com', 'Silvia', 'Rossi', 'Al minuto', 'pass'),
+('simone', 'BALLA', 'SIMONE', 'Servizi', 'pass');
 
 --
 -- Indexes for dumped tables

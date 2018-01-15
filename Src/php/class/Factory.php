@@ -41,7 +41,7 @@ class Factory {
 
 	function getProductList($typeP){
     //typeP can be "Al minuto", "Allingrosso", "Servizi"
-      if ($typeP != "Al minuto" && $typeP != "All'ingrosso" && $typeP!="Servizi") return false;
+      if ($typeP != "Al minuto" && $typeP != "All_ingrosso" && $typeP!="Servizi") return false;
 			if ($this->dbM->getStatus()==true){
           $result = $this->dbM->submitQuery("SELECT * FROM prodotto WHERE tipoProdotto='".$typeP."'");
           $arrUsr = array();

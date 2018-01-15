@@ -8,12 +8,12 @@
     <meta name="keywords" content="curiosita" >
     <meta name="language" content="italian it">
     <meta http-equiv="Content-Type" content="text/html; =charset=utf-8">
-    <link rel="stylesheet" href="stile.css">
+    <link rel="stylesheet" href="../../css/stile.css">
 </head>
 <body>
     <div id="accessBar">
     </div>
-	
+
 
     <?php
 		if(file_exists("CommonHtmlElement.php")){
@@ -21,12 +21,12 @@
 			else{
 				echo "Error: file does not esist.";
 				exit;}
-		
+
 		$header = new CommonHtmlElement();
 		$header->createheader("catering");
 	?>
 
-	
+
     <div id ="internalNavBar">
         <ul>
             <li><a href="#LoginForm">Login</a></li>
@@ -37,8 +37,8 @@
     </div>
     <div id="content">
         <h2>CATERING ED EVENTI</h2>
-		
-		
+
+
          <?php
 			if(file_exists("CommonHtmlElement.php")){
 				require_once "CommonHtmlElement.php";}
@@ -49,8 +49,8 @@
 			$login = new CommonHtmlElement();
 			$login->generatelogin("catering");
 		?>
-		
-		
+
+
         <div id="info">
             <h3>SERVIZIO CATERING ED EVENTI</h3>
             <p>

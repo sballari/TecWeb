@@ -8,13 +8,13 @@
     <meta name="keywords" content="curiosita" >
     <meta name="language" content="italian it">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="stile.css">
+    <link rel="stylesheet" href="../../css/stile.css">
 </head>
 <body>
     <div id="accessBar">
     </div>
-	
-	
+
+
     <?php
 		if(file_exists("CommonHtmlElement.php")){
 			require_once "CommonHtmlElement.php";}
@@ -25,7 +25,7 @@
 		$header->createheader("ristorante");
 	?>
 
-	
+
     <div id ="internalNavBar">
         <ul>
             <li><a href="#LoginForm">Login</a></li>
@@ -36,8 +36,8 @@
     </div>
     <div id="content">
         <h2>PER IL TUO RISTORANTE</h2>
-		
-		
+
+
          <?php
 			if(file_exists("CommonHtmlElement.php")){
 				require_once "CommonHtmlElement.php";}
@@ -47,8 +47,8 @@
 			$login = new CommonHtmlElement();
 			$login->generatelogin("All'ingrosso");
 		?>
-		
-		
+
+
         <div id="info">
             <h3>SERVIZIO FORNITURE</h3>
             <p>
@@ -62,32 +62,30 @@
 
 
             <?php
-				if(file_exists("Factory.php") && file_exists("DBmanager.php") ){
-					require_once("Factory.php");
-					require_once("DBmanager.php");}
+				if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
+					require_once("../class/Factory.php");
+					require_once("../class/DBmanager.php");}
 				else{
 					echo "Error: One of the files does not esist.";
 					exit;}
-				
-				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty");
+
+				$d = new DBmanager("localhost", "root", "", "squittydb");
+        $d->connect();
 				$f = new Factory($d);
-				$prod = $f->getProductList();
-				$arrlength = count($prod);
+        $prod = $f->getProductList("All_ingrosso");
+        //echo var_dump($prod);
 
-
-
-				for($x = 0; $x < $arrlength; $x++){
-					if($prod[$x]->getType()=="Al minuto"){
+        foreach ($prod as $x) {
 						echo "<div class='product'>";
-						echo "<h4>" . $prod[$x]->getName() . "</h4>";
-						echo "<img src='$p->getImage()' alt='$p->getName()'>";
-						echo "<p> Ingredienti:" . $prod[$x]->getIngredienti() . "</p>";
-						echo "<p> Descrizione" . $prod[$x]->getDesc() . "</p>";
+						echo "<h4>" . $x->getName() . "</h4>";
+            $relativeImagePath = "'../../".$x->getImage()."'";
+						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
+						echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";
+						echo "<p> Descrizione" . $x->getDesc() . "</p>";
 						echo "</div>";
-					}
-				}
-			
-			
+        }
+
+
 			?>
 
         </div>
