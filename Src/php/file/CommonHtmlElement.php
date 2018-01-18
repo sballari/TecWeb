@@ -8,7 +8,7 @@ class CommonHtmlElement{
 
 	public function createheader($page){
 		echo "<div id='header'>";
-			echo "<img  id='logo' src='../../img/logo.jpg' alt='logo i tesori di Squitty'>";
+			echo "<img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'>";
 			echo "<h1>I tesori di <span lang='en'>Squitty</span></h1>";
 			echo "<div id='menu' >";
 				switch($page){
