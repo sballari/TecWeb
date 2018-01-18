@@ -1,7 +1,7 @@
 <?php
-include "DBmanager.php";
-include "User.php";
-include "Product.php";
+require_once("DBmanager.php");
+require_once("User.php");
+require_once("Product.php");
 class Factory {
   private $dbM;
 

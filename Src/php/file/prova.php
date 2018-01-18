@@ -25,7 +25,7 @@ $aut = new Authenticator($dbM);
 
 
 
-echo var_dump($aut->validateUser("silvia.rossi@gmail.com", "pass"));
+echo var_dump($aut->validateUser("carlo.bianchi@gmail.com", '"pass"'));
 
 //echo var_dump($man->insertRequest($prenotazione));
 //echo mysqli_error($dbM->no());
