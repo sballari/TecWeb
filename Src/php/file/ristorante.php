@@ -44,8 +44,9 @@
 			else{
 				echo "Error: file does not esist.";
 				exit;}
-			$login = new CommonHtmlElement();
-			$login->generatelogin("All'ingrosso");
+			$log = new CommonHtmlElement();
+			$log->generatelogin();
+			$log->generateSignup();
 		?>
 
 
@@ -69,10 +70,10 @@
 					echo "Error: One of the files does not esist.";
 					exit;}
 
-				$d = new DBmanager("localhost", "root", "", "squittydb");
-        $d->connect();
+				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+				$d->connect();
 				$f = new Factory($d);
-        $prod = $f->getProductList("All_ingrosso");
+				$prod = $f->getProductList("All_ingrosso");
         //echo var_dump($prod);
 
         foreach ($prod as $x) {

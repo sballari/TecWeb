@@ -46,8 +46,9 @@
 				echo "Error: file does not esist.";
 				exit;}
 
-			$login = new CommonHtmlElement();
-			$login->generatelogin("catering");
+			$log = new CommonHtmlElement();
+			$log->generatelogin();
+			$log->generateSignup();
 		?>
 
 
@@ -65,30 +66,34 @@
             <h3>I NOSTRI PRODOTTI</h3>
 
 			<!-- magari fare in forma tabellare???? -->
-            <div class="product">
-                <h4>Catering con fornitura</h4>
-                <img src="img/p1.png" alt="foto catering Quirinale">
-                <p>
-                    Hai solo la location? Nessun problema... pensiamo a tutto noi.
-                </p>
-            </div>
-            <div class="product">
-                <h4>Solo Catering</h4>
-                <img src="img/p1.png" alt="torta quarck">
-                <p>
-                    Il nostro famosissimo servizio di catering, ormai una garanzia.
-                    Favolosi camerieri vestiti in giallo emmental pronti ad allietare
-                    i tuoi ospiti.
-                </p>
-            </div>
-            <div class="product">
-                <h4>Solo fornitura</h4>
-                <img src="img/p1.png" alt="torta quarck">
-                <p>
-                    Hai gi&agrave; la tua squadra di camerieri, hai bisogno solo di favolosi dolci
-                    al formaggio? Questa &egrave; l'opzione giusta per te! Formaggiosissimo!
-                </p>
-            </div>
+           <?php
+				if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
+					require_once("../class/Factory.php");
+					require_once("../class/DBmanager.php");}
+				else{
+					echo "Error: One of the files does not esist.";
+					exit;}
+
+				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+				$d->connect();
+				$f = new Factory($d);
+				$prod = $f->getProductList("Servizio");
+        //echo var_dump($prod);
+
+				foreach ($prod as $x) {
+						echo "kot";
+						echo "<div class='product'>";
+						echo "<h4>" . $x->getName() . "</h4>";
+            $relativeImagePath = "'../../".$x->getImage()."'";
+						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
+						//if($x->getIngredients()!==NULL){
+						//echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";}
+						echo "<p> Descrizione" . $x->getDesc() . "</p>";
+						echo "</div>";
+        }
+
+
+			?>
 
         </div>
 

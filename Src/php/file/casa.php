@@ -15,11 +15,12 @@
     </div>
 
     <?php
-		if(file_exists("CommonHtmlElement.php")){
-			require_once ("CommonHtmlElement.php");}
-		else{
-			echo "Error: file does not esist.";
-			exit;}
+		//if(file_exists("CommonHtmlElement.php")){
+			require_once ("CommonHtmlElement.php");
+			//}
+		//else{
+			//echo "Error: file does not esist.";
+			//exit;}
 		$header = new CommonHtmlElement();
 		$header->createheader("casa");
 	?>
@@ -40,8 +41,9 @@
 			else{
 				echo "Error: file does not esist.";
 				exit;}
-			$login = new CommonHtmlElement();
-			$login->generatelogin("Al minuto");
+			$log = new CommonHtmlElement();
+			$log->generatelogin();
+			$log->generateSignup();
 		?>
         <div id="info">
             <h3>SERVIZIO PRENOTAZIONE</h3>
@@ -63,8 +65,8 @@
 					echo "Error: One of the files does not esist.";
 					exit;}
 
-				$d = new DBmanager("localhost", "root", "", "squittydb");
-        $d->connect();
+				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+				$d->connect();
 				$f = new Factory($d);
 				$prod = $f->getProductList("Al minuto");
 
