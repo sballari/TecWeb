@@ -44,7 +44,7 @@ class Factory {
       if ($typeP != "Al minuto" && $typeP != "All_ingrosso" && $typeP!="Servizio") return false;
 			if ($this->dbM->getStatus()==true){
           $result = $this->dbM->submitQuery("SELECT * FROM prodotto WHERE tipoProdotto='".$typeP."'");
-          $arrUsr = array();
+          $arrPrd = array();
           while ($arr = $result->fetch_assoc()){
               $arrPrd[] =new Product ($arr['imagePath'],
                                    $arr['descrizione'],
@@ -56,7 +56,7 @@ class Factory {
       }
       else return false;
 	}
-  private function getProduct($key){
+  public function getProduct($key){
     if ($this->dbM->getStatus()==true){
       $result = $this->dbM->submitQuery("SELECT * FROM Prodotto WHERE nome='".$key."'");
       $product = $result->fetch_assoc();

@@ -27,7 +27,7 @@ class Product {
     return $this->ingredientes;
   }
 
-  public function getType() {
+  public function getProductType() {
     return $this->type;
   }
 

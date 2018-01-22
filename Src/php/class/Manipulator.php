@@ -1,5 +1,5 @@
 <?php
-
+require_once("DBmanager.php");
 class Manipulator{
   private $dbM;
 
@@ -11,7 +11,7 @@ class Manipulator{
       if($this->dbM->getStatus()==true){
         $query = "INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`)
                   VALUES ('".$user->getEmail()."', '".$user->getName()."', '".$user->getSurname()."',
-                   '".$user->getType()."', '".$user->getPassword()."')";
+                   '".$user->getUserType()."', '".$user->getPassword()."')";
         echo $query;
         return $this->dbM->submitQuery($query);
       }
@@ -22,7 +22,7 @@ class Manipulator{
     require_once("Product.php");
     if($this->dbM->getStatus()==true){
       $query = "INSERT INTO prodotto (`nome`, `ingredienti`, `tipoProdotto`, `imagePath`, `descrizione`)
-                VALUES ('".$product->getName()."', '".$product->getIngredients()."', '".$product->getType()."',
+                VALUES ('".$product->getName()."', '".$product->getIngredients()."', '".$product->getProductType()."',
                  '".$product->getImage()."', '".$product->getDesc()."')";
       return $this->dbM->submitQuery($query);
     }
@@ -31,15 +31,15 @@ class Manipulator{
 
   function removeUser($userEmail){
     if($this->dbM->getStatus()==true){
-      $query = "DELETE FROM `utente` WHERE `utente`.`email` = '".$userEmail."';";
-      return $this->dbM->submitQuery($query);
+      //$query = "DELETE FROM utente WHERE email = ".$userEmail."";
+      return $this->dbM->submitQuery("DELETE FROM utente WHERE email = ".$userEmail."");
     }
     else return false;
   }
 
   function removeProduct($productName){
     if($this->dbM->getStatus()==true){
-      $query = "DELETE FROM `prodotto` WHERE `prodotto`.`nome` = '".$productName."';";
+      $query = "DELETE FROM `prodotto` WHERE `prodotto`.`nome` = '".$productName."'";
       return $this->dbM->submitQuery($query);
     }
     else return false;
@@ -147,13 +147,13 @@ class Manipulator{
     if($this->dbM->getStatus()==true){
       switch($requestType){
         case "Al minuto":
-        $query = "DELETE FROM `prenotazione` WHERE `prenotazione`.`codice` = '".$requestKey."';";
+        $query = "DELETE FROM prenotazione WHERE codice = ".$requestKey."";
         break;
         case "All'ingrosso":
-        $query = "DELETE FROM `ordine_all_ingrosso` WHERE ``.`codice` = '".$requestKey."';";
+        $query = "DELETE FROM ordine_all_ingrosso WHERE codice = ".$requestKey."";
         break;
         case "Servizi":
-        $query = "DELETE FROM `richiesta_servizio` WHERE ``.`codice` = '".$requestKey."';";
+        $query = "DELETE FROM richiesta_servizio WHERE codice = ".$requestKey."";
         break;
       }
       return $this->dbM->submitQuery($query);
