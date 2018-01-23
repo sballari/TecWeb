@@ -216,25 +216,3 @@ body{
 .product h4{
     margin-bottom: 1em;
 }
-
-@media print {
-
-header nav, footer,form {
-display: none;
-}
-
-img{
-  max-width:500px;
-}
-
-@page{
-  margin:0.5cm;
-}
-
-
-body {
-font: 12pt Georgia, "Times New Roman", Times, serif;
-line-height: 1.3;
-}
-
-}

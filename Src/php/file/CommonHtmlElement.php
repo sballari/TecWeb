@@ -16,7 +16,30 @@ class CommonHtmlElement{
 		return $data;
 	}
 
-
+	public function printHead($title, $description, $keyword){
+		echo "<head>";
+		echo "\n";
+		echo '<title> "'.$title.'" - I tesori di Squitty </title>';
+		echo "\n";
+		echo '<meta name="title" content="'.$title.'" />';
+		echo "\n";
+		echo '<meta name="author" content="Simone Ballarin, Gerta Llieshi, Alessio Gobbo, Dario Riccardo"/>';
+		echo "\n";
+		echo '<meta name="description" content="'.$description.'" />';
+		echo "\n";
+		echo '<meta name="keywords" content="Squitty, pasticceria, dolci, '.$keyword.'"/>';
+		echo "\n";
+		echo '<meta name="language" content="italian it"/>';
+		echo "\n";
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
+		echo "\n";
+		echo '<link rel="stylesheet" media="screen" href="../../css/stile.css" type="text/css"/>';
+		echo "\n";
+		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
+		echo "\n";
+		echo '</head>';
+		echo "\n";
+	}
 	public function createheader($page){
 		echo "<div id='header'>";
 			echo "<img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'>";

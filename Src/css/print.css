@@ -1,0 +1,26 @@
+header nav, footer,form, #internalNavBar, #menu {
+display: none;
+}
+
+img{
+  display: none;
+}
+
+.product img{
+  display: inherit;
+  float: left;
+  max-width: 3.5cm;
+  padding-right: 0.5cm;
+}
+
+.product {
+  border-bottom: 1pt black solid;
+}
+
+@page {size: 210mm 297mm; margin: 30mm;}
+
+
+body {
+  font: 12pt Georgia, "Times New Roman", Times, serif;
+  line-height: 1.3;
+}
