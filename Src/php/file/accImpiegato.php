@@ -17,7 +17,7 @@
 
 
 	<div id="header">
-			<img  id="logo" src="../../img/logo.jpg" alt="logo i tesori di Squitty">
+			<img  id="logo" src="../../img/logo.png" alt="logo i tesori di Squitty">
 			<h5>I tesori di <span lang="en">Squitty</span></h5>
 			<h4>Based on what your operation is related to select one of the following buttons.</h4>
 			

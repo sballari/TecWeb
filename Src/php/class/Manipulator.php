@@ -31,8 +31,9 @@ class Manipulator{
 
   function removeUser($userEmail){
     if($this->dbM->getStatus()==true){
-      //$query = "DELETE FROM utente WHERE email = ".$userEmail."";
-      return $this->dbM->submitQuery("DELETE FROM utente WHERE email = ".$userEmail."");
+      $query = "DELETE FROM utente WHERE email = '".$userEmail."'";
+      echo $query;
+      return $this->dbM->submitQuery($query);
     }
     else return false;
   }
