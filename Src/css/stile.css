@@ -40,13 +40,10 @@ body{
   text-align: center;
 	text-decoration: none;
 }
-#menu li span {
-	float:left;
-  padding:1em;
+#menu .active{
   background-color: brown;
   color: white;
 }
-
 #menu li {
 	float:left;
   border-right: 1px solid brown;
