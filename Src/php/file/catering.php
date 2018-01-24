@@ -39,7 +39,18 @@
         <h2>CATERING ED EVENTI</h2>
 
 
-      
+         <?php
+			if(file_exists("CommonHtmlElement.php")){
+				require_once "CommonHtmlElement.php";}
+			else{
+				echo "Error: file does not esist.";
+				exit;}
+
+			$log = new CommonHtmlElement();
+			$log->generatelogin();
+			$log->generateSignup();
+		?>
+
 
         <div id="info">
             <h3>SERVIZIO CATERING ED EVENTI</h3>

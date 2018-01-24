@@ -68,8 +68,8 @@ class Factory {
     }
   }
   private function getOrderProductList($OrderKey, $tipoOrdine){
-    if ($tipoOrdine != "All_ingrosso" && $tipoOrdine != "Al minuto") return false;
-    if ($tipoOrdine == "All_ingrosso") {
+    if ($tipoOrdine != "All'ingrosso" && $tipoOrdine != "Al minuto") return false;
+    if ($tipoOrdine == "All'ingrosso") {
       $table = "composizione_all_ingrosso";
       $secKey="ordine_all_ingrosso";
     }
@@ -101,11 +101,11 @@ class Factory {
 		if ($this->dbM->getStatus()==true){
         $user = $this->getUser($userEmail);
         if ($user==false) {echo "Error: email doesn't exist"; return false;}
-				$tipoUtente = $user->getUserType();
+				$tipoUtente = $user->getType();
 				$email = "'".$userEmail."'";
 
          switch($tipoUtente){
-					 case "Servizio":
+					 case "Servizi":
              require_once("Service.php");
 						 $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio WHERE utente = ".$email);
              $arrRet = array();
@@ -122,7 +122,7 @@ class Factory {
             }
             return $arrRet;
 					 break;
-					 case "All_ingrosso":
+					 case "All'ingrosso":
              require_once("MassiveOrder.php");
 						 $result = $this->dbM->submitQuery("SELECT * FROM ordine_all_ingrosso WHERE utente = ".$email);
              $arrRet = array();
