@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <head>
-    <title> Per la Casa - I tesori di <span lang="en">Squitty</span> </title>
+    <title> Account per il cliente - I tesori di <span lang="en">Squitty</span> </title>
     <meta name="title" content="Trama" >
     <meta name="author" content="Simone Ballarin">
     <meta name="description" content="trama della serie <abbr>TBBT</abbr>" >
@@ -19,8 +19,17 @@
 	<div id="header">
 			<img  id="logo" src="../../img/logo.jpg" alt="logo i tesori di Squitty">
 			<h5>I tesori di <span lang="en">Squitty</span></h5>
-
+			<form action = "" method = "POST">
+					<input type="submit" name="prodotti" value='Prodotti al minuto'>
+					<input type="submit" name="storia" value='Storia dei ordini'>
+					<input type="submit" name="prenotazione" value='Prenotazione'>
+					<input type="submit" name="logout" value='Log Out'>
+					<input type="submit" name="closeaccount" value='Close Account'>
+			<form>
+	</div>
 			<?php
+				session_start();
+				echo "Welcome back " . $_SESSION['Email'];
 				if(isset($_POST['prodotti'])){
 
 					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Product.php")){
@@ -35,10 +44,9 @@
 					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 					$d->connect();
 					$f = new Factory($d);
+					$u = $f->getUser($_SESSION['Email']);
 
-					session_start();
-					$u = $f->getUser($_SESSION['email']);
-					$t = $u->getType();
+					$t = $u->getUserType();
 					$prod = $f->getProductList($t);
 
 					foreach ($prod as $x) {
@@ -51,6 +59,7 @@
 						echo "</div>";
 					}
 				}
+
 				if(isset($_POST['storia'])){
 
 					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
@@ -69,33 +78,26 @@
 					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty");
 					$d->connect();
 					$f = new Factory($d);
-
-					session_start();
-
-					$u = $f->getUser($_SESSION['email']);
-					$t = $u->getType();
-
-					$req = $f->getRequestList($_SESSION['email']);
+					$u = $f->getUser($_SESSION['Email']);
+					$t = $u->getUserType();
+					$req = $f->getRequestList($_SESSION['Email']);
+					echo "test".$req;
 					echo "<div class='tabelaStoria'>";
 					switch($t){
-						case "Servizi":
-
+						case "Servizio":
 							echo "<table>
 							<tr>
 							<th>Request product name</th>
 							<th>Request product image</th>
 							<th>Request product description</th>
-
 							<th>Request staff</th>
 							<th>Request resources</th>
 							<th>Request adress</th>
 							<th>Request receive date and hour</th>
 							<th>Request status</th>
 							<th>Request delivery date and hour</th>
-
 							</tr>";
 							foreach ($req as $x) {
-
 								echo "<tr>";
 								echo "<td>" . $x->getService()->getName() . "</td>";
 								echo "<td>" . $x->getService()->getImage() . "</td>";
@@ -107,81 +109,69 @@
 								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 								echo "<td>" . $x->getStatus() . "</td>";
 								echo "</tr>";
-
-										}
+							}
 							echo "</table>";
 							break;
 
-							case "All'ingrosso":
-
-								echo "<table>
-									<tr>
-									<th>MassiveOrder products names</th>
-									<th>MassiveOrder periodicity</th>
-									<th>MassiveOrder adress</th>
-									<th>MassiveOrder receive date and hour</th>
-									<th>MassiveOrder status</th>
-									<th>MassiveOrder delivery date and hour</th>
-
-									</tr>";
+						case "All_ingrosso":
+							echo "<table>
+							<tr>
+							<th>MassiveOrder product's name</th>
+							<th>MassiveOrder product's number</th>
+							<th>MassiveOrder periodicity</th>
+							<th>MassiveOrder adress</th>
+							<th>MassiveOrder receive date and hour</th>
+							<th>MassiveOrder status</th>
+							<th>MassiveOrder delivery date and hour</th>
+							</tr>";
 							foreach ($req as $x) {
-
 								echo "<tr>";
-								echo "<td>";
-									foreach ($x->getProducts() as $y) {
-										echo "$y->getName()";}
-								echo "</td>";
-
+								//foreach ($x->getProducts() as $y) {
+									//echo "".$y->getName()."";}
+								$y = $x->getProducts();
+								echo "<td>".$y[0]->getName()."</td>";
+								$prodNr = count($y);
+								echo "<td>" . $prodNr . "</td>";
 								echo "<td>" . $x->getPeriodicity() . "</td>";
 								echo "<td>" . $x->getDeliveryAdress() . "</td>";
 								echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
 								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 								echo "<td>" . $x->getStatus() . "</td>";
 								echo "</tr>";
-
 							}
 							echo "</table>";
 							break;
 
-
-
-								case "Al minuto":
-
-								echo "<table>
-									<tr>
-									<th>RetailOrder products names</th>
-									<th>RetailOrder periodicity</th>
-									<th>RetailOrder adress</th>
-									<th>RetailOrder receive date and hour</th>
-									<th>RetailOrder status</th>
-									<th>RetailOrder delivery date and hour</th>
-
-									</tr>";
+						case "Al minuto":
+							echo "<table>
+								<tr>
+								<th>RetailOrder product's name</th>
+								<th>RetailOrder product's number</th>
+								<th>RetailOrder user notes</th>
+								<th>RetailOrder receive date and hour</th>
+								<th>RetailOrder status</th>
+								<th>RetailOrder delivery date and hour</th>
+								</tr>";
 							foreach ($req as $x) {
-
 								echo "<tr>";
-								echo "<td>";
-									foreach ($x->getProducts() as $y) {
-										echo "$y->getName()";}
-								echo "</td>";
-
-
+									//foreach ($x->getProducts() as $y) {
+										//echo "$y->getName()";}
+								$y = $x->getProducts();
+								echo "<td>".$y[0]->getName()."</td>";
+								$prodNr = count($y);
+								echo "<td>" . $prodNr . "</td>";
 								echo "<td>" . $x->getUserNote() . "</td>";
 								echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
 								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 								echo "<td>" . $x->getStatus() . "</td>";
 								echo "</tr>";
-
 							}
 							echo "</table>";
 							break;
 					}
-
-
 				}
+
 				if(isset($_POST['closeaccount'])){
-					echo "<p>closeaccount</p>";
-					echo "<div id='_closeaccount'>";
 
 						if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/User.php")){
 
@@ -192,23 +182,16 @@
 							echo "Error: One of the files does not esist.";
 							exit;}
 
-
-						session_start();
 						$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty");
 						$m = new Manipulator($d);
-
-
-
-						$b = $m->removeUser($_SESSION['email']);
+						$b = $m->removeUser($_SESSION['Email']);
 						if($b==false){
-							echo "Something went wrong try closing your account again.";
+							echo "Something went wrong. Please try closing your account again.";
 						}
 						else{
 							header("Location: home.php");
 						}
-					echo "</div>";
 				}
-
 
 				if(isset($_POST['logout'])){
 					echo "logout"; //******FIX logout*******
@@ -217,21 +200,7 @@
 
 
 
-			?>
-			<form action = "" method = "POST">
 
-					<button type="button" name="prodotti" >Prodotti al minuto</button>
-					<button type="button" name="storia" >Storia dei ordini</button>
-					<button type="button" name="logout" >Log Out</button>
-					<button type="button" name="closeaccount" >Close Account</button>
-			<form>
-		</div>
-
-
-		<div id="body">
-			<h1>Compila la seguente form per ordinare il tuo prodotto.</h1>
-			<h2>Premi il buttone Prodotti al minuto per vedere la lista dei prodotti.</h2>
-				<?php
 
 					function clean_input($data) {
 						$data = trim($data);
@@ -239,222 +208,156 @@
 						$data = strip_tags($data);
 						return $data;
 					}
-					$listaProdotti = $numeroProdotti = $descrizioneUtente = $dataRitiro = $oraRitiro = $time = "";
-					$ErrListaProdotti = $ErrNumeroProdotti = $ErrDescrizioneUtente = $ErrDataRitiro = $ErrOraRitiro = $ErrTime = "";
-					if((isset($_POST['listaProdotti']) && isset($_POST['dataRitiro']) && isset($_POST['oraRitiro']) && isset($_POST['numeroProdotti'])) || (isset($_POST['listaProdotti']) && isset($_POST['dataRitiro']) && isset($_POST['oraRitiro']) && isset($_POST['indirizzoConsegna']) && isset($_POST['periodicita'])) ||  (isset($_POST['listaProdotti']) && isset($_POST['dataRitiro']) && isset($_POST['oraRitiro']) && isset($_POST['personaleRichiesto'])&& isset($_POST['risorceNecessarie']) && isset($_POST['indirizzoEvento']))){
-									//if(empty($_POST['listaProdotti'])){
-										//$listaProdotti = "";}
-									//else{
-										$listaProdotti = $_POST['listaProdotti'];
-									//}
+					$numeroProdotti = $dataRitiro = $oraRitiro = "";
+					$ErrNumeroProdotti = $ErrDataRitiro = $ErrOraRitiro = "";
 
-									//if(empty($_POST['descrizioneUtente'])){
-										//$descrizioneUtente = "";}
-									//else{
-										$descrizioneUtente = $_POST['descrizioneUtente'];
-									//}
-									//if(empty($_POST['time'])){
-										//$time = "";}
-									//else{
-										$time = $_POST["time"];
-									//}
+					if(isset($_POST['prenota'])){
 
-									//if(empty($_POST['numeroProdotti'])){
-										//$numeroProdotti = "";}
-									//else{
-										$numeroProdotti = clean_input($_POST['numeroProdotti']);
-										if (!preg_match("//",$numeroProdotti)) {		//******** YOU HAVE TO FIX IT*******
-											$ErrNumeroProdotti = "Invalid number format";
-										}
-									//}
+						//******VALIDATE ADRESS*****************
+						$numeroProdotti = clean_input($_POST['numeroProdotti']);
+						if (!preg_match("//",$numeroProdotti)) {		//******** YOU HAVE TO FIX IT*******
+							$ErrNumeroProdotti = "Invalid number format";
+						}
 
-									//if(empty($_POST['$dataRitiro'])){
-										//$dataRitiro = "";}
-									//else{
-										$dataRitiro = clean_input($_POST['$dataRitiro']);
-										if (!preg_match("//", $dataRitiro)) {		//******** YOU HAVE TO FIX IT*******
-											$ErrDataRitiro = "Invalid number format";
-										}
-									//}
+						$dataRitiro = clean_input($_POST['$dataRitiro']);
+						if (!preg_match("//", $dataRitiro)) {		//******** YOU HAVE TO FIX IT*******
+							$ErrDataRitiro = "Invalid date format";
+						}
 
-									//if(empty($_POST['oraRitiro'])){
-										//$oraRitiro = "";}
-									//else{
-										$oraRitiro = clean_input($_POST['oraRitiro']);
-										if (!preg_match("//",$oraRitiro)) {		//******** YOU HAVE TO FIX IT*******
-											$ErrOraRitiro= "Invalid number format";
-										}
-									//}
+						$oraRitiro = clean_input($_POST['oraRitiro']);
+						if (!preg_match("//",$oraRitiro)) {		//******** YOU HAVE TO FIX IT*******
+							$ErrOraRitiro= "Invalid time format";
+						}
 
+						if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+							require_once("../class/DBmanager.php");
+							require_once("../class/Manipulator.php");
+							require_once("../class/Factory.php");
+							require_once("../class/User.php");
+							require_once("../class/RetailOrder.php");
+							require_once("../class/MassiveOrder.php");
+							require_once("../class/Service.php");}
+						else{
+							echo "Error: One of the files does not esist.";
+							exit;}
 
-										if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-											//require_once("../class/Request.php");
-											require_once("../class/DBmanager.php");
-											require_once("../class/Manipulator.php");
-											require_once("../class/Factory.php");
-											require_once("../class/User.php");
-											require_once("../class/RetailOrder.php");
-											require_once("../class/MassiveOrder.php");
-											require_once("../class/Service.php");}
-										else{
-											echo "Error: One of the files does not esist.";
-											exit;}
+						$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+						$d->connect();
+						$f = new Factory($d);
+						$u = $f->getUser($_SESSION['Email']);
+						$t = $u->getUserType();
+						$m = new Manipulator($d);
+						$currentDate = date("Y-m-d");
 
-										$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-										$d->connect();
-										$f = new Factory($d);
-										$u = $f->getUser($_SESSION['email']);
-										$t = $u->getType();
-										$m = new Manipulator($d);
-										$currentDate = date("Y/m/d");
+						switch($t){
+							case "Al minuto":
+								$r = new RetailOrder($currentDate, "in_prenotazione",  $u , $_POST['descrizioneUtente'], strtotime($dataRitiro.$oraRitiro), NULL );
+								$nr = $_POST['numeroPordotti'];
+								$Prod = $f->getProduct($_POST['listaProdotti']);
+								for($i = 0; $i<$nr; $i++){
+									$r->insertProduct($Prod);
+								}
+								break;
 
-										switch($t){
-											case "Al minuto":
+							case "All_ingrosso":
+								$r = new MassiveOrder($_POST['indirizzoConsegna'], $_POST['periodicita'], $currentDate, "in_prenotazione",  $u , strtotime($dataRitiro.$oraRitiro), NULL );
+								$nr = $_POST['numeroPordotti'];
+								$Prod = $f->getProduct($_POST['listaProdotti']);
+								for($i = 0; $i<$nr; $i++){
+									$r->insertProduct($Prod);
+								}
+								break;
+							case "Servizio":
+								$p = $f->getProduct($_POST['listaProdotti']);
+								$r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorceNecessarie'], $_POST['indirizzoEvento'], $currentDate, "in_prenotazione",  $u , strtotime($dataRitiro.$oraRitiro), NULL);
+								break;
+						}
 
-												$r = new RetailOrder($currentDate, "in_prenotazione",  $u , $_POST['descrizioneUtente'], strtotime($dataRitiro.$oraRitiro), NULL );
-												$nr = $_POST['numeroPordotti'];
-												$Prod = array();
-												for($i = 0; $i<$nr; $i++){
-													$Prod[] = $f->getProduct($_POST['listaProdotti']);
-												}
-												$r->insertProduct($Prod);
-												if($m->insertRequest($r)){
-													echo "Successful prenotazione.";
-												}
-												else{
-													echo "Try again please.";
-												}
-												break;
-
-											case "All'ingrosso":
-
-												$r = new MassiveOrder($_POST['indirizzoConsegna'], $_POST['periodicita'], $currentDate, "in_prenotazione",  $u , strtotime($dataRitiro.$oraRitiro), NULL );
-												$nr = $_POST['numeroPordotti'];
-												$Prod = array();
-												for($i = 0; $i<$nr; $i++){
-													$Prod[] = $f->getProduct($_POST['listaProdotti']);
-												}
-												$r->insertProduct($Prod);
-												if($m->insertRequest($r)){
-													echo "Successful massive order.";
-												}
-												else{
-													echo "Try again please.";
-												}
-												break;
-
-											case "Servizio":
-												$p = $f->getProduct($_POST['listaProdotti']);
-												$r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorceNecessarie'], $_POST['indirizzoEvento'], $currentDate, "in_prenotazione",  $u , strtotime($dataRitiro.$oraRitiro), NULL, $_POST['indirizzoConsegna'], $_POST['periodicita'] );
-
-
-												if($m->insertRequest($r)){
-													echo "Successfulservice order.";
-												}
-												else{
-													echo "Try again please.";
-												}
-												break;
-
-										}
-
+						if($m->insertRequest($r)){
+							echo "Successful order.";
+						}
+						else{
+							echo "Try again please.";
+						}
 					}
 
-									echo "<div id='ordineForm'>";
-									echo "<form action='' method='post' name='ordineForm'>";
-									echo "<fieldset>";
+				if(isset($_POST['prenotazione'])){
 
-									echo "<legend>Prenotazione</legend>";
-									echo "<br>";
+					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
 
-										if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-											//require_once("../class/Request.php");
-											require_once("../class/DBmanager.php");
-											require_once("../class/Manipulator.php");
-											require_once("../class/Factory.php");
-											require_once("../class/User.php");
-											require_once("../class/RetailOrder.php");
-											require_once("../class/MassiveOrder.php");
-											require_once("../class/Service.php");}
-										else{
-											echo "Error: One of the files does not esist.";
-											exit;}
+						require_once("../class/DBmanager.php");
+						require_once("../class/Manipulator.php");
+						require_once("../class/Factory.php");
+						require_once("../class/User.php");
+						require_once("../class/RetailOrder.php");
+						require_once("../class/MassiveOrder.php");
+						require_once("../class/Service.php");}
+					else{
+						echo "Error: One of the files does not esist.";
+						exit;}
 
-										$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-										$f = new Factory($d);
-										$usr = $f->getUser($_POST['email']);
-										$ty = $usr->getType();
-										$prod = $f->getProductList($ty);
+					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+					$d->connect();
+					$f = new Factory($d);
+					$usr = $f->getUser($_SESSION['Email']);
 
+					$usrType = $usr->getUserType();
+					$prod = $f->getProductList($usrType);
 
-										echo "Prodotto:";
-										echo "</br>";
-										echo "<select name='listaProdotti' required>";
-										echo "<option value=''>--</option>";
-										//for($x = 0; $x < $arrlength; $x++){
-										foreach ($prod as $x) {
-												echo "<option value='$x->getName()'>".$x->getName()."</option>";
+					echo "<div id='ordineForm'>";
+					echo "<form action='' method='POST' >";
+					echo "<fieldset>";
+					echo "<legend>Prenotazione</legend>";
+					echo "</br>";
+					echo "Prodotto:";
+					echo "<select name='listaProdotti' required>";
+					echo "<option value=''>--</option>";
+					foreach ($prod as $x) {
+						echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
+					}
+					echo "</select>";
+					echo "</br></br>";
+					echo "Data ritiro/consegna/evento:     <input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+					echo "</br></br>";
+					echo "Ora ritiro/consegna/evento(da 0 a 24):     <input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+					echo "</br></br>";
 
+					switch($usrType ){
+						case "Al minuto":
+							echo "Numero prodotti: <input type='number' name='numeroProdotti' required>";
+							echo "</br></br>";
+							echo "Descrizione utente:<textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
+							echo "</br></br>";
+							break;
 
+						case "All_ingrosso":
+							echo "Numero prodotti: <input type='number' name='numeroProdotti' required>";
+							echo "</br></br>";
+							echo "Indirizzo consegna:<input type='text' name='indirizzoConsegna' required>";
+							echo "</br></br>";
+							echo "Periodicita: <select name='periodicita' required>";
+							echo "</br></br>";
+							echo "<option value=''>--</option>";
+							echo "<option value='settimanale'>settimanale </option>";
+							echo "<option value='mensile'>mensile</option>";
+							echo "</select>";
+							echo "</br></br>";
+							break;
 
-										}
-										echo "</select>";
-										echo "</br>";
-
-
-
-								echo "Data ritiro:</br>";
-								echo "<input type='date' name='dataRitiro' required></br>";
-								echo "Ora ritiro:</br>";
-								echo "<input type='number' name='oraRitiro' required></br>";
-								echo "<input type='radio' name='time' value='am'>AM";
-								echo "<input type='radio' name='time' value='pm'>PM";
-
-
-									switch($usr->getType()){
-										case "Al minuto":
-											echo "Numero prodotti:" . "</br>";
-											echo "<input type='number' name='numeroProdotti' required></br>";
-											echo "Descrizione utente:</br>";
-											echo "<textarea name='decrizioneUtente' rows='5' cols='30'>";
-											echo "Torta di compleanno con la scrittura Buon compleanno.";
-											echo "</textarea></br>";
-											break;
-
-										case "All'ingrosso":
-											echo "Indirizzo consegna:" . "</br>";
-											echo "<input type='text' name='indirizzoConsegna' required></br>";
-											echo "Periodicita:</br>";
-												echo "<select name='periodicita' required>";
-												echo "<option value=''>--</option>";
-												echo "<option value='settimanale'>settimanale </option>";
-												echo "<option value='mensile'>mensile</option>";
-												echo "</select>";
-											break;
-
-										case "Servizio":
-											echo "Personale richiesto:" . "</br>";
-											echo "<input type='number' name='personaleRichiesto' required></br>";
-											echo "Risorse necessarie:</br>";
-											echo "<textarea name='risorseNecessarie' rows='5' cols='30' required>";
-											echo "5 tavole, 20 sedie.";
-											echo "</textarea></br>";
-											echo "Indirizzo evento:" . "</br>";
-											echo "<input type='text' name='indirizzoEvento' required></br>";
-
-											break;
-									}
-								echo "<input type='submit' value='Prenota'>";
-								echo "</fieldset>";
-							echo "</form>";
-						echo "</div>";
+						case "Servizio":
+							echo "Personale richiesto: <input type='number' name='personaleRichiesto' required>";
+							echo "</br></br>";
+							echo "Risorse necessarie: <textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+							echo "</br></br>";
+							echo "Indirizzo evento: <input type='text' name='indirizzoEvento' required>";
+							echo "</br></br>";
+							break;
+					}
+					echo "<input type='submit' name='prenota' value='Prenota'>";
+					echo "</fieldset>";
+					echo "</form>";
+					echo "</div>";
+				}
 				?>
-		</div>
-
-
-				<div id="content">
-					bbdjksabk
-				</div>
-
 	</body>
 </html>
