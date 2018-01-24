@@ -1,15 +1,14 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<head>
-    <title> Per il Ristorante - I tesori di <span lang="en">Squitty</span> </title>
-    <meta name="title" content="fornitura all'ingrosso" >
-    <meta name="author" content="Simone Ballarin">
-    <meta name="description" content="trama della serie <abbr>TBBT</abbr>" >
-    <meta name="keywords" content="curiosita" >
-    <meta name="language" content="italian it">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="../../css/stile.css">
-</head>
+<?php
+      if(file_exists("CommonHtmlElement.php")){
+        require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+      $h = new CommonHtmlElement();
+      $h->printHead("Ristorante", "pagina dedicata ai ristoranti", "ristorante, ingrosso, clienti");
+ ?>
 <body>
     <div id="accessBar">
     </div>

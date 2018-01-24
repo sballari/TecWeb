@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang ="it">
+<<<<<<< HEAD
 <head>
     <title> Account per il cliente - I tesori di <span lang="en">Squitty</span> </title>
     <meta name="title" content="Trama" >
@@ -10,6 +11,17 @@
     <meta http-equiv="Content-Type" content="text/html; =charset=utf-8">
     <link rel="stylesheet" href="../../css/stile.css">
 </head>
+=======
+<?php
+      if(file_exists("CommonHtmlElement.php")){
+        require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+      $h = new CommonHtmlElement();
+      $h->printHead("Cliente", "pagina personale clienti", "clienti, prenotazioni, ordine, ritiro");
+ ?>
+>>>>>>> 0c15203f0c86dc28066cc2a85f4cf166db1cd29a
 <body>
     <div id="accessBar">
     </div>

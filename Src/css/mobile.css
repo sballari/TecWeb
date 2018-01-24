@@ -1,0 +1,15 @@
+#menu .search-container {
+  float: left;
+
+}
+
+
+#menu li{
+  width: 100%;
+}
+
+
+
+.search-container form {
+  width: 100%;
+}
