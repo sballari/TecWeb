@@ -1,14 +1,15 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<?php
-      if(file_exists("CommonHtmlElement.php")){
-        require_once ("CommonHtmlElement.php");}
-      else{
-        echo "Error: file does not esist.";
-        exit;}
-      $h = new CommonHtmlElement();
-      $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
- ?>
+<head>
+    <title> Home - I tesori di Squitty </title>
+    <meta name="title" content="Trama" >
+    <meta name="author" content="Simone Ballarin">
+    <meta name="description" content="home page della pasticceria i tesori di Squitty" >
+    <meta name="keywords" content="Squitty" >
+    <meta name="language" content="italian it">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../../css/stile.css">
+</head>
 <body>
     <div id="accessBar">
     </div>
