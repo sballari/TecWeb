@@ -2,66 +2,101 @@
     margin: 0;
     padding: 0;
     border: 0;
-
 }
 html, body{
 max-width: 1024px;
 margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 100%;
-
 }
 body{
   border: 1px solid brown;
 }
+
+#header{
+  overflow: hidden;
+  width: 100%;
+  background-color: lightyellow;
+}
+#header h1{
+  width: 80%;
+  float: right;
+}
+
 #logo {
 	overflow: hidden;
-	max-height: 8em;
+  width: 10%;
   padding: 1em;
-	max-width: 20%;
 	float: left;
 }
 
 #menu {
 	overflow: hidden;
-	width: 78%;
-  	border:1px solid brown;
-
-	}
-#header{
-  overflow: hidden;
   width: 100%;
+  float: left;
+  border-top: 1px solid brown;
+	}
+
+
+#menu .search-container {
+    float: right;
+    padding-top: 0.5em;
+    padding-bottom: 0.5;
 }
 
-#menu li a {
-	display: block;
-	padding:1em;
-	color: brown;
-  text-align: center;
-	text-decoration: none;
+
+#search {
+    padding: 0.5em;
+    font-size: 1em;
+    border: black solid 1px;
+    border-right:none;
+    margin-left: 1em;
 }
+
+#menu .search-container button {
+    float: right;
+    padding: 0.5em;
+    margin-right: 1em;
+    background: #ddd;
+    font-size: 1em;
+    border: black solid 1px;
+    cursor: pointer;
+}
+
+#menu .search-container button:hover {
+  background: #ccc;
+}
+
 #menu .active{
   background-color: brown;
   color: white;
 }
-#menu li {
-	float:left;
-  border-right: 1px solid brown;
-}
-#menu li:last-child {
-    border-right: none;
-}
+
 #menu ul {
 	list-style-type: none;
-	overflow: hidden;
-
+	overflow: none;
+}
+#menu li {
+	float:left;
+  display: block;
+  text-align: center;
+  border-right: 1px solid brown;
+}
+#menu li a {
+	display: block;
+	padding:1em;
+	color: brown;
+	text-decoration: none;
+}
+#menu li span{
+	display: block;
+  background-color: brown;
+  color: white;
+  padding:1em;
 }
 
 #menu li a:hover {
-
   background-color:antiquewhite;
-
-
 }
 
 
@@ -75,15 +110,16 @@ body{
 	float: left;
 	font-size: 1.05em;
   margin-top: 1em;
-  padding:1em;
+  padding:0em 0em 1em 1em;
   float: right;
   width: 75%;
 }
 
 #contatti {
 	float: left;
-  margin: 1em;
-  padding:0.5em;
+  /* margin: 1em; */
+  padding-left:0.5em;
+  padding-bottom: 0.5em;
   border: solid 1px brown;
 
 	background-color: lightyellow;
@@ -97,33 +133,24 @@ body{
 }
 
 #footer {
-
 	float: left;
 	background-color: lightyellow;
   width: 100%;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
 }
 #footer{
-  border-top: 1px solid;
-}
-
-#menu input[type=text] {
-	box-sizing: border-box;
-	border: 1px solid brown;
-	border-radius: 4px;
-	padding: 1px;
-	line-height:46px;
-	vertical-align: center;
-	display:block;
-	overflow: hidden;
-}
-
-#menu input[type=text]:focus {
-    background-color: lightblue;
+  border-left: 1px solid brown;
+  border-right: 1px solid brown;
+  border-bottom: 1px solid brown;
 }
 
 .contentElement {
 	padding: 1em;
 	overflow: hidden;
+  background-color: lightyellow;
+  border: 1px brown solid;
+  margin-bottom: 1em;
 
 }
 
@@ -141,10 +168,11 @@ body{
 }
 
 
+
 .contentElement.Left img {
 	float: left;
 	padding-right:  0.6em;
-	margin-right: 0.6em;
+  margin: 1em 0.6em 0em 1em;
 	border-right: 2px solid black;
 
 }
@@ -153,10 +181,19 @@ body{
 	float: right;
 	padding-left: 0.6em;
 	border-left: 2px solid black;
-	margin-left: 0.6em;
+	margin: 1em 1em 0em 0.6em;
 }
+
+
+.aiuti{
+  position:absolute;
+  position:absolute;
+  height:0;
+  overflow:hidden;
+}
+
 #internalNavBar  {
-  margin-top: 1em;
+  margin: 1em 0em 0em 0em;
   width: 20%;
   border: 1px solid brown;
   float:left;

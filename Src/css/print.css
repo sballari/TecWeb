@@ -1,3 +1,11 @@
+html {
+  font-family: "Times New Roman",
+  Times, serif; 
+  font-size:12pt;
+
+}
+
+
 header nav, footer,form, #internalNavBar, #menu {
 display: none;
 }

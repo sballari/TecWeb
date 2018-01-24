@@ -29,7 +29,7 @@
             <li><a href="#LoginForm">Login</a></li>
             <li><a href="#info">Info</a></li>
             <li><a href="#productlist">Prodotti ordinabili</a></li>
-            <li><a>varie ed eventuali</a></li>
+            
         </ul>
     </div>
     <div id="content">
