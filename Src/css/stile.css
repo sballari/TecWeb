@@ -225,7 +225,6 @@ body{
   border: 1px solid brown;
   margin: 1em;
   padding: 1em;
-
 }
 
 #info{
@@ -237,7 +236,6 @@ body{
 .product{
   padding-left: 1em;
   background-color: lightyellow;
-
   padding: 1em;
   overflow: hidden;
 }
@@ -245,7 +243,6 @@ body{
   float:left;
   padding-right: 1em;
   max-width: 60%;
-
 }
 .product h4{
     margin-bottom: 1em;
