@@ -1,5 +1,5 @@
 <?php
-include "Request.php";
+require_once("Request.php");
 
 abstract class Order extends Request {
 	private $products = array();

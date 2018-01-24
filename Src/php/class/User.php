@@ -9,7 +9,7 @@ class User{
   private $type;//"All'ingrosso", "Serizi","Al minuto"
 
   function __construct($e,$p,$n,$s,$tp) {
-    
+
     $this->email=$e;
     $this->password=$p;
     $this->name=$n;
@@ -29,7 +29,7 @@ class User{
   public function getPassword(){
     return $this->password;
   }
-  public function getType(){
+  public function getUserType(){
       return $this->type;
   }
 }

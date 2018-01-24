@@ -1,5 +1,5 @@
 <?php
-include "Order.php";
+require_once("Order.php");
 class RetailOrder extends Order{
 	private $userNote;//string
 

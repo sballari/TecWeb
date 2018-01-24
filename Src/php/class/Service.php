@@ -1,5 +1,5 @@
 <?php
-include "Request.php";
+require_once("Request.php");
 require_once("Product.php");
 
 class Service extends Request {
@@ -9,9 +9,9 @@ class Service extends Request {
 	private $adress; //string
 
 	function __construct(Product $service, int $staffNumber, $resources, $adress,
-											$reiceveRequestDateTime,$status,User $user,$deliveryDateTime){
+											$reiceveRequestDateTime,$status,User $user,$deliveryDateTime, $key){
 
-		 parent::__construct($reiceveRequestDateTime,$status,$user,$deliveryDateTime);
+		 parent::__construct($reiceveRequestDateTime,$status,$user,$deliveryDateTime, $key);
 		 $this->serviceProd = $service;
 	   $this->staffNumber = $staffNumber; //int
 	   $this->resources = $resources; //string
@@ -23,8 +23,9 @@ class Service extends Request {
 	function getStaffNumber(){
 		return $this->staffNumber;
 	}
-  return "Servizio";
+  
 	function getType(){
+      return "Servizio";
 	}
 	function getLocationAdress(){
 		return $this->adress;
