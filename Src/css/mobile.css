@@ -8,8 +8,13 @@
   width: 100%;
 }
 
-
-
+#internalNavBar {
+  width: 100%;
+  text-align: center;
+}
+#content{
+  width: 100%;
+}
 .search-container form {
   width: 100%;
 }
