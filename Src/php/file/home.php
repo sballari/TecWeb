@@ -1,41 +1,35 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<head>
-    <title> Home - I tesori di Squitty </title>
-    <meta name="title" content="Trama" >
-    <meta name="author" content="Simone Ballarin">
-    <meta name="description" content="home page della pasticceria i tesori di Squitty" >
-    <meta name="keywords" content="Squitty" >
-    <meta name="language" content="italian it">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="../../css/stile.css">
-</head>
+<?php
+      if(file_exists("CommonHtmlElement.php")){
+        require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+      $h = new CommonHtmlElement();
+      $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
+ ?>
 <body>
     <div id="accessBar">
     </div>
 
-
-
-
 		<?php
-			if(file_exists("CommonHtmlElement.php")){
-				require_once ("CommonHtmlElement.php");}
-			else{
-				echo "Error: file does not esist.";
-				exit;}
-			$h = new CommonHtmlElement();
 			$h->createheader("home");
-		?>
+    ?>
 
-
-    <div id ="internalNavBar">
+    <div id ="internalNavBar" class="onlyDesktop" >
         <ul>
             <li><a href="#storia">Storia</a></li>
             <li><a href="#negozio">Negozio</a></li>
             <li><a href="#stabilimento">Stabilimento</a></li>
-
         </ul>
+        <div id='logNav'>
+        <?php
+    			$h->generateLogInLink("links");
+        ?>
+      </div>
     </div>
+
     <div id="content">
         <div id="storia" class="contentElement Right">
             <h2>LA NOSTRA STORIA</h2>
@@ -82,5 +76,31 @@
         </p>
         <a href="sitemap.html">sitemap</a>
     </div>
+
+
+    <div class="onlyMobile" id="mobileMenu">
+
+            <div id='linkEsterni'>
+          <?php
+      			$h->generateMenu("home");
+      		?>
+        </div>
+          <div id='mobileInterni'>
+            <h3>LINK INTERNI</h3>
+            <ul>
+                <li><a href="#storia">Storia</a></li>
+                <li><a href="#negozio">Negozio</a></li>
+                <li><a href="#stabilimento">Stabilimento</a></li>
+            </ul>
+        </div>
+        <div id='areaPriv'>
+          <?php
+            $h->generateLogInLink("links");
+          ?>
+        </div>
+  </div>
+
+
+
 </body>
 </html>

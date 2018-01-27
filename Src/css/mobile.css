@@ -1,20 +1,113 @@
 #menu .search-container {
   float: left;
-
 }
 
-
-#menu li{
+.onlyMobile{
+  position: static;
   width: 100%;
+  height: auto;
 }
 
-#internalNavBar {
+.onlyDesktop{
+  overflow: hidden;
+  position: absolute;
+  height: 0;
+}
+
+#header {
+  position: fixed;
+  height: 5em;
+  top: 0;
+  left: 0;
+}
+
+#internalNavBar{
+  margin: 0;
+  border: 0;
   width: 100%;
   text-align: center;
 }
+
 #content{
   width: 100%;
+  margin-top: 5em;
 }
+
+#hamburger{
+  width: 8%;
+  float: right;
+  padding: 1em
+}
+
+#header h1{
+  width: 65%;
+}
+
+#mobileMenu{
+  overflow: hidden;
+  width: 100%;
+  float: left;
+
+}
+
+#mobileMenu h3{
+  text-align: center;
+}
+
+#logNav ul li,#internalNavBar ul li {
+  border: 0px 0px 0px 0px;
+}
+
+#mobileMenu .active{
+  background-color: brown;
+  color: white;
+}
+
+#mobileMenu ul {
+	list-style-type: none;
+	overflow: hidden;
+  border: 0;
+}
+#mobileMenu li {
+  width: 100%;
+	float:left;
+  display: block;
+  text-align: center;
+  border-right: 1px solid brown;
+}
+#mobileMenu li a {
+	display: block;
+	padding:1em;
+	color: brown;
+	text-decoration: none;
+}
+#mobileMenu li span{
+	display: block;
+  background-color: brown;
+  color: white;
+  padding:1em;
+}
+#footer{
+  height: 4em;
+}
+#areaPriv{
+  border-top: 1px brown solid;
+  height: 30em;
+  padding-top: 0.5em;
+}
+
+#mobileMenu li a:hover {
+  background-color:antiquewhite;
+}
+
 .search-container form {
   width: 100%;
+}
+
+#linkEsterni{
+  border-bottom: 1px brown solid;
+}
+
+#mobileInterni{
+  margin-top: 0.5em;
 }

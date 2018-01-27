@@ -1,6 +1,6 @@
 html {
   font-family: "Times New Roman",
-  Times, serif;
+  Times, serif; 
   font-size:12pt;
 
 }
@@ -24,8 +24,6 @@ img{
 .product {
   border-bottom: 1pt black solid;
 }
-
-
 
 @page {size: 210mm 297mm; margin: 30mm;}
 
