@@ -37,19 +37,6 @@
     <div id="content">
         <h2>PER IL TUO RISTORANTE</h2>
 
-
-         <?php
-			if(file_exists("CommonHtmlElement.php")){
-				require_once "CommonHtmlElement.php";}
-			else{
-				echo "Error: file does not esist.";
-				exit;}
-			$log = new CommonHtmlElement();
-			$log->generatelogin();
-			$log->generateSignup();
-		?>
-
-
         <div id="info">
             <h3>SERVIZIO FORNITURE</h3>
             <p>
