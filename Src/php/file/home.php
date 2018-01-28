@@ -10,6 +10,7 @@
       $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
  ?>
 <body>
+    <a name="top"></a>
     <div id="accessBar">
     </div>
 
@@ -99,7 +100,7 @@
           ?>
         </div>
   </div>
-
+  <a href='#top'><img  id='up_arrow' class='onlyMobile' src='../../img/up_arrow.png' alt='pulsante torna su'></a>
 
 
 </body>
