@@ -40,6 +40,7 @@
                 La sua figura – così appassionata e importante per la nostra Azienda – è l’ispirazione quotidiana che ci guida in tutto ciò che facciamo; dalla sua esuberanza è nata anche la visione che si ritrova nella conversazione che portiamo avanti giorno dopo giorno, in questa piattaforma web e su tutti i <span lang="en">social network</span> in cui <span lang="en">Squitty</span> &egrave; presente.<br/>
                 In particolare, ci soffermiamo sempre sui piaceri della vita in tana, che comprendono le buone ricette di dolci della nostra tradizione rivisitate a base di formaggio, ma anche il piacere dell’Arte del ricevere gli ospiti facendoli sentire a loro agio e il gusto di una tavola sempre ben apparecchiata e accogliente.
             </p>
+            <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>
         </div>
         <div id="negozio" class="contentElement Left" >
             <h2>IL NEGOZIO</h2>
@@ -81,12 +82,12 @@
 
     <div class="onlyMobile" id="mobileMenu">
 
-            <div id='linkEsterni'>
+        <div id='linkEsterni'>
           <?php
       			$h->generateMenu("home");
       		?>
         </div>
-          <div id='mobileInterni'>
+        <div id='mobileInterni'>
             <h3>LINK INTERNI</h3>
             <ul>
                 <li><a href="#storia">Storia</a></li>

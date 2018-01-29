@@ -14,8 +14,9 @@ font-size: 100%;
   overflow: hidden;
   background-color: lightyellow;
   border: 1px solid brown;
-
 }
+
+
 
 #logo {
   width: 8%;
@@ -32,16 +33,20 @@ font-size: 100%;
     float: right;
 }
 
-#search {
+input {
     padding: 0.4em;
     font-size: 1em;
     border: black solid 1px;
-    border-right:none;
     margin-left: 1em;
 }
-
-#menu .search-container button {
-    float: right;
+#search {
+  border-right:none;
+}
+fieldset{
+  border: 1px black solid;
+  padding: 1em;
+}
+button {
     padding: 0.4em;
     margin-right: 1em;
     background: #ddd;
@@ -49,8 +54,11 @@ font-size: 100%;
     border: black solid 1px;
     cursor: pointer;
 }
+#menu button{
+  float:right;
+}
 
-#menu .search-container button:hover {
+button:hover {
   background: #ccc;
 }
 
@@ -106,9 +114,15 @@ font-size: 100%;
 	float: left;
 	font-size: 1.05em;
   margin-top: 1em;
-  padding:0em 0em 1em 1em;
+  padding:0em 0em 1em 0em;
   float: right;
   width: 75%;
+}
+#content h2{
+  padding-bottom: 0.4em;
+}
+h2, h3{
+  text-align: center;
 }
 
 #contatti {
@@ -150,7 +164,6 @@ font-size: 100%;
 }
 
 .contentElement h2 {
-	text-align: center;
 	padding: 0.5em;
 }
 
@@ -245,17 +258,20 @@ font-size: 100%;
   padding: 1em;
 }
 
-#info{
-  padding: 1em;
-}
+
 #productlist{
   padding: 1em;
 }
-.product{
+.product, #info{
   padding-left: 1em;
   background-color: lightyellow;
   padding: 1em;
   overflow: hidden;
+  border: 1px solid brown;
+  margin-top: 1em;
+}
+#info{
+  margin: 0em 1em 0em 1em;
 }
 .product img{
   float:left;

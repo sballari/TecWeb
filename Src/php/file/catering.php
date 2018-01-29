@@ -1,15 +1,14 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<head>
-    <title> Catering - I tesori di <span lang="en">Squitty</span> </title>
-    <meta name="title" content="servizio Catering" >
-    <meta name="author" content="Simone Ballarin">
-    <meta name="description" content="trama della serie <abbr>TBBT</abbr>" >
-    <meta name="keywords" content="curiosita" >
-    <meta name="language" content="italian it">
-    <meta http-equiv="Content-Type" content="text/html; =charset=utf-8">
-    <link rel="stylesheet" href="../../css/stile.css">
-</head>
+<?php
+      if(file_exists("CommonHtmlElement.php")){
+        require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+      $h = new CommonHtmlElement();
+      $h->printHead("catering", "pagina dedicata ai servizi catering", "catering");
+ ?>
 <body>
     <div id="accessBar">
     </div>
@@ -26,15 +25,20 @@
 		$header->createheader("catering");
 	?>
 
-
-    <div id ="internalNavBar">
-        <ul>
-            <li><a href="#LoginForm">Login</a></li>
-            <li><a href="#info">Info</a></li>
-            <li><a href="#productlist">Prodotti ordinabili</a></li>
-            <li><a>varie ed eventuali</a></li>
-        </ul>
+  <div id ="internalNavBar" class="onlyDesktop" >
+    <ul>
+      <li><a href="#LoginForm">Login</a></li>
+      <li><a href="#info">Info</a></li>
+      <li><a href="#productlist">Prodotti ordinabili</a></li>
+      <li><a>varie ed eventuali</a></li>
+    </ul>
+      <div id='logNav'>
+      <?php
+        $h->generateLogInLink("links");
+      ?>
     </div>
+  </div>
+
     <div id="content">
         <h2>CATERING ED EVENTI</h2>
 
