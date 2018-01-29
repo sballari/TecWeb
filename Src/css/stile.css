@@ -17,7 +17,6 @@ font-size: 100%;
 
 }
 
-
 #logo {
   width: 8%;
   padding: 0.25em;
@@ -29,11 +28,9 @@ font-size: 100%;
   float: left;
 	}
 
-
 #menu .search-container {
     float: right;
 }
-
 
 #search {
     padding: 0.4em;
@@ -68,6 +65,7 @@ font-size: 100%;
   margin-bottom: 0.2em;
   border-left: 1px brown solid;
 }
+
 #menu li {
 	float:left;
   display: block;

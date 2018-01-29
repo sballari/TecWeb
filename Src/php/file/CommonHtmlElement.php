@@ -30,7 +30,8 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
 		echo "\n";
-		echo '<link rel="stylesheet" media="screen and (max-width:925px)" href="../../css/mobile.css" type="text/css" />';
+		echo '<link rel="stylesheet" media="handheld,screen and (max-width:681px), only screen and (max-device-width:681px)"
+		 			href="../../css/mobile.css" type="text/css" />';
 		echo "\n";
 		echo '</head>';
 		echo "\n";
