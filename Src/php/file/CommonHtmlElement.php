@@ -9,6 +9,17 @@ class CommonHtmlElement{
 	{
 	}
 
+	function createProductDiv($x){
+		echo "<div class='product'>";
+		echo "<h4>" . $x->getName() . "</h4>";
+		$relativeImagePath = "'../../".$x->getImage()."'";
+		echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
+		echo "<p> <strong>Ingredienti</strong>: " . $x->getIngredients() . "</p>";
+		echo "<p> <strong>Descrizione</strong>: " . $x->getDesc() . "</p>";
+		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>";
+		echo "</div>";
+	}
+
 	public function printHead($title, $description, $keyword){
 		echo "<head>";
 		echo "\n";
@@ -76,7 +87,7 @@ class CommonHtmlElement{
 	public function createheader($page){
 		echo "<div id='header'>";
 			echo "<img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'>";
-			echo "<a href='#footer'><img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'></a>";
+			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page);

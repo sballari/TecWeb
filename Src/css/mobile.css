@@ -14,12 +14,34 @@
   height: 0;
 }
 
+
 #header {
-  position: fixed;
-  height: 5em;
-  top: 0;
+  position:fixed;
+  top:  0;
   left: 0;
+  height: 10vh;
 }
+
+#header img {
+  height: 80%;
+  padding-top: 0.5em;
+  width: 13%;
+}
+
+.contentElement img {
+	max-width: 100%;
+}
+.contentElement.Left img, .contentElement.Right img{
+	float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+	padding:  0;
+	border: 0;
+
+}
+
+
 
 #internalNavBar{
   margin: 0;
@@ -30,7 +52,7 @@
 
 #content{
   width: 100%;
-  margin-top: 5em;
+  margin-top: 10vh;
 }
 
 #hamburger{
@@ -39,27 +61,16 @@
   padding: 1em
 }
 
-#up_arrow{
-  width: 8%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-#header h1{
-  width: 65%;
-}
 
 #mobileMenu{
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 100%;
-  float: left;
-
-}
-
-#mobileMenu h3{
+  font-size: 3em;
   text-align: center;
+  height: 100vh;
 }
+
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
@@ -75,17 +86,18 @@
 	overflow: hidden;
   border: 0;
 }
+
 #mobileMenu li {
   width: 100%;
 	float:left;
   display: block;
-  text-align: center;
   border-right: 1px solid brown;
 }
+
 #mobileMenu li a {
 	display: block;
-	padding:1em;
 	color: brown;
+  padding:0.3em;
 	text-decoration: none;
 }
 
@@ -93,16 +105,12 @@
 	display: block;
   background-color: brown;
   color: white;
-  padding:1em;
+  padding:0.3em;
 }
 
-#footer{
-  height: 4em;
-}
 
 #areaPriv{
   border-top: 1px brown solid;
-  height: 11em;
   padding-top: 0.5em;
 }
 
@@ -126,4 +134,26 @@
 #logo{
   width: 10%;
   padding-right: 2.5em;
+}
+
+#headerSpace{
+  height: 10vh;
+}
+
+#contatti {
+  font-size: 2em;
+  padding-left:0.5em;
+  padding-bottom: 0.5em;
+  border: solid 1px brown;
+	background-color: lightyellow;
+  width: 100%;
+}
+
+#footer{
+  font-size: 2em;
+}
+
+.product img{
+  max-width: 100%;
+  width:100%;
 }

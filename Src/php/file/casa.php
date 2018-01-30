@@ -22,10 +22,8 @@
 
   <div id ="internalNavBar" class="onlyDesktop" >
     <ul>
-        <li><a href="#LoginForm">Login</a></li>
-        <li><a href="#info">Info</a></li>
         <li><a href="#productlist">Prodotti ordinabili</a></li>
-        <li><a>varie ed eventuali</a></li>
+        <li><a href="#contatti">Contatti</a></li>
     </ul>
       <div id='logNav'>
       <?php
@@ -63,13 +61,7 @@
 				$prod = $f->getProductList("Al minuto");
 
         foreach ($prod as $x) {
-						echo "<div class='product'>";
-						echo "<h4>" . $x->getName() . "</h4>";
-            $relativeImagePath = "'../../".$x->getImage()."'";
-						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
-						echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";
-						echo "<p> Descrizione" . $x->getDesc() . "</p>";
-						echo "</div>";
+						$h->createProductDiv($x);
         }
 
 			?>

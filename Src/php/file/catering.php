@@ -71,15 +71,7 @@
         //echo var_dump($prod);
 
 				foreach ($prod as $x) {
-						echo "kot";
-						echo "<div class='product'>";
-						echo "<h4>" . $x->getName() . "</h4>";
-            $relativeImagePath = "'../../".$x->getImage()."'";
-						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
-						//if($x->getIngredients()!==NULL){
-						//echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";}
-						echo "<p> Descrizione" . $x->getDesc() . "</p>";
-						echo "</div>";
+						$h->createProductDiv($x);
         }
 
 

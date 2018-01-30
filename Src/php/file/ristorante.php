@@ -37,7 +37,7 @@
       ?>
     </div>
   </div>
-  
+
     <div id="content">
         <h2>PER IL TUO RISTORANTE</h2>
 
@@ -68,13 +68,8 @@
         //echo var_dump($prod);
 
         foreach ($prod as $x) {
-						echo "<div class='product'>";
-						echo "<h4>" . $x->getName() . "</h4>";
-            $relativeImagePath = "'../../".$x->getImage()."'";
-						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
-						echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";
-						echo "<p> Descrizione" . $x->getDesc() . "</p>";
-						echo "</div>";
+						$h->createProductDiv($x);
+
         }
 
 
