@@ -102,6 +102,7 @@ class CommonHtmlElement{
 	}
 
 	public function generateLogInLink($page){
+		echo  "    <div id='areaPriv'>";
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
 		if($page=="loginSignup"){
@@ -113,8 +114,82 @@ class CommonHtmlElement{
 				echo "<li><a href='loginSignup.php'>Sign up</a></li>";
 		}
 		echo "</ul>";
+		echo "</div>";
 	}
 
+	public function printContatti(){
+		echo  "<div id='contatti'>";
+    echo  "	<h3>CONTATTI</h3>";
+    echo  "    <p>";
+    echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
+    echo  "    </p>";
+    echo  "        <ul>";
+    echo  "            <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>";
+    echo  "            <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>";
+    echo  "            <li>mail: info@pasticceriaSquitty.com</li>";
+    echo  "            <li>tel: 0421 5841204</li>";
+    echo  "            <li>fax: 0421 7493729</li>";
+    echo  "        </ul>";
+    echo  "</div>";
+	}
+	public function printFooter(){
+		echo  "<div id='footer'>";
+    echo  "    <p>";
+    echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
+    echo  "    </p>";
+    echo  "    <a href='sitemap.html'>sitemap</a>";
+    echo  "</div>";
+	}
+	public function printMobileMenu($page){
+		echo  "<div class='onlyMobile' id='mobileMenu'>";
+    echo  "    <div id='headerSpace'> </div>";
+    echo  "    <div id='linkEsterni'>";
+      			$this->generateMenu($page);
+    echo  "    </div>";
+    				$this->printInternalMenuMobile("$page");
+						$this->generateLogInLink($page);
+    echo  "    <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>";
+    echo  "</div>";
+	}
+	public function printInternalMenu($page){
+		echo "<div id ='internalNavBar' class='onlyDesktop' >";
+        $this->printListLinkInterni($page);
+				$this->generateLogInLink($page);
+    echo "</div>";
+	}
+	public function printListLinkInterni($page){
+		echo "		<ul>";
+		switch($page){
+			case "home":
+					echo "				<li><a href='#storia'>Storia</a></li>";
+					echo "				<li><a href='#negozio'>Negozio</a></li>";
+					echo "				<li><a href='#stabilimento'>Stabilimento</a></li>";
+			break;
+			case "casa":
+					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
+					echo "<li><a href='#contatti'>Contatti</a></li>";
+			break;
+			case "catering":
+					echo "<li><a href='#info'>Info</a></li>";
+					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
+			break;
+			case "ristorante":
+					echo "<li><a href='#info'>Info</a></li>";
+					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
+			break;
+			case "loginSignup":
+					echo "<li><a href='#loginForm'>Form</a></li>";
+			break;
+			echo "				<li><a href='#contatti'>Contatti</a></li>";
+			echo "		</ul>";
 
+	}
+	}
+	public function printInternalMenuMobile($page){
+		echo "<div id='mobileInterni'>";
+		echo "		<h3>LINK INTERNI</h3>";
+		$this->printListLinkInterni($page);
+		echo "</div>";
+}
 }
 ?>

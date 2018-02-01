@@ -1,11 +1,7 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
-      if(file_exists("CommonHtmlElement.php")){
-        require_once ("CommonHtmlElement.php");}
-      else{
-        echo "Error: file does not esist.";
-        exit;}
+      require_once ("CommonHtmlElement.php");
       $h = new CommonHtmlElement();
       $h->printHead("LogIn", "area personale", "login, signup");
  ?>
@@ -15,15 +11,8 @@
 
 	<?php
 	session_start();
-	if(file_exists("CommonHtmlElement.php")){
-		require_once ("CommonHtmlElement.php");}
-	else{
-		echo "Error: file does not esist.";
-		exit;}
-	$h = new CommonHtmlElement();
 	$h->createheader("loginSignup");
-
-
+  $h->printInternalMenu("loginSignup");
 
 	function cleanInput($data) {
 		$data = trim($data);
@@ -128,15 +117,15 @@
 					echo "Error: One of the files does not esist.";
 					exit;
 				}
-				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-				$d->connect();
+				// $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+				// $d->connect();
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
 
 				if($b==FALSE)
 				{
-				$ErrSignup = "Email has already been used. Insert your data again using another email.";
+				$ErrSignup = "L'Email inserita non &egrave; disponibile. Inserire un Email diversa.";
 
 				}
 				else
@@ -151,6 +140,7 @@
 
 
 	if(!isset($_POST['signup'])){
+  echo "<div id='content'>";
 	echo "<div id='loginForm'>";
 	echo "<form action='' method='POST'>";
 	echo "<fieldset>";
@@ -173,8 +163,10 @@
 	echo "<button type='submit' name = 'signup'>Sign up</button>";
 	echo "</form>";
 	echo "</div>";
+  echo "</div>";
 	}
 	else{
+    echo "<div id=content>";
 		echo "<div id='signupForm'>";
 				echo "<form action=''  method='POST'>";
 					echo "<fieldset>";
@@ -212,36 +204,15 @@
 			echo "<button type='submit' name = 'returnToLogin'>Log in</button>";
 	echo "</form>";
 	echo "</div>";
+  echo "</div>";
 		}
 
-
-
-
-
-
-
 	?>
+    <?php
+      $h->printContatti();
+      $h->printFooter();
+      $h->printMobileMenu("loginSignup");
+    ?>
 
-
- <div id="contatti">
-        <h3>CONTATTI</h3>
-        <p>
-            Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:
-        </p>
-            <ul>
-                <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>
-                <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>
-                <li>mail: info@pasticceriaSquitty.com</li>
-                <li>tel: 0421 5841204</li>
-                <li>fax: 0421 7493729</li>
-            </ul>
-
-    </div>
-    <div id="footer">
-        <p>
-            Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.
-        </p>
-        <a href="sitemap.html">sitemap</a>
-    </div>
 </body>
 </html>
