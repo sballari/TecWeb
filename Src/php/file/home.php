@@ -55,32 +55,5 @@
       $h->printFooter();
       $h->printMobileMenu("home");
     ?>
-
-<!--
-    <div class="onlyMobile" id="mobileMenu">
-        <div id="headerSpace"> </div>
-        <div id='linkEsterni'>
-          <?php
-      			$h->generateMenu("home");
-      		?>
-        </div>
-        <div id='mobileInterni'>
-            <h3>LINK INTERNI</h3>
-            <ul>
-                <li><a href="#storia">Storia</a></li>
-                <li><a href="#negozio">Negozio</a></li>
-                <li><a href="#stabilimento">Stabilimento</a></li>
-            </ul>
-        </div>
-        <div id='areaPriv'>
-          <?php
-            $h->generateLogInLink("links");
-          ?>
-        </div>
-        <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>
-  </div> -->
-
-
-
 </body>
 </html>

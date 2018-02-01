@@ -30,7 +30,7 @@
     <div id="content">
         <h2>CATERING ED EVENTI</h2>
 
-        <div id="info">
+        <div id="info" class="contentElement">
             <h3>SERVIZIO CATERING ED EVENTI</h3>
             <p>
                 Che sia il diciottesimo di vostro figlio o che sia la presentazione del nuovo prodotto di punta della vostra

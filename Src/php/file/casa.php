@@ -16,7 +16,7 @@
     <div id="content">
         <h2>PER LA TUA CASA</h2>
 
-        <div id="info">
+        <div id="info" class="contentElement">
             <h3>SERVIZIO PRENOTAZIONE</h3>
             <p>
                 Stanchi di dover venire da noi per ordinare i vostri doldi preferiti? <br/>

@@ -3,6 +3,7 @@
     padding: 0;
     border: 0;
 }
+
 html, body{
 max-width: 1024px;
 margin: auto;
@@ -32,27 +33,29 @@ font-size: 1.05em;
     float: right;
 }
 
-input {
-    padding: 0.4em;
-    font-size: 1em;
-    border: black solid 1px;
-    margin-left: 1em;
+.search-container input {
+    width: auto;
 }
+
+
 #search {
   border-right:none;
 }
+
 fieldset{
   border: 1px black solid;
   padding: 1em;
 }
-button {
+
+/* .search-container button {
     padding: 0.4em;
     margin-right: 1em;
     background: #ddd;
     font-size: 1em;
     border: black solid 1px;
     cursor: pointer;
-}
+} */
+
 #menu button{
   float:right;
 }
@@ -112,7 +115,6 @@ button:hover {
 
 #content {
 	float: left;
-	/* font-size: 1.05em; */
   margin-top: 1em;
   padding:0em 0em 1em 0em;
   float: right;
@@ -258,11 +260,11 @@ h2, h3{
   padding: 1em;
 }
 
-
 #productlist{
   padding: 1em;
 }
-.product, #info{
+
+.product{
   padding-left: 1em;
   background-color: lightyellow;
   padding: 1em;
@@ -270,14 +272,17 @@ h2, h3{
   border: 1px solid brown;
   margin-top: 1em;
 }
-#info{
+
+/* #info{
   margin: 0em 1em 0em 1em;
-}
+} */
+
 .product img{
   float:left;
   padding-right: 1em;
   max-width: 60%;
 }
+
 .product h4{
     margin-bottom: 1em;
 }
@@ -295,6 +300,30 @@ h2, h3{
   font-weight: bold;
 }
 
-#loginForm label{
-  float: left; width: 6em; text-align: right;
+label{
+  float: left;
+  width: 6em;
+  text-align: right;
+}
+
+button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+}
+
+input{
+  padding: 0.4em;
+  font-size: 1em;
+  border: black solid 1px;
+  margin-left: 1em;
+  width: 35%;
+  margin-bottom: 0.5em;
+}
+
+fieldset{
+  border: 0;
 }

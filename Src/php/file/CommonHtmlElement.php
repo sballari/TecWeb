@@ -67,7 +67,7 @@ class CommonHtmlElement{
 					echo "<li><a href='ristorante.php'>Per il tuo ristorante</a></li>";
 					echo "<li><span>Catering ed Eventi</span></li>";
 				break;
-			case "loginSignup":
+			default:
 					echo "<li><a href='home.php'>Home</a></li>";
 					echo "<li><a href='casa.php'>Per la tua casa</a></li>";
 					echo "<li><a href='ristorante.php'>Per il tuo ristorante</a></li>";
@@ -97,13 +97,19 @@ class CommonHtmlElement{
 		echo  "    <div id='logNav'>";
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
-		if($page=="loginSignup"){
-				echo "<li>O il link o il link</li>";
-
-		}
-		else{
-				echo "<li><a href='loginSignup.php'>Log in</a></li>";
-				echo "<li><a href='loginSignup.php'>Sign up</a></li>";
+		switch($page){
+			case "logIn":
+				echo "<li><span lang='en'>Log in</span>.</li>";
+				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
+			break;
+			case "signUp":
+				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
+				echo "<li><span lang='en'>Sign up</span></li>";
+			break;
+			default:
+				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
+				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
+			break;
 		}
 		echo "</ul>";
 		echo "</div>";
@@ -169,8 +175,13 @@ class CommonHtmlElement{
 					echo "<li><a href='#info'>Info</a></li>";
 					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
 			break;
-			case "loginSignup":
-					echo "<li><a href='#loginForm'>Form</a></li>";
+			case "logIn":
+					echo "<li><a href='#info'>Info</a></li>";
+					echo "<li><a href='#form'>Form Accesso</a></li>";
+			break;
+			case "signUp":
+					echo "<li><a href='#info'>Info</a></li>";
+					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";

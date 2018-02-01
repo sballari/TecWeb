@@ -117,8 +117,6 @@
 					echo "Error: One of the files does not esist.";
 					exit;
 				}
-				// $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-				// $d->connect();
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
@@ -141,7 +139,12 @@
 
 	if(!isset($_POST['signup'])){
   echo "<div id='content'>";
-	//echo "<div id='loginForm'>";
+  echo "<div class='contentElement'>";
+    echo "<p>Se non hai ancora un account non aspettare, creane uno! .</br>
+    Per creare un nuovo account devi fornire i seguenti dati: <strong>nome, cognome, tipo di utente, email, password</strong></p>";
+    echo "<button type='submit' name = 'signup'>Sign up, va cambiato con link</button>";
+  echo "</div>";
+  echo "<div class='contentElement'>";
 	echo "<form action='' method='POST'>";
 	echo "<fieldset>";
   	echo "<legend>Form di accesso:</legend>";
@@ -158,11 +161,8 @@
 	echo "</div>";
 	echo "<div id='signupButtonForm'>";
 	echo "<form action='' method='POST'>";
-	echo "<p>If you haven't yet created a new account click the following button.</br>
-	To create a new account your are going to insert the following data: </br>name, surname, usertype, email, password</p></br>";
-	echo "<button type='submit' name = 'signup'>Sign up</button>";
 	echo "</form>";
-	//echo "</div>";
+  echo "</div>";
   echo "</div>";
 	}
 	else{
