@@ -295,3 +295,7 @@ h2, h3{
 .bold{
   font-weight: bold;
 }
+
+#loginForm label{
+  float: left; width: 6em; text-align: right;
+}
