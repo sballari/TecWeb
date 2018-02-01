@@ -22,21 +22,10 @@
 			exit;}
 		$header = new CommonHtmlElement();
 		$header->createheader("ristorante");
+    $header->printInternalMenu("casa");
 	?>
 
-  <div id ="internalNavBar" class="onlyDesktop" >
-    <ul>
-      <li><a href="#LoginForm">Login</a></li>
-      <li><a href="#info">Info</a></li>
-      <li><a href="#productlist">Forniture possibili</a></li>
-      <li><a>varie ed eventuali</a></li>
-    </ul>
-      <div id='logNav'>
-      <?php
-        $h->generateLogInLink("links");
-      ?>
-    </div>
-  </div>
+
 
     <div id="content">
         <h2>PER IL TUO RISTORANTE</h2>
@@ -78,25 +67,10 @@
         </div>
 
     </div>
-    <div id="contatti">
-        <h3>CONTATTI</h3>
-        <p>
-            Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:
-        </p>
-            <ul>
-                <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>
-                <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>
-                <li>mail: info@pasticceriaSquitty.com</li>
-                <li>tel: 0421 5841204</li>
-                <li>fax: 0421 7493729</li>
-            </ul>
-
-    </div>
-    <div id="footer">
-        <p>
-            Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.
-        </p>
-        <a href="sitemap.html">sitemap</a>
-    </div>
+    <?php
+      $h->printContatti();
+      $h->printFooter();
+      $h->printMobileMenu("ristorante");
+    ?>
 </body>
 </html>
