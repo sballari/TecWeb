@@ -1,14 +1,6 @@
 <?php
 
 class CommonHtmlElement{
-
-
-
-
-	function __construct()
-	{
-	}
-
 	function createProductDiv($x){
 		echo "<div class='product'>";
 		echo "<h4>" . $x->getName() . "</h4>";
@@ -106,8 +98,8 @@ class CommonHtmlElement{
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
 		if($page=="loginSignup"){
-				echo "<li><span>Log in</span></li>";
-				echo "<li><span>Sign up</span></li>";
+				echo "<li>O il link o il link</li>";
+
 		}
 		else{
 				echo "<li><a href='loginSignup.php'>Log in</a></li>";
@@ -161,9 +153,9 @@ class CommonHtmlElement{
 		echo "		<ul>";
 		switch($page){
 			case "home":
-					echo "				<li><a href='#storia'>Storia</a></li>";
-					echo "				<li><a href='#negozio'>Negozio</a></li>";
-					echo "				<li><a href='#stabilimento'>Stabilimento</a></li>";
+					echo "<li><a href='#storia'>Storia</a></li>";
+					echo "<li><a href='#negozio'>Negozio</a></li>";
+					echo "<li><a href='#stabilimento'>Stabilimento</a></li>";
 			break;
 			case "casa":
 					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
@@ -181,7 +173,7 @@ class CommonHtmlElement{
 					echo "<li><a href='#loginForm'>Form</a></li>";
 			break;
 		}
-			echo "				<li><a href='#contatti'>Contatti</a></li>";
+			echo "	  <li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
 
 

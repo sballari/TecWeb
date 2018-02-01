@@ -141,11 +141,11 @@
 
 	if(!isset($_POST['signup'])){
   echo "<div id='content'>";
-	echo "<div id='loginForm'>";
+	//echo "<div id='loginForm'>";
 	echo "<form action='' method='POST'>";
 	echo "<fieldset>";
   	echo "<legend>Form di accesso:</legend>";
-  	echo "</br>".$ErrLogin."</br>";
+  	echo $ErrLogin."</br>";
     echo "<label for='email'>Email: </label>";
   	echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
     echo "</br>";
@@ -162,12 +162,12 @@
 	To create a new account your are going to insert the following data: </br>name, surname, usertype, email, password</p></br>";
 	echo "<button type='submit' name = 'signup'>Sign up</button>";
 	echo "</form>";
-	echo "</div>";
+	//echo "</div>";
   echo "</div>";
 	}
 	else{
     echo "<div id=content>";
-		echo "<div id='signupForm'>";
+		//echo "<div id='signupForm'>";
 				echo "<form action=''  method='POST'>";
 					echo "<fieldset>";
 
@@ -203,7 +203,7 @@
 			echo "<p>Se disponi gi&agrave di un account prego procedere all'accesso dal seguente bottone.";
 			echo "<button type='submit' name = 'returnToLogin'>Log in</button>";
 	echo "</form>";
-	echo "</div>";
+	//echo "</div>";
   echo "</div>";
 		}
 
