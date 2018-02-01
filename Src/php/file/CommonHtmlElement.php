@@ -102,7 +102,7 @@ class CommonHtmlElement{
 	}
 
 	public function generateLogInLink($page){
-		echo  "    <div id='areaPriv'>";
+		echo  "    <div id='logNav'>";
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
 		if($page=="loginSignup"){
@@ -180,10 +180,11 @@ class CommonHtmlElement{
 			case "loginSignup":
 					echo "<li><a href='#loginForm'>Form</a></li>";
 			break;
+		}
 			echo "				<li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
 
-	}
+
 	}
 	public function printInternalMenuMobile($page){
 		echo "<div id='mobileInterni'>";

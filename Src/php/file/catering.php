@@ -26,19 +26,6 @@
     $header->printInternalMenu("catering");
 	?>
 
-  <div id ="internalNavBar" class="onlyDesktop" >
-    <ul>
-      <li><a href="#LoginForm">Login</a></li>
-      <li><a href="#info">Info</a></li>
-      <li><a href="#productlist">Prodotti ordinabili</a></li>
-      <li><a>varie ed eventuali</a></li>
-    </ul>
-      <div id='logNav'>
-      <?php
-        $h->generateLogInLink("links");
-      ?>
-    </div>
-  </div>
 
     <div id="content">
         <h2>CATERING ED EVENTI</h2>
