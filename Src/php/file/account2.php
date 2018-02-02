@@ -1,43 +1,29 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<head>
-    <title> Account per il cliente - I tesori di <span lang="en">Squitty</span> </title>
-    <meta name="title" content="Trama" >
-    <meta name="author" content="Simone Ballarin">
-    <meta name="description" content="trama della serie <abbr>TBBT</abbr>" >
-    <meta name="keywords" content="curiosita" >
-    <meta name="language" content="italian it">
-    <meta http-equiv="Content-Type" content="text/html; =charset=utf-8">
-    <link rel="stylesheet" href="../../css/stile.css">
-</head>
+<?php
+      require_once ("CommonHtmlElement.php");
+      $h = new CommonHtmlElement();
+      $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
+ ?>
 <body>
     <div id="accessBar">
     </div>
-
-	<div id="header">
-			<img  id="logo" src="../../img/logo.jpg" alt="logo i tesori di Squitty">
-			<h5>I tesori di <span lang="en">Squitty</span></h5>
-			<form action = "" method = "POST">
-					<input type="submit" name="prodotti" value='Prodotti al minuto'>
-					<input type="submit" name="storia" value='Storia dei ordini'>
-					<input type="submit" name="prenotazione" value='Prenotazione'>
-					<input type="submit" name="logout" value='Log Out'>
-					<input type="submit" name="closeaccount" value='Close Account'>
-			</form>
-	</div>
-			<?php
+    <?php
+          $h->createheader("account");
+          $h->printInternalMenu("account");
+     ?>
+     <div id="content">
+		 <?php
 				session_start();
-				echo "Welcome back " . $_SESSION['Email'];
+				echo "Bentornato " . $_SESSION['Email'];
 
 				if(isset($_POST['prodotti'])){
-					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Product.php")){
-						require_once("../class/Factory.php");
-						require_once("../class/DBmanager.php");
-						require_once("../class/User.php");
-						require_once("../class/Product.php");}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
+
+					require_once("../class/Factory.php");
+					require_once("../class/DBmanager.php");
+					require_once("../class/User.php");
+					require_once("../class/Product.php");
+
 
 					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 					$d->connect();
@@ -48,13 +34,7 @@
 					$prod = $f->getProductList($t);
 
 					foreach ($prod as $x) {
-						echo "<div class='product'>";
-						echo "<h4>" . $x->getName() . "</h4>";
-						$relativeImagePath = "'../../".$x->getImage()."'";
-						echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
-						echo "<p> Ingredienti:" . $x->getIngredients() . "</p>";
-						echo "<p> Descrizione" . $x->getDesc() . "</p>";
-						echo "</div>";
+            $h->createProductDiv($x);
 					}
 				}
 
@@ -624,5 +604,6 @@
 					echo "</div>";
 				}
 			?>
+    </div>
 	</body>
 </html>

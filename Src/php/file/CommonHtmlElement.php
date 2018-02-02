@@ -106,6 +106,9 @@ class CommonHtmlElement{
 				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
+			case "account":
+				echo "<p>Ciao amico sole il mio nome simomne</p>";
+			break;
 			default:
 				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
 				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
@@ -182,6 +185,15 @@ class CommonHtmlElement{
 			case "signUp":
 					echo "<li><a href='#info'>Info</a></li>";
 					echo "<li><a href='#form'>Creazione utente</a></li>";
+			break;
+			case "account":
+					echo "<form action = '' method = 'POST'>";
+					echo "		<input type='submit' name='prodotti' value='Prodotti al minuto'>";
+					echo "		<input type='submit' name='storia' value='Storia dei ordini'>";
+					echo "		<input type='submit' name='prenotazione' value='Prenotazione'>";
+					echo "		<input type='submit' name='logout' value='Log Out'>";
+					echo "		<input type='submit' name='closeaccount' value='Close Account'>";
+					echo "</form>";
 			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
