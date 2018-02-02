@@ -152,7 +152,7 @@ class Manipulator{
         case "All_ingrosso":
         $query = "DELETE FROM ordine_all_ingrosso WHERE codice = ".$requestKey."";
         break;
-        case "Servizi":
+        case "Servizio":
         $query = "DELETE FROM richiesta_servizio WHERE codice = ".$requestKey."";
         break;
       }

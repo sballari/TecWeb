@@ -56,6 +56,23 @@ class Factory {
       }
       else return false;
 	}
+
+  function getEntireProductList(){
+    if ($this->dbM->getStatus()==true){
+          $result = $this->dbM->submitQuery("SELECT * FROM prodotto ");
+          $arrPrd = array();
+          while ($arr = $result->fetch_assoc()){
+              $arrPrd[] =new Product ($arr['imagePath'],
+                                   $arr['descrizione'],
+                                   $arr['ingredienti'],
+                                   $arr['tipoProdotto'],
+                                   $arr['nome']);
+          }
+					return $arrPrd;
+      }
+      else return false;
+	}
+
   public function getProduct($key){
     if ($this->dbM->getStatus()==true){
       $result = $this->dbM->submitQuery("SELECT * FROM Prodotto WHERE nome='".$key."'");
@@ -174,6 +191,88 @@ class Factory {
 
        }
       else return false;
+}
+
+
+function getTypeRequestList($typeR){
+  //typeP can be "Al minuto", "All_ingrosso", "Servizio"
+    if ($typeR != "Al minuto" && $typeR != "All_ingrosso" && $typeR!="Servizio") return false;
+    if ($this->dbM->getStatus()==true){
+
+      switch($typeR){
+        case "Al minuto":
+          require_once("RetailOrder.php");
+          $result = $this->dbM->submitQuery("SELECT * FROM prenotazione JOIN composizione_al_minuto ON prenotazione.codice =  composizione_al_minuto.prenotazione ");
+          $arrRet = array();
+          $previousKey = NULL;
+          while ($s = $result->fetch_assoc()){
+            $user = $this->getUser($s['utente']);
+            $element = new RetailOrder(
+             $s['data_effettuazione'],
+             $s['stato_ordine'],
+             $user,
+             $s['descrizione_utente'],
+             $s['data_ora_ritiro'],
+             $s['codice']
+           );
+           if(($element->getKey()!=$previousKey) || $previousKey == NULL){
+             $arrP = $this->getOrderProductList($element->getKey(),"Al minuto");
+             $element->insertProducts($arrP);
+             $arrRet[]=$element;
+           }
+           $previousKey=$element->getKey();
+          }
+          return $arrRet;
+          break;
+
+        case "All_ingrosso":
+          require_once("MassiveOrder.php");
+          $result = $this->dbM->submitQuery("SELECT * FROM ordine_all_ingrosso JOIN composizione_all_ingrosso ON ordine_all_ingrosso.codice =  composizione_all_ingrosso.ordine_all_ingrosso ");
+          $arrRet = array();
+          $previousKey = NULL;
+          while ($s = $result->fetch_assoc()){
+           $user = $this->getUser($s['utente']);
+           $element = new MassiveOrder(
+              $s['indirizzo_consegna'],
+              $s['periodicita'],
+              $s['data_effettuazione'],
+              $s['stato_ordine'],
+              $user,
+              $s['data_ora_consegna'],
+              $s['codice']
+            );
+           if(($element->getKey()!=$previousKey) || $previousKey == NULL){
+             $k = $element->getKey();
+             $arrP = $this->getOrderProductList($k, "All_ingrosso");
+             $element->insertProducts($arrP);
+             $arrRet[] = $element;
+           }
+           $previousKey=$element->getKey();
+          }
+          return $arrRet;
+          break;
+
+        case "Servizio":
+          require_once("Service.php");
+          $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio ");
+          $arrRet = array();
+          while ($s= $result->fetch_assoc()){
+            $user = $this->getUser($s['utente']);
+            $arrRet[]=new Service( $this->getProduct($s['Prodotto_servizio']),
+                         $s['personale_richiesto'],
+                         $s['risorse_necessarie'],
+                         $s['indirizzo_evento'],
+                         $s['data_effettuazione'],
+                         $s['stato_ordine'],
+                         $user,
+                         $s['data_ora_evento'],
+                         $s['codice']);
+         }
+         return $arrRet;
+        break;
+      }
+    }
+    else return false;
 }
 }
 ?>

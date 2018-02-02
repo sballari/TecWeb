@@ -1,39 +1,47 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<head>
-    <title> Account Impiegato- I tesori di <span lang="en">Squitty</span> </title>
-    <meta name="title" content="Trama" >
-    <meta name="author" content="Simone Ballarin">
-    <meta name="description" content="trama della serie <abbr>TBBT</abbr>" >
-    <meta name="keywords" content="curiosita" >
-    <meta name="language" content="italian it">
-    <meta http-equiv="Content-Type" content="text/html; =charset=utf-8">
-    <link rel="stylesheet" href="../../css/stile.css">
-</head>
+<?php
+      if(file_exists("CommonHtmlElement.php")){
+        require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+      $h = new CommonHtmlElement();
+      $h->printHead("account impiegato", "pagina dedicata ai impiegati della pasticceria", "account");
+ ?>
 <body>
+      <div id="accessBar">
+      </div>
+
+      <?php
+      if(file_exists("CommonHtmlElement.php")){
+  			require_once ("CommonHtmlElement.php");}
+      else{
+        echo "Error: file does not esist.";
+        exit;}
+  		$header = new CommonHtmlElement();
+  		$header->createheader("loginSignup");
+  	?>
     <div id="accessBar">
     </div>
 
 
 
-	<div id="header">
-			<img  id="logo" src="../../img/logo.jpg" alt="logo i tesori di Squitty">
-			<h5>I tesori di <span lang="en">Squitty</span></h5>
-			<h4>Based on what your operation is related to select one of the following buttons.</h4>
-			
-			<form action = "" method = "POST">
-					
-					<input type="submit" name="ordini" value="Ordini">
-					<input type="submit" name="utente" value="Utente">
-					<input type="submit" name="prodotti" value="Prodotti">
-					
+    <div id ="internalNavBar" class="onlyDesktop" >
+      <form action = "" method = "POST">
+        <ul>
+					<li><input type="submit" name="ordini" value="Ordini"></li>
+					<li><input type="submit" name="utente" value="Utente"></li>
+					<li><input type="submit" name="prodotti" value="Prodotti"></li>
+        </ul>
 			</form>
-	</div>		
+	  </div>
+    <div id="content">
 			<?php
 			session_start();
 			if(isset($_POST['ordini']))
 			{
-				echo "provaOrdini";
+				echo "Scegli le categorie dei ordini che vuoi visualizzare.";
 				echo "<div id='formOrdini'>";
 				echo "<form action = '' method = 'POST'>";
 				//echo "Data ritiro";
@@ -46,338 +54,348 @@
 				echo "<input type='submit' name='visualizzaOrdini' value='Visualizza Ordini'></br></br>";
 				echo "</form>";
 				echo "</div>";
-			}	
-			
-				if(isset($_POST['visualizzaOrdini']))
-				{ echo "Again";
-					if(file_exists("../class/DBmanager.php")){
-					
-					require_once("../class/DBmanager.php");
-					}
-				else{
-					echo "Error: One of the files does not esist.";
-					exit;}
-					
-				
+			}
+
+			if(isset($_POST['visualizzaOrdini'])){
+        if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+          require_once("../class/Factory.php");
+          require_once("../class/DBmanager.php");
+          require_once("../class/User.php");
+          require_once("../class/Request.php");
+          require_once("../class/RetailOrder.php");
+          require_once("../class/MassiveOrder.php");
+          require_once("../class/Service.php");
+          }
+        else{
+          echo "Error: One of the files does not esist.";
+          exit;}
+
 				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 				$d->connect();
-				
-				
-				
-					$id=0;
-					echo "Try again";
-					echo "<form action = '' method = 'POST'>";
-					echo "<div id='tabelleOrdini'>";
-					
-					if(isset($_POST['Al_minuto'])){
-						echo "<table>
-							<tr>
-							<th>Seleziona</th>
-							<th>Codice </th>
-							<th>Data effettuazione</th>
-							<th>Stato</th>
-							<th>Data ora ritiro</th>
-							
-							<th>Descrizione utente</th>
-							<th>Utente</th>
-							<th>Prodotto</th>
-							<th>Numero prodotti</th>
-							</tr>";
-						$result = $d->submitQuery("SELECT * FROM prenotazione JOIN composizione_al_minuto ON prenotazione.codice =  composizione_al_minuto.prenotazione ");
-						//WHERE data_ora_ritiro = '" . $_POST['dataOrdine'] . "'
-						if($result==false){
-							echo "LAst";
-						}
-						
-						
-						while ($arr = $result->fetch_assoc()){
-							$id++;
-							echo "<tr>";
-							echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' >";
-							echo "<td>" . $arr['codice'] . "</td>";
-							
-							echo "<td>" . $arr['data_effettuazione']  . "</td>";
-							echo "<td>" . $arr['stato_ordine']  . "</td>";
-							echo "<td>" . $arr['data_ora_ritiro'] . "</td>";
-							echo "<td>" . $arr['descrizione_utente'] . "</td>";
-							echo "<td>" . $arr['utente'] . "</td>";
-							echo "<td>" . $arr['prodotto'] . "</td>";
-							echo "<td>" . $arr['nr_prodotti'] . "</td>";
-							echo "</tr>";
-							
-							
-						}
-						echo "</table></br></br></br>";
-				
+        $f = new Factory($d);
+        $_SESSION['Al_minuto'] = false;
+        $_SESSION['All_ingrosso'] = false;
+        $_SESSION['Servizio'] = false;
+				$id=0;
+        echo "<form action = '' method = 'POST'>";
+				echo "<div id='tabelleOrdini'>";
+
+				if(isset($_POST['Al_minuto'])){
+          $_SESSION['Al_minuto'] = true;
+          echo "<table>
+            <tr>
+            <th>Seleziona</th>
+            <th>RetailOrder codice</th>
+            <th>RetailOrder product's(number) and name</th>
+
+            <th>RetailOrder user notes</th>
+            <th>RetailOrder receive date and hour</th>
+            <th>RetailOrder status</th>
+            <th>RetailOrder delivery date and hour </th>
+            </tr>";
+            $req = $f->getTypeRequestList("Al minuto");
+          foreach ($req as $x) {
+            $id++;
+            echo "<tr>";
+            echo "<td><input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+            echo "<td>" . $x->getKey() . "</td>";
+
+            $prodArr=$x->getProducts();
+            $length=count($prodArr);
+            $prodNumArr = array();
+
+            for($i=0; $i<$length; $i++){
+              $l=0;
+              $name=$prodArr[$i]->getName();
+              $pos=0;
+              if($prodArr[$i] != NULL){
+              for($j=0; $j<$length; $j++) {
+                if($prodArr[$j]!= NULL){
+                  if($name == $prodArr[$j]->getName()){
+                    $l++;
+                    $prodArr[$j]=NULL;
+                    $pos=$j;
+                  }
+                  else{
+                    break;
+                  }
+                }
+              }
+              $prodNumArr[$name]= "".$l;
+              }
+              $i=$pos;
+            }
+            echo "<td>";
+            foreach ($prodNumArr as $key=>$value) {
+              echo "(".$value.")  ".$key;
+              echo "</br>";
+            }
+            echo "</td>";
+            echo "<td>" . $x->getUserNote() . "</td>";
+            echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+            echo "<td>" . $x->getStatus() . "</td>";
+            echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+            echo "</tr>";
+          }
+          echo "</table>";
+
 					}
-					
-					
+
+
 					if(isset($_POST['All_ingrosso'])){
-						echo "<table>
-							<tr>
-							<th>Seleziona</th>
-							<th>Codice </th>
-							<th>Data effettuazione</th>
-							<th>Stato</th>
-							<th>Data ora ritiro</th>
-							
-							<th>Indirizzo consegna</th>
-							<th>Periodicita</th>
-							<th>Utente</th>
-							<th>Prodotto</th>
-							<th>Numero prodotti</th>
-							</tr>";
-						$result = $d->submitQuery("SELECT * FROM ordine_all_ingrosso JOIN composizione_all_ingrosso ON ordine_all_ingrosso.codice =  composizione_all_ingrosso.ordine_all_ingrosso ");
-						//WHERE data_ora_consegna = '" . $_POST['dataOrdine'] . "'
-						if($result==false){
-							echo "LAst";
-						}
-						
-					
-						while ($arr = $result->fetch_assoc()){
-							$id++;
-							
-							echo "<tr>";
-							echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' >";
-							echo "<td>" . $arr['codice'] . "</td>";
-							echo "<td>" . $arr['data_effettuazione']  . "</td>";
-							echo "<td>" . $arr['stato_ordine']  . "</td>";
-							echo "<td>" . $arr['data_ora_consegna'] . "</td>";
-							echo "<td>" . $arr['indirizzo_consegna'] . "</td>";
-							echo "<td>" . $arr['periodicita'] . "</td>";
-							echo "<td>" . $arr['utente'] . "</td>";
-							echo "<td>" . $arr['prodotto'] . "</td>";
-							echo "<td>" . $arr['nr_prodotti'] . "</td>";
-							
-							echo "</tr>";
-						}
-						echo "</table></br></br></br>";
-				
+            $_SESSION['All_ingrosso'] = true;
+            echo "<table>
+            <tr>
+            <th>Seleziona</th>
+            <th>MassiveOrder codice</th>
+            <th>MassiveOrder product's (number) and name</th>
+
+            <th>MassiveOrder periodicity</th>
+            <th>MassiveOrder adress</th>
+            <th>MassiveOrder receive date and hour</th>
+            <th>MassiveOrder status</th>
+            <th>MassiveOrder delivery date and hour </th>
+            </tr>";
+            $req = $f->getTypeRequestList("All_ingrosso");
+            foreach ($req as $x) {
+              $id++;
+              echo "<tr>";
+              echo "<td><input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+              echo "<td>" . $x->getKey() . "</td>";
+
+              $prodArr=$x->getProducts();
+              $length=count($prodArr);
+              $prodNumArr = array();
+
+              for($i=0; $i<$length; $i++){
+                $l=0;
+                $name=$prodArr[$i]->getName();
+                $pos=0;
+                if($prodArr[$i] != NULL){
+                for($j=0; $j<$length; $j++) {
+                  if($prodArr[$j]!= NULL){
+                    if($name == $prodArr[$j]->getName()){
+                      $l++;
+                      $prodArr[$j]=NULL;
+                      $pos=$j;
+                    }
+                    else{
+                      break;
+                    }
+                  }
+                }
+                $prodNumArr[$name]= "".$l;
+                }
+                $i=$pos;
+              }
+              echo "<td>";
+              foreach ($prodNumArr as $key=>$value) {
+                echo "(".$value.")  ".$key;
+                echo "</br>";
+              }
+              echo "</td>";
+              echo "<td>" . $x->getPeriodicity() . "</td>";
+              echo "<td>" . $x->getDeliveryAdress() . "</td>";
+              echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+              echo "<td>" . $x->getStatus() . "</td>";
+              echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+              echo "</tr>";
+            }
+            echo "</table>";
 					}
-					
-					
+
+
 					if(isset($_POST['Servizio'])){
-						echo "<table>
-							<tr>
-							<th>Seleziona</th>
-							<th>Codice </th>
-							<th>Data effettuazione</th>
-							<th>Stato</th>
-							<th>Data ora evento</th>
-							
-							<th>Risorse necessarie</th>
-							<th>Personale richiesto</th>
-							<th>Indirizzo evento</th>
-							<th>Utente</th>
-							<th>Prodotto servizio</th>
-							</tr>";
-						$result = $d->submitQuery("SELECT * FROM richiesta_servizio ");
-						
-						//WHERE data_ora_evento = '" . $_POST['dataOrdine'] . "'
-						if($result==false){
-							echo "LAst";
-						}
-						
-						
-					
-						while ($arr = $result->fetch_assoc()){
-							$id++;
-							echo "<tr>";
-							echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' >";
-							echo "<td>" . $arr['codice'] . "</td>";
-							echo "<td>" . $arr['data_effettuazione']  . "</td>";
-							echo "<td>" . $arr['stato_ordine']  . "</td>";
-							echo "<td>" . $arr['data_ora_evento'] . "</td>";
-							echo "<td>" . $arr['risorse_necessarie'] . "</td>";
-							echo "<td>" . $arr['personale_richiesto'] . "</td>";
-							echo "<td>" . $arr['indirizzo_evento'] . "</td>";
-							echo "<td>" . $arr['utente'] . "</td>";
-							echo "<td>" . $arr['Prodotto_servizio'] . "</td>";
-						
-							echo "</tr>";
-						}
-						echo "</table>";
-				
-					}
-					
-					echo "</div>";
-					echo "<input type='submit' name='cancellaR' value='Cancella'></br></br>";
-					echo "<input type='submit' name='cambiaStato' value='Cambia Stato'></br>";
-					echo "</form>";
-				}		
-			
-			
-			
-			if(isset($_POST['cancellaR'])){
-				echo "Test";
-					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
-						
-						require_once("../class/DBmanager.php");
-						require_once("../class/Manipulator.php");}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
-					
-					$id = 0;
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$m = new Manipulator($d);
-					
-					$id=0;
-					$result1 = $d->submitQuery("SELECT * FROM prenotazione JOIN composizione_al_minuto ON prenotazione.codice =  composizione_al_minuto.prenotazione ");
-						//WHERE data_ora_ritiro = '" . $_POST['dataOrdine'] . "'
-						while ($arr = $result1->fetch_assoc()){
-							$id++;
-					echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try requestremoval";
-							
-							$b = $m->removeRequest($arr['codice'], "Al minuto");	//****** REMOVERequest NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeRequest wrong try again!";
-							}
-							
-						}
-							
-						}
-					$result2 = $d->submitQuery("SELECT * FROM ordine_all_ingrosso JOIN composizione_all_ingrosso ON ordine_all_ingrosso.codice =  composizione_all_ingrosso.ordine_all_ingrosso ");
-						//WHERE data_ora_consegna = '" . $_POST['dataOrdine'] . "'
-						while ($arr = $result2->fetch_assoc()){
-							$id++;
-						echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try requestremoval";
-							
-							$b = $m->removeRequest($arr['codice'], "Al minuto");	//****** REMOVERequest NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeRequest wrong try again!";
-							}
-							
-						}
-							
-						}
-					$result3 = $d->submitQuery("SELECT * FROM richiesta_servizio ");
-						
-						//WHERE data_ora_evento = '" . $_POST['dataOrdine'] . "'
+            $_SESSION['Servizio'] = true;
+            echo "<table>
+            <tr>
+            <th>Seleziona</th>
+            <th>Request codice</th>
+            <th>Request product name</th>
+            <th>Request product image</th>
+            <th>Request product description</th>
+            <th>Request staff</th>
+            <th>Request resources</th>
+            <th>Request adress</th>
+            <th>Request receive date and hour</th>
+            <th>MassiveOrder status</th>
+            <th>MassiveOrder delivery date and hour </th>
+            </tr>";
+            $req = $f->getTypeRequestList("Servizio");
+            foreach ($req as $x) {
+              $id++;
+              echo "<tr>";
+              echo "<td><input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+              echo "<td>" . $x->getKey() . "</td>";
+              echo "<td>" . $x->getService()->getName() . "</td>";
+              echo "<td>" . $x->getService()->getImage() . "</td>";
+              echo "<td>" . $x->getService()->getDesc() . "</td>";
+              echo "<td>" . $x->getStaffNumber() . "</td>";
+              echo "<td>" . $x->getResourceNeeded() . "</td>";
+              echo "<td>" . $x->getLocationAdress() . "</td>";
+              echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+              echo "<td>" . $x->getStatus() . "</td>";
+              echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+              echo "</tr>";
+            }
+            echo "</table>";
+          }
+          echo "</br></br>";
+          echo "<input type='submit' name='cancellaRichiesta' value='Cancella la richiesta'>";
+          echo "</br></br>";
+          echo "</br></br>";
+          echo "<input type='submit' name='cambiaStato' value='Cambia lo stato della richiesta'>";
+          echo "</br></br>";
+          echo "</div>";
+          echo "</form>";
+        }
 
-						while ($arr = $result3->fetch_assoc()){
-							$id++;
-						echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try requestremoval";
-							
-							$b = $m->removeRequest($arr['codice'], "Al minuto");	//****** REMOVERequest NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeRequest wrong try again!";
-							}
-							
-						}
-							
-						}
-					
-					
-				}
-				
-				
-				
-				if(isset($_POST['cambiaStato'])){
-				echo "Test";
-					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
-						
-						require_once("../class/DBmanager.php");
-						require_once("../class/Manipulator.php");}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
-					
-					$id = 0;
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$m = new Manipulator($d);
-					
-					$id=0;
-					$result1 = $d->submitQuery("SELECT * FROM prenotazione JOIN composizione_al_minuto ON prenotazione.codice =  composizione_al_minuto.prenotazione ");
-						//WHERE data_ora_ritiro = '" . $_POST['dataOrdine'] . "'
-						while ($arr = $result1->fetch_assoc()){
-							$id++;
-					echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try cambiaStato";
-							
-							$b = $d->submitQuery("UPDATE prenotazione SET stato_ordine = 'passato' WHERE codice = " . $arr['codice'] . "");	
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at cccc wrong try again!";
-							}
-							
-						}
-							
-						}
-					$result2 = $d->submitQuery("SELECT * FROM ordine_all_ingrosso JOIN composizione_all_ingrosso ON ordine_all_ingrosso.codice =  composizione_all_ingrosso.ordine_all_ingrosso ");
-						//WHERE data_ora_consegna = '" . $_POST['dataOrdine'] . "'
-						while ($arr = $result2->fetch_assoc()){
-							$id++;
-						echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try cambiaStato";
-							
-							$b = $d->submitQuery("UPDATE ordine_all_ingrosso SET stato_ordine = 'passato' WHERE codice = " . $arr['codice'] . "");		//****** REMOVERequest NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeRequest wrong try again!";
-							}
-							
-						}
-							
-						}
-					$result3 = $d->submitQuery("SELECT * FROM richiesta_servizio ");
-						
-						//WHERE data_ora_evento = '" . $_POST['dataOrdine'] . "'
 
-						while ($arr = $result3->fetch_assoc()){
-							$id++;
-						echo "TestR";
-						$st="request" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try cambiaStato";
-							
-							$b = $d->submitQuery("UPDATE richiesta_servizio SET stato_ordine = 'passato' WHERE codice = " . $arr['codice'] . "");	//****** REMOVERequest NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeRequest wrong try again!";
-							}
-							
-						}
-							
-						}
-					
-					
-				}
-			
-			
+
+      if(isset($_POST['cancellaRichiesta'])){
+        if(file_exists("../class/Factory.php") && file_exists("../class/Manipulator.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+          require_once("../class/Factory.php");
+          require_once("../class/Manipulator.php");
+          require_once("../class/DBmanager.php");
+          require_once("../class/User.php");
+          require_once("../class/Request.php");
+          require_once("../class/RetailOrder.php");
+          require_once("../class/MassiveOrder.php");
+          require_once("../class/Service.php");
+          }
+        else{
+          echo "Error: One of the files does not esist.";
+          exit;}
+
+        $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+        $d->connect();
+        $f = new Factory($d);
+        $m = new Manipulator($d);
+        $id=1;
+        if($_SESSION['Al_minuto']==true){
+          $req = $f->getTypeRequestList("Al minuto");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+              $b = $m->removeRequest($x->getKey(), "Al minuto");
+              if($b==false){
+                echo "Something went at removeRequest wrong try again!";
+              }
+              else{
+                echo "The request has been sucessfully removed.";
+              }
+            }
+          $id++;
+        }
+      }
+        if($_SESSION['All_ingrosso']==true){
+          $req = $f->getTypeRequestList("All_ingrosso");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+              $b = $m->removeRequest($x->getKey(), "All_ingrosso");
+              if($b==false){
+                echo "Something went at removeRequest wrong try again!";
+              }
+              else{
+                echo "The request has been sucessfully removed.";
+              }
+            }
+          $id++;
+        }
+      }
+        if($_SESSION['Servizio']==true){
+          $req = $f->getTypeRequestList("Servizio");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+              $b = $m->removeRequest($x->getKey(), "Servizio");
+              if($b==false){
+                echo "Something went at removeRequest wrong try again!";
+              }
+              else{
+                echo "The request has been sucessfully removed.";
+              }
+            }
+          $id++;
+        }
+      }
+    }
+
+
+
+			if(isset($_POST['cambiaStato'])){
+        if(file_exists("../class/Factory.php") && file_exists("../class/Manipulator.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+          require_once("../class/Factory.php");
+          require_once("../class/Manipulator.php");
+          require_once("../class/DBmanager.php");
+          require_once("../class/User.php");
+          require_once("../class/Request.php");
+          require_once("../class/RetailOrder.php");
+          require_once("../class/MassiveOrder.php");
+          require_once("../class/Service.php");
+          }
+        else{
+          echo "Error: One of the files does not esist.";
+          exit;}
+
+        $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+        $d->connect();
+        $f = new Factory($d);
+        $m = new Manipulator($d);
+        $id=1;
+        if($_SESSION['Al_minuto']==true){
+          $req = $f->getTypeRequestList("Al minuto");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+              $b = $d->submitQuery("UPDATE prenotazione SET stato_ordine = 'passato' WHERE codice = " . $x->getKey() . "");
+              if($b==false){
+                echo "Something went at changeState wrong try again!";
+              }
+              else{
+                echo "The request has sucessfully changed state.";
+              }
+            }
+          $id++;
+        }
+      }
+        if($_SESSION['All_ingrosso']==true){
+          $req = $f->getTypeRequestList("All_ingrosso");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+            $b = $d->submitQuery("UPDATE ordine_all_ingrosso SET stato_ordine = 'passato' WHERE codice = " . $x->getKey() . "");
+              if($b==false){
+                echo "Something went at changeState wrong try again!";
+              }
+              else{
+                echo "The request has sucessfully changed state.";
+              }
+            }
+          $id++;
+        }
+      }
+        if($_SESSION['Servizio']==true){
+          $req = $f->getTypeRequestList("Servizio");
+          foreach($req as $x){
+            $st="request" . $id . "";
+            if(isset($_POST[$st])){
+              $b = $d->submitQuery("UPDATE richiesta_servizio SET stato_ordine = 'passato' WHERE codice = " . $x->getKey() . "");
+              if($b==false){
+                echo "Something went at changeState wrong try again!";
+              }
+              else{
+                echo "The request has sucessfully changed state.";
+              }
+            }
+          $id++;
+        }
+      }
+    }
+
+
 			if(isset($_POST['utente'])){
-				echo "provaUtente";
-			
 				if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
 					require_once("../class/Factory.php");
 					require_once("../class/DBmanager.php");
@@ -385,13 +403,13 @@
 				else{
 					echo "Error: One of the files does not esist.";
 					exit;}
-					
-				
+
+
 				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 				$d->connect();
 				$f = new Factory($d);
 				$usr = $f->getUserList();
-        
+
 				echo "<form action = '' method = 'POST'>";
 				if($usr==false){
 					echo "Something went wrong! Try again.";
@@ -405,8 +423,7 @@
 							<th>Cognome utente</th>
 							<th>Email utente</th>
 							<th>Password utente</th>
-							
-							<th>Tipo utente</th>
+              <th>Tipo utente</th>
 							</tr>";
 				$id = 0;
 				foreach ($usr as $x) {
@@ -423,13 +440,13 @@
 				echo "</table>";
 				echo "</div>";
 				}
-				echo "</br>";
-				echo "</br>";
-				
-				echo "<input type='submit' name='cancella' value='Cancella'></br>";
+				echo "</br></br>";
+				echo "<input type='submit' name='cancellaUtente' value='Cancella'></br>";
 				echo "</form>";
 			}
-				if(isset($_POST['cancella'])){
+
+
+				if(isset($_POST['cancellaUtente'])){
 					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
 						require_once("../class/Factory.php");
 						require_once("../class/DBmanager.php");
@@ -437,134 +454,85 @@
 					else{
 						echo "Error: One of the files does not esist.";
 						exit;}
-					
-				
+
+
 					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 					$d->connect();
 					$m = new Manipulator($d);
 					$f = new Factory($d);
 					$usr = $f->getUserList();
-					
+
 					$id = 0;
 					foreach ($usr as $x) {
-					$id++;
+					  $id++;
 						$st="utente" . $id . "";
 						if(isset($_POST[$st])){
-								
-							echo "try";
-							$e = $x->getEmail();
-							echo "var" . $e;
-							$b = $m->removeUser($e);	//****** REMOVEUSER NON FUNZIONA l'utente non viene rimosso dal DB******
-							echo "var" . $b;
+              $e = $x->getEmail();
+							$b = $m->removeUser($e);
 							if($b==false){
-								
-								echo "Something went at removeUser wrong try again!";
+                echo "Something went at removeUser wrong try again!";
 							}
-							
-						}
-						
-					}
-					
-				}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			if(isset($_POST['prodotti']))
-			{
-				echo "provaProdotti";
-				echo "<div id='formOrdini'>";
-				echo "<form action = '' method = 'POST'>";
-				
-				echo "<input type='submit' name='aggiuntaProdotto' value='Aggiungi un nuovo prodotto' ></br>";
-				
-				if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
-					require_once("../class/Factory.php");
-					require_once("../class/DBmanager.php");}
-				else{
-					echo "Error: One of the files does not esist.";
-					exit;}
+              else{
+                echo "The user has been removed sucessfully!";
+              }
+            }
+          }
+        }
 
-				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-				$d->connect();
-				$f = new Factory($d);
-				$prod1 = $f->getProductList("Al minuto");
-        //echo var_dump($prod);
-				$id=0;
-				
-				echo "<table>
+
+
+        if(isset($_POST['prodotti'])){
+          if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
+  					require_once("../class/Factory.php");
+  					require_once("../class/DBmanager.php");}
+  				else{
+  					echo "Error: One of the files does not esist.";
+  					exit;}
+
+				  $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+				  $d->connect();
+				  $f = new Factory($d);
+				  $prod = $f->getEntireProductList();
+          $id=0;
+          echo "<div id='formOrdini'>";
+          echo "<form action = '' method = 'POST'>";
+          echo "<input type='submit' name='aggiuntaProdotto' value='Aggiungi un nuovo prodotto' ></br>";
+          echo "</br></br>";
+				  echo "<table>
 							<tr>
 							<th>Seleziona</th>
 							<th>Nome</th>
 							<th>Percorso imagine</th>
 							<th>Ingredienti</th>
 							<th>Descrizione</th>
+              <th>Tipo prodotto</th>
 							</tr>";
-				foreach ($prod1 as $x) {
-					
-					$id++;
-					echo "<tr>";
-					echo "<td>".$id."<input type='checkbox' name='prodotto" . $id . "' value='prodotto" . $id . "' >";
-					echo "<td>" . $x->getName() . "</td>";
-					echo "<td>" . $x->getImage()  . "</td>";
-					echo "<td>" . $x->getIngredients()  . "</td>";
-					echo "<td>" . $x->getDesc() . "</td>";
-					echo "</tr>";
-				}
-				
-				
-				
-				
-				$prod2 = $f->getProductList("All_ingrosso");
-				
-				foreach ($prod2 as $x) {
-					
-					$id++;	
-					echo "<tr>";
-					echo "<td>".$id."<input type='checkbox' name='prodotto" . $id . "' value='prodotto" . $id . "' >";
-					echo "<td>" . $x->getName() . "</td>";
-					echo "<td>" . $x->getImage()  . "</td>";
-					echo "<td>" . $x->getIngredients()  . "</td>";
-					echo "<td>" . $x->getDesc() . "</td>";
-					echo "</tr>";
-				}
-				
-				
-				
-				$prod3 = $f->getProductList("Servizio");
-				
-				foreach ($prod3 as $x) {
-					
-					$id++;	
-					echo "<tr>";
-					echo "<td>".$id."<input type='checkbox' name='prodotto" . $id . "' value='prodotto" . $id . "' >";
-					echo "<td>" . $x->getName() . "</td>";
-					echo "<td>" . $x->getImage()  . "</td>";
-					echo "<td>" . $x->getIngredients()  . "</td>";
-					echo "<td>" . $x->getDesc() . "</td>";
-					echo "</tr>";
-				}
-				echo "</table>";
-							
-						
-				echo "<input type='submit' name='cancellaProdotto' value='Cancella prodotto' ></br>";
-				echo "Per modificare prodotti devi scegliere i prodotti uno alla volta.";
-				echo "<input type='submit' name='modificaProdotto' value='Modifica prodotto'></br></br>";
-				
-				echo "</form>";
-				echo "</div>";
-			}	
-			
-			
-			if(isset($_POST['aggiuntaProdotto'])){
-				
-				echo "provaAggiuntaProdotti";
-				echo "<div id='formAggiuntaProdotti'>";
+				  foreach ($prod as $x) {
+            $id++;
+					  echo "<tr>";
+					  echo "<td>".$id."<input type='checkbox' name='prodotto" . $id . "' value='prodotto" . $id . "' >";
+					  echo "<td>" . $x->getName() . "</td>";
+					  echo "<td>" . $x->getImage()  . "</td>";
+					  echo "<td>" . $x->getIngredients()  . "</td>";
+					  echo "<td>" . $x->getDesc() . "</td>";
+            echo "<td>" . $x->getProductType() . "</td>";
+					  echo "</tr>";
+				  }
+          echo "</table>";
+          echo "</br></br>";
+          echo "<input type='submit' name='cancellaProdotto' value='Cancella prodotto' ></br>";
+          echo "</br></br>";
+				  echo "Per modificare prodotti devi scegliere i prodotti uno alla volta.";
+          echo "</br>";
+				  echo "<input type='submit' name='modificaProdotto' value='Modifica prodotto'></br></br>";
+          echo "</form>";
+				  echo "</div>";
+			}
+
+
+
+      if(isset($_POST['aggiuntaProdotto'])){
+        echo "<div id='formAggiuntaProdotti'>";
 				echo "<form action = '' method = 'POST'>";
 				echo "Nome prodotto";
 				echo "<input type='text' name='nomeProdotto' placeholder='nome' required ></br></br>";
@@ -575,7 +543,7 @@
 				echo "<option value='Servizio'>Servizio</option>";
 				echo "</select></br></br>";
 				echo "Ingredienti ";
-				echo "<textarea name='ingidientiProdotto' rows='2' cols='100' required>Inserisci ingridienti</textarea></br></br>";
+				echo "<textarea name='ingidientiProdotto' rows='2' cols='100' >Inserisci ingridienti</textarea></br></br>";
 				echo "Descrizione";
 				echo "<textarea name='descrizioneProdotto' rows='5' cols='100' required>Inserisci descrizione</textarea></br></br>";
 				echo "Percorso imagine prodotto";
@@ -583,11 +551,13 @@
 				echo "<input type='submit' name='inserisciProdotto' value='Inserisci Prodotto'></br>";
 				echo "</form>";
 				echo "</div>";
-				
-			}	
-				if(isset($_POST['inserisciProdotto'])){
-					if(isset($_POST['nomeProdotto']) && isset($_POST['tipoProdotto']) && isset($_POST['ingidientiProdotto']) && isset($_POST['descrizioneProdotto']) && isset($_POST['percorsoImagineProdotto'])){
-					
+      }
+
+
+
+      if(isset($_POST['inserisciProdotto'])){
+				if(isset($_POST['nomeProdotto']) && isset($_POST['tipoProdotto']) && isset($_POST['ingidientiProdotto']) && isset($_POST['descrizioneProdotto']) && isset($_POST['percorsoImagineProdotto'])){
+
 						if(file_exists("../class/Manipulator.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Product.php")){
 							require_once("../class/Manipulator.php");
 							require_once("../class/DBmanager.php");
@@ -595,116 +565,56 @@
 						else{
 							echo "Error: One of the files does not esist.";
 							exit;}
-					
-				
-						$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+
+            $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 						$d->connect();
 						$m = new Manipulator($d);
-						echo "kot" . $_POST['percorsoImagineProdotto'];
 						$p = new Product($_POST['percorsoImagineProdotto'], $_POST['descrizioneProdotto'], $_POST['ingidientiProdotto'], $_POST['tipoProdotto'], $_POST['nomeProdotto']);
 						$b = $m->insertProduct($p);
 						if($b==false){
 							echo "Error! Try again!";
 						}
+            else{
+              echo "The product was sucessfully inserted.";
+            }
 					}
 				}
-			
-			
-			
-			if(isset($_POST['cancellaProdotto'])){
-					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
-						require_once("../class/Factory.php");
-						require_once("../class/DBmanager.php");
-						require_once("../class/Manipulator.php");}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
-					
-				
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$m = new Manipulator($d);
-					$f = new Factory($d);
-					
-					$prod1 = $f->getProductList("Al minuto");
-        
-				$id=0;
-				
-				
-				foreach ($prod1 as $x) {
-					
-					$id++;
-					$st="prodotto" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try remove product";
-							
-							$b = $m->removeProduct($x->getName());	
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeProduct wrong try again!";
-							}
-							
-						}
-					
-				}
-				
-				
-				
-				
-				$prod2 = $f->getProductList("All_ingrosso");
-				
-				foreach ($prod2 as $x) {
-					$id++;	
-					$st="prodotto" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try remove product";
-							
-							$b = $m->removeProduct($x->getName());	
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeProduct wrong try again!";
-							}
-							
-						}
-					
-				}
-				
-				
-				
-				$prod3 = $f->getProductList("Servizio");
-				
-				foreach ($prod3 as $x) {
-					
-					$id++;
-					$st="prodotto" . $id . "";
-						if(isset($_POST[$st])){
-								
-							echo "try remove product";
-							
-							$b = $m->removeProduct($x->getName());	
-							echo "var" . $b;
-							if($b==false){
-								
-								echo "Something went at removeProduct wrong try again!";
-							}
-							
-						}
-					
-				}
-					
-					
-					
-					
-			}
-			
-			
-			
-			
-			if(isset($_POST['modificaProdotto'])){
+
+
+
+			   if(isset($_POST['cancellaProdotto'])){
+				    if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php")){
+						  require_once("../class/Factory.php");
+						  require_once("../class/DBmanager.php");
+						  require_once("../class/Manipulator.php");}
+					  else{
+						  echo "Error: One of the files does not esist.";
+						  exit;}
+
+            $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+					  $d->connect();
+					  $m = new Manipulator($d);
+					  $f = new Factory($d);
+            $prod = $f->getEntireProductList();
+            $id=0;
+            foreach ($prod as $x) {
+              $id++;
+					    $st="prodotto" . $id . "";
+						  if(isset($_POST[$st])){
+                $b = $m->removeProduct($x->getName());
+							  if($b==false){
+                  echo "Something went at removeProduct wrong try again!";
+							  }
+                else{
+                  echo "Product was removed sucessfully!";
+                }
+              }
+            }
+      }
+
+
+
+      if(isset($_POST['modificaProdotto'])){
 					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Product.php")){
 						require_once("../class/Factory.php");
 						require_once("../class/DBmanager.php");
@@ -713,96 +623,54 @@
 					else{
 						echo "Error: One of the files does not esist.";
 						exit;}
-					
-				
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+
+          $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 					$d->connect();
 					$m = new Manipulator($d);
-					
-					$f = new Factory($d);
-					
-					$prod1 = $f->getProductList("Al minuto");
-        
-				$id=0;
-				
-				$prName = NULL;
-				foreach ($prod1 as $x) {
-					
-					$id++;
-					$st="prodotto" . $id . "";
+          $f = new Factory($d);
+          $prod = $f->getEntireProductList();
+          $id=0;
+          $prName = NULL;
+
+				  foreach ($prod as $x) {
+            $id++;
+					  $st="prodotto" . $id . "";
 						if(isset($_POST[$st])){
-							
-							$prName= $x->getName();
+              $prName= $x->getName();
 							break;
 						}
-				}
-				
-				
-				
-				if($prName == NULL){
-					$prod2 = $f->getProductList("All_ingrosso");
-				
-					foreach ($prod2 as $x) {
-						$id++;	
-						$st="prodotto" . $id . "";
-						if(isset($_POST[$st])){
-							$prName= $x->getName();
-							break;
-						}
+				  }
+
+          $y = $f->getProduct($prName);
+				  echo "<div id='formModificaProdotti'>";
+					echo "<form action = '' method = 'POST'>";
+					echo "Nome prodotto";
+					echo "<input type='text' name='nomeProdotto' value='" . $y->getName() . "' required ></br></br>";
+					echo "Tipo prodotto";
+          if($y->getProductType()=="Al minuto"){
+					  echo "<input type='text' name='tipoProdotto' value='Al minuto' readonly ></br></br>";
 					}
-				}
-				
-				
-				if($prName == NULL){
-				$prod3 = $f->getProductList("Servizio");
-				
-				foreach ($prod3 as $x) {
-					
-					$id++;
-					$st="prodotto" . $id . "";
-						if(isset($_POST[$st])){
-								
-							$prName= $x->getName();
-							break;
-						}
-				}
-				}	
-					
-				$y = $f->getProduct($prName);	
-				echo "try modify product";
-							
-							echo "<div id='formmodificaProdotti'>";
-							echo "<form action = '' method = 'POST'>";
-							echo "Nome prodotto";
-							echo "<input type='text' name='nomeProdotto' value='" . $y->getName() . "' required ></br></br>";
-							echo "Tipo prodotto";
-							
-							if($y->getProductType()=="Al minuto"){
-								echo "<input type='text' name='tipoProdotto' value='Al minuto' readonly ></br></br>";
-								}
-							else if($y->getProductType()=="All_ingrosso"){
-								echo "<input type='text' name='tipoProdotto' value='All_ingrosso' readonly ></br></br>";
-							}
-							else {
-								echo "<input type='text' name='tipoProdotto' value='Servizio' readonly ></br></br>";
-							}
-							echo "Ingredienti ";
-							echo "<textarea name='ingidientiProdotto' rows='2' cols='100' required>" . $y->getIngredients() . "</textarea></br></br>";
-							echo "Descrizione";
-							echo "<textarea name='descrizioneProdotto' rows='5' cols='100' required>" . $y->getDesc() . "</textarea></br></br>";
-							echo "Percorso imagine prodotto";
-							echo "<input type='text' name='percorsoImagineProdotto' placeholder='" . $y->getImage() . "' required ></br></br>";
-							echo "<input type='submit' name='confermaModifica' value='Conferma Modifica'></br>";
-							echo "</form>";
-							echo "</div>";
-				$b = $m->removeProduct($y->getName());
-				if($b==false){
-					echo "Something went wrong try again please.";
-				}
-				
+					else if($y->getProductType()=="All_ingrosso"){
+						echo "<input type='text' name='tipoProdotto' value='All_ingrosso' readonly ></br></br>";
+					}
+					else {
+						echo "<input type='text' name='tipoProdotto' value='Servizio' readonly ></br></br>";
+					}
+					echo "Ingredienti ";
+					echo "<textarea name='ingidientiProdotto' rows='2' cols='100' >" . $y->getIngredients() . "</textarea></br></br>";
+					echo "Descrizione";
+					echo "<textarea name='descrizioneProdotto' rows='5' cols='100' required>" . $y->getDesc() . "</textarea></br></br>";
+					echo "Percorso imagine prodotto";
+					echo "<input type='text' name='percorsoImagineProdotto' placeholder='" . $y->getImage() . "' required ></br></br>";
+					echo "<input type='submit' name='confermaModifica' value='Conferma Modifica'></br>";
+					echo "</form>";
+					echo "</div>";
+          $_SESSION['prodottoModificato'] = $y->getName();
 			}
-			
-			if(isset($_POST['confermaModifica'])){
+
+
+
+      if(isset($_POST['confermaModifica'])){
 				if(isset($_POST['nomeProdotto']) && isset($_POST['ingidientiProdotto']) && isset($_POST['descrizioneProdotto']) && isset($_POST['percorsoImagineProdotto'])){
 					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Product.php")){
 						require_once("../class/Factory.php");
@@ -812,21 +680,26 @@
 					else{
 						echo "Error: One of the files does not esist.";
 						exit;}
-					
-				
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+
+          $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 					$d->connect();
 					$p = new Product($_POST['percorsoImagineProdotto'], $_POST['descrizioneProdotto'], $_POST['ingidientiProdotto'], $_POST['tipoProdotto'], $_POST['nomeProdotto']);
 					$m = new Manipulator($d);
-					$b = $m->insertProduct($p);
-					if($b==false){
+          $b1 = $m->removeProduct($_SESSION['prodottoModificato'] );
+				  if($b1==false){
+					  echo "Something went wrong try again please.";
+				  }
+					$b2 = $m->insertProduct($p);
+					if($b2==false){
 						echo "Try inserting the product again please.";
 					}
+          else{
+            echo "The product was sucessfully modified.";
+          }
 				}
 			}
-			
-			?>
-	
+
+		?>
+  </div>
 </body>
 </html>
-	
