@@ -12,8 +12,7 @@
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
       $f = new Factory($d);
-      $u = $f->getUser($_SESSION['Email']);
-      $t = $u->getUserType();
+
  ?>
 <body>
     <div id="accessBar">
@@ -23,12 +22,24 @@
           $h->printInternalMenu("account");
      ?>
      <div id="content">
-		 <?php
 
+
+
+		 <?php
+     if (!isset($_SESSION) | $_SESSION['Email']=="") {
+       echo "<div class='contentElement'>";
+       echo "<h3>ERRORE</h3>";
+       echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.</p>";
+       echo "</div>";
+     }
+     else {
+        $u = $f->getUser($_SESSION['Email']);
+        $t = $u->getUserType();
         echo "<div id='info' class='contentElement'>";
 				echo "<h3>INFO</h3>";
         echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
         echo "</div>";
+      }
 
 			if(isset($_POST['prodotti'])){
 					$prod = $f->getProductList($t);
@@ -65,12 +76,12 @@
 					}
 
 					echo "<p>Ricordati che una richiesta deve essere anullata almeno un giorno prima del suo ritiro.</p>";
-					echo "<button type='submit' name='anullaRichiesta' >Annulla la richiesta</button>";
+					echo "<button type='submit' name='annullaRichiesta' >Annulla la richiesta</button>";
 					echo "</form>";
 				}
 
 
-		if(isset($_POST['anullaRichiesta'])){
+		  if(isset($_POST['annullaRichiesta'])){
 
 					require_once("../class/Request.php");
 					require_once("../class/RetailOrder.php");
@@ -99,25 +110,23 @@
 						}
 						$id++;
 					}
+
 				}
 
 
-				if(isset($_POST['closeaccount'])){
 
-						require_once("../class/DBmanager.php");
-						require_once("../class/Manipulator.php");
-						require_once("../class/User.php");
+			if(isset($_POST['closeaccount'])){
+            echo "<div class = 'contentElement'>";
+            echo "<p>Sei sicuro di voler eliminare il tuo account <strong>definitivamente</strong>?</p>";
+            echo "</div>";
 
-
-						$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-						$d->connect();
-						$m = new Manipulator($d);
 						$b = $m->removeUser($_SESSION['Email']);
 						$diss=$d->disconnect();
 						$_SESSION['Email'] = "";
 
 						if($b==false){
-							echo "Qualcosa &egrave; andato storto.";
+
+							echo "<p>Qualcosa &egrave; andato storto.</p>";
 						}
 						else{
 							header("Location: home.php");
@@ -319,6 +328,7 @@
 					echo "</br></br>";
 					echo "</form>";
 					echo "</div>";
+          unset($_POST);//TEST messo da simone non sono sicuro
 				}
 
 
@@ -435,5 +445,6 @@
 				}
 			?>
     </div>
-	</body>
+
+  </body>
 </html>
