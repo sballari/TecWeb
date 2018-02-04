@@ -207,5 +207,158 @@ class CommonHtmlElement{
 		$this->printListLinkInterni($page);
 		echo "</div>";
 }
+	public function printStoriaOrdiniServizio($req){
+		$id=0;
+		echo "<table>
+		<tr>
+		<th>Seleziona</th>
+		<th>Codice Richiesta</th>
+		<th>Nome del Prodotto</th>
+		<th>Immagine Prodotto</th>
+		<th>Request product description</th>
+		<th>Request staff</th>
+		<th>Request resources</th>
+		<th>Request adress</th>
+		<th>Request receive date and hour</th>
+		<th>MassiveOrder delivery date and hour </th>
+		<th>MassiveOrder status</th>
+		</tr>";
+		foreach ($req as $x) {
+			$id++;
+			echo "<tr>";
+			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";//TODO
+			echo "<td>" . $x->getKey() . "</td>";
+			echo "<td>" . $x->getService()->getName() . "</td>";
+			echo "<td>" . $x->getService()->getImage() . "</td>";
+			echo "<td>" . $x->getService()->getDesc() . "</td>";
+			echo "<td>" . $x->getStaffNumber() . "</td>";
+			echo "<td>" . $x->getResourceNeeded() . "</td>";
+			echo "<td>" . $x->getLocationAdress() . "</td>";
+			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+			echo "<td>" . $x->getStatus() . "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+	}
+	public function printStoriaOrdiniAllIngrosso($req){
+		$id=0;
+		echo "<table>
+		<tr>
+		<th>Seleziona</th>
+		<th>MassiveOrder codice</th>
+		<th>MassiveOrder product's (number) and name</th>
+
+		<th>MassiveOrder periodicity</th>
+		<th>MassiveOrder adress</th>
+		<th>MassiveOrder receive date and hour</th>
+		<th>MassiveOrder delivery date and hour </th>
+		<th>MassiveOrder status</th>
+		</tr>";
+		foreach ($req as $x) {
+			$id++;
+			echo "<tr>";
+			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+			echo "<td>" . $x->getKey() . "</td>";
+
+			$prodArr=$x->getProducts();
+			$length=count($prodArr);
+			$prodNumArr = array();
+
+			for($i=0; $i<$length; $i++){
+				$l=0;
+				$name=$prodArr[$i]->getName();
+				$pos=0;
+				if($prodArr[$i] != NULL){
+				for($j=0; $j<$length; $j++) {
+					if($prodArr[$j]!= NULL){
+						if($name == $prodArr[$j]->getName()){
+							$l++;
+							$prodArr[$j]=NULL;
+							$pos=$j;
+						}
+						else{
+							break;
+						}
+					}
+				}
+				$prodNumArr[$name]= "".$l;
+				}
+				$i=$pos;
+			}
+			echo "<td>";
+			foreach ($prodNumArr as $key=>$value) {
+				echo "(".$value.")  ".$key;
+				echo "</br>";
+			}
+			echo "</td>";
+			echo "<td>" . $x->getPeriodicity() . "</td>";
+			echo "<td>" . $x->getDeliveryAdress() . "</td>";
+			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+			echo "<td>" . $x->getStatus() . "</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+}
+
+public function printStoriaOrdiniAlMinuto($req){
+	$id=0;
+	echo "<table>
+		<tr>
+		<th>Seleziona</th>
+		<th>RetailOrder product's(number) and name</th>
+
+		<th>RetailOrder user notes</th>
+		<th>RetailOrder receive date and hour</th>
+		<th>MassiveOrder delivery date and hour </th>
+		<th>MassiveOrder status</th>
+		</tr>";
+	foreach ($req as $x) {
+		$id++;
+		echo "<tr>";
+		echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+
+		$prodArr=$x->getProducts();
+		$length=count($prodArr);
+		$prodNumArr = array();
+
+		for($i=0; $i<$length; $i++){
+			$l=0;
+			$name=$prodArr[$i]->getName();
+			$pos=0;
+			if($prodArr[$i] != NULL){
+			for($j=0; $j<$length; $j++) {
+				if($prodArr[$j]!= NULL){
+					if($name == $prodArr[$j]->getName()){
+						$l++;
+						$prodArr[$j]=NULL;
+						$pos=$j;
+					}
+					else{
+						break;
+					}
+				}
+			}
+			$prodNumArr[$name]= "".$l;
+			}
+			$i=$pos;
+		}
+		echo "<td>";
+		foreach ($prodNumArr as $key=>$value) {
+			echo "(".$value.")  ".$key;
+			echo "</br>";
+		}
+		echo "</td>";
+		echo "<td>" . $x->getUserNote() . "</td>";
+		echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
+		echo "<td>" . $x->getStatus() . "</td>";
+		echo "</tr>";
+	}
+	echo "</table>";
+
+}
+
 }
 ?>

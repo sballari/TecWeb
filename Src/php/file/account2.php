@@ -1,9 +1,19 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
+      session_start();
       require_once ("CommonHtmlElement.php");
+      require_once ("../class/Factory.php");
+      require_once ("../class/DBmanager.php");
+      require_once ("../class/User.php");
+      require_once ("../class/Product.php");
       $h = new CommonHtmlElement();
       $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
+      $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+      $d->connect();
+      $f = new Factory($d);
+      $u = $f->getUser($_SESSION['Email']);
+      $t = $u->getUserType();
  ?>
 <body>
     <div id="accessBar">
@@ -14,237 +24,59 @@
      ?>
      <div id="content">
 		 <?php
-				session_start();
-				echo "Bentornato " . $_SESSION['Email'];
 
-				if(isset($_POST['prodotti'])){
+        echo "<div id='info' class='contentElement'>";
+				echo "<h3>INFO</h3>";
+        echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
+        echo "</div>";
 
-					require_once("../class/Factory.php");
-					require_once("../class/DBmanager.php");
-					require_once("../class/User.php");
-					require_once("../class/Product.php");
-
-
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$f = new Factory($d);
-					$u = $f->getUser($_SESSION['Email']);
-
-					$t = $u->getUserType();
+			if(isset($_POST['prodotti'])){
 					$prod = $f->getProductList($t);
-
 					foreach ($prod as $x) {
             $h->createProductDiv($x);
 					}
-				}
+			}
 
 
-				if(isset($_POST['storia'])){
-					if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-						require_once("../class/Factory.php");
-						require_once("../class/DBmanager.php");
-						require_once("../class/User.php");
-						require_once("../class/Request.php");
-						require_once("../class/RetailOrder.php");
-						require_once("../class/MassiveOrder.php");
-						require_once("../class/Service.php");
-						}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
+			if(isset($_POST['storia'])){
 
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$f = new Factory($d);
-					$u = $f->getUser($_SESSION['Email']);
-					$t = $u->getUserType();
+					require_once("../class/Request.php");
+					require_once("../class/RetailOrder.php");
+					require_once("../class/MassiveOrder.php");
+					require_once("../class/Service.php");
+
 					$req = $f->getRequestList($_SESSION['Email']);
 
-					$id=0;
-					echo "<div class='tabelaStoria'>";
+
+					echo "<div class='contentElement'>";
 					echo "<form action = '' method = 'POST'>";
 					switch($t){
 						case "Servizio":
-							echo "<table>
-							<tr>
-							<th>Seleziona</th>
-							<th>Request codice</th>
-							<th>Request product name</th>
-							<th>Request product image</th>
-							<th>Request product description</th>
-							<th>Request staff</th>
-							<th>Request resources</th>
-							<th>Request adress</th>
-							<th>Request receive date and hour</th>
-							<th>MassiveOrder delivery date and hour </th>
-							<th>MassiveOrder status</th>
-							</tr>";
-							foreach ($req as $x) {
-								$id++;
-								echo "<tr>";
-								echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-								echo "<td>" . $x->getKey() . "</td>";
-								echo "<td>" . $x->getService()->getName() . "</td>";
-								echo "<td>" . $x->getService()->getImage() . "</td>";
-								echo "<td>" . $x->getService()->getDesc() . "</td>";
-								echo "<td>" . $x->getStaffNumber() . "</td>";
-								echo "<td>" . $x->getResourceNeeded() . "</td>";
-								echo "<td>" . $x->getLocationAdress() . "</td>";
-								echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-								echo "<td>" . $x->getStatus() . "</td>";
-								echo "</tr>";
-							}
-							echo "</table>";
-							break;
+              $h->printStoriaOrdiniServizio($req);
+						break;
 
 						case "All_ingrosso":
-							echo "<table>
-							<tr>
-							<th>Seleziona</th>
-							<th>MassiveOrder codice</th>
-							<th>MassiveOrder product's (number) and name</th>
-
-							<th>MassiveOrder periodicity</th>
-							<th>MassiveOrder adress</th>
-							<th>MassiveOrder receive date and hour</th>
-							<th>MassiveOrder delivery date and hour </th>
-							<th>MassiveOrder status</th>
-							</tr>";
-							foreach ($req as $x) {
-								$id++;
-								echo "<tr>";
-								echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-								echo "<td>" . $x->getKey() . "</td>";
-
-								$prodArr=$x->getProducts();
-								$length=count($prodArr);
-								$prodNumArr = array();
-
-								for($i=0; $i<$length; $i++){
-									$l=0;
-									$name=$prodArr[$i]->getName();
-									$pos=0;
-									if($prodArr[$i] != NULL){
-									for($j=0; $j<$length; $j++) {
-										if($prodArr[$j]!= NULL){
-											if($name == $prodArr[$j]->getName()){
-												$l++;
-												$prodArr[$j]=NULL;
-												$pos=$j;
-											}
-											else{
-												break;
-											}
-										}
-									}
-									$prodNumArr[$name]= "".$l;
-									}
-									$i=$pos;
-								}
-								echo "<td>";
-								foreach ($prodNumArr as $key=>$value) {
-									echo "(".$value.")  ".$key;
-									echo "</br>";
-								}
-								echo "</td>";
-								echo "<td>" . $x->getPeriodicity() . "</td>";
-								echo "<td>" . $x->getDeliveryAdress() . "</td>";
-								echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-								echo "<td>" . $x->getStatus() . "</td>";
-								echo "</tr>";
-							}
-							echo "</table>";
-							break;
+              $h->printStoriaOrdiniAllIngrosso($req);
+						break;
 
 						case "Al minuto":
-							echo "<table>
-								<tr>
-								<th>Seleziona</th>
-								<th>RetailOrder product's(number) and name</th>
-
-								<th>RetailOrder user notes</th>
-								<th>RetailOrder receive date and hour</th>
-								<th>MassiveOrder delivery date and hour </th>
-								<th>MassiveOrder status</th>
-								</tr>";
-							foreach ($req as $x) {
-								$id++;
-								echo "<tr>";
-								echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-
-								$prodArr=$x->getProducts();
-								$length=count($prodArr);
-								$prodNumArr = array();
-
-								for($i=0; $i<$length; $i++){
-									$l=0;
-									$name=$prodArr[$i]->getName();
-									echo "".$name;
-									$pos=0;
-									if($prodArr[$i] != NULL){
-									for($j=0; $j<$length; $j++) {
-										if($prodArr[$j]!= NULL){
-											if($name == $prodArr[$j]->getName()){
-												$l++;
-												$prodArr[$j]=NULL;
-												$pos=$j;
-											}
-											else{
-												break;
-											}
-										}
-									}
-									$prodNumArr[$name]= "".$l;
-									}
-									$i=$pos;
-								}
-								echo "<td>";
-								foreach ($prodNumArr as $key=>$value) {
-									echo "(".$value.")  ".$key;
-									echo "</br>";
-								}
-								echo "</td>";
-								echo "<td>" . $x->getUserNote() . "</td>";
-								echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-								echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-								echo "<td>" . $x->getStatus() . "</td>";
-								echo "</tr>";
-							}
-							echo "</table>";
+							$h->printStoriaOrdiniAlMinuto($req);
 							break;
 					}
-					echo "</br></br>";
-					echo "Ricordati che una richiesta deve essere anullata almeno un giorno prima del suo ritiro.";
-					echo "</br></br>";
-					echo "<input type='submit' name='anullaRichiesta' value='Anulla la richiesta'>";
-					echo "</br></br>";
+
+					echo "<p>Ricordati che una richiesta deve essere anullata almeno un giorno prima del suo ritiro.</p>";
+					echo "<button type='submit' name='anullaRichiesta' >Annulla la richiesta</button>";
 					echo "</form>";
 				}
 
 
-				if(isset($_POST['anullaRichiesta'])){
-					if(file_exists("../class/Factory.php") && file_exists("../class/Manipulator.php") && file_exists("../class/DBmanager.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-						require_once("../class/Factory.php");
-						require_once("../class/Manipulator.php");
-						require_once("../class/DBmanager.php");
-						require_once("../class/User.php");
-						require_once("../class/Request.php");
-						require_once("../class/RetailOrder.php");
-						require_once("../class/MassiveOrder.php");
-						require_once("../class/Service.php");
-						}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
+		if(isset($_POST['anullaRichiesta'])){
 
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$f = new Factory($d);
-					$m = new Manipulator($d);
-					$u = $f->getUser($_SESSION['Email']);
-					$t = $u->getUserType();
+					require_once("../class/Request.php");
+					require_once("../class/RetailOrder.php");
+					require_once("../class/MassiveOrder.php");
+					require_once("../class/Service.php");
+
 					$req = $f->getRequestList($_SESSION['Email']);
 					$id=1;
 					foreach($req as $x){
@@ -255,14 +87,14 @@
 							if($deliveryD > $currentD){
 								$b = $m->removeRequest($x->getKey(), $t);
 								if($b==false){
-									echo "Something went at removeRequest wrong try again!";
+									echo "Qualcosa &egrave; andato storto!";
 								}
 								else{
-									echo "The request has been sucessfully removed.";
+									echo "La richiesta &egrave stata rimossa.";
 								}
 							}
 							else{
-								echo "Your too late to remove the request.";
+								echo "Non &egrave; possibile rimuovere la richiesta.";
 							}
 						}
 						$id++;
@@ -271,13 +103,11 @@
 
 
 				if(isset($_POST['closeaccount'])){
-					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/User.php")){
-							require_once("../class/DBmanager.php");
-							require_once("../class/Manipulator.php");
-							require_once("../class/User.php");}
-						else{
-							echo "Error: One of the files does not esist.";
-							exit;}
+
+						require_once("../class/DBmanager.php");
+						require_once("../class/Manipulator.php");
+						require_once("../class/User.php");
+
 
 						$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 						$d->connect();
@@ -287,7 +117,7 @@
 						$_SESSION['Email'] = "";
 
 						if($b==false){
-							echo "Something went wrong. Please try closing your account again.";
+							echo "Qualcosa &egrave; andato storto.";
 						}
 						else{
 							header("Location: home.php");
