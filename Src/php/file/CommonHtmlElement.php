@@ -99,7 +99,7 @@ class CommonHtmlElement{
 		echo "<ul>";
 		switch($page){
 			case "logIn":
-				echo "<li><span lang='en'>Log in</span>.</li>";
+				echo "<li><span lang='en'>Log in</span></li>";
 				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
 			break;
 			case "signUp":
