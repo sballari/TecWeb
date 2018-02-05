@@ -110,7 +110,7 @@ class CommonHtmlElement{
 				echo "<p>Ciao amico sole il mio nome simomne</p>";
 			break;
 			default:
-				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
+				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
 				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
 			break;
 		}
