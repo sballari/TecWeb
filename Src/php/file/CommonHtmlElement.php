@@ -187,8 +187,8 @@ class CommonHtmlElement{
 					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 			case "account":
-					echo "<form action = '' method = 'POST'>";
-					echo "		<input type='submit' name='prodotti' value='Prodotti al minuto'>";
+
+					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a>";
 					echo "		<input type='submit' name='storia' value='Storia dei ordini'>";
 					echo "		<input type='submit' name='prenotazione' value='Prenotazione'>";
 					echo "		<input type='submit' name='logout' value='Log Out'>";
@@ -258,7 +258,7 @@ class CommonHtmlElement{
 		foreach ($req as $x) {
 			$id++;
 			echo "<tr>";
-			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
+			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "'/ ></td>";
 			echo "<td>" . $x->getKey() . "</td>";
 
 			$prodArr=$x->getProducts();
@@ -358,6 +358,87 @@ public function printStoriaOrdiniAlMinuto($req){
 	}
 	echo "</table>";
 
+}
+
+
+public function printFormPrenotazione($usrType){
+$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+$d->connect();
+$f = new Factory($d);
+$prod = $f->getProductList($usrType);
+$d->disconnect();
+
+echo "<div id='ordineForm' class='contentElement'>";
+echo "<form action='' method='POST' >";
+echo "<fieldset>";
+echo "<legend>Prenotazione</legend>";
+echo "<label>Prodotto:</label>";
+echo "<select name='listaProdotti'  required>";
+echo "<option value=''>--</option>";
+foreach ($prod as $x) {
+	echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
+}
+echo "</select>";
+echo "</br></br>";
+
+switch($usrType ){
+	case "Al minuto":
+		echo "<label>Numero prodotti:</label> <input type='number' name='numeroProdotti' required>";
+
+		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
+
+		echo "</form>";
+		echo "<form action='' method='POST' >";
+		echo "<label>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
+
+		break;
+
+	case "All_ingrosso":
+		echo "<label>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+
+		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
+
+		echo "</form>";
+		echo "<form action='' method='POST' >";
+		echo "<label>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+
+		echo "<label>Periodicita:</label> <select name='periodicita' required>";
+
+		echo "<option value=''>--</option>";
+		echo "<option value='settimanale'>settimanale </option>";
+		echo "<option value='mensile'>mensile</option>";
+		echo "</select>";
+
+		break;
+
+	case "Servizio":
+		echo "<label>Personale richiesto: </label><input type='number' name='personaleRichiesto' required>";
+
+		echo "<label>Risorse necessarie:</label> <textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+
+		echo "<label>Indirizzo evento:</label> <input type='text' name='indirizzoEvento' required>";
+
+		break;
+}
+echo "<label>Data ritiro/consegna/evento:</label>     <input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+
+echo "<label>Ora ritiro/consegna/evento(da 0 a 24):</label>     <input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+
+
+echo "<button type='submit' name='prenota'>Prenota</button>";
+
+echo "</fieldset>";
+echo "</form>";
+echo "</div>";
+unset($_POST);//TEST messo da simone non sono sicuro
+}
+
+public function printOperationElement($operazione, $usrType){
+	switch($operazione){
+		case "prenotazione":
+			$this->printFormPrenotazione($usrType);
+		break;
+	}
 }
 
 }
