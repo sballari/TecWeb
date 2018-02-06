@@ -1,10 +1,57 @@
 <?php
-if(isset($_POST['annullaRichiesta'])){
-    $_SESSION['submitPremuto']="annullaRichiesta";
-    require_once("../class/Request.php");
+
+if(isset($_POST['richiestaDettaglio'])){
+
+  if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+    require_once("../class/DBmanager.php");
+    require_once("../class/Manipulator.php");
+    require_once("../class/Factory.php");
+    require_once("../class/User.php");
     require_once("../class/RetailOrder.php");
     require_once("../class/MassiveOrder.php");
-    require_once("../class/Service.php");
+    require_once("../class/Service.php");}
+  else{
+    echo "Error: One of the files does not esist.";
+    exit;}
+
+  $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+  $d->connect();
+  $f = new Factory($d);
+
+  $req = $f->getRequestList($_SESSION['Email']);
+  $id=1;
+  foreach($req as $x){
+    $st="request" . $id . "";
+    $b = isset($_POST[$st]);
+
+    if(isset($_POST[$st])){
+
+      $_SESSION['richiestaDettaglio'] = $x;
+    }
+    $id++;
+  }
+header("Location: richiestaDettagliata.php");
+}
+
+
+
+if(isset($_POST['annullaRichiesta'])){
+    $_SESSION['submitPremuto']="annullaRichiesta";
+    if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+      require_once("../class/DBmanager.php");
+      require_once("../class/Manipulator.php");
+      require_once("../class/Factory.php");
+      require_once("../class/User.php");
+      require_once("../class/RetailOrder.php");
+      require_once("../class/MassiveOrder.php");
+      require_once("../class/Service.php");}
+    else{
+      echo "Error: One of the files does not esist.";
+      exit;}
+
+    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+    $d->connect();
+    $f = new Factory($d);
 
     $req = $f->getRequestList($_SESSION['Email']);
     $id=1;

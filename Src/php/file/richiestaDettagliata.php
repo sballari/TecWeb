@@ -4,7 +4,7 @@
     require_once ("CommonHtmlElement.php");
     require_once("../class/Factory.php");
     require_once("../class/DBmanager.php");
- 
+
     $h = new CommonHtmlElement();
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
         //PROVA
@@ -27,6 +27,7 @@
   	?>
     <div id="content">
     <?php
+        session_start();
         if (!isset($_SESSION)) {
             echo "<div class='contentElement'>";
             echo "<h3>ERRORE</h3>";
@@ -51,7 +52,7 @@
                 echo "
                 <div class='contentElement'>
                     <h3>ERRORE</h3>
-                    <p> per poter visualizzare una richiesta dettagliata deve prima selezionare una richiesta 
+                    <p> per poter visualizzare una richiesta dettagliata deve prima selezionare una richiesta
                     dalla pagina <a href='storiaOrdini.php'> storia ordini </span></a>. Ci dispiace per il disagio.
                     Le auguriamo una formaggiosa giornata.
                 </div>";
@@ -59,7 +60,7 @@
         }
     ?>
 
-        
+
     </div>
 
     <?php
@@ -71,8 +72,3 @@
 
 </body>
 </html>
-
-
-
-
-

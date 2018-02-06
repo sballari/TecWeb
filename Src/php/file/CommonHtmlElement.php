@@ -202,7 +202,7 @@ class CommonHtmlElement{
 					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
-					
+
 					echo "</form>";
 			break;
 		}
@@ -518,6 +518,7 @@ public function printStoriaOrdini($t){
 			break;
 	}
 	echo "<button type='submit' name='annullaRichiesta' >Annulla la richiesta</button>";
+	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
 	echo "</form>";
 }
 
