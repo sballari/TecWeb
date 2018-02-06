@@ -16,6 +16,16 @@ abstract class Order extends Request {
 	function insertProducts($arrayP){
 		$this->products = array_merge($this->products, $arrayP);
 	}
+	function getProductsWithQta(){
+		$ps = $this->getProducts();
+		$arr = array();
+		foreach ($ps as $x){
+			$name = $x->getName();
+			if (array_key_exists($name, $arr)) $arr[$name]++;
+			else $arr[$name]=1;
+		}
+		return $arr;
+	}
 
 
 }

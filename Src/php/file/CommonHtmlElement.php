@@ -326,77 +326,16 @@ public function printRichiestaDettagliataDiv($Richiesta){
 				<th scope='col' abbr='prod'>Nome Prodotto</th>
 				<th scope='col' abbr= 'quantit&agrave;' >Quantit&agrave; ordinata</th>
 			</tr>";
-		$prodotti = $ordine->getProducts();
-		foreach($prodotti as $p){
-
+		
+		$qta = $ordine->getProductsWithQta();
+		foreach(array_keys($qta) as $p){		
 			echo "<tr>
-					<td>".$p->getName()."</td>
-
-				</tr>";
-			
-			
+					<td>".$p."</td>
+					<td>".$qta[$p]."</td>
+				</tr>";			
 		}
 		echo "</table>";
 }
-
-public function printStoriaOrdiniAlMinuto($req){
-	$id=0;
-	echo "<table>
-		<tr>
-		<th>Seleziona</th>
-		<th>RetailOrder product's(number) and name</th>
-
-		<th>RetailOrder user notes</th>
-		<th>RetailOrder receive date and hour</th>
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
-		</tr>";
-	foreach ($req as $x) {
-		$id++;
-		echo "<tr>";
-		echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-
-		$prodArr=$x->getProducts();
-		$length=count($prodArr);
-		$prodNumArr = array();
-
-		for($i=0; $i<$length; $i++){
-			$l=0;
-			$name=$prodArr[$i]->getName();
-			$pos=0;
-			if($prodArr[$i] != NULL){
-			for($j=0; $j<$length; $j++) {
-				if($prodArr[$j]!= NULL){
-					if($name == $prodArr[$j]->getName()){
-						$l++;
-						$prodArr[$j]=NULL;
-						$pos=$j;
-					}
-					else{
-						break;
-					}
-				}
-			}
-			$prodNumArr[$name]= "".$l;
-			}
-			$i=$pos;
-		}
-		echo "<td>";
-		foreach ($prodNumArr as $key=>$value) {
-			echo "(".$value.")  ".$key;
-			echo "</br>";
-		}
-		echo "</td>";
-		echo "<td>" . $x->getUserNote() . "</td>";
-		echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-		echo "<td>" . $x->getStatus() . "</td>";
-		echo "</tr>";
-	}
-	echo "</table>";
-
-}
-
 
 public function printFormPrenotazione($usrType){
 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");

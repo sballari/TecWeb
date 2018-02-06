@@ -4,17 +4,17 @@
     require_once ("CommonHtmlElement.php");
     require_once("../class/Factory.php");
     require_once("../class/DBmanager.php");
-    require_once("../class/Request.php");
-    require_once("../class/Service.php");
+ 
     $h = new CommonHtmlElement();
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
         //PROVA
-        $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-        $d->connect();
-        $f = new Factory($d);
-        $s= $f->getRequestList("luca.monti@gmail.com");
-        $_SESSION['Email']="luca.monti@gmail.com";
-        $_SESSION['richiestaDettaglio']=$s[0];
+                // $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+                // $d->connect();
+                // $f = new Factory($d);
+                // $email = "cristina.polletto@gmail.it";
+                // $s= $f->getRequestList($email);
+                // $_SESSION['Email']="$email";
+                // $_SESSION['richiestaDettaglio']=$s[0];
         //FINE PROVA
  ?>
 <body>
