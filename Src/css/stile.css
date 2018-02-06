@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -11,12 +12,15 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 1.05em;
 }
 
+button:hover {
+  background: #ccc;
+}
+
 #header{
   overflow: hidden;
   background-color: lightyellow;
   border: 1px solid brown;
 }
-
 
 #logo {
   width: 8%;
@@ -29,81 +33,49 @@ font-size: 1.05em;
   float: left;
 	}
 
-#menu .search-container {
-    float: right;
-}
+  .search-container {
+      float: right;
+  }
 
 .search-container input {
     width: auto;
-}
-
-
-#search {
-  border-right:none;
-}
-
-fieldset{
-  border: 1px black solid;
-  padding: 1em;
-}
-
-/* .search-container button {
-    padding: 0.4em;
-    margin-right: 1em;
-    background: #ddd;
-    font-size: 1em;
-    border: black solid 1px;
-    cursor: pointer;
-} */
-
-#menu button{
-  float:right;
-}
-
-button:hover {
-  background: #ccc;
-}
-
-#menu .active{
-  background-color: brown;
-  color: white;
+    border-right:none;
 }
 
 #menu ul {
 	list-style-type: none;
 	overflow: hidden;
   margin-bottom: 0.2em;
-  border-left: 1px brown solid;
+  margin-left: 0.4em;
 }
+
+#menu li:first-child {border-left: 1px solid brown;}
 
 #menu li {
 	float:left;
   display: block;
-  text-align: center;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-right: 1px solid;
+  border-width: 1px 1px 1px 0;
   border-color: brown;
   border-style: solid;
+}
 
+#menu a {
+display: block;
+padding:0.4em;
+color: brown;
+text-decoration: none;
 }
-#menu li a {
-	display: block;
-	padding:0.4em;
-	color: brown;
-	text-decoration: none;
-}
-#menu li span{
-	display: block;
-  background-color: brown;
-  color: white;
-  padding:0.4em;
+
+#menu span{
+display: block;
+background-color: brown;
+color: white;
+padding:0.4em;
 }
 
 #menu li a:hover {
   background-color:antiquewhite;
 }
-
 
 #header h1{
 	padding: 0.5em;
@@ -120,6 +92,7 @@ button:hover {
   float: right;
   width: 75%;
 }
+
 #content h2{
   padding-bottom: 0.4em;
 }
@@ -138,9 +111,8 @@ h2, h3{
 }
 
 #contatti ul {
-	list-style-type: circle;
+	list-style-type:disc;
   padding-left: 1.5em;
-
 }
 
 #footer {
@@ -207,40 +179,37 @@ h2, h3{
   overflow: hidden;
 }
 
-
-
 #internalNavBar  {
-  margin: 1em 0em 0em 0em;
+  margin-top: 1em;
   width: 20%;
   float:left;
 }
 
+
 #internalNavBar ul {
     list-style-type: none;
     background-color: lightyellow;
-    border-top: 1px brown solid;
-    border-bottom: 1px brown solid;
-    border-left: 1px brown solid;
-    border-right: 1px brown solid;
-    margin-bottom: 0.5em;
+    border-width: 1px 1px 1px 1px;
+    border-color: brown;
+    border-style: solid;
 }
+
+#internalNavBar ul:first-child{margin-bottom: 0.5em;}
 
 #internalNavBar li a{
     display: block;
-    color: brown;
-    padding: 1em 3em;
-    text-decoration: none;
+    padding: 0.5em 0 0.5em 0;
 }
 
-#internalNavBar li a:active{
-	background-color: brown;
-  	color: white;
+#internalNavBar a{
+  color: brown;
+  display: block;
+  text-align: center;
+  text-decoration: none;
 }
 
-/* Change the link color on hover */
 #internalNavBar li a:hover{
     background-color: antiquewhite;
-    color: brown;
 }
 
 #logNav h3{
@@ -252,6 +221,13 @@ h2, h3{
   border-left: 1px brown solid;
   border-right: 1px brown solid;
   margin-top: 0.5em;
+}
+
+#logNav span{
+  display: block;
+  background-color: brown;
+  color: white;
+  padding:0.4em;
 }
 
 #LoginForm {
@@ -272,10 +248,6 @@ h2, h3{
   border: 1px solid brown;
   margin-top: 1em;
 }
-
-/* #info{
-  margin: 0em 1em 0em 1em;
-} */
 
 .product img{
   float:left;

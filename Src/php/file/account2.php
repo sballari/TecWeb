@@ -40,15 +40,17 @@
         echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$t."</p>";
         echo "</div>";
       }
-
-			if(isset($_POST['prodotti'])){
-					$prod = $f->getProductList($t);
+?>
+<!-- if(isset($_POST['prodotti'])){ -->
+      <div id="prodotti">
+<?php
+          $prod = $f->getProductList($t);
 					foreach ($prod as $x) {
             $h->createProductDiv($x);
 					}
-			}
-
-
+          ?>
+			</div>
+<?php
 			if(isset($_POST['storia'])){
 
 					require_once("../class/Request.php");
@@ -92,6 +94,8 @@
 					$id=1;
 					foreach($req as $x){
 						$st="request" . $id . "";
+            $b = isset($_POST[$st]);
+
 						if(isset($_POST[$st])){
 							$currentD = "".date("Y-m-d ");
 							$deliveryD = "".$x->getDeliveryDateTime();
