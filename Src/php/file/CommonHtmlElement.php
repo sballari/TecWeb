@@ -255,66 +255,86 @@ public function printRichiestaDettagliataDiv($Richiesta){
 				</tr>";
 				echo "</table>";
 		break;
+		case "All_ingrosso":
+			echo "<table summary='Nella tabella viene fornito i dettagli dell'ordine selezionato. Ogni riga descrive una caratteristica dell'ordine. 
+			In ordine sono numero, periodicit&agrave;, indirizzo di consegna, ora e data di ricezine, ora e data di consegna e stato.>";
+			echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+			echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+			echo "<tr>
+					<th scope = 'row'>Periodicit&agrave;</th>
+					<td>".$Richiesta->getPeriodicity()."</td>
+				</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='indirizzo'>Indirizzo di consegna</th>
+				<td>".$Richiesta->getDeliveryAdress()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='ricezione'>Data e ora ricezione</th>
+				<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='consegna'>Data e ora di consegna</th>
+				<td>".$Richiesta->getDeliveryDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row'>Stato</th>
+				<td>".$Richiesta->getStatus()."</td>
+			</tr>";
+			echo "</table>";
+			$this->printComposizioneOrdineTable($Richiesta);		
+		break;
+		case "Al minuto":
+			echo "<table summary='Nella tabella viene fornito i dettagli dell'ordine al minuto selezionato. Ogni riga descrive una caratteristica dell'ordine. 
+			In ordine sono chiave, note utente, data e ora di ricezione, data e ora di ritiro, stato.>";
+			echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+			echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+			echo "<tr>
+					<th scope = 'row'>Note Utente;</th>
+					<td>".$Richiesta->getUserNote()."</td>
+				</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='ricezione'>Data e ora ricezione</th>
+				<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='consegna'>Data e ora di ritiro</th>
+				<td>".$Richiesta->getDeliveryDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row'>Stato</th>
+				<td>".$Richiesta->getStatus()."</td>
+			</tr>";
+			echo "</table>";
+			$this->printComposizioneOrdineTable($Richiesta);		
+		break;
 	}
+	
 	echo "</div>";
 }
-	public function printStoriaOrdiniAllIngrosso($req){
-		$id=0;
-		echo "<table>
-		<tr>
-		<th>Seleziona</th>
-		<th>MassiveOrder codice</th>
-		<th>MassiveOrder product's (number) and name</th>
+	public function printComposizioneOrdineTable($ordine){
+		echo "<table summary='La tabella indica i prodotti che compongono l&#39;ordine richiesto. Ogni riga rappresenta un prodotto. 
+		I dati forniti in ogni riga sono, in ordine, nome del prodotto e quantit&agrave; ordinata' >";
+		echo "<caption>Composizione Ordine</caption>";
+		echo "
+			<tr>
+				<th scope='col' abbr='prod'>Nome Prodotto</th>
+				<th scope='col' abbr= 'quantit&agrave;' >Quantit&agrave; ordinata</th>
+			</tr>";
+		$prodotti = $ordine->getProducts();
+		foreach($prodotti as $p){
 
-		<th>MassiveOrder periodicity</th>
-		<th>MassiveOrder adress</th>
-		<th>MassiveOrder receive date and hour</th>
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
-		</tr>";
-		foreach ($req as $x) {
-			$id++;
-			echo "<tr>";
-			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "'/ ></td>";
-			echo "<td>" . $x->getKey() . "</td>";
+			echo "<tr>
+					<td>".$p->getName()."</td>
 
-			$prodArr=$x->getProducts();
-			$length=count($prodArr);
-			$prodNumArr = array();
-
-			for($i=0; $i<$length; $i++){
-				$l=0;
-				$name=$prodArr[$i]->getName();
-				$pos=0;
-				if($prodArr[$i] != NULL){
-				for($j=0; $j<$length; $j++) {
-					if($prodArr[$j]!= NULL){
-						if($name == $prodArr[$j]->getName()){
-							$l++;
-							$prodArr[$j]=NULL;
-							$pos=$j;
-						}
-						else{
-							break;
-						}
-					}
-				}
-				$prodNumArr[$name]= "".$l;
-				}
-				$i=$pos;
-			}
-			echo "<td>";
-			foreach ($prodNumArr as $key=>$value) {
-				echo "(".$value.")  ".$key;
-				echo "</br>";
-			}
-			echo "</td>";
-			echo "<td>" . $x->getPeriodicity() . "</td>";
-			echo "<td>" . $x->getDeliveryAdress() . "</td>";
-			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-			echo "<td>" . $x->getStatus() . "</td>";
-			echo "</tr>";
+				</tr>";
+			
+			
 		}
 		echo "</table>";
 }

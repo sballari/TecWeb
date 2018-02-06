@@ -12,8 +12,8 @@
         $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
         $d->connect();
         $f = new Factory($d);
-        $s= $f->getRequestList("carlo.bianchi@gmail.com");
-        $_SESSION['Email']="carlo.bianchi@gmail.com";
+        $s= $f->getRequestList("luca.monti@gmail.com");
+        $_SESSION['Email']="luca.monti@gmail.com";
         $_SESSION['richiestaDettaglio']=$s[0];
         //FINE PROVA
  ?>
