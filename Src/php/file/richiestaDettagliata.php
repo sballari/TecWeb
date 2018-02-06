@@ -1,21 +1,23 @@
 <!DOCTYPE HTML>
 <html lang ="it"></html>
 <?php
+    session_start();
     require_once ("CommonHtmlElement.php");
     require_once("../class/Factory.php");
     require_once("../class/DBmanager.php");
 
     $h = new CommonHtmlElement();
+    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+    $d->connect();
+    $f = new Factory($d);
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
-        //PROVA
-                // $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-                // $d->connect();
-                // $f = new Factory($d);
-                // $email = "cristina.polletto@gmail.it";
-                // $s= $f->getRequestList($email);
-                // $_SESSION['Email']="$email";
-                // $_SESSION['richiestaDettaglio']=$s[0];
+        //PROVA      
+                //$email = "cristina.polletto@gmail.it";
+                //$s= $f->getRequestList($email);
+                //$_SESSION['Email']="$email";
+                //$_SESSION['richiestaDettaglio']=$s[0];
         //FINE PROVA
+        print_r($_SESSION);
  ?>
 <body>
     <div id="accessBar">
@@ -27,7 +29,7 @@
   	?>
     <div id="content">
     <?php
-        session_start();
+     
         if (!isset($_SESSION)) {
             echo "<div class='contentElement'>";
             echo "<h3>ERRORE</h3>";
@@ -38,6 +40,7 @@
         }
 
         else {
+            
             $u = $f->getUser($_SESSION['Email']);
             $t = $u->getUserType();
             echo "<div id='info' class='contentElement'>";
@@ -52,7 +55,7 @@
                 echo "
                 <div class='contentElement'>
                     <h3>ERRORE</h3>
-                    <p> per poter visualizzare una richiesta dettagliata deve prima selezionare una richiesta
+                    <p> per poter visualizzare una richiesta dettagliata deve prima selezionare una richiesta 
                     dalla pagina <a href='storiaOrdini.php'> storia ordini </span></a>. Ci dispiace per il disagio.
                     Le auguriamo una formaggiosa giornata.
                 </div>";
@@ -60,7 +63,7 @@
         }
     ?>
 
-
+        
     </div>
 
     <?php
@@ -72,3 +75,8 @@
 
 </body>
 </html>
+
+
+
+
+

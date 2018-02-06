@@ -27,6 +27,7 @@ if(isset($_POST['richiestaDettaglio'])){
     if(isset($_POST[$st])){
 
       $_SESSION['richiestaDettaglio'] = $x;
+      
     }
     $id++;
   }
