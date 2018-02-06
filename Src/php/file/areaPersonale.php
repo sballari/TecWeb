@@ -40,9 +40,13 @@
      echo "<h3>INFO</h3>";
      echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
      echo "</div>";
-
+     if(!isset($_GET) || count($_GET)==0){
+       $h->printOperationElement("prenotazione", $t);
+     }
+     else{
      $h->printOperationElement($_GET['operazione'], $t);
-   }
+    }
+ }
 ?>
 </div>
 

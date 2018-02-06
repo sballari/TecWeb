@@ -1,6 +1,15 @@
 <?php
-
+require_once("../class/Manipulator.php");
+require_once("../class/Factory.php");
+require_once("../class/DBmanager.php");
+require_once("../class/User.php");
+require_once("../class/Product.php");
+require_once("../class/Request.php");
+require_once("../class/RetailOrder.php");
+require_once("../class/MassiveOrder.php");
+require_once("../class/Service.php");
 class CommonHtmlElement{
+
 	function createProductDiv($x){
 		echo "<div class='product'>";
 		echo "<h4>" . $x->getName() . "</h4>";
@@ -107,7 +116,8 @@ class CommonHtmlElement{
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
 			case "account":
-				echo "<p>Ciao amico sole il mio nome simomne</p>";
+				echo "		<li><a href='areaPersonale.php?operazione=logout'>Log out</a></li>";
+				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Close account</a></li>";
 			break;
 			default:
 				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
@@ -187,12 +197,13 @@ class CommonHtmlElement{
 					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 			case "account":
-
-					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a>";
-					echo "		<input type='submit' name='storia' value='Storia dei ordini'>";
-					echo "		<input type='submit' name='prenotazione' value='Prenotazione'>";
-					echo "		<input type='submit' name='logout' value='Log Out'>";
-					echo "		<input type='submit' name='closeaccount' value='Close Account'>";
+					echo "<form action='' method='GET'>";
+					//echo "		<li><button type='submit' name='operazione' value='prenotazione'>Prenotazione</button></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=logout'>Log out</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Close account</a></li>";
 					echo "</form>";
 			break;
 		}
@@ -206,6 +217,16 @@ class CommonHtmlElement{
 		echo "		<h3>LINK INTERNI</h3>";
 		$this->printListLinkInterni($page);
 		echo "</div>";
+}
+
+public function printListaProdotti($usrType){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$prod = $f->getProductList($usrType);
+	foreach ($prod as $x) {
+		$this->createProductDiv($x);
+	}
 }
 	public function printStoriaOrdiniServizio($req){
 		$id=0;
@@ -361,6 +382,31 @@ public function printStoriaOrdiniAlMinuto($req){
 }
 
 
+public function printStoriaOrdini($t){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$req = $f->getRequestList($_SESSION['Email']);
+	echo "<div class='contentElement'>";
+	echo "<form action = 'operationManager.php' method = 'POST'>";
+	switch($t){
+		case "Servizio":
+			$this->printStoriaOrdiniServizio($req);
+		break;
+
+		case "All_ingrosso":
+			$this->printStoriaOrdiniAllIngrosso($req);
+		break;
+
+		case "Al minuto":
+			$this->printStoriaOrdiniAlMinuto($req);
+			break;
+	}
+	echo "<button type='submit' name='annullaRichiesta' >Annulla la richiesta</button>";
+	echo "</form>";
+}
+
+
 public function printFormPrenotazione($usrType){
 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 $d->connect();
@@ -369,10 +415,14 @@ $prod = $f->getProductList($usrType);
 $d->disconnect();
 
 echo "<div id='ordineForm' class='contentElement'>";
-echo "<form action='' method='POST' >";
+echo "<form action='operationManager.php' method='POST' >";
 echo "<fieldset>";
-echo "<legend>Prenotazione</legend>";
-echo "<label>Prodotto:</label>";
+if($usrType!=="Servizio"){
+	echo "<legend>Lista prodotti</legend>";}
+else{
+	echo "<legend>Dati prenotazione</legend>";}
+
+echo "<label for='listaProdotti'>Prodotto:</label>  ";
 echo "<select name='listaProdotti'  required>";
 echo "<option value=''>--</option>";
 foreach ($prod as $x) {
@@ -383,26 +433,31 @@ echo "</br></br>";
 
 switch($usrType ){
 	case "Al minuto":
-		echo "<label>Numero prodotti:</label> <input type='number' name='numeroProdotti' required>";
-
+		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-
+		echo "</fieldset>";
 		echo "</form>";
-		echo "<form action='' method='POST' >";
-		echo "<label>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
+		echo "<form action='operationManager.php' method='POST' >";
+		echo "<fieldset>";
+		echo "<legend>Dati prenotazione</legend>";
+
+		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
 
 		break;
 
 	case "All_ingrosso":
-		echo "<label>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
 
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-
+		echo "</fieldset>";
 		echo "</form>";
-		echo "<form action='' method='POST' >";
-		echo "<label>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+		echo "<form action='operationManager.php' method='POST' >";
+		echo "<fieldset>";
+		echo "<legend>Dati prenotazione</legend>";
 
-		echo "<label>Periodicita:</label> <select name='periodicita' required>";
+		echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+
+		echo "<label for='periodicita'>Periodicita:</label><select name='periodicita' required>";
 
 		echo "<option value=''>--</option>";
 		echo "<option value='settimanale'>settimanale </option>";
@@ -412,32 +467,57 @@ switch($usrType ){
 		break;
 
 	case "Servizio":
-		echo "<label>Personale richiesto: </label><input type='number' name='personaleRichiesto' required>";
+		echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
 
-		echo "<label>Risorse necessarie:</label> <textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
 
-		echo "<label>Indirizzo evento:</label> <input type='text' name='indirizzoEvento' required>";
+		echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
 
 		break;
 }
-echo "<label>Data ritiro/consegna/evento:</label>     <input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
 
-echo "<label>Ora ritiro/consegna/evento(da 0 a 24):</label>     <input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
-
-
+echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
-
 echo "</fieldset>";
 echo "</form>";
 echo "</div>";
-unset($_POST);//TEST messo da simone non sono sicuro
+}
+
+
+public function printTabelaProdottiScelti($usrType){
+	if(($usrType=="Al minuto") || ($usrType=="All_ingrosso")){
+		echo "<div id='prodScelti'>";
+		echo "Fino adesso ai scelto i seguenti prodotti:";
+		echo "</br>";
+		echo "<table id='outputTable'>
+			<tr>
+			<th>Nr.</th>
+			<th>Nome</th>
+			</tr>";
+
+		for($i=1; $i<=$c; $i++){
+			echo "<tr>";
+			echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";
+			echo "<td>".$_SESSION['listaProdotti'.$i]."</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+		echo "</div>";
+	}
 }
 
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
 			$this->printFormPrenotazione($usrType);
-		break;
+			break;
+		case "storia":
+			$this->printStoriaOrdini($usrType);
+			break;
+		case "prodotti":
+			$this->printListaProdotti($usrType);
+			break;
 	}
 }
 

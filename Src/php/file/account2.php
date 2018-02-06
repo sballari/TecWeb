@@ -337,9 +337,10 @@
 
 
 				if(isset($_POST['nuovoProd'])){
+          //Il contatore conta i prodotti aggiunti.
 					$c = $_SESSION['contatore'];
 					$controllo = 0;
-					for($i=1; $i<=$c; $i++){
+					for($i=1; $i<=$c && $controllo == 0; $i++){
 						if($_SESSION['listaProdotti'.$c] == $_POST['listaProdotti']){
 							$controllo=1;
 							break;
@@ -353,6 +354,26 @@
 					}
 					else{
 						$_SESSION[$_POST['listaProdotti']] = $_SESSION[$_POST['listaProdotti']] + $_POST['numeroProdotti'];
+					}
+
+          if(($usrType=="Al minuto") || ($usrType=="All_ingrosso")){
+						echo "<div id='prodScelti'>";
+						echo "Fino adesso ai scelto i seguenti prodotti:";
+						echo "</br>";
+						echo "<table id='outputTable'>
+							<tr>
+							<th>Nr.</th>
+							<th>Nome</th>
+							</tr>";
+
+						for($i=1; $i<=$c; $i++){
+							echo "<tr>";
+							echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";
+							echo "<td>".$_SESSION['listaProdotti'.$i]."</td>";
+							echo "</tr>";
+						}
+						echo "</table>";
+						echo "</div>";
 					}
 					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
 
