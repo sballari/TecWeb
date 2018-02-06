@@ -207,40 +207,57 @@ class CommonHtmlElement{
 		$this->printListLinkInterni($page);
 		echo "</div>";
 }
-	public function printStoriaOrdiniServizio($req){
-		$id=0;
-		echo "<table>
-		<tr>
-		<th>Seleziona</th>
-		<th>Codice Richiesta</th>
-		<th>Nome del Prodotto</th>
-		<th>Immagine Prodotto</th>
-		<th>Request product description</th>
-		<th>Request staff</th>
-		<th>Request resources</th>
-		<th>Request adress</th>
-		<th>Request receive date and hour</th>
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
-		</tr>";
-		foreach ($req as $x) {
-			$id++;
-			echo "<tr>";
-			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";//TODO
-			echo "<td>" . $x->getKey() . "</td>";
-			echo "<td>" . $x->getService()->getName() . "</td>";
-			echo "<td>" . $x->getService()->getImage() . "</td>";
-			echo "<td>" . $x->getService()->getDesc() . "</td>";
-			echo "<td>" . $x->getStaffNumber() . "</td>";
-			echo "<td>" . $x->getResourceNeeded() . "</td>";
-			echo "<td>" . $x->getLocationAdress() . "</td>";
-			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
-			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
-			echo "<td>" . $x->getStatus() . "</td>";
-			echo "</tr>";
-		}
-		echo "</table>";
+public function printRichiestaDettagliataDiv($Richiesta){
+	$tipo = $Richiesta->getType();
+	echo "<div class='contentElement'>";
+	
+	switch ($tipo){
+		case 'Servizio':
+				echo "<table summary='Nella tabella viene fornito i dettagli del Servizio selezionata. Ogni riga descrive una caratteristica del servizio. 
+				In ordine sono numero, nome, descrizione, numero personale richiesto, numero risorse richieste, indirizzo evento, data di ricezione della richiesta,
+				data dell'evento, stato della richiesta>";
+				echo "<caption>Dettagli Servizio numero ".$Richiesta->getKey()." </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='nome'>Nome Servizio</th>
+					<td>".$Richiesta->getService()->getName()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='desc'>Descrizione</th>
+					<td>".$Richiesta->getService()->getDesc()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='staff'>Numero Personale</th>
+					<td>".$Richiesta->getStaffNumber()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='risorse'>Risorse Richieste</th>
+					<td>".$Richiesta->getResourceNeeded()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='luogo'>Luogo Evento</th>
+					<td>".$Richiesta->getLocationAdress()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='ricezione'>Data e Ora Ricezione Richiesta</th>
+					<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row'>Data e Ora Evento</th>
+					<td>".$Richiesta->getDeliveryDateTime()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row'>Stato</th>
+					<td>".$Richiesta->getStatus()."</td>
+				</tr>";
+				echo "</table>";
+		break;
 	}
+	echo "</div>";
+}
 	public function printStoriaOrdiniAllIngrosso($req){
 		$id=0;
 		echo "<table>
