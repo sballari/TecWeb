@@ -103,7 +103,7 @@ class CommonHtmlElement{
 				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
 			break;
 			case "signUp":
-				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
+				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
 			case "account":

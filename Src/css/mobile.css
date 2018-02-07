@@ -1,3 +1,4 @@
+
 #menu .search-container {
   float: left;
 }
@@ -58,10 +59,9 @@
   padding: 1em
 }
 
-#mobileMenu{
-  /* overflow: hidden; */
+#mobileMenu {
   width: 100%;
-  font-size: 3em;
+  /* font-size: 3em; */
   text-align: center;
   height: 100vh;
 }
@@ -142,7 +142,7 @@
 }
 
 #footer{
-  font-size: 2em;
+  /* font-size: 2em; */
 }
 
 .product img{
