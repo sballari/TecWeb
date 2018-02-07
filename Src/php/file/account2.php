@@ -37,7 +37,7 @@
         $t = $u->getUserType();
         echo "<div id='info' class='contentElement'>";
 				echo "<h3>INFO</h3>";
-        echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
+        echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$t."</p>";
         echo "</div>";
       }
 ?>
@@ -164,24 +164,11 @@
 							//$ErrOraRitiro= "Invalid time format";
 						//}
 						//if(($ErrNumeroProdotti = "") && ($ErrDataRitiro = "") && ($ErrOraRitiro = "")){
-					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-						require_once("../class/DBmanager.php");
-						require_once("../class/Manipulator.php");
-						require_once("../class/Factory.php");
-						require_once("../class/User.php");
+
 						require_once("../class/RetailOrder.php");
 						require_once("../class/MassiveOrder.php");
-						require_once("../class/Service.php");}
-					else{
-						echo "Error: One of the files does not esist.";
-						exit;}
+						require_once("../class/Service.php");
 
-					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-					$d->connect();
-					$f = new Factory($d);
-					$m = new Manipulator($d);
-					$usr = $f->getUser($_SESSION['Email']);
-					$usrType = $usr->getUserType();
 					$co = $_SESSION['contatore'];
 
 					switch($usrType){
@@ -337,9 +324,10 @@
 
 
 				if(isset($_POST['nuovoProd'])){
+          //Il contatore conta i prodotti aggiunti.
 					$c = $_SESSION['contatore'];
 					$controllo = 0;
-					for($i=1; $i<=$c; $i++){
+					for($i=1; $i<=$c && $controllo == 0; $i++){
 						if($_SESSION['listaProdotti'.$c] == $_POST['listaProdotti']){
 							$controllo=1;
 							break;
@@ -353,6 +341,26 @@
 					}
 					else{
 						$_SESSION[$_POST['listaProdotti']] = $_SESSION[$_POST['listaProdotti']] + $_POST['numeroProdotti'];
+					}
+
+          if(($usrType=="Al minuto") || ($usrType=="All_ingrosso")){
+						echo "<div id='prodScelti'>";
+						echo "Fino adesso ai scelto i seguenti prodotti:";
+						echo "</br>";
+						echo "<table id='outputTable'>
+							<tr>
+							<th>Nr.</th>
+							<th>Nome</th>
+							</tr>";
+
+						for($i=1; $i<=$c; $i++){
+							echo "<tr>";
+							echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";
+							echo "<td>".$_SESSION['listaProdotti'.$i]."</td>";
+							echo "</tr>";
+						}
+						echo "</table>";
+						echo "</div>";
 					}
 					if(file_exists("../class/DBmanager.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
 

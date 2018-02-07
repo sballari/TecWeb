@@ -1,6 +1,15 @@
 <?php
-
+require_once("../class/Manipulator.php");
+require_once("../class/Factory.php");
+require_once("../class/DBmanager.php");
+require_once("../class/User.php");
+require_once("../class/Product.php");
+require_once("../class/Request.php");
+require_once("../class/RetailOrder.php");
+require_once("../class/MassiveOrder.php");
+require_once("../class/Service.php");
 class CommonHtmlElement{
+
 	function createProductDiv($x){
 		echo "<div class='product'>";
 		echo "<h4>" . $x->getName() . "</h4>";
@@ -107,7 +116,8 @@ class CommonHtmlElement{
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
 			case "account":
-				echo "<p>Ciao amico sole il mio nome simomne</p>";
+				echo "		<li><a href='areaPersonale.php?operazione=logout'>Log out</a></li>";
+				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Close account</a></li>";
 			break;
 			default:
 				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
@@ -187,12 +197,12 @@ class CommonHtmlElement{
 					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 			case "account":
+					echo "<form action='' method='GET'>";
+					//echo "		<li><button type='submit' name='operazione' value='prenotazione'>Prenotazione</button></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 
-					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a>";
-					echo "		<input type='submit' name='storia' value='Storia dei ordini'>";
-					echo "		<input type='submit' name='prenotazione' value='Prenotazione'>";
-					echo "		<input type='submit' name='logout' value='Log Out'>";
-					echo "		<input type='submit' name='closeaccount' value='Close Account'>";
 					echo "</form>";
 			break;
 		}
@@ -207,6 +217,124 @@ class CommonHtmlElement{
 		$this->printListLinkInterni($page);
 		echo "</div>";
 }
+public function printRichiestaDettagliataDiv($Richiesta){
+	$tipo = $Richiesta->getType();
+	echo "<div class='contentElement'>";
+
+	switch ($tipo){
+		case 'Servizio':
+				echo "<table summary='Nella tabella viene fornito i dettagli del Servizio selezionata. Ogni riga descrive una caratteristica del servizio.
+				In ordine sono numero, nome, descrizione, numero personale richiesto, numero risorse richieste, indirizzo evento, data di ricezione della richiesta,
+				data dell'evento, stato della richiesta>";
+				echo "<caption>Dettagli Servizio numero ".$Richiesta->getKey()." </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='nome'>Nome Servizio</th>
+					<td>".$Richiesta->getService()->getName()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='desc'>Descrizione</th>
+					<td>".$Richiesta->getService()->getDesc()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='staff'>Numero Personale</th>
+					<td>".$Richiesta->getStaffNumber()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='risorse'>Risorse Richieste</th>
+					<td>".$Richiesta->getResourceNeeded()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='luogo'>Luogo Evento</th>
+					<td>".$Richiesta->getLocationAdress()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='ricezione'>Data e Ora Ricezione Richiesta</th>
+					<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row'>Data e Ora Evento</th>
+					<td>".$Richiesta->getDeliveryDateTime()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row'>Stato</th>
+					<td>".$Richiesta->getStatus()."</td>
+				</tr>";
+				echo "</table>";
+		break;
+		case "All_ingrosso":
+			echo "<table summary='Nella tabella viene fornito i dettagli dell'ordine selezionato. Ogni riga descrive una caratteristica dell'ordine.
+			In ordine sono numero, periodicit&agrave;, indirizzo di consegna, ora e data di ricezine, ora e data di consegna e stato.>";
+			echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+			echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+			echo "<tr>
+					<th scope = 'row'>Periodicit&agrave;</th>
+					<td>".$Richiesta->getPeriodicity()."</td>
+				</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='indirizzo'>Indirizzo di consegna</th>
+				<td>".$Richiesta->getDeliveryAdress()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='ricezione'>Data e ora ricezione</th>
+				<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='consegna'>Data e ora di consegna</th>
+				<td>".$Richiesta->getDeliveryDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row'>Stato</th>
+				<td>".$Richiesta->getStatus()."</td>
+			</tr>";
+			echo "</table>";
+			$this->printComposizioneOrdineTable($Richiesta);
+		break;
+		case "Al minuto":
+			echo "<table summary='Nella tabella viene fornito i dettagli dell'ordine al minuto selezionato. Ogni riga descrive una caratteristica dell'ordine.
+			In ordine sono chiave, note utente, data e ora di ricezione, data e ora di ritiro, stato.>";
+			echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+			echo "<tr>
+						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
+						<td>".$Richiesta->getKey()."</td>
+					</tr>";
+			echo "<tr>
+					<th scope = 'row'>Note Utente;</th>
+					<td>".$Richiesta->getUserNote()."</td>
+				</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='ricezione'>Data e ora ricezione</th>
+				<td>".$Richiesta->getReiceveRequestDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row' abbr='consegna'>Data e ora di ritiro</th>
+				<td>".$Richiesta->getDeliveryDateTime()."</td>
+			</tr>";
+			echo "<tr>
+				<th scope = 'row'>Stato</th>
+				<td>".$Richiesta->getStatus()."</td>
+			</tr>";
+			echo "</table>";
+			$this->printComposizioneOrdineTable($Richiesta);
+		break;
+}
+echo "</div>";
+}
+public function printListaProdotti($usrType){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$prod = $f->getProductList($usrType);
+	foreach ($prod as $x) {
+		$this->createProductDiv($x);
+	}
+}
 	public function printStoriaOrdiniServizio($req){
 		$id=0;
 		echo "<table>
@@ -214,12 +342,7 @@ class CommonHtmlElement{
 		<th>Seleziona</th>
 		<th>Codice Richiesta</th>
 		<th>Nome del Prodotto</th>
-		<th>Immagine Prodotto</th>
-		<th>Request product description</th>
-		<th>Request staff</th>
-		<th>Request resources</th>
-		<th>Request adress</th>
-		<th>Request receive date and hour</th>
+
 		<th>MassiveOrder delivery date and hour </th>
 		<th>MassiveOrder status</th>
 		</tr>";
@@ -229,29 +352,24 @@ class CommonHtmlElement{
 			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";//TODO
 			echo "<td>" . $x->getKey() . "</td>";
 			echo "<td>" . $x->getService()->getName() . "</td>";
-			echo "<td>" . $x->getService()->getImage() . "</td>";
-			echo "<td>" . $x->getService()->getDesc() . "</td>";
-			echo "<td>" . $x->getStaffNumber() . "</td>";
-			echo "<td>" . $x->getResourceNeeded() . "</td>";
-			echo "<td>" . $x->getLocationAdress() . "</td>";
-			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
 		}
 		echo "</table>";
 	}
-	public function printStoriaOrdiniAllIngrosso($req){
+
+
+
+
+public function printStoriaOrdiniAllIngrosso($req){
 		$id=0;
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
 		<th>MassiveOrder codice</th>
 		<th>MassiveOrder product's (number) and name</th>
-
-		<th>MassiveOrder periodicity</th>
-		<th>MassiveOrder adress</th>
-		<th>MassiveOrder receive date and hour</th>
 		<th>MassiveOrder delivery date and hour </th>
 		<th>MassiveOrder status</th>
 		</tr>";
@@ -292,9 +410,7 @@ class CommonHtmlElement{
 				echo "</br>";
 			}
 			echo "</td>";
-			echo "<td>" . $x->getPeriodicity() . "</td>";
-			echo "<td>" . $x->getDeliveryAdress() . "</td>";
-			echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
@@ -307,10 +423,10 @@ public function printStoriaOrdiniAlMinuto($req){
 	echo "<table>
 		<tr>
 		<th>Seleziona</th>
+		<th>ReTailOrder codice</th>
 		<th>RetailOrder product's(number) and name</th>
 
-		<th>RetailOrder user notes</th>
-		<th>RetailOrder receive date and hour</th>
+
 		<th>MassiveOrder delivery date and hour </th>
 		<th>MassiveOrder status</th>
 		</tr>";
@@ -318,7 +434,7 @@ public function printStoriaOrdiniAlMinuto($req){
 		$id++;
 		echo "<tr>";
 		echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-
+		echo "<td>" . $x->getKey() . "</td>";
 		$prodArr=$x->getProducts();
 		$length=count($prodArr);
 		$prodNumArr = array();
@@ -360,6 +476,52 @@ public function printStoriaOrdiniAlMinuto($req){
 
 }
 
+	public function printComposizioneOrdineTable($ordine){
+		echo "<table summary='La tabella indica i prodotti che compongono l&#39;ordine richiesto. Ogni riga rappresenta un prodotto.
+		I dati forniti in ogni riga sono, in ordine, nome del prodotto e quantit&agrave; ordinata' >";
+		echo "<caption>Composizione Ordine</caption>";
+		echo "
+			<tr>
+				<th scope='col' abbr='prod'>Nome Prodotto</th>
+				<th scope='col' abbr= 'quantit&agrave;' >Quantit&agrave; ordinata</th>
+			</tr>";
+
+		$qta = $ordine->getProductsWithQta();
+		foreach(array_keys($qta) as $p){
+			echo "<tr>
+					<td>".$p."</td>
+					<td>".$qta[$p]."</td>
+				</tr>";
+		}
+		echo "</table>";
+}
+
+
+public function printStoriaOrdini($t){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$req = $f->getRequestList($_SESSION['Email']);
+	echo "<div class='contentElement'>";
+	echo "<form action = 'operationManager.php' method = 'POST'>";
+	switch($t){
+		case "Servizio":
+			$this->printStoriaOrdiniServizio($req);
+		break;
+
+		case "All_ingrosso":
+			$this->printStoriaOrdiniAllIngrosso($req);
+		break;
+
+		case "Al minuto":
+			$this->printStoriaOrdiniAlMinuto($req);
+			break;
+	}
+	echo "<button type='submit' name='annullaRichiesta' >Annulla la richiesta</button>";
+	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
+	echo "</form>";
+}
+
 
 public function printFormPrenotazione($usrType){
 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -369,10 +531,14 @@ $prod = $f->getProductList($usrType);
 $d->disconnect();
 
 echo "<div id='ordineForm' class='contentElement'>";
-echo "<form action='' method='POST' >";
+echo "<form action='operationManager.php' method='POST' >";
 echo "<fieldset>";
-echo "<legend>Prenotazione</legend>";
-echo "<label>Prodotto:</label>";
+if($usrType!=="Servizio"){
+	echo "<legend>Lista prodotti</legend>";}
+else{
+	echo "<legend>Dati prenotazione</legend>";}
+
+echo "<label for='listaProdotti'>Prodotto:</label>  ";
 echo "<select name='listaProdotti'  required>";
 echo "<option value=''>--</option>";
 foreach ($prod as $x) {
@@ -383,26 +549,31 @@ echo "</br></br>";
 
 switch($usrType ){
 	case "Al minuto":
-		echo "<label>Numero prodotti:</label> <input type='number' name='numeroProdotti' required>";
-
+		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-
+		echo "</fieldset>";
 		echo "</form>";
-		echo "<form action='' method='POST' >";
-		echo "<label>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
+		echo "<form action='operationManager.php' method='POST' >";
+		echo "<fieldset>";
+		echo "<legend>Dati prenotazione</legend>";
+
+		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
 
 		break;
 
 	case "All_ingrosso":
-		echo "<label>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
 
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-
+		echo "</fieldset>";
 		echo "</form>";
-		echo "<form action='' method='POST' >";
-		echo "<label>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+		echo "<form action='operationManager.php' method='POST' >";
+		echo "<fieldset>";
+		echo "<legend>Dati prenotazione</legend>";
 
-		echo "<label>Periodicita:</label> <select name='periodicita' required>";
+		echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+
+		echo "<label for='periodicita'>Periodicita:</label><select name='periodicita' required>";
 
 		echo "<option value=''>--</option>";
 		echo "<option value='settimanale'>settimanale </option>";
@@ -412,32 +583,57 @@ switch($usrType ){
 		break;
 
 	case "Servizio":
-		echo "<label>Personale richiesto: </label><input type='number' name='personaleRichiesto' required>";
+		echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
 
-		echo "<label>Risorse necessarie:</label> <textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
 
-		echo "<label>Indirizzo evento:</label> <input type='text' name='indirizzoEvento' required>";
+		echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
 
 		break;
 }
-echo "<label>Data ritiro/consegna/evento:</label>     <input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
 
-echo "<label>Ora ritiro/consegna/evento(da 0 a 24):</label>     <input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
-
-
+echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
-
 echo "</fieldset>";
 echo "</form>";
 echo "</div>";
-unset($_POST);//TEST messo da simone non sono sicuro
+}
+
+
+public function printTabelaProdottiScelti($usrType){
+	if(($usrType=="Al minuto") || ($usrType=="All_ingrosso")){
+		echo "<div id='prodScelti'>";
+		echo "Fino adesso ai scelto i seguenti prodotti:";
+		echo "</br>";
+		echo "<table id='outputTable'>
+			<tr>
+			<th>Nr.</th>
+			<th>Nome</th>
+			</tr>";
+
+		for($i=1; $i<=$c; $i++){
+			echo "<tr>";
+			echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";
+			echo "<td>".$_SESSION['listaProdotti'.$i]."</td>";
+			echo "</tr>";
+		}
+		echo "</table>";
+		echo "</div>";
+	}
 }
 
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
 			$this->printFormPrenotazione($usrType);
-		break;
+			break;
+		case "storia":
+			$this->printStoriaOrdini($usrType);
+			break;
+		case "prodotti":
+			$this->printListaProdotti($usrType);
+			break;
 	}
 }
 
