@@ -41,28 +41,36 @@
      echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
      echo "</div>";
      if(!isset($_GET) || count($_GET)==0){
+       if(isset($_SESSION['messaggioArea'])){
+         echo "<div id='messaggio' class='contentElement'>";
+         echo "".$_SESSION['messaggioArea'];
+         echo "</div>";
+         unset($_SESSION['messaggioArea']);
+       }
+       else{
        $h->printOperationElement("prenotazione", $t);
+       }
      }
      else{
-     $h->printOperationElement($_GET['operazione'], $t);
+       if($_GET['operazione']=='logout'){
+         $_SESSION['submitPremuto']="logout";
+         header("Location: ConfirmPage.php");
+       }
+       elseif($_GET['operazione']=='closeaccount'){
+         $_SESSION['submitPremuto']="closeaccount";
+         header("Location: ConfirmPage.php");
+       }
+       else{
+         $h->printOperationElement($_GET['operazione'], $t);
+       }
+
     }
+
  }
 ?>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <?php
+<?php
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("home");

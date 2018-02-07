@@ -1,9 +1,19 @@
 <!DOCTYPE HTML>
 <html lang ="it"></html>
 <?php
-    require_once ("CommonHtmlElement.php");
-    require_once("../class/Factory.php");
-    require_once("../class/DBmanager.php");
+session_start();
+if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
+  require_once("../class/DBmanager.php");
+  require_once("CommonHtmlElement.php");
+  require_once("../class/Manipulator.php");
+  require_once("../class/Factory.php");
+  require_once("../class/User.php");
+  require_once("../class/RetailOrder.php");
+  require_once("../class/MassiveOrder.php");
+  require_once("../class/Service.php");}
+else{
+  echo "Error: One of the files does not esist.";
+  exit;}
 
     $h = new CommonHtmlElement();
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
@@ -27,7 +37,7 @@
   	?>
     <div id="content">
     <?php
-        session_start();
+
         if (!isset($_SESSION)) {
             echo "<div class='contentElement'>";
             echo "<h3>ERRORE</h3>";
@@ -38,6 +48,9 @@
         }
 
         else {
+          $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+           $d->connect();
+          $f = new Factory($d);
             $u = $f->getUser($_SESSION['Email']);
             $t = $u->getUserType();
             echo "<div id='info' class='contentElement'>";
@@ -46,7 +59,9 @@
             echo "</div>";
 
             if (isset($_SESSION['richiestaDettaglio'])){
-                $h->printRichiestaDettagliataDiv($_SESSION['richiestaDettaglio']);
+              $r = unserialize($_SESSION['richiestaDettaglio']);
+                $h->printRichiestaDettagliataDiv($r);
+                unset($_SESSION['richiestaDettaglio']);
             }
             else {
                 echo "

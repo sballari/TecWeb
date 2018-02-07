@@ -29,7 +29,7 @@ abstract class Request {
   public function getReiceveRequestHour() {
     return $this->reiceveRequestDateTime->format('H:i');
   }
-  
+
   public function getReiceveRequestDateTime(){
     return $this->reiceveRequestDateTime->format('Y-m-d H:i:s');
   }

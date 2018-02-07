@@ -23,7 +23,7 @@ class Service extends Request {
 	function getStaffNumber(){
 		return $this->staffNumber;
 	}
-  
+
 	function getType(){
       return "Servizio";
 	}
