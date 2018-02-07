@@ -6,7 +6,6 @@
 }
 
 html, body{
-border-radius: 5px;
 max-width: 1024px;
 margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -21,7 +20,6 @@ font-size: 1em;
   border: black solid 1px;
   cursor: pointer;
   float: right;
-
 }
 
 button:hover {
@@ -95,7 +93,6 @@ padding:0.4em;
 	text-align: center;
 	color: black;
   float: left;
-  font-size: 2.5em;
 }
 
 #content {

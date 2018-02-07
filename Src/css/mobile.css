@@ -1,12 +1,14 @@
 
-#menu .search-container {
-  float: left;
+#header h1{
+  float: none;
+  font-size: 5em;
+  padding-left: 2em;
+  text-align: center;
 }
 
 .onlyMobile{
   position: static;
   width: 100%;
-  height: auto;
 }
 
 .onlyDesktop{
@@ -20,12 +22,15 @@
   top:  0;
   left: 0;
   height: 10vh;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid brown;
 }
 
 #header img {
-  height: 80%;
   padding-top: 0.5em;
-  width: 13%;
+  height: 7em;
+  width: 7em;
 }
 
 .contentElement img {
@@ -50,30 +55,31 @@
 
 #content{
   width: 100%;
-  margin-top: 10vh;
+  margin: 0;
 }
 
 #hamburger{
-  width: 6%;
+  /* width: 6%; */
   float: right;
-  padding: 1em
+  /* padding: 1em */
 }
 
 #mobileMenu {
   width: 100%;
-  /* font-size: 3em; */
   text-align: center;
   height: 100vh;
 }
 
+#mobileMenu h3 {
+  fon
+}
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
 }
 
-#mobileMenu .active{
-  background-color: brown;
-  color: white;
+#mobileMenu img{
+  margin-top: 1em;
 }
 
 #mobileMenu ul {
@@ -94,6 +100,7 @@
 	color: brown;
   padding:0.3em;
 	text-decoration: none;
+  font-size: 4em;
 }
 
 #mobileMenu li span{
@@ -101,15 +108,16 @@
   background-color: brown;
   color: white;
   padding:0.3em;
+  font-size: 4em;
 }
 
-#areaPriv{
+#mobileMenu img{
+  margin-top: 10vh;
+}
+
+#logNav{
   border-top: 1px brown solid;
   padding-top: 0.5em;
-}
-
-#mobileMenu li a:hover {
-  background-color:red;
 }
 
 .search-container form {
@@ -124,28 +132,34 @@
   margin-top: 0.5em;
 }
 
-#logo{
-  width: 10%;
-  padding-right: 2.5em;
-}
-
 #headerSpace{
   height: 10vh;
-}
-
-#contatti {
-  padding-left:0.5em;
-  padding-bottom: 0.5em;
-  border: solid 1px brown;
-	background-color: lightyellow;
-  width: 100%;
-}
-
-#footer{
-  /* font-size: 2em; */
 }
 
 .product img{
   max-width: 100%;
   width:100%;
+}
+
+#storia,#negozio,#stabilimento,#contatti,#info,#productlist{
+  padding-top: 10vh;
+  border-left: 0;
+  border-right: 0;
+  width: 100%;
+}
+
+#footer{
+  border-left: 0;
+  border-right: 0;
+  margin:0.3em 0.3em 0.3em 0.3em;
+}
+
+#contatti li{
+  margin-left: 0.5em;
+  margin-top: 0.2em;
+}
+
+#up_arrow{
+  height: 5em;
+  width: 5em;
 }
