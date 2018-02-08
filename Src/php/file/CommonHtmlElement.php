@@ -93,7 +93,7 @@ class CommonHtmlElement{
 			echo "<div id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page);
 				echo "<div class='search-container'>";
-								echo "<form action='/search_page.php'>";
+								echo "<form action='search_page.php'>";
 							  echo "<input id='search' type='search' name='search' placeholder='Cerca...'>";
 								echo "<button type='submit'>Cerca</button>";
 								echo "</form>";

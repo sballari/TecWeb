@@ -9,6 +9,27 @@ class Factory {
     $this->dbM = $dbman;
   }
 
+
+
+  function searchProdotti($testo){
+    if ($this->dbM->getStatus()==true){
+      $query = "SELECT * FROM prodotto  WHERE (nome LIKE '%" . $testo . "%') 
+                OR (descrizione LIKE '%" . $testo . "%') 
+                OR (tipoProdotto LIKE '%" . $testo . "%')
+                OR (ingredienti LIKE '%" . $testo . "%')";
+      $result = $this->dbM->submitQuery($query);
+      $arrPrd = array();
+      while ($arr = $result->fetch_assoc()){
+        $arrPrd[] =new Product ($arr['imagePath'],
+                             $arr['descrizione'],
+                             $arr['ingredienti'],
+                             $arr['tipoProdotto'],
+                             $arr['nome']);
+      }
+      return $arrPrd;
+    }
+    else return false;
+  }
   function getUserList(){
       if ($this->dbM->getStatus()==true){
           $result = $this->dbM->submitQuery("SELECT * FROM utente");
