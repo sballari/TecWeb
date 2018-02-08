@@ -223,21 +223,20 @@ if(isset($_POST['annullaRichiesta'])){
       }
       break;
 
-
-        break;
       case "logout":
-        $_SESSION['Email'] = "";
+        unset($_SESSION['Email']);
         header("Location: home.php");
         break;
       case "closeaccount":
+        $m = new Manipulator($d);
         $b = $m->removeUser($_SESSION['Email']);
-        $diss=$d->disconnect();
-        $_SESSION['Email'] = "";
 
         if($b==false){
-          echo "<p>Qualcosa &egrave; andato storto.</p>";
+          $_SESSION['messaggioConfirm'] = "<p>Qualcosa &egrave; andato storto.</p>";
+          header("Location: ConfirmPage.php");
         }
         else{
+          unset($_SESSION['Email']);
           header("Location: home.php");
         }
         break;
@@ -272,27 +271,15 @@ if(isset($_POST['annulla'])){
     }
         break;
 
-
-      break;
     case "logout":
-      $_SESSION['Email'] = "";
-      header("Location: home.php");
+      header("Location: areaPersonale.php");
       break;
     case "closeaccount":
-      $b = $m->removeUser($_SESSION['Email']);
-      $diss=$d->disconnect();
-      $_SESSION['Email'] = "";
-
-      if($b==false){
-        echo "<p>Qualcosa &egrave; andato storto.</p>";
-      }
-      else{
-        header("Location: home.php");
-      }
+      header("Location: areaPersonale.php");
       break;
 
-}
-unset($_SESSION['submitPremuto']);
+    }
+    unset($_SESSION['submitPremuto']);
 }
 
 

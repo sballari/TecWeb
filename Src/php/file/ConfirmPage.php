@@ -24,7 +24,7 @@
     ?>
 <div id="content">
   <?php
-  if (!isset($_SESSION)) {
+  if (!isset($_SESSION['Email'])) {
     echo "<div class='contentElement'>";
     echo "<h3>ERRORE</h3>";
     echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
@@ -49,7 +49,7 @@
           echo "La richiesta che hai scelto di annullare e la seguente:";
           echo "Stampa la richiesta";
           $r = unserialize($_SESSION['richiestaAnnullata']);
-          $h->printRichiestaDettagliataDiv($r);  //******FIX DISPLAY REQUEST**********
+          $h->printRichiestaDettagliataDiv($r);
 
         }
         break;
@@ -59,9 +59,9 @@
        echo "Stampa la richiesta";
        $r = unserialize($_SESSION['richiestaPrenotata']);
 
-       $h->printRichiestaDettagliataDiv($r);    //******FIX DISPLAY REQUEST usando la funzione della richiestaDettagliata**********
+       $h->printRichiestaDettagliataDiv($r);
 
-        //}
+
         break;
       case "logout":
         echo "<p>Sei sicuro di voler uscire dal suo account <strong>definitivamente</strong>?</p>";
@@ -88,4 +88,11 @@
    }
    ?>
    </div>
+
+ <?php
+ $h->printContatti();
+   $h->printFooter();
+   $h->printMobileMenu("casa");
+ ?>
    </body>
+ </html>

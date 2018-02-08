@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
+      if(isset($_SESSION['Email'])){
+        unset($_SESSION['Email']);
+      }
+
       if(file_exists("CommonHtmlElement.php")){
-        require_once ("CommonHtmlElement.php");}
+        require_once("CommonHtmlElement.php");}
       else{
         echo "Error: file does not esist.";
         exit;}
@@ -15,15 +19,9 @@
 
 
     <?php
-		if(file_exists("CommonHtmlElement.php")){
-				require_once "CommonHtmlElement.php";}
-			else{
-				echo "Error: file does not esist.";
-				exit;}
 
-		$header = new CommonHtmlElement();
-		$header->createheader("catering");
-    $header->printInternalMenu("catering");
+		$h->createheader("catering");
+    $h->printInternalMenu("catering");
 	?>
 
 
@@ -56,6 +54,7 @@
 				$d->connect();
 				$f = new Factory($d);
 				$prod = $f->getProductList("Servizio");
+        $d->disconnect();
         //echo var_dump($prod);
 
 				foreach ($prod as $x) {

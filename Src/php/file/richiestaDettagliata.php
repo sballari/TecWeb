@@ -26,7 +26,7 @@ else{
                 //$_SESSION['Email']="$email";
                 //$_SESSION['richiestaDettaglio']=$s[0];
         //FINE PROVA
-        print_r($_SESSION);
+
  ?>
 <body>
     <div id="accessBar">
@@ -39,7 +39,7 @@ else{
     <div id="content">
     <?php
 
-        if (!isset($_SESSION)) {
+        if (!isset($_SESSION['Email'])) {
             echo "<div class='contentElement'>";
             echo "<h3>ERRORE</h3>";
             echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
@@ -61,8 +61,9 @@ else{
 
             if (isset($_SESSION['richiestaDettaglio'])){
               $r = unserialize($_SESSION['richiestaDettaglio']);
+              unset($_SESSION['richiestaDettaglio']);
                 $h->printRichiestaDettagliataDiv($r);
-                unset($_SESSION['richiestaDettaglio']);
+
             }
             else {
                 echo "

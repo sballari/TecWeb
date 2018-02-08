@@ -76,7 +76,7 @@
 				else
 				{
 					$_SESSION['Email'] = $emailSignup;
-					header("Location: account2.php");
+					header("Location: areaPersonale.php");
 
 				}
 

@@ -1,6 +1,10 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
+      if(isset($_SESSION['Email'])){
+        unset($_SESSION['Email']);
+      }
+
       if(file_exists("CommonHtmlElement.php")){
         require_once ("CommonHtmlElement.php");}
       else{

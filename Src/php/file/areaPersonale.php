@@ -24,7 +24,7 @@
     ?>
 <div id="content">
   <?php
-  if (!isset($_SESSION)) {
+  if (!isset($_SESSION['Email'])){
     echo "<div class='contentElement'>";
     echo "<h3>ERRORE</h3>";
     echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
@@ -32,8 +32,7 @@
     <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
     echo "</div>";
   }
-
-  else {
+else {
      $u = $f->getUser($_SESSION['Email']);
      $t = $u->getUserType();
      echo "<div id='info' class='contentElement'>";

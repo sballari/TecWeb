@@ -73,7 +73,7 @@
 				{
 				$_SESSION['Email'] = $email;
 
-				header("Location: account2.php");
+				header("Location: areaPersonale.php");
 				}
 				}
 			}
