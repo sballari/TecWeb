@@ -58,7 +58,7 @@
         //echo var_dump($prod);
 
 				foreach ($prod as $x) {
-						$h->createProductDiv($x);
+						$h->createProductDiv($x, false);
         }
 
 

@@ -47,7 +47,7 @@
       				  $prod = $f->getProductList("Al minuto");
                 $d->disconnect();
                 foreach ($prod as $x) {
-      						$h->createProductDiv($x);
+      						$h->createProductDiv($x, false);
                 }
       			?>
         </div>
