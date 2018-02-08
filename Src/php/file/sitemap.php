@@ -30,6 +30,7 @@
 				<li><a href='singUp.php'>Sign Up</a></li>
         </ul>
     </div>
+    </div>
         
 
     <?php
