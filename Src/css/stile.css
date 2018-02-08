@@ -1,0 +1,340 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html, body{
+max-width: 1024px;
+margin: auto;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 1em;
+}
+
+.search-container button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
+}
+
+button:hover {
+  background: #ccc;
+}
+
+#header{
+  overflow: hidden;
+  background-color: lightyellow;
+  border: 1px solid brown;
+}
+
+#logo {
+  width: 8%;
+  padding: 0.25em;
+	float: left;
+}
+
+#menu {
+	overflow: hidden;
+  float: left;
+	}
+
+  .search-container {
+      float: right;
+  }
+
+.search-container input {
+    width: auto;
+    border-right:none;
+    border-radius: 0;
+}
+
+#menu ul {
+	list-style-type: none;
+	overflow: hidden;
+  margin-bottom: 0.2em;
+  margin-left: 0.4em;
+}
+
+
+#menu li:first-child {border-left: 1px solid brown;}
+
+#menu li {
+	float:left;
+  display: block;
+  border-width: 1px 1px 1px 0;
+  border-color: brown;
+  border-style: solid;
+}
+
+#menu a {
+display: block;
+padding:0.4em;
+color: brown;
+text-decoration: none;
+}
+
+#menu span{
+display: block;
+background-color: brown;
+color: white;
+padding:0.4em;
+}
+
+#menu li a:hover {
+  background-color:antiquewhite;
+}
+
+#header h1{
+	padding: 0.5em;
+	text-align: center;
+	color: black;
+  float: left;
+}
+
+#content {
+	float: left;
+  margin-top: 1em;
+  padding:0em 0em 1em 0em;
+  float: right;
+  width: 75%;
+}
+
+#content h2{
+  padding-bottom: 0.4em;
+}
+h2, h3{
+  text-align: center;
+}
+#sitemap h3{
+  text-align: left;
+  padding: 0.2em;
+
+}
+
+#contatti {
+	float: left;
+  padding-left:0.5em;
+  padding-bottom: 0.5em;
+  border: solid 1px brown;
+	background-color: lightyellow;
+  width: 100%;
+}
+
+#contatti ul {
+	list-style-type:disc;
+  padding-left: 1.5em;
+}
+
+#footer {
+	float: left;
+	background-color: lightyellow;
+  width: 100%;
+  padding-left: 0.5em;
+  padding-bottom: 0.5em;
+  border-left: 1px solid brown;
+  border-right: 1px solid brown;
+  border-bottom: 1px solid brown;
+}
+
+
+.contentElement {
+	padding: 1em;
+	overflow: hidden;
+  background-color: lightyellow;
+  border: 1px brown solid;
+  margin-bottom: 1em;
+
+}
+
+.contentElement h2 {
+	padding: 0.5em;
+}
+.contentElement ul {
+  padding-left: 3em;
+}
+
+.contentElement img {
+	max-width: 40%;
+}
+
+.contentElement p {
+	margin: 1em;
+}
+
+
+
+.contentElement.Left img {
+	float: left;
+	padding-right:  0.6em;
+  margin: 1em 0.6em 0em 1em;
+	border-right: 2px solid black;
+
+}
+
+.contentElement.Right img {
+	float: right;
+	padding-left: 0.6em;
+	border-left: 2px solid black;
+	margin: 1em 1em 0em 0.6em;
+}
+
+
+.aiuti{
+  position:absolute;
+  height:0;
+  overflow:hidden;
+}
+
+.onlyMobile{
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+}
+
+#internalNavBar  {
+  margin-top: 1em;
+  width: 20%;
+  float:left;
+}
+
+
+#internalNavBar ul {
+    list-style-type: none;
+    background-color: lightyellow;
+    border-width: 1px 1px 1px 1px;
+    border-color: brown;
+    border-style: solid;
+}
+
+#internalNavBar ul:first-child{margin-bottom: 0.5em;}
+
+#internalNavBar li a{
+    display: block;
+    padding: 0.5em 0 0.5em 0;
+}
+
+#internalNavBar a{
+  color: brown;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+#internalNavBar li a:hover{
+    background-color: antiquewhite;
+}
+
+#logNav h3{
+  text-align: center;
+}
+
+#logNav ul{
+  border-top: 1px brown solid;
+  border-left: 1px brown solid;
+  border-right: 1px brown solid;
+  margin-top: 0.5em;
+}
+
+#logNav span{
+  display: block;
+  background-color: brown;
+  color: white;
+  padding:0.4em;
+  text-align: center;
+}
+
+#productlist{
+  padding: 1em;
+}
+
+.product{
+  padding-left: 1em;
+  background-color: lightyellow;
+  padding: 1em;
+  overflow: hidden;
+  border: 1px solid brown;
+  margin-top: 1em;
+}
+
+.product img{
+  float:left;
+  padding-right: 1em;
+  max-width: 60%;
+}
+
+.product h4{
+    margin-bottom: 1em;
+}
+
+#up_arrow{
+  width: 6%;
+  display: block;
+  float: none;
+  border: 0;
+  margin:0 auto;
+}
+
+#form button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
+}
+
+.contentElement button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
+}
+
+label{
+  float: left;
+  width: 6em;
+  text-align: right;
+}
+
+select,input{
+  border-radius: 5px;
+  padding: 0.4em;
+  font-size: 1em;
+  border: black solid 1px;
+  margin-left: 1em;
+  width: auto;
+  margin-bottom: 0.5em;
+}
+
+fieldset{
+  border: 0;
+}
+table {
+  padding: 0.5em;
+}
+th {
+  background: brown;
+  color: white;
+  padding: 0.4em;
+}
+td{
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.4em;
+}
+table caption {
+  text-align: center;
+ 
+  
+  
+
+}
