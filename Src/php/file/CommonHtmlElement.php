@@ -24,13 +24,49 @@ class CommonHtmlElement{
 	function evidenziaTesto($input, $par){
 			return $newTesto =str_ireplace($par,
 			 "<mark >".strtoupper($par)."</mark>",
-			 $input);			
+			 $input);
+	}
+	public function printBricioleDiPane($page){
+		switch ($page) {
+			case 'home':
+				$percorso = "<span lang='en'>Home</span>";
+				break;
+			case 'casa':
+				$percorso = "<span>Casa</span>";
+				break;
+			case 'ristorante':
+				$percorso = "<span>Ristorante</span>";
+				break;
+			case 'catering':
+				$percorso = "<span>Catering</span>";
+				break;
+			case 'account': 
+				$percorso = "<span lang='en'>Account</span>";
+				break;
+			case 'logIn': 
+				$percorso = "<span lang='en'>Log In</span>";
+				break;
+			case 'signUp': 
+				$percorso = "<span lang='en'>Sign Up</span>";
+				break;
+			case 'sitemap':
+				$percorso = "<span lang='en'>SiteMap</span>";
+			break;
+			case 'search':
+				$percorso = "Ricerca";
+			break;
+		}
+		echo "
+			<div id='briciole'>
+				<p>Ti trovi in : ".$percorso."</p>
+			</div>
+		";
 	}
 
 	public function printHead($title, $description, $keyword){
 		echo "<head>";
 		echo "\n";
-		echo '<title> "'.$title.'" - I tesori di Squitty </title>';
+		echo '<title> '.$title.' - I tesori di Squitty </title>';
 		echo "\n";
 		echo '<meta name="title" content="'.$title.'" />';
 		echo "\n";
@@ -92,6 +128,9 @@ class CommonHtmlElement{
 	}
 
 	public function createheader($page){
+		echo "<div id='accessBar'>
+			<a href ='#content'>Vai al contenuto</a>
+    	</div>";
 		echo "<div id='header'>";
 			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
@@ -105,6 +144,7 @@ class CommonHtmlElement{
 								echo "</form>";
 				echo "</div>";
 			echo "</div>";
+			$this->printBricioleDiPane($page);
 		echo "</div>";
 	}
 
@@ -175,7 +215,8 @@ class CommonHtmlElement{
 	}
 	public function printInternalMenu($page){
 		echo "<div id ='internalNavBar' class='onlyDesktop' >";
-        $this->printListLinkInterni($page);
+				echo "<a href ='#content' class='aiuti'>Salta menu</a>";
+        		$this->printListLinkInterni($page);
 				$this->generateLogInLink($page);
     echo "</div>";
 	}
@@ -189,7 +230,7 @@ class CommonHtmlElement{
 			break;
 			case "casa":
 					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
-					// echo "<li><a href='#contatti'>Contatti</a></li>";
+					
 			break;
 			case "catering":
 					echo "<li><a href='#info'>Info</a></li>";
@@ -216,6 +257,12 @@ class CommonHtmlElement{
 
 					echo "</form>";
 			break;
+			case "sitemap":
+					echo "<li><a href='#sitemap'>Sitemap</a></li>";
+			break;
+			case 'search':
+				echo "<li><a href='#productlist'>Prodotti trovati</a></li>";
+				break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
@@ -224,6 +271,7 @@ class CommonHtmlElement{
 	}
 	public function printInternalMenuMobile($page){
 		echo "<div id='mobileInterni'>";
+		echo "<a href ='#content' class='aiuti'>Vai al contenuto</a>";
 		echo "		<h3>LINK INTERNI</h3>";
 		$this->printListLinkInterni($page);
 		echo "</div>";
@@ -438,8 +486,8 @@ public function printStoriaOrdiniAlMinuto($req){
 		<th>RetailOrder product's(number) and name</th>
 
 
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>ReTailOrder delivery date and hour </th>
+		<th>ReTailOrder status</th>
 		</tr>";
 	foreach ($req as $x) {
 		$id++;
@@ -477,8 +525,7 @@ public function printStoriaOrdiniAlMinuto($req){
 			echo "</br>";
 		}
 		echo "</td>";
-		echo "<td>" . $x->getUserNote() . "</td>";
-		echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+		
 		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 		echo "<td>" . $x->getStatus() . "</td>";
 		echo "</tr>";
