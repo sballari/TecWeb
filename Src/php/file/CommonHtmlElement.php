@@ -87,7 +87,7 @@ class CommonHtmlElement{
 
 	public function createheader($page){
 		echo "<div id='header'>";
-			echo "<img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'>";
+			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
@@ -112,7 +112,7 @@ class CommonHtmlElement{
 				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
 			break;
 			case "signUp":
-				echo "<li><a href='logIn.php' lang='en'>Log in</a>.</li>";
+				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
 			case "account":
@@ -161,7 +161,12 @@ class CommonHtmlElement{
     echo  "    </div>";
     				$this->printInternalMenuMobile("$page");
 						$this->generateLogInLink($page);
-    echo  "    <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>";
+    echo  "    <a href='#top'>
+									<div>
+										<img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'>
+										<p> Torna Su </p>
+									</div>
+							 </a>";
     echo  "</div>";
 	}
 	public function printInternalMenu($page){
@@ -180,7 +185,7 @@ class CommonHtmlElement{
 			break;
 			case "casa":
 					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
-					echo "<li><a href='#contatti'>Contatti</a></li>";
+					// echo "<li><a href='#contatti'>Contatti</a></li>";
 			break;
 			case "catering":
 					echo "<li><a href='#info'>Info</a></li>";

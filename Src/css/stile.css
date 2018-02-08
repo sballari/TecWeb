@@ -9,7 +9,17 @@ html, body{
 max-width: 1024px;
 margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 1.05em;
+font-size: 1em;
+}
+
+.search-container button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
 }
 
 button:hover {
@@ -40,6 +50,7 @@ button:hover {
 .search-container input {
     width: auto;
     border-right:none;
+    border-radius: 0;
 }
 
 #menu ul {
@@ -82,7 +93,6 @@ padding:0.4em;
 	text-align: center;
 	color: black;
   float: left;
-  font-size: 2.5em;
 }
 
 #content {
@@ -102,7 +112,6 @@ h2, h3{
 
 #contatti {
 	float: left;
-  /* margin: 1em; */
   padding-left:0.5em;
   padding-bottom: 0.5em;
   border: solid 1px brown;
@@ -121,7 +130,6 @@ h2, h3{
   width: 100%;
   padding-left: 0.5em;
   padding-bottom: 0.5em;
-
   border-left: 1px solid brown;
   border-right: 1px solid brown;
   border-bottom: 1px solid brown;
@@ -228,12 +236,7 @@ h2, h3{
   background-color: brown;
   color: white;
   padding:0.4em;
-}
-
-#LoginForm {
-  border: 1px solid brown;
-  margin: 1em;
-  padding: 1em;
+  text-align: center;
 }
 
 #productlist{
@@ -264,12 +267,27 @@ h2, h3{
   display: block;
   float: none;
   border: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin:0 auto;
 }
 
-.bold{
-  font-weight: bold;
+#form button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
+}
+
+.contentElement button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
 }
 
 label{
@@ -278,21 +296,13 @@ label{
   text-align: right;
 }
 
-button{
-  padding: 0.4em;
-  margin-right: 1em;
-  background: #ddd;
-  font-size: 1em;
-  border: black solid 1px;
-  cursor: pointer;
-}
-
-input{
+select,input{
+  border-radius: 5px;
   padding: 0.4em;
   font-size: 1em;
   border: black solid 1px;
   margin-left: 1em;
-  width: 35%;
+  width: auto;
   margin-bottom: 0.5em;
 }
 

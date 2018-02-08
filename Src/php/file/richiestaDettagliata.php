@@ -16,16 +16,17 @@ else{
   exit;}
 
     $h = new CommonHtmlElement();
+    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+    $d->connect();
+    $f = new Factory($d);
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
         //PROVA
-                // $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-                // $d->connect();
-                // $f = new Factory($d);
-                // $email = "cristina.polletto@gmail.it";
-                // $s= $f->getRequestList($email);
-                // $_SESSION['Email']="$email";
-                // $_SESSION['richiestaDettaglio']=$s[0];
+                //$email = "cristina.polletto@gmail.it";
+                //$s= $f->getRequestList($email);
+                //$_SESSION['Email']="$email";
+                //$_SESSION['richiestaDettaglio']=$s[0];
         //FINE PROVA
+        print_r($_SESSION);
  ?>
 <body>
     <div id="accessBar">
