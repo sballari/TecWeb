@@ -2,7 +2,10 @@
 <html lang ="it">
 <?php
       require_once ("CommonHtmlElement.php");
+      require_once("../class/DBmanager.php");
       $h = new CommonHtmlElement();
+      $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+      $d->connect();
       $h->printHead("singUp", "area personale", "login, signup");
  ?>
 <body>
@@ -85,7 +88,7 @@
 
     <div id=content>
     <div class="contentElement">
-
+    		<h3>INFO</h3>
 			<p>
         Se disponi gi&agrave di un account prego procedere all'accesso dal seguente bottone.
 			  <a href="logIn.php">Vai alla pagina di <span lang='en'>Log in</span></a>.
@@ -131,6 +134,7 @@
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("singUp");
+      $d->disconnect();
     ?>
 
 </body>

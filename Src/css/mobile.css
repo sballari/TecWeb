@@ -1,5 +1,5 @@
 
-#header h1{
+.header h1{
   float: none;
   font-size: 5em;
   padding-left: 2em;
@@ -17,17 +17,17 @@
   height: 0;
 }
 
-#header {
-  position:fixed;
+.header {
+  /* position:fixed;
   top:  0;
-  left: 0;
-  height: 10vh;
+  left: 0; */
+  /* height: 10vh; */
   width: 100%;
   border: 0;
   border-bottom: 1px solid brown;
 }
 
-#header img {
+.header img {
   padding-top: 0.5em;
   height: 7em;
   width: 7em;
@@ -132,17 +132,13 @@
   margin-top: 0.5em;
 }
 
-#headerSpace{
-  height: 10vh;
-}
-
 .product img{
   max-width: 100%;
   width:100%;
 }
 
 #storia,#negozio,#stabilimento,#contatti,#info,#productlist{
-  padding-top: 10vh;
+  /* padding-top: 10vh; */
   border-left: 0;
   border-right: 0;
   width: 100%;
@@ -162,4 +158,8 @@
 #up_arrow{
   height: 5em;
   width: 5em;
+}
+
+#close{
+  float:right;
 }
