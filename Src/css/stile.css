@@ -60,6 +60,7 @@ button:hover {
   margin-left: 0.4em;
 }
 
+
 #menu li:first-child {border-left: 1px solid brown;}
 
 #menu li {
@@ -109,6 +110,11 @@ padding:0.4em;
 h2, h3{
   text-align: center;
 }
+#sitemap h3{
+  text-align: left;
+  padding: 0.2em;
+
+}
 
 #contatti {
 	float: left;
@@ -147,6 +153,9 @@ h2, h3{
 
 .contentElement h2 {
 	padding: 0.5em;
+}
+.contentElement ul {
+  padding-left: 3em;
 }
 
 .contentElement img {
@@ -309,4 +318,23 @@ select,input{
 fieldset{
   border: 0;
 }
+table {
+  padding: 0.5em;
+}
+th {
+  background: brown;
+  color: white;
+  padding: 0.4em;
+}
+td{
+  border: 1px solid black;
+  text-align: center;
+  padding: 0.4em;
+}
+table caption {
+  text-align: center;
+ 
+  
+  
 
+}

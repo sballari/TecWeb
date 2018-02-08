@@ -154,7 +154,7 @@ class CommonHtmlElement{
     echo  "    <p>";
     echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
     echo  "    </p>";
-    echo  "    <a href='sitemap.html'>sitemap</a>";
+    echo  "    <a href='sitemap.php'>sitemap</a>";
     echo  "</div>";
 	}
 	public function printMobileMenu($page){
