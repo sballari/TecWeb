@@ -56,7 +56,7 @@ if(isset($_POST['annullaRichiesta'])){
           $_SESSION['richiestaAnnullata'] = serialize($x);
           $_SESSION['submitPremuto']="annullaRichiesta";
           header("Location: ConfirmPage.php");
-
+          break;
         }
         else{
           $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta.";

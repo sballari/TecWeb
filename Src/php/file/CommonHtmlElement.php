@@ -24,7 +24,7 @@ class CommonHtmlElement{
 	function evidenziaTesto($input, $par){
 			return $newTesto =str_ireplace($par,
 			 "<mark >".strtoupper($par)."</mark>",
-			 $input);			
+			 $input);
 	}
 
 	public function printHead($title, $description, $keyword){
@@ -438,8 +438,8 @@ public function printStoriaOrdiniAlMinuto($req){
 		<th>RetailOrder product's(number) and name</th>
 
 
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>ReTailOrder delivery date and hour </th>
+		<th>ReTailOrder status</th>
 		</tr>";
 	foreach ($req as $x) {
 		$id++;
@@ -477,8 +477,7 @@ public function printStoriaOrdiniAlMinuto($req){
 			echo "</br>";
 		}
 		echo "</td>";
-		echo "<td>" . $x->getUserNote() . "</td>";
-		echo "<td>" . $x->getReiceveRequestDateTime() . "</td>";
+		
 		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 		echo "<td>" . $x->getStatus() . "</td>";
 		echo "</tr>";

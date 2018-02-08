@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
+
       if(isset($_SESSION['Email'])){
         unset($_SESSION['Email']);
       }
