@@ -1,15 +1,7 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
-      if(isset($_SESSION['Email'])){
-        unset($_SESSION['Email']);
-      }
-
-      if(file_exists("CommonHtmlElement.php")){
-  				require_once("CommonHtmlElement.php");}
-  			else{
-  				echo "Error: file does not esist.";
-  				exit;}
+      require_once ("CommonHtmlElement.php");
       $h = new CommonHtmlElement();
       $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
  ?>
@@ -34,13 +26,8 @@
         <div id="productlist">
             <h3>I NOSTRI PRODOTTI</h3>
       			<?php
-                if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
-                  require_once("../class/Factory.php");
-                  require_once("../class/DBmanager.php");}
-                else{
-                  echo "Error: file does not esist.";
-                  exit;}
-
+      					require_once("../class/Factory.php");
+      					require_once("../class/DBmanager.php");
                 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       				  $d->connect();
       				  $f = new Factory($d);

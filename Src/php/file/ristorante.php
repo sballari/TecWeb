@@ -1,15 +1,7 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
-    if(isset($_SESSION['Email'])){
-      unset($_SESSION['Email']);
-    }
-
-    if(file_exists("CommonHtmlElement.php")){
-        require_once("CommonHtmlElement.php");}
-    else{
-        echo "Error: file does not esist.";
-        exit;}
+    require_once ("CommonHtmlElement.php");
     $h = new CommonHtmlElement();
     $h->printHead("ristorante", "pagina dedicata ai prodotti per ristoranti e hotel", "ristorante, hotel, ingrosso");
  ?>
@@ -20,7 +12,7 @@
 
     <?php
 
-	  $h->createheader("ristorante");
+	$h->createheader("ristorante");
     $h->printInternalMenu("ristorante");
 	?>
 
@@ -43,17 +35,14 @@
 
         <?php
 
-        if(file_exists("../class/Factory.php") && file_exists("../class/DBmanager.php")){
-          require_once("../class/Factory.php");
-          require_once("../class/DBmanager.php");}
-        else{
-          echo "Error: file does not esist.";
-          exit;}
-		    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-		    $d->connect();
-		    $f = new Factory($d);
-		    $prod = $f->getProductList("All_ingrosso");
         $d->disconnect();
+		require_once("../class/Factory.php");
+		require_once("../class/DBmanager.php");
+		$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+		$d->connect();
+		$f = new Factory($d);
+		$prod = $f->getProductList("All_ingrosso");
+
 
         foreach ($prod as $x) {
 						$h->createProductDiv($x, false);

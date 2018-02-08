@@ -81,6 +81,7 @@
 		?>
     <div id='content'>
     <div id='info' class='contentElement'>
+    	<h3>INFO</h3>
       <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
         <strong>nome, cognome, tipo di utente, email, password</strong>.
         <a href="signUp.php">Vai alla pagina di  <span lang='en'>Sign up</span></a>.
