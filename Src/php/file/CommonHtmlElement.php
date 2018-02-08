@@ -116,8 +116,10 @@ class CommonHtmlElement{
 				echo "<li><span lang='en'>Sign up</span></li>";
 			break;
 			case "account":
+				echo "<form action='' method='GET'>";
 				echo "		<li><a href='areaPersonale.php?operazione=logout'>Log out</a></li>";
 				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Close account</a></li>";
+				echo "</form>";
 			break;
 			default:
 				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
@@ -223,6 +225,7 @@ class CommonHtmlElement{
 		echo "</div>";
 }
 public function printRichiestaDettagliataDiv($Richiesta){
+
 	$tipo = $Richiesta->getType();
 	echo "<div class='contentElement'>";
 
@@ -555,53 +558,59 @@ echo "</br></br>";
 switch($usrType ){
 	case "Al minuto":
 		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+		echo "</br></br>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
 		echo "</fieldset>";
 		echo "</form>";
+		echo "</br></br>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
+		echo "</br></br>";
 		echo "<legend>Dati prenotazione</legend>";
-
+		echo "</br></br>";
 		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
-
+		echo "</br></br>";
 		break;
 
 	case "All_ingrosso":
 		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
-
+		echo "</br></br>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
 		echo "</fieldset>";
 		echo "</form>";
+		echo "</br></br>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
-
+		echo "</br></br>";
 		echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
-
+		echo "</br></br>";
 		echo "<label for='periodicita'>Periodicita:</label><select name='periodicita' required>";
-
+		echo "</br></br>";
 		echo "<option value=''>--</option>";
 		echo "<option value='settimanale'>settimanale </option>";
 		echo "<option value='mensile'>mensile</option>";
 		echo "</select>";
-
+		echo "</br></br>";
 		break;
 
 	case "Servizio":
 		echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
-
+		echo "</br></br>";
 		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
-
+		echo "</br></br>";
 		echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
-
+		echo "</br></br>";
 		break;
 }
 echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
-
+echo "</br></br>";
 echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+echo "</br></br>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
 echo "</fieldset>";
 echo "</form>";
+echo "</br></br>";
 echo "</div>";
 }
 
@@ -616,7 +625,7 @@ public function printTabelaProdottiScelti($usrType){
 			<th>Nr.</th>
 			<th>Nome</th>
 			</tr>";
-
+			$c = $_SESSION['contatore'];
 		for($i=1; $i<=$c; $i++){
 			echo "<tr>";
 			echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";
@@ -626,11 +635,17 @@ public function printTabelaProdottiScelti($usrType){
 		echo "</table>";
 		echo "</div>";
 	}
+	unset($_SESSION['submitPremuto']);
 }
 
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
+			if(isset($_SESSION['submitPremuto'])){
+			if($_SESSION['submitPremuto'] == "nuovoProd"){
+				$this->printTabelaProdottiScelti($usrType);
+		  }
+			}
 			$this->printFormPrenotazione($usrType);
 			break;
 		case "storia":

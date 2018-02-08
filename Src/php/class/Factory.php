@@ -105,6 +105,18 @@ class Factory {
                            $product['nome']);
     }
   }
+
+//DELETE
+public function getRequest($key, $usrType){
+  $req = $this->getTypeRequestList($usrType);
+  foreach($req as $x){
+    if($x->getKey() == $key){
+      return $x;
+    }
+  }
+  return false;
+}
+
   private function getOrderProductList($OrderKey, $tipoOrdine){
     if ($tipoOrdine != "All_ingrosso" && $tipoOrdine != "Al minuto") return false;
     if ($tipoOrdine == "All_ingrosso") {
