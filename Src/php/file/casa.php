@@ -33,7 +33,7 @@
       				  $f = new Factory($d);
       				  $prod = $f->getProductList("Al minuto");
                 foreach ($prod as $x) {
-      						$h->createProductDiv($x);
+      						$h->createProductDiv($x, false);
                 }
       			?>
         </div>

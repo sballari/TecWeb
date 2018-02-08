@@ -23,9 +23,11 @@
   	?>
     <div id="content">
     <?php
+        
         $c = $f->searchProdotti($_GET['search']);
+        echo "<h2>Trovati ".count($c)." prodotti corrispondenti.</h2>";
         foreach($c as $p){
-            $h->createProductDiv($p);
+            $h->createProductDiv($p, true,$_GET['search']);
         }
     ?>
 
