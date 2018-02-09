@@ -138,7 +138,7 @@ class CommonHtmlElement{
 	}
 
 	public function createheader($page){
-		echo "<div id='sfondo'><a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a></div>";
+		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>";
 		echo "<div id='accessBar'>
 			<a href ='#content'>Vai al contenuto</a>
     	</div>";
@@ -156,6 +156,14 @@ class CommonHtmlElement{
 				echo "</div>";
 			echo "</div>";
 			$this->printBricioleDiPane($page);
+		echo "</div>";
+	}
+
+	public function createBottomHeader(){
+		echo "<div class='header'>";
+			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
+			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 		echo "</div>";
 	}
 
@@ -228,6 +236,7 @@ class CommonHtmlElement{
 	echo  "	   <div class='onlyMobile' id='mobileMenu'>";
     echo  "    <div id='headerSpace'> </div>";
     echo  "    <div id='linkEsterni'>";
+		$this->createBottomHeader();
       			$this->generateMenu($page);
     echo  "    </div>";
     				$this->printInternalMenuMobile("$page");
