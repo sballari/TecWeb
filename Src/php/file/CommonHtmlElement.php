@@ -41,7 +41,7 @@ class CommonHtmlElement{
 				$percorso = "<span>Catering ed Eventi</span>";
 				break;
 			case 'account':
-				
+
 				if (isset($_SESSION['Email'])){
 					$percorso = "Area Personale";
 					if (isset($_GET['operazione']) and $_GET['operazione']=='storia') $percorso = $percorso.">>Storia Ordini";
@@ -173,9 +173,26 @@ class CommonHtmlElement{
 				echo "<li><span>Registrati</span></li>";
 			break;
 			case "account":
-				echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
-				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
 			break;
+			case "accountImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+
 			default:
 				echo "<li><a href='logIn.php'>Accedi</a></li>";
 				echo "<li><a href='signUp.php'>Registrati</a></li>";
@@ -231,7 +248,7 @@ class CommonHtmlElement{
     	echo "</div>";
 	}
 	public function printListLinkInterni($page){
-		
+
 		echo "<ul>";
 		switch($page){
 			case "home":
@@ -262,7 +279,7 @@ class CommonHtmlElement{
 			case "account":
 					if (isset($_SESSION['Email'])){
 						$percorso = "Area Personale";
-						
+
 						if (isset($_GET['operazione']) and $_GET['operazione']=='storia') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
 							echo "<li><span>Storia dei ordini</span></li>";
@@ -272,7 +289,7 @@ class CommonHtmlElement{
 							echo "<li><span>Prenotazione</span></li>";
 							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
 							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
-						}						
+						}
 						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
 							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
@@ -284,13 +301,35 @@ class CommonHtmlElement{
 							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 					}
-					else {
-						echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
-						echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
-						echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
-					}
-
 			break;
+
+			case "accountImpiegato":
+					if (isset($_SESSION['Email'])){
+						$percorso = "Area Personale Impiegato";
+
+						if (isset($_GET['operazione']) and $_GET['operazione']=='utenti') {
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+							echo "<li><span>Utenti</span></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+						}
+						if (isset($_GET['operazione']) and $_GET['operazione']=='ordini') {
+							echo "<li><span>Ordini</span></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+						}
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') {
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+							echo "<li><span>Prodotti</span></li>";
+						}
+						if (!isset($_GET['operazione'])){
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+							echo "<li><span>Prodotti</span></li>";
+						}
+					}
+					break;
+
 			case "sitemap":
 					echo "<li><a href='#sitemap'>Sitemap</a></li>";
 			break;
@@ -302,10 +341,15 @@ class CommonHtmlElement{
 				echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
 				echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 			break;
+			case 'ConfirmPageImpiegato':
+				echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+				echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+				echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
-			
+
 
 
 	}

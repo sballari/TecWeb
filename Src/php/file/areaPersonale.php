@@ -8,7 +8,7 @@
       require_once ("../class/User.php");
       require_once ("../class/Product.php");
       $h = new CommonHtmlElement();
-      $h->printHead("prenotazione", "prenotazione ordini", "prenotazione, ordine");
+      $h->printHead("Area personale", "area personale del cliente", "prenotazione, ordine");
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
       $f = new Factory($d);
