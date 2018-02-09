@@ -34,6 +34,10 @@
   width: 5em;
 }
 
+#briciole{
+  font-size: 2.5em;
+}
+
 .contentElement img {
 	max-width: 100%;
 }
@@ -133,16 +137,20 @@
 }
 
 #storia,#negozio,#stabilimento,#contatti,#info,#productlist{
-  /* padding-top: 10vh; */
   border-left: 0;
   border-right: 0;
   width: 100%;
+}
+
+#contatti,#footer{
+  font-size: 1.5em;
 }
 
 #footer{
   border-left: 0;
   border-right: 0;
   margin:0.3em 0.3em 0.3em 0.3em;
+  margin-bottom: 100vh;
 }
 
 #contatti li{
@@ -151,10 +159,15 @@
 }
 
 #up_arrow{
-  height: 5em;
-  width: 5em;
+  height: 7em;
+  width: 7em;
+  left: 42.5%;
 }
 
 #close{
   float:right;
+}
+
+body{
+  font-size: 1em;
 }

@@ -277,9 +277,9 @@ h2, h3{
   display: block;
   position: fixed;
   border: 1px solid black;
-  top: 80%;
+  top: 90%;
   left: 46.5%;
-  background-color: rgba(165,42,42,0.2);
+  background-color: rgba(165,42,42,0.7);
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
@@ -328,22 +328,27 @@ select,input{
 fieldset{
   border: 0;
 }
+
 table {
   padding: 0.5em;
 }
+
 th {
   background: brown;
   color: white;
   padding: 0.4em;
 }
-td{
+
+td {
   border: 1px solid black;
   text-align: center;
   padding: 0.4em;
 }
+
 table caption {
   text-align: center;
 }
+
 #briciole{
   width: 100%;
   float: left;
