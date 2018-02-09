@@ -40,13 +40,13 @@ class CommonHtmlElement{
 			case 'catering':
 				$percorso = "<span>Catering</span>";
 				break;
-			case 'account': 
+			case 'account':
 				$percorso = "<span lang='en'>Account</span>";
 				break;
-			case 'logIn': 
+			case 'logIn':
 				$percorso = "<span lang='en'>Log In</span>";
 				break;
-			case 'signUp': 
+			case 'signUp':
 				$percorso = "<span lang='en'>Sign Up</span>";
 				break;
 			case 'sitemap':
@@ -230,7 +230,7 @@ class CommonHtmlElement{
 			break;
 			case "casa":
 					echo "<li><a href='#productlist'>Prodotti ordinabili</a></li>";
-					
+
 			break;
 			case "catering":
 					echo "<li><a href='#info'>Info</a></li>";
@@ -249,13 +249,11 @@ class CommonHtmlElement{
 					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 			case "account":
-					echo "<form action='' method='GET'>";
-					//echo "		<li><button type='submit' name='operazione' value='prenotazione'>Prenotazione</button></li>";
+
 					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 
-					echo "</form>";
 			break;
 			case "sitemap":
 					echo "<li><a href='#sitemap'>Sitemap</a></li>";
@@ -393,9 +391,10 @@ public function printListaProdotti($usrType){
 	foreach ($prod as $x) {
 		$this->createProductDiv($x);
 	}
+	$d->disconnect();
 }
 	public function printStoriaOrdiniServizio($req){
-		$id=0;
+		$id=1;
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
@@ -406,15 +405,16 @@ public function printListaProdotti($usrType){
 		<th>MassiveOrder status</th>
 		</tr>";
 		foreach ($req as $x) {
-			$id++;
+
 			echo "<tr>";
-			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";//TODO
+			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";//TODO
 			echo "<td>" . $x->getKey() . "</td>";
 			echo "<td>" . $x->getService()->getName() . "</td>";
 
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
+			$id++;
 		}
 		echo "</table>";
 	}
@@ -423,7 +423,7 @@ public function printListaProdotti($usrType){
 
 
 public function printStoriaOrdiniAllIngrosso($req){
-		$id=0;
+		$id=1;
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
@@ -433,52 +433,28 @@ public function printStoriaOrdiniAllIngrosso($req){
 		<th>MassiveOrder status</th>
 		</tr>";
 		foreach ($req as $x) {
-			$id++;
+
 			echo "<tr>";
-			echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "'/ ></td>";
+			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "'/ ></td>";
 			echo "<td>" . $x->getKey() . "</td>";
 
-			$prodArr=$x->getProducts();
-			$length=count($prodArr);
-			$prodNumArr = array();
-
-			for($i=0; $i<$length; $i++){
-				$l=0;
-				$name=$prodArr[$i]->getName();
-				$pos=0;
-				if($prodArr[$i] != NULL){
-				for($j=0; $j<$length; $j++) {
-					if($prodArr[$j]!= NULL){
-						if($name == $prodArr[$j]->getName()){
-							$l++;
-							$prodArr[$j]=NULL;
-							$pos=$j;
-						}
-						else{
-							break;
-						}
-					}
-				}
-				$prodNumArr[$name]= "".$l;
-				}
-				$i=$pos;
-			}
+			$qta = $x->getProductsWithQta();
 			echo "<td>";
-			foreach ($prodNumArr as $key=>$value) {
-				echo "(".$value.")  ".$key;
-				echo "</br>";
+			foreach(array_keys($qta) as $p){
+				echo "(".$qta[$p].")  ".$p;
 			}
 			echo "</td>";
 
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
+			$id++;
 		}
 		echo "</table>";
 }
 
 public function printStoriaOrdiniAlMinuto($req){
-	$id=0;
+	$id=1;
 	echo "<table>
 		<tr>
 		<th>Seleziona</th>
@@ -490,45 +466,21 @@ public function printStoriaOrdiniAlMinuto($req){
 		<th>ReTailOrder status</th>
 		</tr>";
 	foreach ($req as $x) {
-		$id++;
-		echo "<tr>";
-		echo "<td>".$id."<input type='checkbox' name='request" . $id . "' value='request" . $id . "' ></td>";
-		echo "<td>" . $x->getKey() . "</td>";
-		$prodArr=$x->getProducts();
-		$length=count($prodArr);
-		$prodNumArr = array();
 
-		for($i=0; $i<$length; $i++){
-			$l=0;
-			$name=$prodArr[$i]->getName();
-			$pos=0;
-			if($prodArr[$i] != NULL){
-			for($j=0; $j<$length; $j++) {
-				if($prodArr[$j]!= NULL){
-					if($name == $prodArr[$j]->getName()){
-						$l++;
-						$prodArr[$j]=NULL;
-						$pos=$j;
-					}
-					else{
-						break;
-					}
-				}
-			}
-			$prodNumArr[$name]= "".$l;
-			}
-			$i=$pos;
-		}
+		echo "<tr>";
+		echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";
+		echo "<td>" . $x->getKey() . "</td>";
+		$qta = $x->getProductsWithQta();
 		echo "<td>";
-		foreach ($prodNumArr as $key=>$value) {
-			echo "(".$value.")  ".$key;
-			echo "</br>";
+		foreach(array_keys($qta) as $p){
+			echo "(".$qta[$p].")  ".$p;
 		}
 		echo "</td>";
-		
+
 		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 		echo "<td>" . $x->getStatus() . "</td>";
 		echo "</tr>";
+		$id++;
 	}
 	echo "</table>";
 
@@ -560,6 +512,7 @@ public function printStoriaOrdini($t){
 	$d->connect();
 	$f = new Factory($d);
 	$req = $f->getRequestList($_SESSION['Email']);
+	$d->disconnect();
 	echo "<div class='contentElement'>";
 	echo "<form action = 'operationManager.php' method = 'POST'>";
 	switch($t){
@@ -578,6 +531,7 @@ public function printStoriaOrdini($t){
 	echo "<button type='submit' name='annullaRichiesta' >Annulla la richiesta</button>";
 	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
 	echo "</form>";
+	echo "</div>";
 }
 
 
@@ -595,7 +549,7 @@ if($usrType!=="Servizio"){
 	echo "<legend>Lista prodotti</legend>";}
 else{
 	echo "<legend>Dati prenotazione</legend>";}
-
+echo "</br>";
 echo "<label for='listaProdotti'>Prodotto:</label>  ";
 echo "<select name='listaProdotti'  required>";
 echo "<option value=''>--</option>";
@@ -603,56 +557,60 @@ foreach ($prod as $x) {
 	echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
 }
 echo "</select>";
-echo "</br></br>";
+echo "</br>";
 
 switch($usrType ){
 	case "Al minuto":
 		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
+		echo "</br>";
 		echo "</fieldset>";
 		echo "</form>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
-
+		echo "</br>";
 		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
 
 		break;
 
 	case "All_ingrosso":
 		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
-
+		echo "</br>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
+		echo "</br>";
 		echo "</fieldset>";
 		echo "</form>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
-
+		echo "</br>";
 		echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
-
+		echo "</br>";
 		echo "<label for='periodicita'>Periodicita:</label><select name='periodicita' required>";
 
 		echo "<option value=''>--</option>";
 		echo "<option value='settimanale'>settimanale </option>";
 		echo "<option value='mensile'>mensile</option>";
 		echo "</select>";
-
+		echo "</br>";
 		break;
 
 	case "Servizio":
 		echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
-
+		echo "</br>";
 		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
-
+		echo "</br>";
 		echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
-
+		echo "</br>";
 		break;
 }
 echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
-
+echo "</br>";
 echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+echo "</br>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
+echo "</br>";
 echo "</fieldset>";
 echo "</form>";
 echo "</div>";
@@ -669,7 +627,7 @@ public function printTabelaProdottiScelti($usrType){
 			<th>Nr.</th>
 			<th>Nome</th>
 			</tr>";
-
+		$c = $_SESSION['contatore'];
 		for($i=1; $i<=$c; $i++){
 			echo "<tr>";
 			echo "<td>".$_SESSION[$_SESSION['listaProdotti'.$i]]."</td>";

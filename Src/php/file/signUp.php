@@ -70,7 +70,7 @@
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
-
+        $d->disconnect();
 				if($b==FALSE)
 				{
 				$ErrSignup = "L'Email inserita non &egrave; disponibile. Inserire un Email diversa.";

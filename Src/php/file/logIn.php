@@ -1,16 +1,22 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
-      require_once ("CommonHtmlElement.php");
-      $h = new CommonHtmlElement();
-      $h->printHead("LogIn", "area personale", "login, signup");
+      session_start();
+      if(isset($_SESSION['Email'])){
+        header("Location: areaPersonale.php");
+      }
+      else{
+        require_once ("CommonHtmlElement.php");
+        $h = new CommonHtmlElement();
+        $h->printHead("LogIn", "area personale", "login, signup");
+      }
  ?>
 <body>
     <div id="accessBar">
     </div>
 
 	<?php
-	session_start();
+
 	$h->createheader("logIn");
   $h->printInternalMenu("logIn");
 
@@ -61,8 +67,8 @@
 				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 				$d->connect();
 				$a = new Authenticator($d);
-
-				$b = $a->validateUser($email, $password);
+        $b = $a->validateUser($email, $password);
+        $d->disconnect();
 				if($b==false)
 				{
 
@@ -91,8 +97,8 @@
     <div id='form' class='contentElement'>
   	<form action='' method='POST'>
   	<fieldset>
-    	<legend>Form di accesso:</legend>
-      <?php
+    <legend>Form di accesso:</legend>
+    <?php
     	echo $ErrLogin."</br>";
       echo "<label for='email'>Email: </label>";
     	echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
@@ -100,8 +106,8 @@
       echo "<label for='password'>Password: </label>";
     	echo "<input type='password' name='password' placeholder='insert your password' required ><span class='err'>".$ErrPassw."</span>";
       ?>
-      </br>
-    	<button type='submit' name = 'login' >Log in</button>
+    </br>
+    <button type='submit' name = 'login' >Log in</button>
   	</fieldset>
   	</form>
   	</div>
