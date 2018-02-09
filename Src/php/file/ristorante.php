@@ -35,14 +35,14 @@
 
         <?php
 
-        $d->disconnect();
+
 		require_once("../class/Factory.php");
 		require_once("../class/DBmanager.php");
 		$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 		$d->connect();
 		$f = new Factory($d);
 		$prod = $f->getProductList("All_ingrosso");
-
+    $d->disconnect();
 
         foreach ($prod as $x) {
 						$h->createProductDiv($x, false);

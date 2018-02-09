@@ -18,14 +18,14 @@
 }
 
 .header {
-  /* position:fixed;
-  top:  0;
-  left: 0; */
-  /* height: 10vh; */
   width: 100%;
   border: 0;
   border-bottom: 1px solid brown;
 }
+
+/* #sotto{
+  padding-top: 5em;
+} */
 
 .header img {
   padding-top: 0.5em;
@@ -58,10 +58,8 @@
   margin: 0;
 }
 
-#hamburger{
-  /* width: 6%; */
+#hamburger,#close{
   float: right;
-  /* padding: 1em */
 }
 
 #mobileMenu {
@@ -71,7 +69,7 @@
 }
 
 #mobileMenu h3 {
-  fon
+  font-size: 4em;
 }
 
 #logNav ul li,#internalNavBar ul li {
@@ -111,9 +109,9 @@
   font-size: 4em;
 }
 
-#mobileMenu img{
+/* #mobileMenu img{
   margin-top: 10vh;
-}
+} */
 
 #logNav{
   border-top: 1px brown solid;
