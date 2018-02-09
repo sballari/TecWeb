@@ -337,14 +337,18 @@ class CommonHtmlElement{
 				echo "<li><a href='#productlist'>Prodotti trovati</a></li>";
 			break;
 			case 'ConfirmPage':
-				echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
-				echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
-				echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+				}
 			break;
 			case 'ConfirmPageImpiegato':
-				echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
-				echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
-				echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+				}
 			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";

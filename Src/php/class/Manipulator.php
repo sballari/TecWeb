@@ -127,15 +127,15 @@ class Manipulator{
         $query = "INSERT INTO `richiesta_servizio` (`data_effettuazione`,
                       `stato_ordine`, `data_ora_evento`,
                       `risorse_necessarie`, `personale_richiesto`,
-                       `indirizzo_evento`,`utente`,`Prodotto_servizio`)
+                       ,`indirizzo_evento`,`utente`,`Prodotto_servizio`)
                   VALUES ('".$request->getReiceveRequestDateTime()."',
                    '".$request->getStatus()."',
                    '".$request->getDeliveryDateTime()."',
                    '".$request->getResourceNeeded()."',
                    '".$request->getStaffNumber()."',
-                   '".$request->getLocationAdress()."',
-                   '".$request->getUser()->getEmail()."',
-                   '".$request->getService()->getName()."')";
+                   '".$request->getDeliveryAdress()."',
+                   '".$request->getUser()->getEmail().",
+                   '".$request->getService()."')";
         return $this->dbM->submitQuery($query);
         break;
     }
