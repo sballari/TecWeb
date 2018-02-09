@@ -79,8 +79,12 @@
 				else
 				{
 					$_SESSION['Email'] = $emailSignup;
+          if($tipoUtente == "Impiegato"){
+            header("Location: areaPersonaleImpiegato.php");
+          }
+          else{
 					header("Location: areaPersonale.php");
-
+          }
 				}
 
 			}

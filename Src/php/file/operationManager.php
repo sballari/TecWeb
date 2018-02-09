@@ -131,7 +131,7 @@ if(isset($_POST['annullaRichiesta'])){
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $p = $f->getProduct($_POST['listaProdotti']);
 
-        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $date, "in_lavorazione", $usr, $deliveryDate, NULL);
+        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);
 
         break;
       //}
@@ -194,7 +194,7 @@ if(isset($_POST['annullaRichiesta'])){
       case "prenotaRichiesta":
        if(isset($_SESSION['richiestaPrenotata'])){
          $r = unserialize($_SESSION['richiestaPrenotata']);
-
+         echo "".$_SESSION['richiestaPrenotata'];
          $b = $m->insertRequest($r);
 
           unset($_SESSION['richiestaPrenotata']);
