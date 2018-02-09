@@ -30,7 +30,6 @@
                 La sua figura – così appassionata e importante per la nostra Azienda – è l’ispirazione quotidiana che ci guida in tutto ciò che facciamo; dalla sua esuberanza è nata anche la visione che si ritrova nella conversazione che portiamo avanti giorno dopo giorno, in questa piattaforma web e su tutti i <span lang="en">social network</span> in cui <span lang="en">Squitty</span> &egrave; presente.<br/>
                 In particolare, ci soffermiamo sempre sui piaceri della vita in tana, che comprendono le buone ricette di dolci della nostra tradizione rivisitate a base di formaggio, ma anche il piacere dell’Arte del ricevere gli ospiti facendoli sentire a loro agio e il gusto di una tavola sempre ben apparecchiata e accogliente.
             </p>
-            <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su' title='Pulsante torna su'></a>
         </div>
         <div id="negozio" class="contentElement Left" >
             <h2>IL NEGOZIO</h2>
@@ -39,7 +38,6 @@
                Nel 1984 fu fondato il negozio, nello stesso locale dove ancor oggi si trova. L’edificio e’ una notevole opera dell’architetto <span lang="de">Benedikter</span> espressamente richiesto del  signor (si fa per dire…) <span lang="en">Squitty</span>. L’architetto si &egrave; ispirato durante la progettazione all’armoniosit&agrave;; e purezza delle forme di formaggio e all’esuberanza del  signor <span lang="en">Squitty</span>. Ogni linea e dettaglio del negozio richiama e rimanda ai principi su cui si fonda la nostra azienda: purezza, semplicit&agrave; e tradizione.<br>
                Fino agli anni 2000 la produzione era interamente svolta nel laboratorio nel  retro bottega, ora la produzione e’ stata spostata nel nostro nuovo stabilimento. Grazie a ci&ograve;; si &agrave; potuta effettuare una notevole espansione del locale atta a rendere più confortevole la permanenza dei nostri affezionati clienti.
             </p>
-            <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su' title='Pulsante torna su'></a>
         </div>
         <div id="stabilimento" class="contentElement Right">
             <h2>LO STABILIMENTO</h2>
@@ -47,7 +45,6 @@
             <p>
                 Gi&agrave; dalla fine degli anni '90, la nostra qualit&agrave; e professionalita’ ha portato alla consolidazione di una clientela sempre più affezionata e alla ricerca di qualit&agrave;. E fu il 1999 l’anno in cui ci trovammo di fronte ad un’ardua scelta: continuare la produzione artigianale nel piccolo  laboratorio o tentare una rischiosa espansione inaugurando un nuovo stabilimento produttivo. Squitty, nonostante le sue minute dimensioni, pensava in grande e la decisione fu ovvia, ma sofferta. Industrializzazione non significa perdita di qualità, ma bensì, offrire la nostra esperienza ad una più ampia clientela. Addirittura, tutto ciò ci ha permesso di elevare i nostri standard focalizzandoci sul miglioramento delle lavorazioni e dei singoli processi cos&igrave; da ottenere un prodotto di maggior qualit&agrave;. L’artigianalit&agrave; &egrave; comunque garantita: le impastatrici sono all’avanguardia ma lavorano lentamente, senza stressare la pasta, i forni assicurano cotture uniformi, con il giusto equilibrio di umidit&agrave; e croccantezza, frighi e vetrine offrono il prodotto così com’&egrave; stato sfornato, nel sapore e nella fragranza. Perch&egrave; i nostri clienti possano ricevere sempre il meglio.
             </p>
-            <a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su ' title='Pulsante torna su'></a>
         </div>
     </div>
     <?php

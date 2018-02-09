@@ -18,16 +18,12 @@
 }
 
 .header {
-  /* position:fixed;
-  top:  0;
-  left: 0; */
-  /* height: 10vh; */
   width: 100%;
   border: 0;
   border-bottom: 1px solid brown;
 }
 
-.header img {
+.header img, #logo {
   padding-top: 0.5em;
   height: 7em;
   width: 7em;
@@ -59,9 +55,7 @@
 }
 
 #hamburger{
-  /* width: 6%; */
   float: right;
-  /* padding: 1em */
 }
 
 #mobileMenu {
@@ -71,7 +65,7 @@
 }
 
 #mobileMenu h3 {
-  fon
+  font-size: 3em;
 }
 
 #logNav ul li,#internalNavBar ul li {

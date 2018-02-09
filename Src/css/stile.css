@@ -26,7 +26,7 @@ button:hover {
   background: #ccc;
 }
 
-#header{
+.header{
   overflow: hidden;
   background-color: lightyellow;
   border: 1px solid brown;
@@ -89,7 +89,7 @@ padding:0.4em;
   background-color:antiquewhite;
 }
 
-#header h1{
+.header h1{
 	padding: 0.5em;
 	text-align: center;
 	color: black;
@@ -273,11 +273,20 @@ h2, h3{
 }
 
 #up_arrow{
-  width: 6%;
+  width: 3.5%;
   display: block;
-  float: none;
-  border: 0;
-  margin:0 auto;
+  position: fixed;
+  border: 1px solid black;
+  top: 90%;
+  left: 46.5%;
+  background-color: rgba(165,42,42,0.2);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+#sfondo{
+  display: block;
+  background-color: brown;
 }
 
 #form button{

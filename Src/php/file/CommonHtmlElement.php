@@ -18,7 +18,6 @@ class CommonHtmlElement{
 		echo "<p> <strong>Ingredienti</strong>: " . $this->evidenziaTesto($x->getIngredients() ,$evidenzia). "</p>";
 		echo "<p> <strong>Descrizione</strong>: " . $this->evidenziaTesto($x->getDesc(),$evidenzia) . "</p>";
 		if ($ricerca==true) echo "<p> <strong>Tipo prodotto</strong>: " . $this->evidenziaTesto($x->getProductType(),$evidenzia) . "</p>";
-		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>";
 		echo "</div>";
 	}
 	function evidenziaTesto($input, $par){
@@ -139,10 +138,11 @@ class CommonHtmlElement{
 	}
 
 	public function createheader($page){
+		echo "<div id='sfondo'><a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a></div>";
 		echo "<div id='accessBar'>
 			<a href ='#content'>Vai al contenuto</a>
     	</div>";
-		echo "<div id='header'>";
+		echo "<div class='header'>";
 			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
@@ -232,13 +232,6 @@ class CommonHtmlElement{
     echo  "    </div>";
     				$this->printInternalMenuMobile("$page");
 						$this->generateLogInLink($page);
-    echo  "    <a href='#top'>
-									<div>
-										<img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'>
-										<p> Torna Su </p>
-									</div>
-							 </a>";
-    echo  "</div>";
 	}
 	public function printInternalMenu($page){
 		echo "<div id ='internalNavBar' class='onlyDesktop' >";
