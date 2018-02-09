@@ -19,8 +19,8 @@
     </div>
 
 		<?php
-			$h->createheader("account");
-      $h->printInternalMenu("account");
+			$h->createheader("ConfirmPage");
+      $h->printInternalMenu("ConfirmPage");
     ?>
 <div id="content">
   <?php

@@ -38,22 +38,33 @@ class CommonHtmlElement{
 				$percorso = "<span>Ristorante</span>";
 				break;
 			case 'catering':
-				$percorso = "<span>Catering</span>";
+				$percorso = "<span>Catering ed Eventi</span>";
 				break;
 			case 'account':
-				$percorso = "<span lang='en'>Account</span>";
+				
+				if (isset($_SESSION['Email'])){
+					$percorso = "Area Personale";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='storia') $percorso = $percorso.">>Storia Ordini";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='prenotazione') $percorso = $percorso.">>Prenotazione";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso.">>Prodotti";
+					if (!isset($_GET['operazione'])) $percorso = $percorso.">>Prenotazione";
+				}
+				else {$percorso = "Pagina di Errore";}
 				break;
 			case 'logIn':
-				$percorso = "<span lang='en'>Log In</span>";
+				$percorso = "<span>Accedi</span>";
 				break;
 			case 'signUp':
-				$percorso = "<span lang='en'>Sign Up</span>";
+				$percorso = "<span>Registrati</span>";
 				break;
 			case 'sitemap':
 				$percorso = "<span lang='en'>SiteMap</span>";
 			break;
 			case 'search':
 				$percorso = "Ricerca";
+			break;
+			case 'ConfirmPage':
+				$percorso = "Pagina di Conferma";
 			break;
 		}
 		echo "
@@ -149,25 +160,25 @@ class CommonHtmlElement{
 	}
 
 	public function generateLogInLink($page){
-		echo  "    <div id='logNav'>";
+		echo "<div id='logNav'>";
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
 		switch($page){
 			case "logIn":
-				echo "<li><span lang='en'>Log in</span></li>";
-				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
+				echo "<li><span>Accedi</span></li>";
+				echo "<li><a href='signUp.php' lang='en'>Registrati</a></li>";
 			break;
 			case "signUp":
-				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
-				echo "<li><span lang='en'>Sign up</span></li>";
+				echo "<li><a href='logIn.php'>Accedi</a></li>";
+				echo "<li><span>Registrati</span></li>";
 			break;
 			case "account":
-				echo "		<li><a href='areaPersonale.php?operazione=logout'>Log out</a></li>";
-				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Close account</a></li>";
+				echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
+				echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
 			break;
 			default:
-				echo "<li><a href='logIn.php' lang='en'>Log in</a></li>";
-				echo "<li><a href='signUp.php' lang='en'>Sign up</a></li>";
+				echo "<li><a href='logIn.php'>Accedi</a></li>";
+				echo "<li><a href='signUp.php'>Registrati</a></li>";
 			break;
 		}
 		echo "</ul>";
@@ -175,7 +186,7 @@ class CommonHtmlElement{
 	}
 
 	public function printContatti(){
-		echo  "<div id='contatti'>";
+	echo  "<adress id='contatti'>";
     echo  "	<h3>CONTATTI</h3>";
     echo  "    <p>";
     echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
@@ -183,11 +194,10 @@ class CommonHtmlElement{
     echo  "        <ul>";
     echo  "            <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>";
     echo  "            <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>";
-    echo  "            <li>mail: info@pasticceriaSquitty.com</li>";
-    echo  "            <li>tel: 0421 5841204</li>";
-    echo  "            <li>fax: 0421 7493729</li>";
+    echo  "            <li>mail: <a href ='mailto: info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
+    echo  "            <li>tel: <a href ='tel: 04215841204'>0421 5841204</a></li>";
     echo  "        </ul>";
-    echo  "</div>";
+    echo  "</adress>";
 	}
 	public function printFooter(){
 		echo  "<div id='footer'>";
@@ -198,7 +208,7 @@ class CommonHtmlElement{
     echo  "</div>";
 	}
 	public function printMobileMenu($page){
-		echo  "<div class='onlyMobile' id='mobileMenu'>";
+	echo  "	   <div class='onlyMobile' id='mobileMenu'>";
     echo  "    <div id='headerSpace'> </div>";
     echo  "    <div id='linkEsterni'>";
       			$this->generateMenu($page);
@@ -218,10 +228,11 @@ class CommonHtmlElement{
 				echo "<a href ='#content' class='aiuti'>Salta menu</a>";
         		$this->printListLinkInterni($page);
 				$this->generateLogInLink($page);
-    echo "</div>";
+    	echo "</div>";
 	}
 	public function printListLinkInterni($page){
-		echo "		<ul>";
+		
+		echo "<ul>";
 		switch($page){
 			case "home":
 					echo "<li><a href='#storia'>Storia</a></li>";
@@ -249,10 +260,35 @@ class CommonHtmlElement{
 					echo "<li><a href='#form'>Creazione utente</a></li>";
 			break;
 			case "account":
-
-					echo "		<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
-					echo "		<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
-					echo "		<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+					if (isset($_SESSION['Email'])){
+						$percorso = "Area Personale";
+						
+						if (isset($_GET['operazione']) and $_GET['operazione']=='storia') {
+							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+							echo "<li><span>Storia dei ordini</span></li>";
+							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+						}
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prenotazione') {
+							echo "<li><span>Prenotazione</span></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+						}						
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') {
+							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><span>Prodotti</span></li>";
+						}
+						if (!isset($_GET['operazione'])){
+							echo "<li><span>Prenotazione</span></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+						}
+					}
+					else {
+						echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+						echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+						echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+					}
 
 			break;
 			case "sitemap":
@@ -260,10 +296,16 @@ class CommonHtmlElement{
 			break;
 			case 'search':
 				echo "<li><a href='#productlist'>Prodotti trovati</a></li>";
-				break;
+			break;
+			case 'ConfirmPage':
+				echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+				echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+				echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
+			
 
 
 	}
