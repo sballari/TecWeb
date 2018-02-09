@@ -10,10 +10,7 @@
       $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
  ?>
 <body>
-    <a name="top"></a>
-    <div id="accessBar">
-    </div>
-
+    <div id="top"></div>
 		<?php
 			$h->createheader("home");
       $h->printInternalMenu("home");

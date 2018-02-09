@@ -94,11 +94,14 @@
     	<legend>Form di accesso:</legend>
       <?php
     	echo $ErrLogin."</br>";
+      echo "<div id=email>";
       echo "<label for='email'>Email: </label>";
     	echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
-      echo "</br>";
+      echo "</div>";
+      echo "<div id=password>";
       echo "<label for='password'>Password: </label>";
     	echo "<input type='password' name='password' placeholder='insert your password' required ><span class='err'>".$ErrPassw."</span>";
+      echo "</div>";
       ?>
       </br>
     	<button type='submit' name = 'login' >Log in</button>

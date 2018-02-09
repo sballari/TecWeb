@@ -136,14 +136,17 @@
   width:100%;
 }
 
-#storia,#negozio,#stabilimento,#contatti,#info,#productlist{
+#storia,#negozio,#stabilimento,#contatti,#footer,#info,#productlist{
   border-left: 0;
   border-right: 0;
+  padding: 0;
   width: 100%;
+
+
 }
 
 #contatti,#footer{
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 #footer{
@@ -168,6 +171,23 @@
   float:right;
 }
 
-body{
-  font-size: 1em;
+
+
+#email,#password{
+  float: left;
+  width: 100%;
+  text-align: left;
+}
+
+#form button, #form label{
+  float: left;
+  text-align: left;
+}
+
+#form input{
+  float: right;
+}
+
+#form,#info{
+  font-size: 3em;
 }

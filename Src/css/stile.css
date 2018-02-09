@@ -32,7 +32,7 @@ button:hover {
   border: 1px solid brown;
 }
 
-#logo {
+.logo {
   width: 8%;
   padding: 0.25em;
 	float: left;
@@ -230,18 +230,18 @@ h2, h3{
     background-color: antiquewhite;
 }
 
-#logNav h3{
+.logNav h3{
   text-align: center;
 }
 
-#logNav ul{
+.logNav ul{
   border-top: 1px brown solid;
   border-left: 1px brown solid;
   border-right: 1px brown solid;
   margin-top: 0.5em;
 }
 
-#logNav span{
+.logNav span{
   display: block;
   background-color: brown;
   color: white;
@@ -278,7 +278,7 @@ h2, h3{
   position: fixed;
   border: 1px solid black;
   top: 90%;
-  left: 46.5%;
+  left: 90%;
   background-color: rgba(165,42,42,0.7);
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -355,4 +355,21 @@ table caption {
   padding: 0.2em;
   background-color: brown;
   color: white;
+}
+
+#accessBar{
+  /* background-color: #CCC; */
+  background-color: AliceBlue;
+  text-decoration: none;
+  padding-bottom: 0.3em;
+  padding-left: 0.2em;
+}
+
+#accessBar a{
+  text-decoration: none;
+  color: black;
+}
+
+#accessBar a:hover{
+  text-decoration: underline;
 }
