@@ -1,5 +1,6 @@
 <?php
 session_start();
+if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
   require_once("../class/DBmanager.php");
   require_once("CommonHtmlElement.php");
   require_once("../class/Manipulator.php");
@@ -8,9 +9,11 @@ session_start();
   require_once("../class/Request.php");
   require_once("../class/RetailOrder.php");
   require_once("../class/MassiveOrder.php");
-  require_once("../class/Product.php");
-  require_once("../class/Service.php");
-
+    require_once("../class/Product.php");
+  require_once("../class/Service.php");}
+else{
+  echo "Error: One of the files does not esist.";
+  exit;}
   $h = new CommonHtmlElement();
   $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -20,17 +23,19 @@ session_start();
 
 if(isset($_POST['richiestaDettaglio'])){
   $req = $f->getRequestList($_SESSION['Email']);
-
-    if(isset($_POST['request'])){
-      $pos = substr($_POST['request'], 7);
-      $x = $req[$pos-1];
+  $id=1;
+  foreach($req as $x){
+    $st="request" . $id . "";
+    if(isset($_POST[$st])){
       $_SESSION['richiestaDettaglio'] = serialize($x);
       header("Location: richiestaDettagliata.php");
     }
-    else{
-      $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
-      header("Location: areaPersonale.php");
-    }
+    $id++;
+  }
+  if(!isset($_SESSION['richiestaDettaglio'])){
+    $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
+    header("Location: areaPersonale.php");
+  }
 
 }
 
@@ -38,10 +43,12 @@ if(isset($_POST['richiestaDettaglio'])){
 
 if(isset($_POST['annullaRichiesta'])){
   $req = $f->getRequestList($_SESSION['Email']);
+    $id=1;
+    foreach($req as $x){
+      $st="request" . $id . "";
+      $b = isset($_POST[$st]);
 
-  if(isset($_POST['request'])){
-    $pos = substr($_POST['request'], 7);
-    $x = $req[$pos-1];
+      if(isset($_POST[$st])){
         $currentD = "".date("Y-m-d ");
         $deliveryD = "".$x->getDeliveryDateTime();
         if($deliveryD > $currentD){
@@ -49,15 +56,16 @@ if(isset($_POST['annullaRichiesta'])){
           $_SESSION['richiestaAnnullata'] = serialize($x);
           $_SESSION['submitPremuto']="annullaRichiesta";
           header("Location: ConfirmPage.php");
-
+          break;
         }
         else{
-          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. Si possono annullare solo richieste con stato: in lavorazione e almeno un giorno prima della data della consegna.";
+          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta.";
           header("Location: areaPersonale.php");
         }
-
+      }
+      $id++;
     }
-  else{
+    if(!isset($_SESSION['richiestaAnnullata'])){
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter procedere con l'operazione di annulla.";
       header("Location: areaPersonale.php");
     }
@@ -86,7 +94,7 @@ if(isset($_POST['annullaRichiesta'])){
         //$ErrOraRitiro= "Invalid time format";
       //}
       //if(($ErrNumeroProdotti = "") && ($ErrDataRitiro = "") && ($ErrOraRitiro = "")){
-
+    $m = new Manipulator($d);
     $usr = $f->getUser($_SESSION['Email']);
     $usrType = $usr->getUserType();
     $co = $_SESSION['contatore'];
@@ -131,7 +139,7 @@ if(isset($_POST['annullaRichiesta'])){
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $p = $f->getProduct($_POST['listaProdotti']);
 
-        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);
+        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $date, "in_lavorazione", $usr, $deliveryDate, NULL);
 
         break;
       //}
@@ -151,7 +159,7 @@ if(isset($_POST['annullaRichiesta'])){
     for($i=1; $i<=$c && $controllo == 0; $i++){
       if($_SESSION['listaProdotti'.$c] == $_POST['listaProdotti']){
         $controllo=1;
-
+        break;
       }
     }
     if($controllo == 0){
@@ -174,7 +182,7 @@ if(isset($_POST['annullaRichiesta'])){
     switch( $_SESSION['submitPremuto']){
       case "annullaRichiesta":
         if(isset($_SESSION['richiestaAnnullata'])){
-
+          $m = new Manipulator($d);
 
           $r = unserialize($_SESSION['richiestaAnnullata']);
           $b = $m->removeRequest($r->getKey(), $r->getType());
@@ -194,7 +202,7 @@ if(isset($_POST['annullaRichiesta'])){
       case "prenotaRichiesta":
        if(isset($_SESSION['richiestaPrenotata'])){
          $r = unserialize($_SESSION['richiestaPrenotata']);
-         echo "".$_SESSION['richiestaPrenotata'];
+         $m = new Manipulator($d);
          $b = $m->insertRequest($r);
 
           unset($_SESSION['richiestaPrenotata']);
@@ -220,7 +228,7 @@ if(isset($_POST['annullaRichiesta'])){
         header("Location: home.php");
         break;
       case "closeaccount":
-
+        $m = new Manipulator($d);
         $b = $m->removeUser($_SESSION['Email']);
 
         if($b==false){
@@ -274,6 +282,6 @@ if(isset($_POST['annulla'])){
     unset($_SESSION['submitPremuto']);
 }
 
-$d->disconnect();
+
 
 ?>

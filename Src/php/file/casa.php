@@ -1,7 +1,20 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
+<<<<<<< HEAD
+
+      if(isset($_SESSION['Email'])){
+        unset($_SESSION['Email']);
+      }
+
+      if(file_exists("CommonHtmlElement.php")){
+  				require_once("CommonHtmlElement.php");}
+  			else{
+  				echo "Error: file does not esist.";
+  				exit;}
+=======
       require_once ("CommonHtmlElement.php");
+>>>>>>> e2a718d36d8fb581758476b64892031832e0e4e3
       $h = new CommonHtmlElement();
       $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
  ?>

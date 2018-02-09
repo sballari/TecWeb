@@ -70,7 +70,7 @@
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
-        $d->disconnect();
+
 				if($b==FALSE)
 				{
 				$ErrSignup = "L'Email inserita non &egrave; disponibile. Inserire un Email diversa.";
@@ -79,12 +79,8 @@
 				else
 				{
 					$_SESSION['Email'] = $emailSignup;
-          if($tipoUtente == "Impiegato"){
-            header("Location: areaPersonaleImpiegato.php");
-          }
-          else{
 					header("Location: areaPersonale.php");
-          }
+
 				}
 
 			}

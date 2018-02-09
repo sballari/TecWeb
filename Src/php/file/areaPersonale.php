@@ -34,7 +34,6 @@
   }
 else {
      $u = $f->getUser($_SESSION['Email']);
-     $d->disconnect();
      $t = $u->getUserType();
      echo "<div id='info' class='contentElement'>";
      echo "<h3>INFO</h3>";
@@ -48,21 +47,15 @@ else {
          unset($_SESSION['messaggioArea']);
        }
        else{
-         if(isset($_SESSION['submitPremuto'])){
-           if($_SESSION['submitPremuto'] == "nuovoProd" ){
-             $h->printTabelaProdottiScelti($t);
-           }
-         }
-           $h->printOperationElement("prenotazione", $t);
-
+       $h->printOperationElement("prenotazione", $t);
        }
      }
      else{
-       if($_GET['operazione'] == "logout"){
+       if($_GET['operazione']=='logout'){
          $_SESSION['submitPremuto']="logout";
          header("Location: ConfirmPage.php");
        }
-       elseif($_GET['operazione'] == "closeaccount"){
+       elseif($_GET['operazione']=='closeaccount'){
          $_SESSION['submitPremuto']="closeaccount";
          header("Location: ConfirmPage.php");
        }

@@ -19,8 +19,8 @@
     </div>
 
 		<?php
-			$h->createheader("ConfirmPage");
-      $h->printInternalMenu("ConfirmPage");
+			$h->createheader("account");
+      $h->printInternalMenu("account");
     ?>
 <div id="content">
   <?php
@@ -35,7 +35,6 @@
 
   else {
      $u = $f->getUser($_SESSION['Email']);
-     $d->disconnect();
      $t = $u->getUserType();
      echo "<div id='info' class='contentElement'>";
      if(isset($_SESSION['messaggioConfirm'])){
@@ -82,7 +81,9 @@
      echo  "</form>";
      echo "</div>";
    }
-
+   else{
+     echo "".$_SESSION['messaggio'];
+   }
  }
    }
    ?>
