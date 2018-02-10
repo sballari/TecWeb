@@ -5,7 +5,7 @@
     $h = new CommonHtmlElement();
     $h->printHead("ristorante", "pagina dedicata ai prodotti per ristoranti e hotel", "ristorante, hotel, ingrosso");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -53,6 +53,7 @@
 
     </div>
     <?php
+    $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("ristorante");

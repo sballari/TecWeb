@@ -13,7 +13,7 @@
     $h->printHead('ricerca', "ricerca", "ricerca, dolci, risultati");
 
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -37,6 +37,7 @@
     </div>
 
     <?php
+    $h->createStatisticDiv();
 	  $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("search");

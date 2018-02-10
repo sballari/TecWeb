@@ -13,7 +13,7 @@
       $d->connect();
       $f = new Factory($d);
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <a name="top"></a>
     <div id="accessBar">
     </div>
@@ -70,6 +70,7 @@ else {
 </div>
 
 <?php
+      $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("home");

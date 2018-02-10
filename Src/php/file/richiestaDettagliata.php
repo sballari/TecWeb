@@ -22,7 +22,7 @@ else{
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
 
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -75,6 +75,7 @@ else{
     </div>
 
     <?php
+    $h->createStatisticDiv();
 	  $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("casa");

@@ -5,7 +5,7 @@
       $h = new CommonHtmlElement();
       $h->printHead("LogIn", "area personale", "login, signup");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -110,7 +110,8 @@
     	</div>
     </div>
 
-    <?php
+		<?php
+		$h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("logIn");
