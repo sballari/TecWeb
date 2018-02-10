@@ -16,7 +16,7 @@ class CommonHtmlElement{
 			<h3>STATISTICHE</h3>
 			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <span abbr='JS' lang='en'>JavaScript</span></p>
 			</div>
-			
+
 		";
 	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
@@ -324,22 +324,22 @@ class CommonHtmlElement{
 
 						if (isset($_GET['operazione']) and $_GET['operazione']=='storia') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
-							echo "<li><span>Storia dei ordini</span></li>";
+							echo "<li><span>Storia degli ordini</span></li>";
 							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 						if (isset($_GET['operazione']) and $_GET['operazione']=='prenotazione') {
 							echo "<li><span>Prenotazione</span></li>";
-							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia degli ordini</a></li>";
 							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
-							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia degli ordini</a></li>";
 							echo "<li><span>Prodotti</span></li>";
 						}
 						if (!isset($_GET['operazione'])){
 							echo "<li><span>Prenotazione</span></li>";
-							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+							echo "<li><a href='areaPersonale.php?operazione=storia'>Storia degli ordini</a></li>";
 							echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 					}
@@ -395,10 +395,8 @@ class CommonHtmlElement{
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
 			echo "		</ul>";
-
-
-
 	}
+
 	public function printInternalMenuMobile($page){
 		echo "<div id='mobileInterni'>";
 		echo "<a href ='#content' class='aiuti'>Vai al contenuto</a>";
@@ -406,6 +404,7 @@ class CommonHtmlElement{
 		$this->printListLinkInterni($page);
 		echo "</div>";
 }
+
 public function printRichiestaDettagliataDiv($Richiesta){
 	$tipo = $Richiesta->getType();
 	echo "<div class='contentElement'>";
@@ -780,7 +779,7 @@ switch($usrType ){
 		echo "<legend>Dati prenotazione</legend>";
 		echo "<div>";
 			echo "<label for='decrizioneUtente'>Descrizione utente:</label>";
-			echo "<textarea name='decrizioneUtente' rows='5' cols='30'>Dolce con la scritta Buon compleanno.</textarea>";
+			echo "<textarea name='decrizioneUtente'>Dolce con la scritta Buon compleanno.</textarea>";
 		echo "</div>";
 		break;
 
@@ -809,7 +808,7 @@ switch($usrType ){
 	case "Servizio":
 		echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
 		echo "</br>";
-		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+		echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' required> 5 tavole, 20 sedie. </textarea>";
 		echo "</br>";
 		echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
 		echo "</br>";

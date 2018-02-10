@@ -13,8 +13,13 @@
       $d->connect();
       $f = new Factory($d);
  ?>
+<<<<<<< HEAD
 <body onload='creaStatistiche()'>
     <a name="top"></a>
+=======
+<body>
+    <div id="top"></div>
+>>>>>>> 00efe8a7385ac3add835801d5fa6697ec5fd1608
     <div id="accessBar">
     </div>
 
@@ -28,7 +33,7 @@
     echo "<div class='contentElement'>";
     echo "<h3>ERRORE</h3>";
     echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
-    <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
+    <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a>
     <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
     echo "</div>";
   }
@@ -62,9 +67,7 @@ else {
        else{
          $h->printOperationElement($_GET['operazione'], $t);
        }
-
     }
-
  }
 ?>
 </div>
@@ -73,7 +76,7 @@ else {
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("home");
+      $h->printMobileMenu("account");
     ?>
     </body>
     </html>
