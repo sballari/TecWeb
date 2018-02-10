@@ -650,29 +650,32 @@ if($usrType!=="Servizio"){
 	echo "<legend>Lista prodotti</legend>";}
 else{
 	echo "<legend>Dati prenotazione</legend>";}
-echo "</br>";
-echo "<label for='listaProdotti'>Prodotto:</label>  ";
-echo "<select name='listaProdotti'  required>";
-echo "<option value=''>--</option>";
-foreach ($prod as $x) {
-	echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
-}
+echo "<div>";
+	echo "<label for='listaProdotti'>Prodotto:</label>  ";
+	echo "<select name='listaProdotti'  required>";
+	echo "<option value=''>--</option>";
+	foreach ($prod as $x) {
+		echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
+	}
+echo "</div>";
 echo "</select>";
-echo "</br>";
 
 switch($usrType ){
 	case "Al minuto":
-		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+	  echo "<div>";
+			echo "<label for='numeroProdotti'>Numero prodotti:</label>";
+			echo "<input type='number' name='numeroProdotti' required>";
+		echo "</div>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-		echo "</br>";
 		echo "</fieldset>";
 		echo "</form>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
-		echo "</br>";
-		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
-
+		echo "<div>";
+			echo "<label for='decrizioneUtente'>Descrizione utente:</label>";
+			echo "<textarea name='decrizioneUtente' rows='5' cols='30'>Dolce con la scritta Buon compleanno.</textarea>";
+		echo "</div>";
 		break;
 
 	case "All_ingrosso":

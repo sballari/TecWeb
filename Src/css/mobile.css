@@ -109,8 +109,6 @@ html,body{
   border-right: 1px solid brown;
 }
 
-/* #mobileMenu li:last-child {display: none;} */
-
 #mobileMenu li a {
 	display: block;
 	color: brown;
@@ -132,9 +130,6 @@ html,body{
   padding-top: 0.5em;
 }
 
-/* .search-container form {
-  width: 100%;
-} */
 .search-container{
   display: none;
 }

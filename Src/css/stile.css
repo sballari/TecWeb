@@ -79,11 +79,12 @@ color: brown;
 text-decoration: none;
 }
 
-#menu span{
-display: block;
-background-color: brown;
-color: white;
-padding:0.4em;
+#menu span,#internalNavBar span{
+  display: block;
+  background-color: brown;
+  color: white;
+  padding:0.4em;
+  text-align: center;
 }
 
 #menu li a:hover {
@@ -314,20 +315,27 @@ label{
   float: left;
   width: 6em;
   text-align: right;
+  display: block;
 }
 
-select,input{
-  border-radius: 5px;
+legend{
+  font-weight: bold;
+  padding-top: 0.5em;
+}
+
+select,input,textarea{
   padding: 0.4em;
   font-size: 1em;
   border: black solid 1px;
-  margin-left: 1em;
+  margin-left: 2em;
   width: auto;
   margin-bottom: 0.5em;
 }
 
-fieldset{
-  border: 0;
+#form div{
+  float: left;
+  width: 100%;
+  text-align: left;
 }
 
 table {

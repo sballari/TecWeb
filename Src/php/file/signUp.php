@@ -99,7 +99,7 @@
 				<form id='form' action=''  method='POST'>
 					<fieldset>
 
-						<legend>Creazione account</legend>
+						<legend>Creazione account:</legend>
             <?php
 						echo "</br>".$ErrSignup;
             echo "<div id='nome'>";
@@ -115,7 +115,7 @@
   						echo "<select name='tipoUtente' required>
   							<option value=''>--</option>
   							<option value='Al minuto'>Al minuto</option>
-  							<option value='All ingrosso'>All'ngrosso</option>
+  							<option value='All ingrosso'>All'ingrosso</option>
   							<option value='Servizio'>Servizio</option>
   							<option value='Impiegato'>Impiegato</option>
   							</select><span class='err'>".$ErrTipoUtente."</span>";
