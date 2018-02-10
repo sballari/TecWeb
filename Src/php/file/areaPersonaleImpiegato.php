@@ -48,26 +48,37 @@ else {
          unset($_SESSION['messaggioArea']);
        }
        else{
-         if(isset($_SESSION['submitPremuto'])){
-           if($_SESSION['submitPremuto'] == "nuovoProd" ){
-             $h->printTabelaProdottiScelti($t);
-           }
-         }
-           $h->printOperationElement("prenotazione", $t);
-
+         echo "<div id='messaggio' class='contentElement'>";
+         echo "<p>Nella lista dei link interni si trovano i seguenti link: Ordini, Utenti, Prodotti.</br> Tramite il link Ordini potra visualizzare la tabella
+         dei ordini in base di tipo del ordine scelto. Dopo aver scelto un ordine potra: visualizzarlo in modo piu dettagliato, cambiare lo stato del ordine
+         da in_lavorazione in passato, cancellare l'ordine.</br> Tramite il link Utenti potra visualizzare la tabella dei utenti. Dopo aver scelto un utente
+         potra: visualizzarlo in modo piu dettagliato o cancellare l'utente.</br> Tramite il link Prodotti potra visualizzare la tabella dei prodotti.
+         Dopo aver scelto un prodotto potra: visualizzarlo in modo piu dettagliato, modificare o cancellare l'prodotto.</br> ";
+         echo "</div>";
        }
      }
      else{
        if($_GET['operazione'] == "logout"){
-         $_SESSION['submitPremuto']="logout";
-         header("Location: ConfirmPage.php");
+         $_SESSION['buttonPremuto']="logout";
+         header("Location: ConfirmPageImpiegato.php");
        }
        elseif($_GET['operazione'] == "closeaccount"){
-         $_SESSION['submitPremuto']="closeaccount";
-         header("Location: ConfirmPage.php");
+         $_SESSION['buttonPremuto']="closeaccount";
+         header("Location: ConfirmPageImpiegato.php");
        }
        else{
-         $h->printOperationElement($_GET['operazione'], $t);
+         if(isset($_SESSION['checkM'])){
+           $h->printOperationElementImpiegato($_GET['operazione'], "Al minuto")
+         }
+         if(isset($_SESSION['checkI'])){
+           $h->printOperationElementImpiegato($_GET['operazione'], "All_ingrosso")
+         }
+         if(isset($_SESSION['checkS'])){
+           $h->printOperationElementImpiegato($_GET['operazione'], "Servizio")
+         }
+         if(!isset($_SESSION['checkM']) && !isset($_SESSION['checkI']) && !isset($_SESSION['checkS'])){
+           $h->printFormCategorie();
+         }
        }
 
     }

@@ -182,7 +182,7 @@ class CommonHtmlElement{
 					echo "<li><a href='signUp.php'>Registrati</a></li>";
 				}
 			break;
-			case "accountImpiegato":
+			case "ConfirmPage":
 				if (isset($_SESSION['Email'])){
 					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
@@ -192,6 +192,27 @@ class CommonHtmlElement{
 					echo "<li><a href='signUp.php'>Registrati</a></li>";
 				}
 			break;
+			case "accountImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "ConfirmPageImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+
 
 			default:
 				echo "<li><a href='logIn.php'>Accedi</a></li>";
@@ -278,7 +299,7 @@ class CommonHtmlElement{
 			break;
 			case "account":
 					if (isset($_SESSION['Email'])){
-						$percorso = "Area Personale";
+						//$percorso = "Area Personale";
 
 						if (isset($_GET['operazione']) and $_GET['operazione']=='storia') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
@@ -473,11 +494,11 @@ public function printRichiestaDettagliataDiv($Richiesta){
 }
 echo "</div>";
 }
-public function printListaProdotti($usrType){
+public function printListaProdotti($Type){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
 	$f = new Factory($d);
-	$prod = $f->getProductList($usrType);
+	$prod = $f->getProductList($Type);
 	foreach ($prod as $x) {
 		$this->createProductDiv($x);
 	}
@@ -488,19 +509,14 @@ public function printListaProdotti($usrType){
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>Codice Richiesta</th>
-		<th>Nome del Prodotto</th>
-
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>Codice</th>
+		<th>Delivery date and hour </th>
+		<th>Status</th>
 		</tr>";
 		foreach ($req as $x) {
-
 			echo "<tr>";
 			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";//TODO
 			echo "<td>" . $x->getKey() . "</td>";
-			echo "<td>" . $x->getService()->getName() . "</td>";
-
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
@@ -509,32 +525,19 @@ public function printListaProdotti($usrType){
 		echo "</table>";
 	}
 
-
-
-
 public function printStoriaOrdiniAllIngrosso($req){
 		$id=1;
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>MassiveOrder codice</th>
-		<th>MassiveOrder product's (number) and name</th>
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>Codice</th>
+		<th>Delivery date and hour</th>
+		<th>Status</th>
 		</tr>";
 		foreach ($req as $x) {
-
 			echo "<tr>";
 			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "'/ ></td>";
 			echo "<td>" . $x->getKey() . "</td>";
-
-			$qta = $x->getProductsWithQta();
-			echo "<td>";
-			foreach(array_keys($qta) as $p){
-				echo "(".$qta[$p].")  ".$p;
-			}
-			echo "</td>";
-
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
@@ -548,32 +551,20 @@ public function printStoriaOrdiniAlMinuto($req){
 	echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>ReTailOrder codice</th>
-		<th>RetailOrder product's(number) and name</th>
-
-
-		<th>ReTailOrder delivery date and hour </th>
-		<th>ReTailOrder status</th>
+		<th>Codice</th>
+		<th>Delivery date and hour </th>
+		<th>Status</th>
 		</tr>";
 	foreach ($req as $x) {
-
 		echo "<tr>";
 		echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";
 		echo "<td>" . $x->getKey() . "</td>";
-		$qta = $x->getProductsWithQta();
-		echo "<td>";
-		foreach(array_keys($qta) as $p){
-			echo "(".$qta[$p].")  ".$p;
-		}
-		echo "</td>";
-
 		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 		echo "<td>" . $x->getStatus() . "</td>";
 		echo "</tr>";
 		$id++;
 	}
 	echo "</table>";
-
 }
 
 	public function printComposizioneOrdineTable($ordine){
@@ -624,6 +615,111 @@ public function printStoriaOrdini($t){
 	echo "</div>";
 }
 
+
+public function printTabellaOrdini($Type){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$req = $f->getTypeRequestList($Type);
+	$d->disconnect();
+	echo "<div class='contentElement'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	switch($t){
+		case "Servizio":
+			$this->printStoriaOrdiniServizio($req);
+		break;
+
+		case "All_ingrosso":
+			$this->printStoriaOrdiniAllIngrosso($req);
+		break;
+
+		case "Al minuto":
+			$this->printStoriaOrdiniAlMinuto($req);
+			break;
+	}
+	echo "<button type='submit' name='cambiaStato' >Cambia stato</button>";
+	echo "<button type='submit' name='cancellaRichiesta' >Cancella la richiesta</button>";
+	echo "<button type='submit' name='richiestaDettagliataImp' >Richiesta dettagliata</button>";
+	echo "</form>";
+	echo "</div>";
+}
+
+
+public function printTabellaUtenti($Type){
+	require_once("../class/Factory.php");
+	require_once("../class/DBmanager.php");
+	require_once("../class/Manipulator.php");
+
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$usr = $f->getUserList($Type);
+	echo "<div class='contentElement' >;
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	if($usr==false){
+		echo "Something went wrong! Try again.";
+	}
+	else{
+		echo "<div id='tabelaUtenti'>";
+		echo "<table>
+				<tr>
+				<th>Seleziona</th>
+				<th>Email</th>
+				<th>Tipo utente</th>
+				</tr>";
+	$id = 1;
+	foreach ($usr as $x) {
+		echo "<tr>";
+		echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";
+		echo "<td>" . $x->getEmail() . "</td>";
+		echo "<td>" . $x->getUserType() . "</td>";
+		echo "</tr>";
+		$id++;
+	}
+	echo "</table>";
+	echo "</div>";
+	}
+	echo "</br></br>";
+	echo "<button type='submit' name='cancellaUtente'>Cancella l'utente</button>";
+	echo "<button type='submit' name='utenteDettagliato'>Utente dettagliato</button>";
+	echo "</form>";
+	echo "</div>";
+}
+
+
+public function printTabellaProdotti($Type){
+	require_once("../class/Factory.php");
+	require_once("../class/DBmanager.php");
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$prod = $f->getProductList($Type);
+
+	echo "<div id='formOrdini' class='contentElement'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	echo "<button type='submit' name='aggiuntaProdotto'>Aggiungi un nuovo prodotto</button></br>";
+	echo "</br></br>";
+	echo "<table>
+			<tr>
+			<th>Seleziona</th>
+			<th>Nome</th>
+			</tr>";
+	$id=1;
+	foreach ($prod as $x) {
+		echo "<tr>";
+		echo "<td>".$id."<input type='radio' name='prodotto' value='prodotto" . $id . "' ></td>";
+		echo "<td>" . $x->getName() . "</td>";
+		echo "</tr>";
+		$id++;
+	}
+	echo "</table>";
+	echo "</br></br>";
+	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button></br>";
+	echo "</br></br>";
+	echo "<button type='submit' name='modificaProdotto'>Modifica prodotto</button></br></br>";
+	echo "</form>";
+	echo "</div>";
+}
 
 public function printFormPrenotazione($usrType){
 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -739,6 +835,33 @@ public function printOperationElement($operazione, $usrType){
 			break;
 		case "prodotti":
 			$this->printListaProdotti($usrType);
+			break;
+	}
+}
+
+
+public function printFormCategorie(){
+	echo "<p>Scegli le categorie dei ordini che vuoi visualizzare.</p>";
+	echo "<div id='formOrdini'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	echo "<input type='checkbox' name='Al_minuto' value='Al minuto' checked>Al minuto</br>";
+	echo "<input type='checkbox' name='All_ingrosso' value='All_ingrosso' checked>All'ingrosso</br>";
+	echo "<input type='checkbox' name='Servizio' value='Servizio' checked>Servizio</br></br>";
+	echo "<input type='submit' name='visualizzaOrdini' value='Visualizza Ordini'></br></br>";
+	echo "</form>";
+	echo "</div>";
+}
+
+public function printOperationElementImpiegato($operazione, $Type){
+	switch($operazione){
+		case "ordini":
+			$this->printTabellaOrdini($Type);
+			break;
+		case "utenti":
+			$this->printTabellaUtenti($Type);
+			break;
+		case "prodotti":
+			$this->printTabellaProdotti($Type);
 			break;
 	}
 }
