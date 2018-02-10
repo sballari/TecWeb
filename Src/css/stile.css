@@ -298,7 +298,7 @@ h2, h3{
   float: right;
 }
 
-.contentElement button{
+.contentElement button, .bottomElement button{
   padding: 0.4em;
   margin-right: 1em;
   background: #ddd;

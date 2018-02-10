@@ -22,7 +22,7 @@
         return "";
     }
     function resetStatistiche(){
-        delCookie("contatore");
+        delCookie("contatoreSett");
         document.getElementById("statP").innerText = "statistiche resettate!";
         
     }
@@ -33,15 +33,21 @@
 
         var contatore = getCookie("contatoreSett");
         if (contatore != "") { //il biscotto esiste
-            testo = "Un formaggioso benvenuto anche a te! Questi ultimi sette giorni ci hai visitato. "+contatore+" volte!"; 
-            setCookie("contatore", Number(contatore)+1, 7);    
+            testo = "Un formaggioso benvenuto anche a te! Questi ultimi sette giorni ci hai visitato "+contatore+" volte!"; 
+            setCookie("contatoreSett", Number(contatore)+1, 7);    
             
         } 
         else { //non esiste il biscotto  
             testo = "Un formaggioso benvenuto anche a te! Vedo che sei nuovo, buona permanenza nel nostro sito.";    
-            setCookie("contatore", 1, 7);
+            setCookie("contatoreSett", 1, 7);
             
         }
+        //testo.concat(document.getElementsByTagName("title")[0].innerText);
+
+
+
+
+
         var button =document.createElement("button");
         button.setAttribute("onclick","resetStatistiche()")
         button.innerText = "Resetta le statistiche";
