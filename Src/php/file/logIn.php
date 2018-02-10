@@ -80,31 +80,34 @@
 
 		?>
     <div id='content'>
-    <div id='info' class='contentElement'>
-    	<h3>INFO</h3>
-      <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
-        <strong>nome, cognome, tipo di utente, email, password</strong>.
-        <a href="signUp.php">Vai alla pagina di  <span lang='en'>Sign up</span></a>.
-      </p>
-
-    </div>
-    <div id='form' class='contentElement'>
-  	<form action='' method='POST'>
-  	<fieldset>
-    	<legend>Form di accesso:</legend>
-      <?php
-    	echo $ErrLogin."</br>";
-      echo "<label for='email'>Email: </label>";
-    	echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
-      echo "</br>";
-      echo "<label for='password'>Password: </label>";
-    	echo "<input type='password' name='password' placeholder='insert your password' required ><span class='err'>".$ErrPassw."</span>";
-      ?>
-      </br>
-    	<button type='submit' name = 'login' >Log in</button>
-  	</fieldset>
-  	</form>
-  	</div>
+      <div id='info' class='contentElement'>
+      	<h3>INFO</h3>
+        <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
+          <strong>nome, cognome, tipo di utente, email, password</strong>.
+        </br>
+          <a href="signUp.php">Vai alla pagina di  <span lang='en'>Sign up</span></a>.
+        </p>
+      </div>
+      <div id='form' class='contentElement'>
+      	<form action='' method='POST'>
+      	<fieldset>
+        	<legend>Form di accesso:</legend>
+          <?php
+        	echo $ErrLogin."</br>";
+          echo "<div id=email>";
+          echo "<label for='email'>Email: </label>";
+        	echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
+          echo "</div>";
+          echo "<div id=password>";
+          echo "<label for='password'>Password: </label>";
+        	echo "<input type='password' name='password' placeholder='insert your password' required ><span class='err'>".$ErrPassw."</span>";
+          echo "</div>";
+          ?>
+          </br>
+        	<button type='submit' name = 'login' >Log in</button>
+      	</fieldset>
+      	</form>
+    	</div>
     </div>
 
     <?php

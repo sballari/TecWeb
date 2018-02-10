@@ -35,7 +35,7 @@
 
         <?php
 
-        $d->disconnect();
+        // $d->disconnect();
 		require_once("../class/Factory.php");
 		require_once("../class/DBmanager.php");
 		$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");

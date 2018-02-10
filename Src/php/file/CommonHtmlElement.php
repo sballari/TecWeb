@@ -18,14 +18,15 @@ class CommonHtmlElement{
 		echo "<p> <strong>Ingredienti</strong>: " . $this->evidenziaTesto($x->getIngredients() ,$evidenzia). "</p>";
 		echo "<p> <strong>Descrizione</strong>: " . $this->evidenziaTesto($x->getDesc(),$evidenzia) . "</p>";
 		if ($ricerca==true) echo "<p> <strong>Tipo prodotto</strong>: " . $this->evidenziaTesto($x->getProductType(),$evidenzia) . "</p>";
-		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='pulsante torna su'></a>";
 		echo "</div>";
 	}
+
 	function evidenziaTesto($input, $par){
 			return $newTesto =str_ireplace($par,
 			 "<mark >".strtoupper($par)."</mark>",
 			 $input);
 	}
+
 	public function printBricioleDiPane($page){
 		switch ($page) {
 			case 'home':
@@ -95,7 +96,7 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
 		echo "\n";
-		echo '<link rel="stylesheet" media="handheld,screen and (max-width:681px), only screen and (max-device-width:681px)"
+		echo '<link rel="stylesheet" media="screen and (max-width:681px), only screen and (max-device-width:681px)"
 		 			href="../../css/mobile.css" type="text/css" />';
 		echo "\n";
 		echo '</head>';
@@ -136,31 +137,43 @@ class CommonHtmlElement{
 					echo "<li><a href='catering.php'>Catering ed Eventi</a></li>";
 			break;
 		}
+		echo "<li>";
+			echo "<div class='search-container'>";
+			echo "<form action='search_page.php'>";
+			echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
+			echo "<button type='submit'>Cerca</button>";
+			echo "</form>";
+			echo "</div>";
+		echo "</li>";
+	 echo "</ul>";
 	}
 
 	public function createheader($page){
+		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>";
 		echo "<div id='accessBar'>
 			<a href ='#content'>Vai al contenuto</a>
     	</div>";
-		echo "<div id='header'>";
-			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+		echo "<div class='header'>";
+			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page);
-				echo "<div class='search-container'>";
-								echo "<form action='search_page.php'>";
-							  	echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
-								echo "<button type='submit'>Cerca</button>";
-								echo "</form>";
-				echo "</div>";
-			echo "</div>";
+		  echo "</div>";
 			$this->printBricioleDiPane($page);
 		echo "</div>";
 	}
 
+	public function createBottomHeader(){
+		echo "<div class='header'>";
+			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
+			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
+		echo "</div>";
+	}
+
 	public function generateLogInLink($page){
-		echo "<div id='logNav'>";
+		echo "<div class='logNav'>";
 		echo "<h3 >AREA PERSONALE</h3>";
 		echo "<ul>";
 		switch($page){
@@ -224,7 +237,7 @@ class CommonHtmlElement{
 	}
 
 	public function printContatti(){
-	echo  "<adress id='contatti'>";
+	echo  "<div id='contatti'>";
     echo  "	<h3>CONTATTI</h3>";
     echo  "    <p>";
     echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
@@ -232,11 +245,12 @@ class CommonHtmlElement{
     echo  "        <ul>";
     echo  "            <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>";
     echo  "            <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>";
-    echo  "            <li>mail: <a href ='mailto: info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
-    echo  "            <li>tel: <a href ='tel: 04215841204'>0421 5841204</a></li>";
+    echo  "            <li>mail:<a href ='mailto:info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
+    echo  "            <li>tel:<a href ='tel:04215841204'>0421 5841204</a></li>";
     echo  "        </ul>";
-    echo  "</adress>";
+  echo  "</div>";
 	}
+
 	public function printFooter(){
 		echo  "<div id='footer'>";
     echo  "    <p>";
@@ -245,22 +259,19 @@ class CommonHtmlElement{
     echo  "    <a href='sitemap.php'>sitemap</a>";
     echo  "</div>";
 	}
+
 	public function printMobileMenu($page){
-	echo  "	   <div class='onlyMobile' id='mobileMenu'>";
+	echo  "<div class='onlyMobile' id='mobileMenu'>";
     echo  "    <div id='headerSpace'> </div>";
+		$this->createBottomHeader();
     echo  "    <div id='linkEsterni'>";
       			$this->generateMenu($page);
     echo  "    </div>";
     				$this->printInternalMenuMobile("$page");
 						$this->generateLogInLink($page);
-    echo  "    <a href='#top'>
-									<div>
-										<img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'>
-										<p> Torna Su </p>
-									</div>
-							 </a>";
-    echo  "</div>";
+	echo "</div>";
 	}
+
 	public function printInternalMenu($page){
 		echo "<div id ='internalNavBar' class='onlyDesktop' >";
 				echo "<a href ='#content' class='aiuti'>Salta menu</a>";

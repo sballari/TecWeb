@@ -1,9 +1,17 @@
 
+html,body{
+  font-size: 1em;
+}
+
 .header h1{
   float: none;
   font-size: 5em;
   padding-left: 2em;
   text-align: center;
+}
+
+#accessBar{
+  display: none;
 }
 
 .onlyMobile{
@@ -18,19 +26,31 @@
 }
 
 .header {
-  /* position:fixed;
-  top:  0;
-  left: 0; */
-  /* height: 10vh; */
   width: 100%;
   border: 0;
   border-bottom: 1px solid brown;
+  margin-bottom: 0.5em;
+  border-top: 1px solid brown;
 }
 
 .header img {
   padding-top: 0.5em;
   height: 7em;
   width: 7em;
+  margin-top: 1em;
+}
+
+#close{
+  float:right;
+  height: 5em;
+  width: 5em;
+  padding-right: 1em;
+  margin-top: 2em;
+}
+
+#briciole{
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
 }
 
 .contentElement img {
@@ -59,27 +79,21 @@
 }
 
 #hamburger{
-  /* width: 6%; */
   float: right;
-  /* padding: 1em */
 }
 
 #mobileMenu {
   width: 100%;
   text-align: center;
-  height: 100vh;
+  height: 130vh;
 }
 
 #mobileMenu h3 {
-  fon
+  font-size: 3em;
 }
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
-}
-
-#mobileMenu img{
-  margin-top: 1em;
 }
 
 #mobileMenu ul {
@@ -94,6 +108,8 @@
   display: block;
   border-right: 1px solid brown;
 }
+
+/* #mobileMenu li:last-child {display: none;} */
 
 #mobileMenu li a {
 	display: block;
@@ -111,17 +127,16 @@
   font-size: 4em;
 }
 
-#mobileMenu img{
-  margin-top: 10vh;
-}
-
 #logNav{
   border-top: 1px brown solid;
   padding-top: 0.5em;
 }
 
-.search-container form {
+/* .search-container form {
   width: 100%;
+} */
+.search-container{
+  display: none;
 }
 
 #linkEsterni{
@@ -137,17 +152,23 @@
   width:100%;
 }
 
-#storia,#negozio,#stabilimento,#contatti,#info,#productlist{
-  /* padding-top: 10vh; */
+#storia,#negozio,#stabilimento,#contatti,#footer,#info,#productlist{
   border-left: 0;
   border-right: 0;
-  width: 100%;
+  padding: 0;
+  /* width: 100%; */
+  float: none;
+}
+
+#contatti,#footer{
+  /* font-size: 2em; */
 }
 
 #footer{
   border-left: 0;
   border-right: 0;
   margin:0.3em 0.3em 0.3em 0.3em;
+  margin-bottom: 100vh;
 }
 
 #contatti li{
@@ -156,10 +177,26 @@
 }
 
 #up_arrow{
-  height: 5em;
-  width: 5em;
+  height: 7em;
+  width: 7em;
+  left: 43.48%;
 }
 
-#close{
-  float:right;
+#form button, #form label{
+  float: left;
+  text-align: left;
+}
+
+#form input,select{
+  float: right;
+}
+
+#form,#info{
+  font-size: 2.5em;
+}
+
+#form div{
+  float: left;
+  width: 100%;
+  text-align: left;
 }
