@@ -30,17 +30,22 @@ html,body{
   border: 0;
   border-bottom: 1px solid brown;
   margin-bottom: 0.5em;
+  border-top: 1px solid brown;
 }
 
-.header img, #logo {
+.header img {
   padding-top: 0.5em;
   height: 7em;
   width: 7em;
+  margin-top: 1em;
 }
 
 #close{
+  float:right;
   height: 5em;
   width: 5em;
+  padding-right: 1em;
+  margin-top: 2em;
 }
 
 #briciole{
@@ -80,7 +85,7 @@ html,body{
 #mobileMenu {
   width: 100%;
   text-align: center;
-  height: 100vh;
+  height: 130vh;
 }
 
 #mobileMenu h3 {
@@ -89,10 +94,6 @@ html,body{
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
-}
-
-#mobileMenu img{
-  margin-top: 1em;
 }
 
 #mobileMenu ul {
@@ -181,25 +182,21 @@ html,body{
   left: 43.48%;
 }
 
-#close{
-  float:right;
-}
-
-#email,#password{
-  float: left;
-  width: 100%;
-  text-align: left;
-}
-
 #form button, #form label{
   float: left;
   text-align: left;
 }
 
-#form input{
+#form input,select{
   float: right;
 }
 
 #form,#info{
-  font-size: 3em;
+  font-size: 2.5em;
+}
+
+#form div{
+  float: left;
+  width: 100%;
+  text-align: left;
 }
