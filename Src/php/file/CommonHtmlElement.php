@@ -665,7 +665,7 @@ public function printTabellaUtenti($Type){
 	$d->connect();
 	$f = new Factory($d);
 	$usr = $f->getUserList($Type);
-	echo "<div class='contentElement' >;
+	echo "<div class='contentElement' >";
 	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
 	if($usr==false){
 		echo "Something went wrong! Try again.";
@@ -740,7 +740,7 @@ $prod = $f->getProductList($usrType);
 $d->disconnect();
 
 echo "<div id='ordineForm' class='contentElement'>";
-echo "<form action='operationManager.php' method='POST' >";
+echo "<form id='form' action='operationManager.php' method='POST' >";
 echo "<fieldset>";
 if($usrType!=="Servizio"){
 	echo "<legend>Lista prodotti</legend>";}
@@ -762,10 +762,10 @@ switch($usrType ){
 			echo "<label for='numeroProdotti'>Numero prodotti:</label>";
 			echo "<input type='number' name='numeroProdotti' required>";
 		echo "</div>";
-		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
+			echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
 		echo "</fieldset>";
 		echo "</form>";
-		echo "<form action='operationManager.php' method='POST' >";
+		echo "<form id='form' action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
 		echo "<div>";
@@ -805,12 +805,15 @@ switch($usrType ){
 		echo "</br>";
 		break;
 }
-echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
-echo "</br>";
-echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
-echo "</br>";
-echo "<button type='submit' name='prenota'>Prenota</button>";
-echo "</br>";
+
+echo "<div>";
+	echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label>";
+	echo "<input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+echo "</div>";
+echo "<div>";
+	echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+echo "</div>";
+	echo "<button type='submit' name='prenota'>Prenota</button>";
 echo "</fieldset>";
 echo "</form>";
 echo "</div>";
