@@ -117,7 +117,7 @@ h2, h3{
 
 }
 
-#contatti {
+.bottomElement {
 	float: left;
   margin-top: 0.5em;
   padding-left:0.5em;
@@ -127,20 +127,17 @@ h2, h3{
   width: 100%;
 }
 
-#contatti ul {
+.bottomElement ul {
 	list-style-type:disc;
   padding-left: 1.5em;
 }
 
-#footer {
-	float: left;
-	background-color: lightyellow;
-  width: 100%;
-  padding-left: 0.5em;
-  padding-bottom: 0.5em;
+ #footer{
+  margin-top: 0; 
   border-left: 1px solid brown;
   border-right: 1px solid brown;
   border-bottom: 1px solid brown;
+  border-top: 0;
 }
 
 
@@ -198,11 +195,12 @@ h2, h3{
   overflow: hidden;
 }
 
-#internalNavBar  {
+#internalNavBar {
   margin-top: 1em;
   width: 20%;
   float:left;
 }
+
 
 
 #internalNavBar ul {

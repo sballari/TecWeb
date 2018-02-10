@@ -9,11 +9,11 @@
       $h = new CommonHtmlElement();
       $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="top"></div>
 		<?php
-			$h->createheader("home");
-      $h->printInternalMenu("home");
+            $h->createheader("home");
+            $h->printInternalMenu("home");       
     ?>
 
 
@@ -45,7 +45,8 @@
         </div>
     </div>
     <?php
-			$h->printContatti();
+      $h->createStatisticDiv();
+      $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("home");
     ?>
