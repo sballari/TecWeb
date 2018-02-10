@@ -13,8 +13,8 @@ class Factory {
 
   function searchProdotti($testo){
     if ($this->dbM->getStatus()==true){
-      $query = "SELECT * FROM prodotto  WHERE (nome LIKE '%" . $testo . "%') 
-                OR (descrizione LIKE '%" . $testo . "%') 
+      $query = "SELECT * FROM prodotto  WHERE (nome LIKE '%" . $testo . "%')
+                OR (descrizione LIKE '%" . $testo . "%')
                 OR (tipoProdotto LIKE '%" . $testo . "%')
                 OR (ingredienti LIKE '%" . $testo . "%')";
       $result = $this->dbM->submitQuery($query);
@@ -30,9 +30,9 @@ class Factory {
     }
     else return false;
   }
-  function getUserList(){
+  function getUserList($userType){
       if ($this->dbM->getStatus()==true){
-          $result = $this->dbM->submitQuery("SELECT * FROM utente");
+          $result = $this->dbM->submitQuery("SELECT * FROM utente WHERE tipo_utente='".$userType."'");
           $arrUsr = array();
           while ($arr = $result->fetch_assoc()){
               $arrUsr[] =new User ($arr['email'],

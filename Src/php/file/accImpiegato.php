@@ -41,7 +41,7 @@
 			session_start();
 			if(isset($_POST['ordini']))
 			{
-				echo "Scegli le categorie dei ordini che vuoi visualizzare.";
+				echo "<p>Scegli le categorie dei ordini che vuoi visualizzare.</p>";
 				echo "<div id='formOrdini'>";
 				echo "<form action = '' method = 'POST'>";
 				//echo "Data ritiro";

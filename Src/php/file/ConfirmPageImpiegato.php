@@ -8,7 +8,7 @@
       require_once ("../class/User.php");
       require_once ("../class/Product.php");
       $h = new CommonHtmlElement();
-      $h->printHead("Pagina di conferma cliente", "pagina dedicata alla conferma delle operazioni eseguite dal cliente", "conferma, annulla");
+      $h->printHead("Pagina di conferma impiegato", "pagina dedicata alla conferma delle operazioni eseguite dall'impiegato", "conferma, annulla");
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
       $f = new Factory($d);
@@ -20,7 +20,7 @@
 
 		<?php
 			$h->createheader("account");
-      $h->printInternalMenu("ConfirmPage");
+      $h->printInternalMenu("ConfirmPageImpiegato");
     ?>
 <div id="content">
   <?php
@@ -42,8 +42,8 @@
        unset($_SESSION['messaggioConfirm']);
      }
      else{
-     if(isset($_SESSION['submitPremuto'])){
-     switch($_SESSION['submitPremuto']){
+     if(isset($_SESSION['buttonPremuto'])){
+     switch($_SESSION['buttonPremuto']){
        case "annullaRichiesta":
         if(isset($_SESSION['richiestaAnnullata'])){
           echo "La richiesta che hai scelto di annullare e la seguente:";
