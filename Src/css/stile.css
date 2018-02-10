@@ -334,6 +334,14 @@ legend{
   text-align: center;
 }
 
+#form input,select{
+  max-width: 50%;
+}
+
+#form textarea{
+  height: 50%;
+}
+
 fieldset{
   border: 1px solid brown;
   padding: 0.5em;
