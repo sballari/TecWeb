@@ -9,7 +9,7 @@ html, body{
 max-width: 1024px;
 margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 1em;
+font-size: 14px;
 }
 
 .search-container button{
@@ -41,9 +41,10 @@ button:hover {
 #menu {
 	overflow: hidden;
   float: left;
+  width: 100%;
 	}
 
-  .search-container {
+.search-container {
       float: right;
   }
 
@@ -60,8 +61,8 @@ button:hover {
   margin-left: 0.4em;
 }
 
-
 #menu li:first-child {border-left: 1px solid brown;}
+#menu li:last-child {border:0;}
 
 #menu li {
 	float:left;

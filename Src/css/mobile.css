@@ -1,9 +1,17 @@
 
+html,body{
+  font-size: 1em;
+}
+
 .header h1{
   float: none;
   font-size: 5em;
   padding-left: 2em;
   text-align: center;
+}
+
+#accessBar{
+  display: none;
 }
 
 .onlyMobile{
@@ -21,6 +29,7 @@
   width: 100%;
   border: 0;
   border-bottom: 1px solid brown;
+  margin-bottom: 0.5em;
 }
 
 .header img, #logo {
@@ -36,6 +45,7 @@
 
 #briciole{
   font-size: 2.5em;
+  margin-bottom: 0.5em;
 }
 
 .contentElement img {
@@ -98,6 +108,8 @@
   border-right: 1px solid brown;
 }
 
+/* #mobileMenu li:last-child {display: none;} */
+
 #mobileMenu li a {
 	display: block;
 	color: brown;
@@ -119,8 +131,11 @@
   padding-top: 0.5em;
 }
 
-.search-container form {
+/* .search-container form {
   width: 100%;
+} */
+.search-container{
+  display: none;
 }
 
 #linkEsterni{
@@ -140,13 +155,12 @@
   border-left: 0;
   border-right: 0;
   padding: 0;
-  width: 100%;
-
-
+  /* width: 100%; */
+  float: none;
 }
 
 #contatti,#footer{
-  font-size: 2em;
+  /* font-size: 2em; */
 }
 
 #footer{
@@ -164,14 +178,12 @@
 #up_arrow{
   height: 7em;
   width: 7em;
-  left: 42.5%;
+  left: 43.48%;
 }
 
 #close{
   float:right;
 }
-
-
 
 #email,#password{
   float: left;

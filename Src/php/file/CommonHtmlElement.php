@@ -137,7 +137,15 @@ class CommonHtmlElement{
 					echo "<li><a href='catering.php'>Catering ed Eventi</a></li>";
 			break;
 		}
-		echo "</ul>";
+		echo "<li>";
+			echo "<div class='search-container'>";
+			echo "<form action='search_page.php'>";
+			echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
+			echo "<button type='submit'>Cerca</button>";
+			echo "</form>";
+			echo "</div>";
+		echo "</li>";
+	 echo "</ul>";
 	}
 
 	public function createheader($page){
@@ -151,13 +159,7 @@ class CommonHtmlElement{
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page);
-				echo "<div class='search-container'>";
-								echo "<form action='search_page.php'>";
-							  	echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
-								echo "<button type='submit'>Cerca</button>";
-								echo "</form>";
-				echo "</div>";
-			echo "</div>";
+		  echo "</div>";
 			$this->printBricioleDiPane($page);
 		echo "</div>";
 	}
@@ -225,7 +227,7 @@ class CommonHtmlElement{
     echo  "            <li>mail:<a href ='mailto:info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
     echo  "            <li>tel:<a href ='tel:04215841204'>0421 5841204</a></li>";
     echo  "        </ul>";
-    echo  "</div>";
+  echo  "</div>";
 	}
 
 	public function printFooter(){
