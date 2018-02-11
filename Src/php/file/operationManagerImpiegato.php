@@ -22,40 +22,86 @@ session_start();
 
 
 if(isset($_POST['richiestaDettagliataImp'])){
-  $req = $f->getTypeRequestList("Servizio");
-  $id=1;
-  foreach($req as $x){
-    $st="request" . $id . "";
-    if(isset($_POST[$st])){
+  $reqS = $f->getTypeRequestList("Servizio");
+  $lengthS = count($reqS);
+    $reqI = $f->getTypeRequestList("All_ingrosso");
+    $lengthI = count($reqI);
+      $reqM = $f->getTypeRequestList("Al minuto");
+        $lengthM = count($reqM);
+  if(isset($_POST['request'])){
+
+      $pos = substr($_POST['request'], 7);
+      if($pos <= $lengthS){
+        $x = $reqS[$pos-1];
+      }
+      elseif($pos <= ($lengthI + $lengthS)){
+        $x = $reqI[$pos-$lengthS-1];
+      }
+      elseif($pos <= ($lengthI + $lengthS + $lengthM)){
+        $x = $reqM[$pos-$lengthS-$lengthI-1];
+      }
+      else{
+        $_SESSION['messaggioAreaImp'] = "Qualcosa &egrave; andato storto!";
+        header("Location: areaPersonaleImpiegato.php");
+      }
+
+
       $_SESSION['richiestaDettagliataImp'] = serialize($x);
-      header("Location: richiestaDettagliataImpiegato.php");
+      header("Location: oggettoDettagliatoImpiegato.php");
     }
-    $id++;
-  }
-  $req = $f->getTypeRequestList("All_ingrosso");
-  foreach($req as $x){
-    $st="request" . $id . "";
-    if(isset($_POST[$st])){
-      $_SESSION['richiestaDettagliataImp'] = serialize($x);
-      header("Location: richiestaDettagliataImpiegato.php");
-    }
-    $id++;
-  }
-  $req = $f->getTypeRequestList("Al minuto");
-  foreach($req as $x){
-    $st="request" . $id . "";
-    if(isset($_POST[$st])){
-      $_SESSION['richiestaDettagliataImp'] = serialize($x);
-      header("Location: richiestaDettagliataImpiegato.php");
-    }
-    $id++;
-  }
-  if(!isset($_SESSION['richiestaDettagliataImp'])){
+  else{
+
+
     $_SESSION['messaggioAreaImp'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
     header("Location: areaPersonaleImpiegato.php");
   }
-
 }
+
+
+
+  if(isset($_POST['utenteDettagliato'])){
+    $req = $f->getEntireUserList();
+    if(isset($_POST['utente'])){
+
+        $pos = substr($_POST['utente'], 6);
+
+          $x = $req[$pos-1];
+
+
+        $_SESSION['utenteDettagliato'] = serialize($x);
+        header("Location: oggettoDettagliatoImpiegato.php");
+      }
+    else{
+
+
+      $_SESSION['messaggioAreaImp'] = "Devi selezionare un utente per poter visualizzare l'utente dettagliatto.";
+      header("Location: areaPersonaleImpiegato.php");
+    }
+  }
+
+
+    if(isset($_POST['prodottoDettagliato'])){
+      $req = $f->getEntireProductList();
+      if(isset($_POST['prodotto'])){
+
+          $pos = substr($_POST['prodotto'], 8);
+
+            $x = $req[$pos-1];
+
+
+          $_SESSION['prodottoDettagliato'] = serialize($x);
+          header("Location: oggettoDettagliatoImpiegato.php");
+        }
+      else{
+
+
+        $_SESSION['messaggioAreaImp'] = "Devi selezionare un prodotto per poter visualizzare il prodotto dettagliatto.";
+        header("Location: areaPersonaleImpiegato.php");
+      }
+    }
+
+
+
 
 
 

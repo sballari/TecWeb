@@ -225,6 +225,16 @@ class CommonHtmlElement{
 					echo "<li><a href='signUp.php'>Registrati</a></li>";
 				}
 			break;
+			case "richiestaDettagliata":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
 			case "accountImpiegato":
 				if (isset($_SESSION['Email'])){
 					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
@@ -236,6 +246,16 @@ class CommonHtmlElement{
 				}
 			break;
 			case "ConfirmPageImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "oggettoDettagliatoImpiegato":
 				if (isset($_SESSION['Email'])){
 					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
 					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
@@ -738,7 +758,7 @@ public function printTabellaUtenti(){
 	$id = 1;
 	foreach ($usr as $x) {
 		echo "<tr>";
-		echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";
+		echo "<td>".$id."<input type='radio' name='utente' value='utente" . $id . "' ></td>";
 		echo "<td>" . $x->getEmail() . "</td>";
 		echo "<td>" . $x->getUserType() . "</td>";
 		echo "</tr>";
