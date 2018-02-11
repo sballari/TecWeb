@@ -9,7 +9,15 @@ require_once("../class/RetailOrder.php");
 require_once("../class/MassiveOrder.php");
 require_once("../class/Service.php");
 class CommonHtmlElement{
-
+	public function createStatisticDiv(){
+		echo "
+			<div id='statD' class='bottomElement'>
+			<h3>INFO NAVIGAZIONE</h3>
+			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <span abbr='JS' lang='en'>JavaScript</span></p>
+			</div>
+			
+		";
+	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
 		echo "<div class='product'>";
 		echo "<h4>" . $this->evidenziaTesto($x->getName(), $evidenzia) . "</h4>";
@@ -119,6 +127,7 @@ class CommonHtmlElement{
 		echo '<link rel="stylesheet" media="screen and (max-width:681px), only screen and (max-device-width:681px)"
 		 			href="../../css/mobile.css" type="text/css" />';
 		echo "\n";
+		echo "<script src='gestioneCookie.js'></script>";
 		echo '</head>';
 		echo "\n";
 	}
@@ -256,7 +265,7 @@ class CommonHtmlElement{
 	}
 
 	public function printContatti(){
-	echo  "<div id='contatti'>";
+	echo  "<div id='contatti' class='bottomElement'>";
     echo  "	<h3>CONTATTI</h3>";
     echo  "    <p>";
     echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
@@ -271,7 +280,7 @@ class CommonHtmlElement{
 	}
 
 	public function printFooter(){
-		echo  "<div id='footer'>";
+	echo  "<div id='footer' class='bottomElement'>";
     echo  "    <p>";
     echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Lleshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
     echo  "    </p>";
