@@ -13,7 +13,7 @@ class CommonHtmlElement{
 		echo "
 			<div id='statD' class='bottomElement'>
 			<h3>INFO NAVIGAZIONE</h3>
-			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <span abbr='JS' lang='en'>JavaScript</span></p>
+			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <abbr lang='en' title = 'JavaScript'>JS</abbr></p>
 			</div>
 			
 		";
@@ -107,8 +107,8 @@ class CommonHtmlElement{
 		echo "<head>";
 		echo "\n";
 		echo '<title> '.$title.' - I tesori di Squitty </title>';
-		echo "\n";
-		echo '<meta name="title" content="'.$title.'" />';
+		//echo "\n";
+		//echo '<meta name="title" content="'.$title.'" />';
 		echo "\n";
 		echo '<meta name="author" content="Simone Ballarin, Gerta Llieshi, Alessio Gobbo, Dario Riccardo"/>';
 		echo "\n";
@@ -116,8 +116,8 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<meta name="keywords" content="Squitty, pasticceria, dolci, '.$keyword.'"/>';
 		echo "\n";
-		echo '<meta name="language" content="italian it"/>';
-		echo "\n";
+		//echo '<meta name="language" content="italian it"/>';
+		//echo "\n";
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
 		echo "\n";
 		echo '<link rel="stylesheet" media="screen" href="../../css/stile.css" type="text/css"/>';
@@ -132,7 +132,7 @@ class CommonHtmlElement{
 		echo "\n";
 	}
 
-	public function generateMenu($page){
+	public function generateMenu($page, $boolS){
 		echo "<ul>";
 		switch($page){
 			case "home":
@@ -166,28 +166,32 @@ class CommonHtmlElement{
 					echo "<li><a href='catering.php'>Catering ed Eventi</a></li>";
 			break;
 		}
+		if ($boolS){
 		echo "<li>";
 			echo "<div class='search-container'>";
 			echo "<form action='search_page.php'>";
-			echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
+			echo "<label for='searchInput' class='aiuti'>Cerca </label>";
+			echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
 			echo "<button type='submit'>Cerca</button>";
 			echo "</form>";
 			echo "</div>";
 		echo "</li>";
+		}
 	 echo "</ul>";
 	}
 
 	public function createheader($page){
-		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>";
+		
 		echo "<div id='accessBar'>
-			<a href ='#content'>Vai al contenuto</a>
+			<a href ='#skip'>Vai al contenuto</a>
+			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
 		echo "<div class='header'>";
 			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
-			$this->generateMenu($page);
+			$this->generateMenu($page, true);
 		  echo "</div>";
 			$this->printBricioleDiPane($page);
 		echo "</div>";
@@ -203,7 +207,7 @@ class CommonHtmlElement{
 
 	public function generateLogInLink($page){
 		echo "<div class='logNav'>";
-		echo "<h3 >AREA PERSONALE</h3>";
+		echo "<h2>AREA PERSONALE</h2>";
 		echo "<ul>";
 		switch($page){
 			case "logIn":
@@ -293,9 +297,9 @@ class CommonHtmlElement{
     echo  "    <div id='headerSpace'> </div>";
 		$this->createBottomHeader();
     echo  "    <div id='linkEsterni'>";
-      			$this->generateMenu($page);
+      			$this->generateMenu($page,false);
     echo  "    </div>";
-    				$this->printInternalMenuMobile("$page");
+    				$this->printInternalMenuMobile($page);
 						$this->generateLogInLink($page);
 	echo "</div>";
 	}
