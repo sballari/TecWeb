@@ -168,7 +168,7 @@ class CommonHtmlElement{
 		}
 		if ($boolS){
 		echo "<li>";
-			echo "<div class='search-container'>";
+			echo "<div class='search-container,onlyDesktop'>";
 			echo "<form action='search_page.php'>";
 			echo "<label for='searchInput' class='aiuti'>Cerca </label>";
 			echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
@@ -182,11 +182,11 @@ class CommonHtmlElement{
 
 	public function createheader($page){
 
-		echo "<div id='accessBar'>
-			<a href ='#skip'>Vai al contenuto</a>
+		echo "<div id='accessBar' class='onlyDesktop'>
+			<a href ='#content'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
-		echo "<div class='header'>";
+		echo "<div class='header' id='top'>";
 			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
@@ -972,9 +972,9 @@ switch($usrType ){
 		echo "</br>";
 		break;
 }
-echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' required>";
 echo "</br>";
-echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='text' name='oraRitiro' required>";
 echo "</br>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
 echo "</br>";
