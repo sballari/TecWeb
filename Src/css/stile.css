@@ -114,7 +114,6 @@ h2, h3{
 #sitemap h3{
   text-align: left;
   padding: 0.2em;
-
 }
 
 .bottomElement {
@@ -288,7 +287,7 @@ h2, h3{
   background-color: brown;
 }
 
-#form button{
+/* #form button{
   padding: 0.4em;
   margin-right: 1em;
   background: #ddd;
@@ -296,7 +295,7 @@ h2, h3{
   border: black solid 1px;
   cursor: pointer;
   float: right;
-}
+} */
 
 .contentElement button, .bottomElement button{
   padding: 0.4em;
@@ -314,41 +313,29 @@ legend{
   color: brown;
 }
 
-#form div{
-  margin: 0.5em 0 0.5em 0;
+input, select, textarea{
   width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: vertical;
   float: left;
+  width: 75%;
+  margin-top: 6px;
 }
 
-#form label{
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
   float: left;
-  display: block;
-  text-align: right;
+  width: 25%;
+  margin-top: 6px;
 }
 
-#form input,select,textarea{
-  float: right;
-  border: black solid 1px;
-  display: block;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-#form input,select{
-  max-width: 50%;
-}
-
-#form textarea{
-  height: 50%;
-}
-
-fieldset{
-  border: 1px solid brown;
-  padding: 0.5em;
-}
-
-#form button{
-  float: left;
+div::after{
+  content: "";
+  display: table;
+  clear: both;
 }
 
 table {
