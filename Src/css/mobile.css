@@ -3,17 +3,6 @@ html,body{
   font-size: 1em;
 }
 
-.header h1{
-  float: none;
-  font-size: 5em;
-  padding-left: 2em;
-  text-align: center;
-}
-
-#accessBar{
-  display: none;
-}
-
 .onlyMobile{
   position: static;
   width: 100%;
@@ -26,11 +15,18 @@ html,body{
 }
 
 .header {
-  width: 100%;
+  width: 100vw;
   border: 0;
   border-bottom: 1px solid brown;
   margin-bottom: 0.5em;
   border-top: 1px solid brown;
+}
+
+.header h1{
+  float: none;
+  font-size: 5em;
+  padding-left: 2em;
+  text-align: center;
 }
 
 .header img {
@@ -53,13 +49,25 @@ html,body{
   margin-bottom: 0.5em;
 }
 
-.contentElement img {
-	max-width: 100%;
-}
 
-.contentElement{
+.contentElement ,.bottomElement{
   border-left: 0;
   border-right: 0;
+  padding: 0;
+  width: 100%;
+  
+}
+#content {
+  float: none;
+  width: 100vw;
+}
+#contentElement p{
+  margin: 0;
+  padding: 0;
+}
+.contentElement img {
+  max-width: 95vw;
+  
 }
 
 .contentElement.Left img, .contentElement.Right img{
@@ -78,10 +86,6 @@ html,body{
   text-align: center;
 }
 
-#content{
-  width: 100%;
-  margin: 0;
-}
 
 #hamburger{
   float: right;
@@ -135,38 +139,23 @@ html,body{
   padding-top: 0.5em;
 }
 
-.search-container{
-  display: none;
-}
 
-#linkEsterni{
-  border-bottom: 1px brown solid;
-}
 
-#mobileInterni{
-  margin-top: 0.5em;
-}
 
 .product img{
   max-width: 100%;
   width:100%;
 }
 
-#storia,#negozio,#stabilimento,#contatti,#footer,#info,#productlist{
+
+
+
+
+.bottomElement {
   border-left: 0;
   border-right: 0;
-  padding: 0;
-  /* width: 100%; */
-  float: none;
-}
-
-
-
-#footer{
-  border-left: 0;
-  border-right: 0;
-  margin:0.3em 0.3em 0.3em 0.3em;
-  margin-bottom: 100vh;
+  margin:0.5em 0.3em 0.3em 0.3em;
+  
 }
 
 #contatti li{
@@ -190,7 +179,9 @@ html,body{
   font-size: 1em;
 }
 
-fieldset{border:0;}
+fieldset{
+  border:0;
+}
 
 #form ,#info{
   font-size: 2.5em;
