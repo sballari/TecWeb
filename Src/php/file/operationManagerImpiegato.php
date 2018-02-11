@@ -1,6 +1,5 @@
 <?php
 session_start();
-if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
   require_once("../class/DBmanager.php");
   require_once("CommonHtmlElement.php");
   require_once("../class/Manipulator.php");
@@ -9,11 +8,9 @@ if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php")
   require_once("../class/Request.php");
   require_once("../class/RetailOrder.php");
   require_once("../class/MassiveOrder.php");
-    require_once("../class/Product.php");
-  require_once("../class/Service.php");}
-else{
-  echo "Error: One of the files does not esist.";
-  exit;}
+  require_once("../class/Product.php");
+  require_once("../class/Service.php");
+
   $h = new CommonHtmlElement();
   $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -21,32 +18,101 @@ else{
   $f = new Factory($d);
   $m = new Manipulator($d);
 
-if(isset($_POST['richiestaDettaglio'])){
-  $req = $f->getRequestList($_SESSION['Email']);
+
+
+
+if(isset($_POST['richiestaDettagliataImp'])){
+  $reqS = $f->getTypeRequestList("Servizio");
+  $lengthS = count($reqS);
+    $reqI = $f->getTypeRequestList("All_ingrosso");
+    $lengthI = count($reqI);
+      $reqM = $f->getTypeRequestList("Al minuto");
+        $lengthM = count($reqM);
   if(isset($_POST['request'])){
 
       $pos = substr($_POST['request'], 7);
+      if($pos <= $lengthS){
+        $x = $reqS[$pos-1];
+      }
+      elseif($pos <= ($lengthI + $lengthS)){
+        $x = $reqI[$pos-$lengthS-1];
+      }
+      elseif($pos <= ($lengthI + $lengthS + $lengthM)){
+        $x = $reqM[$pos-$lengthS-$lengthI-1];
+      }
+      else{
+        $_SESSION['messaggioAreaImp'] = "Qualcosa &egrave; andato storto!";
+        header("Location: areaPersonaleImpiegato.php");
+      }
 
-      $x = $req[$pos-1];
 
-      $_SESSION['richiestaDettaglio'] = serialize($x);
-      header("Location: richiestaDettagliata.php");
+      $_SESSION['richiestaDettagliataImp'] = serialize($x);
+      header("Location: oggettoDettagliatoImpiegato.php");
     }
+  else{
+
+
+    $_SESSION['messaggioAreaImp'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
+    header("Location: areaPersonaleImpiegato.php");
+  }
+}
+
+
+
+  if(isset($_POST['utenteDettagliato'])){
+    $req = $f->getEntireUserList();
+    if(isset($_POST['utente'])){
+
+        $pos = substr($_POST['utente'], 6);
+
+          $x = $req[$pos-1];
+
+
+        $_SESSION['utenteDettagliato'] = serialize($x);
+        header("Location: oggettoDettagliatoImpiegato.php");
+      }
     else{
-    $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
-    header("Location: areaPersonale.php");
+
+
+      $_SESSION['messaggioAreaImp'] = "Devi selezionare un utente per poter visualizzare l'utente dettagliatto.";
+      header("Location: areaPersonaleImpiegato.php");
+    }
   }
 
-}
+
+    if(isset($_POST['prodottoDettagliato'])){
+      $req = $f->getEntireProductList();
+      if(isset($_POST['prodotto'])){
+
+          $pos = substr($_POST['prodotto'], 8);
+
+            $x = $req[$pos-1];
+
+
+          $_SESSION['prodottoDettagliato'] = serialize($x);
+          header("Location: oggettoDettagliatoImpiegato.php");
+        }
+      else{
+
+
+        $_SESSION['messaggioAreaImp'] = "Devi selezionare un prodotto per poter visualizzare il prodotto dettagliatto.";
+        header("Location: areaPersonaleImpiegato.php");
+      }
+    }
+
+
+
 
 
 
 if(isset($_POST['annullaRichiesta'])){
   $req = $f->getRequestList($_SESSION['Email']);
-  if(isset($_POST['request'])){
-      $pos = substr($_POST['request'], 7);
-      $x = $req[$pos-1];
+    $id=1;
+    foreach($req as $x){
+      $st="request" . $id . "";
+      $b = isset($_POST[$st]);
 
+      if(isset($_POST[$st])){
         $currentD = "".date("Y-m-d ");
         $deliveryD = "".$x->getDeliveryDateTime();
         if($deliveryD > $currentD){
@@ -54,16 +120,16 @@ if(isset($_POST['annullaRichiesta'])){
           $_SESSION['richiestaAnnullata'] = serialize($x);
           $_SESSION['submitPremuto']="annullaRichiesta";
           header("Location: ConfirmPage.php");
-
+          break;
         }
         else{
-          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. La richiesta da annullare deve essere in lavorazione e l'annulla deve essere fatta almeno un giorno prima della consegna.";
+          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta.";
           header("Location: areaPersonale.php");
         }
       }
-
-
-    else{
+      $id++;
+    }
+    if(!isset($_SESSION['richiestaAnnullata'])){
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter procedere con l'operazione di annulla.";
       header("Location: areaPersonale.php");
     }
@@ -177,7 +243,7 @@ if(isset($_POST['annullaRichiesta'])){
 
 
   if(isset($_POST['conferma'])){
-    switch( $_SESSION['submitPremuto']){
+    switch( $_SESSION['buttonPremuto']){
       case "annullaRichiesta":
         if(isset($_SESSION['richiestaAnnullata'])){
           $m = new Manipulator($d);
@@ -231,7 +297,7 @@ if(isset($_POST['annullaRichiesta'])){
 
         if($b==false){
           $_SESSION['messaggioConfirm'] = "<p>Qualcosa &egrave; andato storto.</p>";
-          header("Location: ConfirmPage.php");
+          header("Location: ConfirmPageImpiegato.php");
         }
         else{
           unset($_SESSION['Email']);
@@ -240,7 +306,7 @@ if(isset($_POST['annullaRichiesta'])){
         break;
 
   }
-  unset($_SESSION['submitPremuto']);
+  unset($_SESSION['buttonPremuto']);
 }
 
 
@@ -270,14 +336,14 @@ if(isset($_POST['annulla'])){
         break;
 
     case "logout":
-      header("Location: areaPersonale.php");
+      header("Location: areaPersonaleImpiegato.php");
       break;
     case "closeaccount":
-      header("Location: areaPersonale.php");
+      header("Location: areaPersonaleImpiegato.php");
       break;
 
     }
-    unset($_SESSION['submitPremuto']);
+    unset($_SESSION['buttonPremuto']);
 }
 
 

@@ -9,17 +9,7 @@ html, body{
 max-width: 1024px;
 margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 1em;
-}
-
-.search-container button{
-  padding: 0.4em;
-  margin-right: 1em;
-  background: #ddd;
-  font-size: 1em;
-  border: black solid 1px;
-  cursor: pointer;
-  float: right;
+font-size: 14px;
 }
 
 button:hover {
@@ -32,7 +22,7 @@ button:hover {
   border: 1px solid brown;
 }
 
-#logo {
+.logo {
   width: 8%;
   padding: 0.25em;
 	float: left;
@@ -41,16 +31,25 @@ button:hover {
 #menu {
 	overflow: hidden;
   float: left;
+  width: 80%;
+  margin-bottom: 0.5em;
 	}
 
-  .search-container {
-      float: right;
-  }
 
 .search-container input {
-    width: auto;
-    border-right:none;
-    border-radius: 0;
+    border: 1px solid black;
+    border-right: 0;
+    padding: 0.5em;
+}
+.search-container label {
+  padding : 0;
+}
+
+.search-container button{
+  background: #ddd;
+  border: black solid 1px;
+  cursor: pointer;
+  padding: 0.5em;
 }
 
 #menu ul {
@@ -60,8 +59,8 @@ button:hover {
   margin-left: 0.4em;
 }
 
-
 #menu li:first-child {border-left: 1px solid brown;}
+#menu li:last-child {border:0;float: right;}
 
 #menu li {
 	float:left;
@@ -78,11 +77,12 @@ color: brown;
 text-decoration: none;
 }
 
-#menu span{
-display: block;
-background-color: brown;
-color: white;
-padding:0.4em;
+#menu span,#internalNavBar span{
+  display: block;
+  background-color: brown;
+  color: white;
+  padding:0.4em;
+  text-align: center;
 }
 
 #menu li a:hover {
@@ -113,10 +113,9 @@ h2, h3{
 #sitemap h3{
   text-align: left;
   padding: 0.2em;
-
 }
 
-#contatti {
+.bottomElement {
 	float: left;
   margin-top: 0.5em;
   padding-left:0.5em;
@@ -126,20 +125,17 @@ h2, h3{
   width: 100%;
 }
 
-#contatti ul {
+.bottomElement ul {
 	list-style-type:disc;
   padding-left: 1.5em;
 }
 
-#footer {
-	float: left;
-	background-color: lightyellow;
-  width: 100%;
-  padding-left: 0.5em;
-  padding-bottom: 0.5em;
+ #footer{
+  margin-top: 0;
   border-left: 1px solid brown;
   border-right: 1px solid brown;
   border-bottom: 1px solid brown;
+  border-top: 0;
 }
 
 
@@ -197,11 +193,12 @@ h2, h3{
   overflow: hidden;
 }
 
-#internalNavBar  {
+#internalNavBar {
   margin-top: 1em;
   width: 20%;
   float:left;
 }
+
 
 
 #internalNavBar ul {
@@ -230,18 +227,18 @@ h2, h3{
     background-color: antiquewhite;
 }
 
-#logNav h3{
+.logNav h3{
   text-align: center;
 }
 
-#logNav ul{
+.logNav ul{
   border-top: 1px brown solid;
   border-left: 1px brown solid;
   border-right: 1px brown solid;
   margin-top: 0.5em;
 }
 
-#logNav span{
+.logNav span{
   display: block;
   background-color: brown;
   color: white;
@@ -278,7 +275,7 @@ h2, h3{
   position: fixed;
   border: 1px solid black;
   top: 90%;
-  left: 46.5%;
+  left: 90%;
   background-color: rgba(165,42,42,0.7);
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -289,7 +286,17 @@ h2, h3{
   background-color: brown;
 }
 
-#form button{
+/* #form button{
+  padding: 0.4em;
+  margin-right: 1em;
+  background: #ddd;
+  font-size: 1em;
+  border: black solid 1px;
+  cursor: pointer;
+  float: right;
+} */
+
+.contentElement button, .bottomElement button{
   padding: 0.4em;
   margin-right: 1em;
   background: #ddd;
@@ -299,34 +306,35 @@ h2, h3{
   float: right;
 }
 
-.contentElement button{
-  padding: 0.4em;
-  margin-right: 1em;
-  background: #ddd;
-  font-size: 1em;
-  border: black solid 1px;
-  cursor: pointer;
-  float: right;
+legend{
+  font-weight: bold;
+  padding-top: 0.5em;
+  color: brown;
 }
 
-label{
+input, select, textarea{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: vertical;
   float: left;
-  width: 6em;
-  text-align: right;
+  width: 75%;
+  /* margin-top: 6px; */
 }
 
-select,input{
-  border-radius: 5px;
-  padding: 0.4em;
-  font-size: 1em;
-  border: black solid 1px;
-  margin-left: 1em;
-  width: auto;
-  margin-bottom: 0.5em;
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  width: 25%;
+  margin-top: 6px;
 }
 
-fieldset{
-  border: 0;
+div::after{
+  content: "";
+  display: table;
+  clear: both;
 }
 
 table {
@@ -355,4 +363,20 @@ table caption {
   padding: 0.2em;
   background-color: brown;
   color: white;
+}
+
+#accessBar{
+  background-color: AliceBlue;
+  text-decoration: none;
+  padding-bottom: 0.3em;
+  padding-left: 0.2em;
+}
+
+#accessBar a{
+  text-decoration: none;
+  color: black;
+}
+
+#accessBar a:hover{
+  text-decoration: underline;
 }

@@ -2,13 +2,17 @@
 <html lang ="it">
 <?php
       require_once ("CommonHtmlElement.php");
+      require_once("../class/Factory.php");
+      require_once("../class/User.php");
+      require_once("../class/Manipulator.php");
       require_once("../class/DBmanager.php");
       $h = new CommonHtmlElement();
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
+      $f = new Factory($d);
       $h->printHead("singUp", "area personale", "login, signup");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -66,7 +70,7 @@
 					require_once("../class/User.php");
 					require_once("../class/Manipulator.php");
 					require_once("../class/DBmanager.php");
-				}
+
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
@@ -79,58 +83,72 @@
 				else
 				{
 					$_SESSION['Email'] = $emailSignup;
-					header("Location: areaPersonale.php");
+          $u = $f->getUser($_SESSION['Email']);
+          $t = $u->getUserType();
+          if($t == "Impiegato"){
+            header("Location: areaPersonaleImpiegato.php");
+          }
+          else{
+            header("Location: areaPersonale.php");
+          }
+
 
 				}
-
-			}
+      }
+		}
 ?>
 
     <div id=content>
-    <div class="contentElement">
+    <div id='info' class="contentElement">
     		<h3>INFO</h3>
 			<p>
         Se disponi gi&agrave di un account prego procedere all'accesso dal seguente bottone.
+      </br>
 			  <a href="logIn.php">Vai alla pagina di <span lang='en'>Log in</span></a>.
       </p>
    </div>
 	<div class='contentElement'>
-				<form action=''  method='POST'>
+				<form id='form' action=''  method='POST'>
 					<fieldset>
 
-						<legend>Creazione account</legend>
+						<legend>Creazione account:</legend>
             <?php
 						echo "</br>".$ErrSignup;
-						echo "<label for='nome'>Nome: </label>";
-						echo "<input type='text' name='nome'  placeholder='insert your name' required><span class='err'>".$ErrNome."</span>";
-            echo "</br>";
-						echo "<label for='cognome'>Cognome: </label>";
-						echo "<input type='text' name='cognome'  placeholder='insert your surname' required><span class='err'>".$ErrCognome."</span>";
-            echo "</br>";
-						echo "<label for='tipoUtente'>Tipo utente: </label>";
-						echo "<select name='tipoUtente' required>
-							<option value=''>--</option>
-							<option value='Al minuto'>Al minuto</option>
-							<option value='All ingrosso'>All'ngrosso</option>
-							<option value='Servizio'>Servizio</option>
-							<option value='Impiegato'>Impiegato</option>
-							</select><span class='err'>".$ErrTipoUtente."</span>";
-
-            echo "</br>";
-						echo "<label for='email'>Email: </label>";
-						echo "<input type='email' name='emailSignup' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEmail."</span>";
-            echo "</br>";
-						echo "<label for='password'>Password: </label>";
-						echo "<input type='password' name='passwordSignup' placeholder='insert your password' required><span class='err'>".$ErrPassword."</span>";
+            echo "<div id='nome'>";
+  						echo "<label for='nome'>Nome: </label>";
+  						echo "<input type='text' name='nome'  placeholder='insert your name' required><span class='err'>".$ErrNome."</span>";
+            echo "</div>";
+            echo "<div id='cognome'>";
+  						echo "<label for='cognome'>Cognome: </label>";
+  						echo "<input type='text' name='cognome'  placeholder='insert your surname' required><span class='err'>".$ErrCognome."</span>";
+            echo "</div>";
+            echo "<div id='tipo'>";
+  						echo "<label for='tipoUtente'>Tipo utente: </label>";
+  						echo "<select name='tipoUtente' required>
+  							<option value=''>--</option>
+  							<option value='Al minuto'>Al minuto</option>
+  							<option value='All ingrosso'>All'ingrosso</option>
+  							<option value='Servizio'>Servizio</option>
+  							<option value='Impiegato'>Impiegato</option>
+  							</select><span class='err'>".$ErrTipoUtente."</span>";
+            echo "</div>";
+            echo "<div id='email'>";
+  						echo "<label for='email'>Email: </label>";
+  						echo "<input type='email' name='emailSignup' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEmail."</span>";
+            echo "</div>";
+            echo "<div id='email'>";
+  						echo "<label for='password'>Password: </label>";
+  						echo "<input type='password' name='passwordSignup' placeholder='insert your password' required><span class='err'>".$ErrPassword."</span>";
+            echo "</div>";
             ?>
-            </br>
 						<button type='submit' name='createAccount'>Create account</button>
 					</fieldset>
 				</form>
 			</div>
-
 </div>
+
 <?php
+	$h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("singUp");

@@ -16,18 +16,24 @@ session_start();
     $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
     $d->connect();
     $f = new Factory($d);
-    $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
+    $h->printHead("Oggetto Dettagliato", "dettagli dell'oggetto", "ordini, utenti, prodotti");
+        //PROVA
+                //$email = "cristina.polletto@gmail.it";
+                //$s= $f->getRequestList($email);
+                //$_SESSION['Email']="$email";
+                //$_SESSION['richiestaDettaglio']=$s[0];
+        //FINE PROVA
 
  ?>
-<body onload='creaStatistiche()'>
+<body>
     <div id="accessBar">
     </div>
 
     <?php
-  	   $h->createheader("richiestaDettagliata");
+  	   $h->createheader("oggettoDettagliatoImpiegato");
 
 
-          if (!isset($_SESSION['Email'])){
+        if (!isset($_SESSION['Email'])) {
             $h->printInternalMenu("errore");
             echo "<div id='content'>";
             echo "<div class='contentElement'>";
@@ -40,8 +46,9 @@ session_start();
 
         else {
           $u = $f->getUser($_SESSION['Email']);
+
           $t = $u->getUserType();
-          if($t == "Impiegato"){
+          if($t != "Impiegato"){
             $h->printInternalMenu("errore");
             echo "<div id='content'>";
             echo "<div class='contentElement'>";
@@ -53,39 +60,41 @@ session_start();
             echo "</div>";
           }
           else{
-            $h->printInternalMenu("richiestaDettagliata");
+            $h->printInternalMenu("oggettoDettagliatoImpiegato");
             echo "<div id='content'>";
             echo "<div id='info' class='contentElement'>";
             echo "<h3>INFO</h3>";
             echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
             echo "</div>";
 
-            if (isset($_SESSION['richiestaDettaglio'])){
-              $r = unserialize($_SESSION['richiestaDettaglio']);
-
-
-              unset($_SESSION['richiestaDettaglio']);
+            if (isset($_SESSION['richiestaDettagliataImp'])){
+              $r = unserialize($_SESSION['richiestaDettagliataImp']);
+              unset($_SESSION['richiestaDettagliataImp']);
                 $h->printRichiestaDettagliataDiv($r);
 
             }
+            elseif(isset($_SESSION['utenteDettagliato'])){
+              $ut = unserialize($_SESSION['utenteDettagliato']);
+              unset($_SESSION['utenteDettagliato']);
+                $h->printUtenteDettagliatoDiv($ut);
+            }
+            elseif(isset($_SESSION['prodottoDettagliato'])){
+              $pr = unserialize($_SESSION['prodottoDettagliato']);
+              unset($_SESSION['prodottoDettagliato']);
+                $h->printProdottoDettagliatoDiv($pr);
+            }
             else {
-                echo "
-                <div class='contentElement'>
+
+                echo "<div class='contentElement'>
                     <h3>ERRORE</h3>
-                    <p> per poter visualizzare una richiesta dettagliata deve prima selezionare una richiesta. Ci dispiace per il disagio.
+                    <p> per poter visualizzare un oggetto dettagliato deve prima selezionare un oggetto.
+                     Ci dispiace per il disagio.
                     Le auguriamo una formaggiosa giornata.
                 </div>";
             }
         }
       }
 
-    ?>
-
-
-    </div>
-
-    <?php
-    $h->createStatisticDiv();
 	  $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("casa");

@@ -8,7 +8,7 @@
       require_once ("../class/User.php");
       require_once ("../class/Product.php");
       $h = new CommonHtmlElement();
-      $h->printHead("prenotazione", "prenotazione ordini", "prenotazione, ordine");
+      $h->printHead("Pagina di conferma cliente", "pagina dedicata alla conferma delle operazioni eseguite dal cliente", "conferma, annulla");
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
       $f = new Factory($d);
@@ -19,12 +19,11 @@
     </div>
 
 		<?php
-			$h->createheader("account");
-      $h->printInternalMenu("account");
-    ?>
-<div id="content">
-  <?php
-  if (!isset($_SESSION['Email'])) {
+			$h->createheader("ConfirmPage");
+
+  if (!isset($_SESSION['Email'])){
+    $h->printInternalMenu("errore");
+    echo "<div id='content'>";
     echo "<div class='contentElement'>";
     echo "<h3>ERRORE</h3>";
     echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
@@ -34,8 +33,23 @@
   }
 
   else {
-     $u = $f->getUser($_SESSION['Email']);
-     $t = $u->getUserType();
+    $u = $f->getUser($_SESSION['Email']);
+    $t = $u->getUserType();
+    if($t == "Impiegato"){
+      $h->printInternalMenu("errore");
+      echo "<div id='content'>";
+      echo "<div class='contentElement'>";
+      echo "<h3>ERRORE</h3>";
+      echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
+      <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
+      <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
+      echo "</div>";
+      echo "</div>";
+    }
+    else{
+        $h->printInternalMenu("ConfirmPage");
+        echo "<div id='content'>";
+
      echo "<div id='info' class='contentElement'>";
      if(isset($_SESSION['messaggioConfirm'])){
        echo "".$_SESSION['messaggioConfirm'];
@@ -86,10 +100,8 @@
    }
  }
    }
-   ?>
-   </div>
-
- <?php
+ }
+  
  $h->printContatti();
    $h->printFooter();
    $h->printMobileMenu("casa");

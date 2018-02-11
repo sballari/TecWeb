@@ -9,7 +9,15 @@ require_once("../class/RetailOrder.php");
 require_once("../class/MassiveOrder.php");
 require_once("../class/Service.php");
 class CommonHtmlElement{
+	public function createStatisticDiv(){
+		echo "
+			<div id='statD' class='bottomElement'>
+			<h3>INFO NAVIGAZIONE</h3>
+			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <abbr lang='en' title = 'JavaScript'>JS</abbr></p>
+			</div>
 
+		";
+	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
 		echo "<div class='product'>";
 		echo "<h4>" . $this->evidenziaTesto($x->getName(), $evidenzia) . "</h4>";
@@ -20,11 +28,13 @@ class CommonHtmlElement{
 		if ($ricerca==true) echo "<p> <strong>Tipo prodotto</strong>: " . $this->evidenziaTesto($x->getProductType(),$evidenzia) . "</p>";
 		echo "</div>";
 	}
+
 	function evidenziaTesto($input, $par){
 			return $newTesto =str_ireplace($par,
 			 "<mark >".strtoupper($par)."</mark>",
 			 $input);
 	}
+
 	public function printBricioleDiPane($page){
 		switch ($page) {
 			case 'home':
@@ -50,6 +60,17 @@ class CommonHtmlElement{
 				}
 				else {$percorso = "Pagina di Errore";}
 				break;
+			case 'accountImpiegato':
+
+					if (isset($_SESSION['Email'])){
+						$percorso = "Area Personale Impiegato";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='ordini') $percorso = $percorso.">>Ordini";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='utenti') $percorso = $percorso.">>Utenti";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso.">>Prodotti";
+
+					}
+					else {$percorso = "Pagina di Errore";}
+					break;
 			case 'logIn':
 				$percorso = "<span>Accedi</span>";
 				break;
@@ -65,6 +86,15 @@ class CommonHtmlElement{
 			case 'ConfirmPage':
 				$percorso = "Pagina di Conferma";
 			break;
+			case 'richiestaDettagliata':
+				$percorso = "Pagina di Richiesta Dettagliata";
+			break;
+			case 'ConfirmPageImpiegato':
+				$percorso = "Pagina di Conferma Impiegato";
+			break;
+			case 'oggettoDettagliatoImpiegato':
+				$percorso = "Pagina di Oggetto Dettagliato";
+			break;
 		}
 		echo "
 			<div id='briciole'>
@@ -77,8 +107,8 @@ class CommonHtmlElement{
 		echo "<head>";
 		echo "\n";
 		echo '<title> '.$title.' - I tesori di Squitty </title>';
-		echo "\n";
-		echo '<meta name="title" content="'.$title.'" />';
+		//echo "\n";
+		//echo '<meta name="title" content="'.$title.'" />';
 		echo "\n";
 		echo '<meta name="author" content="Simone Ballarin, Gerta Llieshi, Alessio Gobbo, Dario Riccardo"/>';
 		echo "\n";
@@ -86,22 +116,23 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<meta name="keywords" content="Squitty, pasticceria, dolci, '.$keyword.'"/>';
 		echo "\n";
-		echo '<meta name="language" content="italian it"/>';
-		echo "\n";
+		//echo '<meta name="language" content="italian it"/>';
+		//echo "\n";
 		echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
 		echo "\n";
 		echo '<link rel="stylesheet" media="screen" href="../../css/stile.css" type="text/css"/>';
 		echo "\n";
 		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
 		echo "\n";
-		echo '<link rel="stylesheet" media="handheld,screen and (max-width:681px), only screen and (max-device-width:681px)"
+		echo '<link rel="stylesheet" media="screen and (max-width:681px), only screen and (max-device-width:681px)"
 		 			href="../../css/mobile.css" type="text/css" />';
 		echo "\n";
+		echo "<script src='gestioneCookie.js'></script>";
 		echo '</head>';
 		echo "\n";
 	}
 
-	public function generateMenu($page){
+	public function generateMenu($page, $boolS){
 		echo "<ul>";
 		switch($page){
 			case "home":
@@ -135,41 +166,48 @@ class CommonHtmlElement{
 					echo "<li><a href='catering.php'>Catering ed Eventi</a></li>";
 			break;
 		}
+		if ($boolS){
+		echo "<li>";
+			echo "<div class='search-container'>";
+			echo "<form action='search_page.php'>";
+			echo "<label for='searchInput' class='aiuti'>Cerca </label>";
+			echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
+			echo "<button type='submit'>Cerca</button>";
+			echo "</form>";
+			echo "</div>";
+		echo "</li>";
+		}
+	 echo "</ul>";
 	}
 
 	public function createheader($page){
-		echo "<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>";
+
 		echo "<div id='accessBar'>
 			<a href ='#content'>Vai al contenuto</a>
+			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
 		echo "<div class='header'>";
-			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
-			$this->generateMenu($page);
-				echo "<div class='search-container'>";
-								echo "<form action='search_page.php'>";
-							  	echo "<input id='search' type='search' name='search' placeholder='Cerca prodotti...'>";
-								echo "<button type='submit'>Cerca</button>";
-								echo "</form>";
-				echo "</div>";
-			echo "</div>";
+			$this->generateMenu($page, true);
+		  echo "</div>";
 			$this->printBricioleDiPane($page);
 		echo "</div>";
 	}
 
 	public function createBottomHeader(){
 		echo "<div class='header'>";
-			echo "<a href='home.php'><img  id='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 		echo "</div>";
 	}
 
 	public function generateLogInLink($page){
-		echo "<div id='logNav'>";
-		echo "<h3 >AREA PERSONALE</h3>";
+		echo "<div class='logNav'>";
+		echo "<h2>AREA PERSONALE</h2>";
 		echo "<ul>";
 		switch($page){
 			case "logIn":
@@ -190,10 +228,50 @@ class CommonHtmlElement{
 					echo "<li><a href='signUp.php'>Registrati</a></li>";
 				}
 			break;
-			case "accountImpiegato":
+			case "ConfirmPage":
 				if (isset($_SESSION['Email'])){
 					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
 					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "richiestaDettagliata":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonale.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonale.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "accountImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "ConfirmPageImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
+				}
+				else{
+					echo "<li><a href='logIn.php'>Accedi</a></li>";
+					echo "<li><a href='signUp.php'>Registrati</a></li>";
+				}
+			break;
+			case "oggettoDettagliatoImpiegato":
+				if (isset($_SESSION['Email'])){
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=logout'>Esci</a></li>";
+					echo "		<li><a href='areaPersonaleImpiegato.php?operazione=closeaccount'>Elimina Account</a></li>";
 				}
 				else{
 					echo "<li><a href='logIn.php'>Accedi</a></li>";
@@ -211,7 +289,7 @@ class CommonHtmlElement{
 	}
 
 	public function printContatti(){
-	echo  "<adress id='contatti'>";
+	echo  "<div id='contatti' class='bottomElement'>";
     echo  "	<h3>CONTATTI</h3>";
     echo  "    <p>";
     echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
@@ -219,29 +297,33 @@ class CommonHtmlElement{
     echo  "        <ul>";
     echo  "            <li>negozio: via G. Stilton 44 Jesolo (VE) cap. 30016</li>";
     echo  "            <li>stabilimento: via dell’Innovazione 42 Jesolo (VE) cap. 30016</li>";
-    echo  "            <li>mail: <a href ='mailto: info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
-    echo  "            <li>tel: <a href ='tel: 04215841204'>0421 5841204</a></li>";
+    echo  "            <li>mail:<a href ='mailto:info@pasticceriaSquitty'>info@pasticceriaSquitty.com</a></li>";
+    echo  "            <li>tel:<a href ='tel:04215841204'>0421 5841204</a></li>";
     echo  "        </ul>";
-    echo  "</adress>";
+  echo  "</div>";
 	}
+
 	public function printFooter(){
-		echo  "<div id='footer'>";
+	echo  "<div id='footer' class='bottomElement'>";
     echo  "    <p>";
-    echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
+    echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Lleshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
     echo  "    </p>";
     echo  "    <a href='sitemap.php'>sitemap</a>";
     echo  "</div>";
 	}
+
 	public function printMobileMenu($page){
-	echo  "	   <div class='onlyMobile' id='mobileMenu'>";
+	echo  "<div class='onlyMobile' id='mobileMenu'>";
     echo  "    <div id='headerSpace'> </div>";
-    echo  "    <div id='linkEsterni'>";
 		$this->createBottomHeader();
-      			$this->generateMenu($page);
+    echo  "    <div id='linkEsterni'>";
+      			$this->generateMenu($page,false);
     echo  "    </div>";
-    				$this->printInternalMenuMobile("$page");
+    				$this->printInternalMenuMobile($page);
 						$this->generateLogInLink($page);
+	echo "</div>";
 	}
+
 	public function printInternalMenu($page){
 		echo "<div id ='internalNavBar' class='onlyDesktop' >";
 				echo "<a href ='#content' class='aiuti'>Salta menu</a>";
@@ -280,7 +362,7 @@ class CommonHtmlElement{
 			break;
 			case "account":
 					if (isset($_SESSION['Email'])){
-						$percorso = "Area Personale";
+						//$percorso = "Area Personale";
 
 						if (isset($_GET['operazione']) and $_GET['operazione']=='storia') {
 							echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
@@ -327,7 +409,7 @@ class CommonHtmlElement{
 						if (!isset($_GET['operazione'])){
 							echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
 							echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
-							echo "<li><span>Prodotti</span></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 					}
 					break;
@@ -345,7 +427,21 @@ class CommonHtmlElement{
 					echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 				}
 			break;
+			case 'richiestaDettagliata':
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+				}
+			break;
 			case 'ConfirmPageImpiegato':
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+				}
+			break;
+			case 'oggettoDettagliatoImpiegato':
 				if (isset($_SESSION['Email'])){
 					echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
 					echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
@@ -475,11 +571,11 @@ public function printRichiestaDettagliataDiv($Richiesta){
 }
 echo "</div>";
 }
-public function printListaProdotti($usrType){
+public function printListaProdotti($Type){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
 	$f = new Factory($d);
-	$prod = $f->getProductList($usrType);
+	$prod = $f->getProductList($Type);
 	foreach ($prod as $x) {
 		$this->createProductDiv($x);
 	}
@@ -487,95 +583,85 @@ public function printListaProdotti($usrType){
 }
 	public function printStoriaOrdiniServizio($req){
 		$id=1;
+		echo "<p>Tabella degli ordini servizio</p>";
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>Codice Richiesta</th>
-		<th>Nome del Prodotto</th>
-
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>Codice</th>
+		<th>Delivery date and hour </th>
+		<th>Status</th>
 		</tr>";
 		foreach ($req as $x) {
-
 			echo "<tr>";
 			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";//TODO
 			echo "<td>" . $x->getKey() . "</td>";
-			echo "<td>" . $x->getService()->getName() . "</td>";
-
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
 			$id++;
 		}
+		if($_SESSION['operazione'] == "ordini"){
+		$_SESSION['iD'] = $id;
+
+	}
 		echo "</table>";
 	}
 
-
-
-
 public function printStoriaOrdiniAllIngrosso($req){
-		$id=1;
+		if(isset($_SESSION['iD'])){
+			$id = $_SESSION['iD'];
+		}
+		else{
+			$id=1;
+		}
+		echo "<p>Tabella degli ordini all'ingrosso</p>";
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>MassiveOrder codice</th>
-		<th>MassiveOrder product's (number) and name</th>
-		<th>MassiveOrder delivery date and hour </th>
-		<th>MassiveOrder status</th>
+		<th>Codice</th>
+		<th>Delivery date and hour</th>
+		<th>Status</th>
 		</tr>";
 		foreach ($req as $x) {
-
 			echo "<tr>";
 			echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "'/ ></td>";
 			echo "<td>" . $x->getKey() . "</td>";
-
-			$qta = $x->getProductsWithQta();
-			echo "<td>";
-			foreach(array_keys($qta) as $p){
-				echo "(".$qta[$p].")  ".$p;
-			}
-			echo "</td>";
-
 			echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 			echo "<td>" . $x->getStatus() . "</td>";
 			echo "</tr>";
 			$id++;
 		}
+		if($_SESSION['operazione'] == "ordini"){
+		$_SESSION['iD'] = $id;
+	}
 		echo "</table>";
 }
 
 public function printStoriaOrdiniAlMinuto($req){
-	$id=1;
+	if(isset($_SESSION['iD'])){
+		$id = $_SESSION['iD'];
+	}
+	else{
+		$id=1;
+	}
+	echo "<p>Tabella degli ordini al minuto</p>";
 	echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>ReTailOrder codice</th>
-		<th>RetailOrder product's(number) and name</th>
-
-
-		<th>ReTailOrder delivery date and hour </th>
-		<th>ReTailOrder status</th>
+		<th>Codice </th>
+		<th>Delivery date and hour </th>
+		<th>Status</th>
 		</tr>";
 	foreach ($req as $x) {
-
 		echo "<tr>";
 		echo "<td>".$id."<input type='radio' name='request' value='request" . $id . "' ></td>";
 		echo "<td>" . $x->getKey() . "</td>";
-		$qta = $x->getProductsWithQta();
-		echo "<td>";
-		foreach(array_keys($qta) as $p){
-			echo "(".$qta[$p].")  ".$p;
-		}
-		echo "</td>";
-
 		echo "<td>" . $x->getDeliveryDateTime() . "</td>";
 		echo "<td>" . $x->getStatus() . "</td>";
 		echo "</tr>";
 		$id++;
 	}
 	echo "</table>";
-
 }
 
 	public function printComposizioneOrdineTable($ordine){
@@ -604,7 +690,7 @@ public function printStoriaOrdini($t){
 	$d->connect();
 	$f = new Factory($d);
 	$req = $f->getRequestList($_SESSION['Email']);
-	$d->disconnect();
+
 	echo "<div class='contentElement'>";
 	echo "<form action = 'operationManager.php' method = 'POST'>";
 	switch($t){
@@ -624,8 +710,120 @@ public function printStoriaOrdini($t){
 	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
 	echo "</form>";
 	echo "</div>";
+	$d->disconnect();
 }
 
+
+public function printTabellaOrdini(){
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+
+	echo "<div class='contentElement'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+
+	$req = $f->getTypeRequestList("Servizio");
+	$this->printStoriaOrdiniServizio($req);
+
+	$req = $f->getTypeRequestList("All_ingrosso");
+	$this->printStoriaOrdiniAllIngrosso($req);
+
+	$req = $f->getTypeRequestList("Al minuto");
+	$this->printStoriaOrdiniAlMinuto($req);
+	if(isset($_SESSION['iD'])){
+		unset($_SESSION['iD']);
+	}
+	if(isset($_SESSION['operazione'])){
+		unset($_SESSION['operazione']);
+	}
+	echo "<button type='submit' name='cambiaStato' >Cambia stato</button>";
+	echo "<button type='submit' name='cancellaRichiesta' >Cancella la richiesta</button>";
+	echo "<button type='submit' name='richiestaDettagliataImp' >Richiesta dettagliata</button>";
+	echo "</form>";
+	echo "</div>";
+	$d->disconnect();
+}
+
+
+public function printTabellaUtenti(){
+	require_once("../class/Factory.php");
+	require_once("../class/DBmanager.php");
+	require_once("../class/Manipulator.php");
+
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$usr = $f->getEntireUserList();
+	$d->disconnect();
+	echo "<div class='contentElement'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	if($usr==false){
+		echo "Something went wrong! Try again.";
+	}
+	else{
+		echo "<div id='tabelaUtenti'>";
+		echo "<table>
+				<tr>
+				<th>Seleziona</th>
+				<th>Email</th>
+				<th>Tipo utente</th>
+				</tr>";
+	$id = 1;
+	foreach ($usr as $x) {
+		echo "<tr>";
+		echo "<td>".$id."<input type='radio' name='utente' value='utente" . $id . "' ></td>";
+		echo "<td>" . $x->getEmail() . "</td>";
+		echo "<td>" . $x->getUserType() . "</td>";
+		echo "</tr>";
+		$id++;
+	}
+	echo "</table>";
+	echo "</div>";
+	}
+	echo "</br></br>";
+	echo "<button type='submit' name='cancellaUtente'>Cancella l'utente</button>";
+	echo "<button type='submit' name='utenteDettagliato'>Utente dettagliato</button>";
+	echo "</form>";
+	echo "</div>";
+}
+
+
+public function printTabellaProdotti(){
+	require_once("../class/Factory.php");
+	require_once("../class/DBmanager.php");
+	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+	$d->connect();
+	$f = new Factory($d);
+	$prod = $f->getEntireProductList();
+	$d->disconnect();
+	echo "<div id='formOrdini' class='contentElement'>";
+	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+	echo "<button type='submit' name='aggiuntaProdotto'>Aggiungi un nuovo prodotto</button></br>";
+	echo "</br></br>";
+	echo "<table>
+			<tr>
+			<th>Seleziona</th>
+			<th>Nome</th>
+			<th>Tipo</th>
+			</tr>";
+	$id=1;
+	foreach ($prod as $x) {
+		echo "<tr>";
+		echo "<td>".$id."<input type='radio' name='prodotto' value='prodotto" . $id . "' ></td>";
+		echo "<td>" . $x->getName() . "</td>";
+		echo "<td>" . $x->getProductType() . "</td>";
+		echo "</tr>";
+		$id++;
+	}
+	echo "</table>";
+	echo "</br></br>";
+	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button></br>";
+	echo "</br></br>";
+	echo "<button type='submit' name='prodottoDettagliato'>Prodotto dettagliato</button>";
+	echo "<button type='submit' name='modificaProdotto'>Modifica prodotto</button></br></br>";
+	echo "</form>";
+	echo "</div>";
+}
 
 public function printFormPrenotazione($usrType){
 $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -641,29 +839,32 @@ if($usrType!=="Servizio"){
 	echo "<legend>Lista prodotti</legend>";}
 else{
 	echo "<legend>Dati prenotazione</legend>";}
-echo "</br>";
-echo "<label for='listaProdotti'>Prodotto:</label>  ";
-echo "<select name='listaProdotti'  required>";
-echo "<option value=''>--</option>";
-foreach ($prod as $x) {
-	echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
-}
+echo "<div>";
+	echo "<label for='listaProdotti'>Prodotto:</label>  ";
+	echo "<select name='listaProdotti'  required>";
+	echo "<option value=''>--</option>";
+	foreach ($prod as $x) {
+		echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
+	}
+echo "</div>";
 echo "</select>";
-echo "</br>";
 
 switch($usrType ){
 	case "Al minuto":
-		echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+	  echo "<div>";
+			echo "<label for='numeroProdotti'>Numero prodotti:</label>";
+			echo "<input type='number' name='numeroProdotti' required>";
+		echo "</div>";
 		echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
-		echo "</br>";
 		echo "</fieldset>";
 		echo "</form>";
 		echo "<form action='operationManager.php' method='POST' >";
 		echo "<fieldset>";
 		echo "<legend>Dati prenotazione</legend>";
-		echo "</br>";
-		echo "<label for='decrizioneUtente'>Descrizione utente:</label><textarea name='decrizioneUtente' rows='5' cols='30'>Torta di compleanno con la scrittura Buon compleanno.</textarea></br></br>";
-
+		echo "<div>";
+			echo "<label for='decrizioneUtente'>Descrizione utente:</label>";
+			echo "<textarea name='decrizioneUtente' rows='5' cols='30'>Dolce con la scritta Buon compleanno.</textarea>";
+		echo "</div>";
 		break;
 
 	case "All_ingrosso":
@@ -697,9 +898,9 @@ switch($usrType ){
 		echo "</br>";
 		break;
 }
-echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' placeholder='YYYY-MM-DD' required>";
+echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='date' name='dataRitiro' required>";
 echo "</br>";
-echo "<label for='oraRitiro'>Ora ritiro/consegna/evento(da 0 a 24):</label><input type='text' name='oraRitiro' placeholder='HH:MM:SS' required>";
+echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='time' name='oraRitiro' required>";
 echo "</br>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
 echo "</br>";
@@ -734,6 +935,9 @@ public function printTabelaProdottiScelti($usrType){
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
+			if(isset($_SESSION['submitPremuto']) && $_SESSION['submitPremuto'] == "nuovoProd"){
+				$this->printTabelaProdottiScelti($usrType);
+			}
 			$this->printFormPrenotazione($usrType);
 			break;
 		case "storia":
@@ -741,6 +945,23 @@ public function printOperationElement($operazione, $usrType){
 			break;
 		case "prodotti":
 			$this->printListaProdotti($usrType);
+			break;
+	}
+}
+
+
+
+
+public function printOperationElementImpiegato($operazione){
+	switch($operazione){
+		case "ordini":
+			$this->printTabellaOrdini();
+			break;
+		case "utenti":
+			$this->printTabellaUtenti();
+			break;
+		case "prodotti":
+			$this->printTabellaProdotti();
 			break;
 	}
 }
