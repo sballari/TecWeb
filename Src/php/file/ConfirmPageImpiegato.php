@@ -53,30 +53,38 @@
       echo "<div id='content'>";
 
       echo "<div id='info' class='contentElement'>";
-      if(isset($_SESSION['messaggioConfirm'])){
-        echo "".$_SESSION['messaggioConfirm'];
-        unset($_SESSION['messaggioConfirm']);
+      if(isset($_SESSION['messaggioConfirmImp'])){
+        echo "".$_SESSION['messaggioConfirmImp'];
+        unset($_SESSION['messaggioConfirmImp']);
       }
       else{
         if(isset($_SESSION['buttonPremuto'])){
           switch($_SESSION['buttonPremuto']){
-            case "annullaRichiesta":
-              if(isset($_SESSION['richiestaAnnullata'])){
-                echo "La richiesta che hai scelto di annullare e la seguente:";
-                echo "Stampa la richiesta";
-                $r = unserialize($_SESSION['richiestaAnnullata']);
+            case "cancellaRichiesta":
+              if(isset($_SESSION['richiestaCancellata'])){
+                echo "La richiesta che hai scelto di cancellare e la seguente:";
+
+                $r = unserialize($_SESSION['richiestaCancellata']);
                 $h->printRichiestaDettagliataDiv($r);
               }
               break;
-            case "prenotaRichiesta":
-              echo "I dati della sua prenotazione sono i seguenti:";
-              echo "Stampa la richiesta";
-              $r = unserialize($_SESSION['richiestaPrenotata']);
+            case "cambiaStato":
+                if(isset($_SESSION['richiestaCambiata'])){
+                  echo "La richiesta che hai scelto di cambia stato e la seguente:";
 
-              $h->printRichiestaDettagliataDiv($r);
+                  $r = unserialize($_SESSION['richiestaCambiata']);
+                  $h->printRichiestaDettagliataDiv($r);
+                }
+                break;
+            case "cancellaUtente":
+              if(isset($_SESSION['utenteCancellato'])){
+                echo "L'utente che hai scelto di cancellare e il seguente:";
 
-
+                $ut = unserialize($_SESSION['utenteCancellato']);
+                $h->printUtenteDettagliatoDiv($ut);
+              }
               break;
+
             case "logout":
               echo "<p>Sei sicuro di voler uscire dal suo account <strong>definitivamente</strong>?</p>";
 
@@ -95,9 +103,7 @@
           echo  "</form>";
           echo "</div>";
         }
-        else{
-          echo "".$_SESSION['messaggio'];
-        }
+
       }
    }
  }

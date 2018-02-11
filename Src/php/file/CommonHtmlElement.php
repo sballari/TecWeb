@@ -15,7 +15,7 @@ class CommonHtmlElement{
 			<h3>INFO NAVIGAZIONE</h3>
 			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <abbr lang='en' title = 'JavaScript'>JS</abbr></p>
 			</div>
-			
+
 		";
 	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
@@ -181,7 +181,7 @@ class CommonHtmlElement{
 	}
 
 	public function createheader($page){
-		
+
 		echo "<div id='accessBar'>
 			<a href ='#skip'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
@@ -571,6 +571,80 @@ public function printRichiestaDettagliataDiv($Richiesta){
 }
 echo "</div>";
 }
+
+
+public function printUtenteDettagliatoDiv($utente){
+
+	echo "<div class='contentElement'>";
+
+
+				echo "<table summary='Nella tabella viene fornito i dettagli del utente selezionato. Ogni riga descrive una caratteristica dell'utente.";
+				echo "<caption>Dettagli Utente </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='nome'>Nome utente</th>
+						<td>".$utente->getName()."</td>
+					</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='cognome'>Cognome utente</th>
+					<td>".$utente->getSurname()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='tipo'>Tipo utente</th>
+					<td>".$utente->getUserType()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='email'>Email utente</th>
+					<td>".$utente->getEmail()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='password'>Password utente</th>
+					<td>".$utente->getPassword()."</td>
+				</tr>";
+
+				echo "</table>";
+
+echo "</div>";
+}
+
+
+
+public function printProdottoDettagliatoDiv($prodotto){
+
+	echo "<div class='contentElement'>";
+
+
+				echo "<table summary='Nella tabella viene fornito i dettagli del prodotto selezionato. Ogni riga descrive una caratteristica del prodotto.";
+				echo "<caption>Dettagli Prodotto </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='nome'>Nome</th>
+						<td>".$prodotto->getName()."</td>
+					</tr>";
+
+				echo "<tr>
+					<th scope = 'row' abbr='tipo'>Tipo prodotto</th>
+					<td>".$prodotto->getProductType()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='ingridienti'>Ingridienti</th>
+					<td>".$prodotto->getIngredients()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='descrizione'>Descrizione</th>
+					<td>".$prodotto->getDesc()."</td>
+				</tr>";
+				echo "<tr>
+				 <th scope = 'row' abbr='image'>Image path</th>
+				 <td>".$prodotto->getImage()."</td>
+			 </tr>";
+
+				echo "</table>";
+
+echo "</div>";
+}
+
+
+
+
 public function printListaProdotti($Type){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
