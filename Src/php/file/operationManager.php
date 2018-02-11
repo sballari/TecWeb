@@ -23,16 +23,16 @@ else{
 
 if(isset($_POST['richiestaDettaglio'])){
   $req = $f->getRequestList($_SESSION['Email']);
-  $id=1;
-  foreach($req as $x){
-    $st="request" . $id . "";
-    if(isset($_POST[$st])){
+  if(isset($_POST['request'])){
+
+      $pos = substr($_POST['request'], 7);
+
+      $x = $req[$pos-1];
+
       $_SESSION['richiestaDettaglio'] = serialize($x);
       header("Location: richiestaDettagliata.php");
     }
-    $id++;
-  }
-  if(!isset($_SESSION['richiestaDettaglio'])){
+    else{
     $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
     header("Location: areaPersonale.php");
   }
@@ -43,12 +43,10 @@ if(isset($_POST['richiestaDettaglio'])){
 
 if(isset($_POST['annullaRichiesta'])){
   $req = $f->getRequestList($_SESSION['Email']);
-    $id=1;
-    foreach($req as $x){
-      $st="request" . $id . "";
-      $b = isset($_POST[$st]);
+  if(isset($_POST['request'])){
+      $pos = substr($_POST['request'], 7);
+      $x = $req[$pos-1];
 
-      if(isset($_POST[$st])){
         $currentD = "".date("Y-m-d ");
         $deliveryD = "".$x->getDeliveryDateTime();
         if($deliveryD > $currentD){
@@ -56,16 +54,16 @@ if(isset($_POST['annullaRichiesta'])){
           $_SESSION['richiestaAnnullata'] = serialize($x);
           $_SESSION['submitPremuto']="annullaRichiesta";
           header("Location: ConfirmPage.php");
-          break;
+
         }
         else{
-          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta.";
+          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. La richiesta da annullare deve essere in lavorazione e l'annulla deve essere fatta almeno un giorno prima della consegna.";
           header("Location: areaPersonale.php");
         }
       }
-      $id++;
-    }
-    if(!isset($_SESSION['richiestaAnnullata'])){
+
+
+    else{
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter procedere con l'operazione di annulla.";
       header("Location: areaPersonale.php");
     }

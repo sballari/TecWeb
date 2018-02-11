@@ -55,6 +55,8 @@ else{
 
             if (isset($_SESSION['richiestaDettaglio'])){
               $r = unserialize($_SESSION['richiestaDettaglio']);
+
+            
               unset($_SESSION['richiestaDettaglio']);
                 $h->printRichiestaDettagliataDiv($r);
 

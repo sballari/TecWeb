@@ -567,7 +567,10 @@ public function printListaProdotti($Type){
 			echo "</tr>";
 			$id++;
 		}
+		if($_SESSION['operazione'] == "ordini"){
 		$_SESSION['iD'] = $id;
+
+	}
 		echo "</table>";
 	}
 
@@ -595,7 +598,9 @@ public function printStoriaOrdiniAllIngrosso($req){
 			echo "</tr>";
 			$id++;
 		}
+		if($_SESSION['operazione'] == "ordini"){
 		$_SESSION['iD'] = $id;
+	}
 		echo "</table>";
 }
 
@@ -694,6 +699,9 @@ public function printTabellaOrdini(){
 	$this->printStoriaOrdiniAlMinuto($req);
 	if(isset($_SESSION['iD'])){
 		unset($_SESSION['iD']);
+	}
+	if(isset($_SESSION['operazione'])){
+		unset($_SESSION['operazione']);
 	}
 	echo "<button type='submit' name='cambiaStato' >Cambia stato</button>";
 	echo "<button type='submit' name='cancellaRichiesta' >Cancella la richiesta</button>";
@@ -894,7 +902,9 @@ public function printTabelaProdottiScelti($usrType){
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
-
+			if(isset($_SESSION['submitPremuto']) && $_SESSION['submitPremuto'] == "nuovoProd"){
+				$this->printTabelaProdottiScelti($usrType);
+			}
 			$this->printFormPrenotazione($usrType);
 			break;
 		case "storia":

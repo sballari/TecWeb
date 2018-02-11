@@ -13,13 +13,13 @@
       $d->connect();
       $f = new Factory($d);
  ?>
-<body onload='creaStatistiche()'>
+<body>
     <a name="top"></a>
     <div id="accessBar">
     </div>
 
 		<?php
-			$h->createheader("account");
+			$h->createheader("ConfirmPage");
       $h->printInternalMenu("ConfirmPage");
     ?>
 <div id="content">
@@ -90,7 +90,6 @@
    </div>
 
  <?php
- $h->createStatisticDiv();
  $h->printContatti();
    $h->printFooter();
    $h->printMobileMenu("casa");
