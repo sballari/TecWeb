@@ -14,14 +14,12 @@
       $f = new Factory($d);
  ?>
 <body onload='creaStatistiche()'>
-    <div id="top"></div>
-    <div id="accessBar">
-    </div>
 
 		<?php
 			$h->createheader("account");
       $h->printInternalMenu("account");
     ?>
+    
 <div id="content">
   <?php
   if (!isset($_SESSION['Email'])){

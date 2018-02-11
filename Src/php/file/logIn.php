@@ -9,8 +9,7 @@
       $h->printHead("LogIn", "area personale", "login, signup");
  ?>
 <body onload='creaStatistiche()'>
-    <div id="accessBar">
-    </div>
+
 
 	<?php
 	session_start();
