@@ -6,8 +6,6 @@
     $h->printHead("ristorante", "pagina dedicata ai prodotti per ristoranti e hotel", "ristorante, hotel, ingrosso");
  ?>
 <body onload='creaStatistiche()'>
-    <div id="accessBar">
-    </div>
 
 
     <?php

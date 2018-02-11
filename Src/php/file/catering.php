@@ -10,9 +10,6 @@
       $h->printHead("catering", "pagina dedicata ai servizi catering", "catering");
  ?>
 <body onload='creaStatistiche()'>
-    <div id="accessBar">
-    </div>
-
 
     <?php
 

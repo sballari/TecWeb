@@ -16,9 +16,6 @@
       $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
  ?>
 <body onload='creaStatistiche()'>
-    <div id="accessBar">
-    </div>
-
     <?php
   	   $h->createheader("casa");
        $h->printInternalMenu("casa");
