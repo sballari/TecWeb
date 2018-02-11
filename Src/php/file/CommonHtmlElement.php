@@ -168,11 +168,11 @@ class CommonHtmlElement{
 		}
 		if ($boolS){
 		echo "<li>";
-			echo "<div class='search-container,onlyDesktop'>";
+			echo "<div id='search-contatiner' class='onlyDesktop'>";
 			echo "<form action='search_page.php'>";
-			echo "<label for='searchInput' class='aiuti'>Cerca </label>";
-			echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
-			echo "<button type='submit'>Cerca</button>";
+					echo "<label for='searchInput' class='aiuti'>Cerca </label>";
+					echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
+					echo "<button type='submit'>Cerca</button>";
 			echo "</form>";
 			echo "</div>";
 		echo "</li>";
@@ -207,7 +207,7 @@ class CommonHtmlElement{
 
 	public function generateLogInLink($page){
 		echo "<div class='logNav'>";
-		echo "<h2>AREA PERSONALE</h2>";
+		echo "<h3>AREA PERSONALE</h3>";
 		echo "<ul>";
 		switch($page){
 			case "logIn":
@@ -571,6 +571,80 @@ public function printRichiestaDettagliataDiv($Richiesta){
 }
 echo "</div>";
 }
+
+
+public function printUtenteDettagliatoDiv($utente){
+
+	echo "<div class='contentElement'>";
+
+
+				echo "<table summary='Nella tabella viene fornito i dettagli del utente selezionato. Ogni riga descrive una caratteristica dell'utente.";
+				echo "<caption>Dettagli Utente </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='nome'>Nome utente</th>
+						<td>".$utente->getName()."</td>
+					</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='cognome'>Cognome utente</th>
+					<td>".$utente->getSurname()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='tipo'>Tipo utente</th>
+					<td>".$utente->getUserType()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='email'>Email utente</th>
+					<td>".$utente->getEmail()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='password'>Password utente</th>
+					<td>".$utente->getPassword()."</td>
+				</tr>";
+
+				echo "</table>";
+
+echo "</div>";
+}
+
+
+
+public function printProdottoDettagliatoDiv($prodotto){
+
+	echo "<div class='contentElement'>";
+
+
+				echo "<table summary='Nella tabella viene fornito i dettagli del prodotto selezionato. Ogni riga descrive una caratteristica del prodotto.";
+				echo "<caption>Dettagli Prodotto </caption>";
+				echo "<tr>
+						<th scope = 'row' abbr='nome'>Nome</th>
+						<td>".$prodotto->getName()."</td>
+					</tr>";
+
+				echo "<tr>
+					<th scope = 'row' abbr='tipo'>Tipo prodotto</th>
+					<td>".$prodotto->getProductType()."</td>
+				</tr>";
+				echo "<tr>
+					<th scope = 'row' abbr='ingridienti'>Ingridienti</th>
+					<td>".$prodotto->getIngredients()."</td>
+				</tr>";
+			   echo "<tr>
+					<th scope = 'row' abbr='descrizione'>Descrizione</th>
+					<td>".$prodotto->getDesc()."</td>
+				</tr>";
+				echo "<tr>
+				 <th scope = 'row' abbr='image'>Image path</th>
+				 <td>".$prodotto->getImage()."</td>
+			 </tr>";
+
+				echo "</table>";
+
+echo "</div>";
+}
+
+
+
+
 public function printListaProdotti($Type){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
@@ -898,9 +972,9 @@ switch($usrType ){
 		echo "</br>";
 		break;
 }
-echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='date' name='dataRitiro' required>";
+echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' required>";
 echo "</br>";
-echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='time' name='oraRitiro' required>";
+echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='text' name='oraRitiro' required>";
 echo "</br>";
 echo "<button type='submit' name='prenota'>Prenota</button>";
 echo "</br>";

@@ -36,16 +36,16 @@ button:hover {
 	}
 
 
-.search-container input {
+#search-container input {
     border: 1px solid black;
     border-right: 0;
     padding: 0.5em;
 }
-.search-container label {
+#search-container label {
   padding : 0;
 }
 
-.search-container button{
+#search-container button{
   background: #ddd;
   border: black solid 1px;
   cursor: pointer;
@@ -198,8 +198,6 @@ h2, h3{
   width: 20%;
   float:left;
 }
-
-
 
 #internalNavBar ul {
     list-style-type: none;
