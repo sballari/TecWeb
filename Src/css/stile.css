@@ -35,21 +35,20 @@ button:hover {
   margin-bottom: 0.5em;
 	}
 
-.search-container {
-      float: right;
-  }
 
 .search-container input {
     border: 1px solid black;
     border-right: 0;
     padding: 0.5em;
 }
+.search-container label {
+  padding : 0;
+}
 
 .search-container button{
   background: #ddd;
   border: black solid 1px;
   cursor: pointer;
-  float: right;
   padding: 0.5em;
 }
 
@@ -321,13 +320,13 @@ input, select, textarea{
   resize: vertical;
   float: left;
   width: 75%;
-  margin-top: 6px;
+  /* margin-top: 6px; */
 }
+
 
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
-  float: left;
   width: 25%;
   margin-top: 6px;
 }
