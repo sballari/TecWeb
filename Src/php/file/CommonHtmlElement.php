@@ -168,7 +168,7 @@ class CommonHtmlElement{
 		}
 		if ($boolS){
 		echo "<li>";
-			echo "<div class='search-container,onlyDesktop'>";
+			echo "<div class='search-container, onlyDesktop'>";
 			echo "<form action='search_page.php'>";
 			echo "<label for='searchInput' class='aiuti'>Cerca </label>";
 			echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
@@ -207,7 +207,7 @@ class CommonHtmlElement{
 
 	public function generateLogInLink($page){
 		echo "<div class='logNav'>";
-		echo "<h2>AREA PERSONALE</h2>";
+		echo "<h3>AREA PERSONALE</h3>";
 		echo "<ul>";
 		switch($page){
 			case "logIn":
