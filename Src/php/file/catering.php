@@ -9,7 +9,7 @@
       $h = new CommonHtmlElement();
       $h->printHead("catering", "pagina dedicata ai servizi catering", "catering");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -64,6 +64,7 @@
 
     </div>
     <?php
+    $h->createStatisticDiv();
 			$h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("catering");

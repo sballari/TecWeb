@@ -12,7 +12,7 @@
       $f = new Factory($d);
       $h->printHead("singUp", "area personale", "login, signup");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -148,6 +148,7 @@
 </div>
 
 <?php
+	$h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("singUp");

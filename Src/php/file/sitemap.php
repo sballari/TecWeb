@@ -5,7 +5,7 @@
       $h = new CommonHtmlElement();
       $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -34,9 +34,10 @@
         
 
     <?php
-			$h->printContatti();
-      $h->printFooter();
-      $h->printMobileMenu("sitemap");
+    $h->createStatisticDiv();
+	$h->printContatti();
+    $h->printFooter();
+    $h->printMobileMenu("sitemap");
     ?>
 
 

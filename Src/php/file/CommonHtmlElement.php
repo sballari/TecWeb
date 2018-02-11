@@ -894,6 +894,7 @@ public function printTabelaProdottiScelti($usrType){
 public function printOperationElement($operazione, $usrType){
 	switch($operazione){
 		case "prenotazione":
+
 			$this->printFormPrenotazione($usrType);
 			break;
 		case "storia":

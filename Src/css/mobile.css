@@ -57,6 +57,11 @@ html,body{
 	max-width: 100%;
 }
 
+.contentElement{
+  border-left: 0;
+  border-right: 0;
+}
+
 .contentElement.Left img, .contentElement.Right img{
 	float: none;
   display: block;
@@ -182,11 +187,14 @@ html,body{
   text-align: left;
 }
 
-#form input,select{
+#form input,select,textarea{
   float: right;
+  font-size: 1em;
 }
 
-#form,#info{
+fieldset{border:0;}
+
+#form ,#info{
   font-size: 2.5em;
 }
 

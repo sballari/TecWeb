@@ -20,15 +20,9 @@ else{
     $d->connect();
     $f = new Factory($d);
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
-        //PROVA
-                //$email = "cristina.polletto@gmail.it";
-                //$s= $f->getRequestList($email);
-                //$_SESSION['Email']="$email";
-                //$_SESSION['richiestaDettaglio']=$s[0];
-        //FINE PROVA
 
  ?>
-<body>
+<body onload='creaStatistiche()'>
     <div id="accessBar">
     </div>
 
@@ -81,6 +75,7 @@ else{
     </div>
 
     <?php
+    $h->createStatisticDiv();
 	  $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("casa");
