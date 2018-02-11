@@ -46,6 +46,23 @@ class Factory {
       else return false;
   }
 
+
+  function getEntireUserList(){
+      if ($this->dbM->getStatus()==true){
+          $result = $this->dbM->submitQuery("SELECT * FROM utente");
+          $arrUsr = array();
+          while ($arr = $result->fetch_assoc()){
+              $arrUsr[] =new User ($arr['email'],
+                                   $arr['password'],
+                                   $arr['nome'],
+                                   $arr['cognome'],
+                                   $arr['tipo_utente']);
+          }
+					return $arrUsr;
+      }
+      else return false;
+  }
+
  public function getUser($key){
    if ($this->dbM->getStatus()==true){
      $result = $this->dbM->submitQuery("SELECT * FROM utente WHERE email='".$key."'");

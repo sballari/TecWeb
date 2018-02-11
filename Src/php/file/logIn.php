@@ -1,7 +1,10 @@
 <!DOCTYPE HTML>
 <html lang ="it">
 <?php
-      require_once ("CommonHtmlElement.php");
+      require_once("CommonHtmlElement.php");
+      require_once("../class/DBmanager.php");
+      require_once("../class/User.php");
+      require_once("../class/Factory.php");
       $h = new CommonHtmlElement();
       $h->printHead("LogIn", "area personale", "login, signup");
  ?>
@@ -11,6 +14,19 @@
 
 	<?php
 	session_start();
+  $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+  $d->connect();
+  $f = new Factory($d);
+  if(isset($_SESSION['Email'])){
+    $u = $f->getUser($_SESSION['Email']);
+    $t = $u->getUserType();
+    if($t == "Impiegato"){
+      header("Location: areaPersonaleImpiegato.php");
+    }
+    else{
+      header("Location: areaPersonale.php");
+    }
+  }
 	$h->createheader("logIn");
   $h->printInternalMenu("logIn");
 
@@ -33,50 +49,41 @@
 
 
 
-			if(isset($_POST['email']) && isset($_POST['password']))
+	if(isset($_POST['email']) && isset($_POST['password']))
+	{
+    $email = cleanInput($_POST['email']);
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		  $ErrEm = "Validation message: Invalid email format";
+		}
+
+		$password = cleanInput($_POST['password']);
+		if (!preg_match("//",$password)) {		//******** YOU HAVE TO FIXED*******
+      $ErrPassw = "Validation message: Invalid password format";
+		}
+
+		if($ErrEm == "" && $ErrPassw == ""){
+		  require_once("../class/Authenticator.php");
+			$a = new Authenticator($d);
+      $b = $a->validateUser($email, $password);
+			if($b==false)
 			{
-
-
-				$email = cleanInput($_POST['email']);
-				if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				  $ErrEm = "Validation message: Invalid email format";
-				}
-
-				$password = cleanInput($_POST['password']);
-				if (!preg_match("//",$password)) {		//******** YOU HAVE TO FIXED*******
-				 $ErrPassw = "Validation message: Invalid password format";
-				}
-
-				if($ErrEm == "" && $ErrPassw == ""){
-				if(file_exists("../class/Authenticator.php") && file_exists("../class/DBmanager.php"))
-				{
-					require_once("../class/Authenticator.php");
-					require_once("../class/DBmanager.php");
-				}
-				else
-				{
-					echo "Error: file does not esist.";
-					exit;
-				}
-				$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
-				$d->connect();
-				$a = new Authenticator($d);
-
-				$b = $a->validateUser($email, $password);
-				if($b==false)
-				{
-
-				 $ErrLogin = "La password o l'Email non sono corretti. Prova con  Email e password diverse.";
-
-				}
-				else
-				{
+        $ErrLogin = "La password o l'Email non sono corretti. Prova con  Email e password diverse.";
+      }
+			else
+			{
 				$_SESSION['Email'] = $email;
 
-				header("Location: areaPersonale.php");
-				}
-				}
+        $u = $f->getUser($_SESSION['Email']);
+        $t = $u->getUserType();
+        if($t == "Impiegato"){
+          header("Location: areaPersonaleImpiegato.php");
+        }
+        else{
+          header("Location: areaPersonale.php");
+        }
 			}
+		}
+	}
 
 		?>
     <div id='content'>

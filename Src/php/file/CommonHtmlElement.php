@@ -52,6 +52,17 @@ class CommonHtmlElement{
 				}
 				else {$percorso = "Pagina di Errore";}
 				break;
+			case 'accountImpiegato':
+
+					if (isset($_SESSION['Email'])){
+						$percorso = "Area Personale Impiegato";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='ordini') $percorso = $percorso.">>Ordini";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='utenti') $percorso = $percorso.">>Utenti";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso.">>Prodotti";
+
+					}
+					else {$percorso = "Pagina di Errore";}
+					break;
 			case 'logIn':
 				$percorso = "<span>Accedi</span>";
 				break;
@@ -66,6 +77,15 @@ class CommonHtmlElement{
 			break;
 			case 'ConfirmPage':
 				$percorso = "Pagina di Conferma";
+			break;
+			case 'richiestaDettagliata':
+				$percorso = "Pagina di Richiesta Dettagliata";
+			break;
+			case 'ConfirmPageImpiegato':
+				$percorso = "Pagina di Conferma Impiegato";
+			break;
+			case 'oggettoDettagliatoImpiegato':
+				$percorso = "Pagina di Oggetto Dettagliato";
 			break;
 		}
 		echo "
@@ -226,7 +246,6 @@ class CommonHtmlElement{
 				}
 			break;
 
-
 			default:
 				echo "<li><a href='logIn.php'>Accedi</a></li>";
 				echo "<li><a href='signUp.php'>Registrati</a></li>";
@@ -254,7 +273,7 @@ class CommonHtmlElement{
 	public function printFooter(){
 		echo  "<div id='footer'>";
     echo  "    <p>";
-    echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Llieshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
+    echo  "        Sito creato per il progetto didattico di Tecnologie per il Web da parte di: Gerta Lleshi, Alessio Gobbo, Dario Riccardo e Simone Ballarin.";
     echo  "    </p>";
     echo  "    <a href='sitemap.php'>sitemap</a>";
     echo  "</div>";
@@ -357,7 +376,7 @@ class CommonHtmlElement{
 						if (!isset($_GET['operazione'])){
 							echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
 							echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
-							echo "<li><span>Prodotti</span></li>";
+							echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
 						}
 					}
 					break;
@@ -375,7 +394,21 @@ class CommonHtmlElement{
 					echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
 				}
 			break;
+			case 'richiestaDettagliata':
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonale.php?operazione=prenotazione'>Prenotazione</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=storia'>Storia dei ordini</a></li>";
+					echo "<li><a href='areaPersonale.php?operazione=prodotti'>Prodotti</a></li>";
+				}
+			break;
 			case 'ConfirmPageImpiegato':
+				if (isset($_SESSION['Email'])){
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
+					echo "<li><a href='areaPersonaleImpiegato.php?operazione=prodotti'>Prodotti</a></li>";
+				}
+			break;
+			case 'oggettoDettagliatoImpiegato':
 				if (isset($_SESSION['Email'])){
 					echo "<li><a href='areaPersonaleImpiegato.php?operazione=ordini'>Ordini</a></li>";
 					echo "<li><a href='areaPersonaleImpiegato.php?operazione=utenti'>Utenti</a></li>";
@@ -517,6 +550,7 @@ public function printListaProdotti($Type){
 }
 	public function printStoriaOrdiniServizio($req){
 		$id=1;
+		echo "<p>Tabella degli ordini servizio</p>";
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
@@ -533,11 +567,18 @@ public function printListaProdotti($Type){
 			echo "</tr>";
 			$id++;
 		}
+		$_SESSION['iD'] = $id;
 		echo "</table>";
 	}
 
 public function printStoriaOrdiniAllIngrosso($req){
-		$id=1;
+		if(isset($_SESSION['iD'])){
+			$id = $_SESSION['iD'];
+		}
+		else{
+			$id=1;
+		}
+		echo "<p>Tabella degli ordini all'ingrosso</p>";
 		echo "<table>
 		<tr>
 		<th>Seleziona</th>
@@ -554,15 +595,22 @@ public function printStoriaOrdiniAllIngrosso($req){
 			echo "</tr>";
 			$id++;
 		}
+		$_SESSION['iD'] = $id;
 		echo "</table>";
 }
 
 public function printStoriaOrdiniAlMinuto($req){
-	$id=1;
+	if(isset($_SESSION['iD'])){
+		$id = $_SESSION['iD'];
+	}
+	else{
+		$id=1;
+	}
+	echo "<p>Tabella degli ordini al minuto</p>";
 	echo "<table>
 		<tr>
 		<th>Seleziona</th>
-		<th>Codice</th>
+		<th>Codice </th>
 		<th>Delivery date and hour </th>
 		<th>Status</th>
 		</tr>";
@@ -604,7 +652,7 @@ public function printStoriaOrdini($t){
 	$d->connect();
 	$f = new Factory($d);
 	$req = $f->getRequestList($_SESSION['Email']);
-	$d->disconnect();
+
 	echo "<div class='contentElement'>";
 	echo "<form action = 'operationManager.php' method = 'POST'>";
 	switch($t){
@@ -624,39 +672,39 @@ public function printStoriaOrdini($t){
 	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
 	echo "</form>";
 	echo "</div>";
+	$d->disconnect();
 }
 
 
-public function printTabellaOrdini($Type){
+public function printTabellaOrdini(){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
 	$f = new Factory($d);
-	$req = $f->getTypeRequestList($Type);
-	$d->disconnect();
+
 	echo "<div class='contentElement'>";
 	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
-	switch($t){
-		case "Servizio":
-			$this->printStoriaOrdiniServizio($req);
-		break;
 
-		case "All_ingrosso":
-			$this->printStoriaOrdiniAllIngrosso($req);
-		break;
+	$req = $f->getTypeRequestList("Servizio");
+	$this->printStoriaOrdiniServizio($req);
 
-		case "Al minuto":
-			$this->printStoriaOrdiniAlMinuto($req);
-			break;
+	$req = $f->getTypeRequestList("All_ingrosso");
+	$this->printStoriaOrdiniAllIngrosso($req);
+
+	$req = $f->getTypeRequestList("Al minuto");
+	$this->printStoriaOrdiniAlMinuto($req);
+	if(isset($_SESSION['iD'])){
+		unset($_SESSION['iD']);
 	}
 	echo "<button type='submit' name='cambiaStato' >Cambia stato</button>";
 	echo "<button type='submit' name='cancellaRichiesta' >Cancella la richiesta</button>";
 	echo "<button type='submit' name='richiestaDettagliataImp' >Richiesta dettagliata</button>";
 	echo "</form>";
 	echo "</div>";
+	$d->disconnect();
 }
 
 
-public function printTabellaUtenti($Type){
+public function printTabellaUtenti(){
 	require_once("../class/Factory.php");
 	require_once("../class/DBmanager.php");
 	require_once("../class/Manipulator.php");
@@ -664,8 +712,9 @@ public function printTabellaUtenti($Type){
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
 	$f = new Factory($d);
-	$usr = $f->getUserList($Type);
-	echo "<div class='contentElement' >;
+	$usr = $f->getEntireUserList();
+	$d->disconnect();
+	echo "<div class='contentElement'>";
 	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
 	if($usr==false){
 		echo "Something went wrong! Try again.";
@@ -698,14 +747,14 @@ public function printTabellaUtenti($Type){
 }
 
 
-public function printTabellaProdotti($Type){
+public function printTabellaProdotti(){
 	require_once("../class/Factory.php");
 	require_once("../class/DBmanager.php");
 	$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
 	$d->connect();
 	$f = new Factory($d);
-	$prod = $f->getProductList($Type);
-
+	$prod = $f->getEntireProductList();
+	$d->disconnect();
 	echo "<div id='formOrdini' class='contentElement'>";
 	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
 	echo "<button type='submit' name='aggiuntaProdotto'>Aggiungi un nuovo prodotto</button></br>";
@@ -714,12 +763,14 @@ public function printTabellaProdotti($Type){
 			<tr>
 			<th>Seleziona</th>
 			<th>Nome</th>
+			<th>Tipo</th>
 			</tr>";
 	$id=1;
 	foreach ($prod as $x) {
 		echo "<tr>";
 		echo "<td>".$id."<input type='radio' name='prodotto' value='prodotto" . $id . "' ></td>";
 		echo "<td>" . $x->getName() . "</td>";
+		echo "<td>" . $x->getProductType() . "</td>";
 		echo "</tr>";
 		$id++;
 	}
@@ -727,6 +778,7 @@ public function printTabellaProdotti($Type){
 	echo "</br></br>";
 	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button></br>";
 	echo "</br></br>";
+	echo "<button type='submit' name='prodottoDettagliato'>Prodotto dettagliato</button>";
 	echo "<button type='submit' name='modificaProdotto'>Modifica prodotto</button></br></br>";
 	echo "</form>";
 	echo "</div>";
@@ -854,28 +906,18 @@ public function printOperationElement($operazione, $usrType){
 }
 
 
-public function printFormCategorie(){
-	echo "<p>Scegli le categorie dei ordini che vuoi visualizzare.</p>";
-	echo "<div id='formOrdini'>";
-	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
-	echo "<input type='checkbox' name='Al_minuto' value='Al minuto' checked>Al minuto</br>";
-	echo "<input type='checkbox' name='All_ingrosso' value='All_ingrosso' checked>All'ingrosso</br>";
-	echo "<input type='checkbox' name='Servizio' value='Servizio' checked>Servizio</br></br>";
-	echo "<input type='submit' name='visualizzaOrdini' value='Visualizza Ordini'></br></br>";
-	echo "</form>";
-	echo "</div>";
-}
 
-public function printOperationElementImpiegato($operazione, $Type){
+
+public function printOperationElementImpiegato($operazione){
 	switch($operazione){
 		case "ordini":
-			$this->printTabellaOrdini($Type);
+			$this->printTabellaOrdini();
 			break;
 		case "utenti":
-			$this->printTabellaUtenti($Type);
+			$this->printTabellaUtenti();
 			break;
 		case "prodotti":
-			$this->printTabellaProdotti($Type);
+			$this->printTabellaProdotti();
 			break;
 	}
 }

@@ -2,10 +2,14 @@
 <html lang ="it">
 <?php
       require_once ("CommonHtmlElement.php");
+      require_once("../class/Factory.php");
+      require_once("../class/User.php");
+      require_once("../class/Manipulator.php");
       require_once("../class/DBmanager.php");
       $h = new CommonHtmlElement();
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
+      $f = new Factory($d);
       $h->printHead("singUp", "area personale", "login, signup");
  ?>
 <body>
@@ -66,7 +70,7 @@
 					require_once("../class/User.php");
 					require_once("../class/Manipulator.php");
 					require_once("../class/DBmanager.php");
-				}
+
 				$m = new Manipulator($d);
 				$u = new User($emailSignup, $passwordSignup, $nome, $cognome, $tipoUtente);
 				$b = $m->insertUser($u);
@@ -79,11 +83,19 @@
 				else
 				{
 					$_SESSION['Email'] = $emailSignup;
-					header("Location: areaPersonale.php");
+          $u = $f->getUser($_SESSION['Email']);
+          $t = $u->getUserType();
+          if($t == "Impiegato"){
+            header("Location: areaPersonaleImpiegato.php");
+          }
+          else{
+            header("Location: areaPersonale.php");
+          }
+
 
 				}
-
-			}
+      }
+		}
 ?>
 
     <div id=content>

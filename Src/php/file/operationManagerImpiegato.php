@@ -1,6 +1,5 @@
 <?php
 session_start();
-if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
   require_once("../class/DBmanager.php");
   require_once("CommonHtmlElement.php");
   require_once("../class/Manipulator.php");
@@ -9,11 +8,9 @@ if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php")
   require_once("../class/Request.php");
   require_once("../class/RetailOrder.php");
   require_once("../class/MassiveOrder.php");
-    require_once("../class/Product.php");
-  require_once("../class/Service.php");}
-else{
-  echo "Error: One of the files does not esist.";
-  exit;}
+  require_once("../class/Product.php");
+  require_once("../class/Service.php");
+
   $h = new CommonHtmlElement();
   $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -21,20 +18,41 @@ else{
   $f = new Factory($d);
   $m = new Manipulator($d);
 
-if(isset($_POST['richiestaDettaglio'])){
-  $req = $f->getRequestList($_SESSION['Email']);
+
+
+
+if(isset($_POST['richiestaDettagliataImp'])){
+  $req = $f->getTypeRequestList("Servizio");
   $id=1;
   foreach($req as $x){
     $st="request" . $id . "";
     if(isset($_POST[$st])){
-      $_SESSION['richiestaDettaglio'] = serialize($x);
-      header("Location: richiestaDettagliata.php");
+      $_SESSION['richiestaDettagliataImp'] = serialize($x);
+      header("Location: richiestaDettagliataImpiegato.php");
     }
     $id++;
   }
-  if(!isset($_SESSION['richiestaDettaglio'])){
-    $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
-    header("Location: areaPersonale.php");
+  $req = $f->getTypeRequestList("All_ingrosso");
+  foreach($req as $x){
+    $st="request" . $id . "";
+    if(isset($_POST[$st])){
+      $_SESSION['richiestaDettagliataImp'] = serialize($x);
+      header("Location: richiestaDettagliataImpiegato.php");
+    }
+    $id++;
+  }
+  $req = $f->getTypeRequestList("Al minuto");
+  foreach($req as $x){
+    $st="request" . $id . "";
+    if(isset($_POST[$st])){
+      $_SESSION['richiestaDettagliataImp'] = serialize($x);
+      header("Location: richiestaDettagliataImpiegato.php");
+    }
+    $id++;
+  }
+  if(!isset($_SESSION['richiestaDettagliataImp'])){
+    $_SESSION['messaggioAreaImp'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
+    header("Location: areaPersonaleImpiegato.php");
   }
 
 }

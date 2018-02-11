@@ -2,7 +2,6 @@
 <html lang ="it"></html>
 <?php
 session_start();
-if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
   require_once("../class/DBmanager.php");
   require_once("CommonHtmlElement.php");
   require_once("../class/Manipulator.php");
@@ -10,16 +9,14 @@ if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php")
   require_once("../class/User.php");
   require_once("../class/RetailOrder.php");
   require_once("../class/MassiveOrder.php");
-  require_once("../class/Service.php");}
-else{
-  echo "Error: One of the files does not esist.";
-  exit;}
+  require_once("../class/Service.php");
+
 
     $h = new CommonHtmlElement();
     $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
     $d->connect();
     $f = new Factory($d);
-    $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
+    $h->printHead("Oggetto Dettagliato", "dettagli dell'oggetto", "ordini, utenti, prodotti");
         //PROVA
                 //$email = "cristina.polletto@gmail.it";
                 //$s= $f->getRequestList($email);
@@ -33,8 +30,8 @@ else{
     </div>
 
     <?php
-  	   $h->createheader("richiestaDettagliata");
-       $h->printInternalMenu("richiestaDettagliata");
+  	   $h->createheader("oggettoDettagliatoImpiegato");
+       $h->printInternalMenu("oggettoDettagliatoImpiegato");
   	?>
     <div id="content">
     <?php
