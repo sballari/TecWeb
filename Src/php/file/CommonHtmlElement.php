@@ -15,7 +15,7 @@ class CommonHtmlElement{
 			<h3>INFO NAVIGAZIONE</h3>
 			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <abbr lang='en' title = 'JavaScript'>JS</abbr></p>
 			</div>
-			
+
 		";
 	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
@@ -181,9 +181,9 @@ class CommonHtmlElement{
 	}
 
 	public function createheader($page){
-		
+
 		echo "<div id='accessBar'>
-			<a href ='#skip'>Vai al contenuto</a>
+			<a href ='#content'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
 		echo "<div class='header'>";
