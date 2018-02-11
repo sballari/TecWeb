@@ -182,7 +182,7 @@ class CommonHtmlElement{
 
 	public function createheader($page){
 
-		echo "<div id='accessBar'>
+		echo "<div id='accessBar' class='onlyDesktop'>
 			<a href ='#content'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
