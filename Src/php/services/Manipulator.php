@@ -7,7 +7,7 @@ class Manipulator{
     $this->dbM=$dbM;
   }
   function insertUser($user){
-      require_once("User.php");
+      require_once("../models/User.php");
       if($this->dbM->getStatus()==true){
         $query = "INSERT INTO `utente` (`email`, `nome`, `cognome`, `tipo_utente`, `password`)
                   VALUES ('".$user->getEmail()."', '".$user->getName()."', '".$user->getSurname()."',
@@ -19,7 +19,7 @@ class Manipulator{
   }
 
   function insertProduct($product){
-    require_once("Product.php");
+    require_once("../models/Product.php");
     if($this->dbM->getStatus()==true){
       $query = "INSERT INTO prodotto (`nome`, `ingredienti`, `tipoProdotto`, `imagePath`, `descrizione`)
                 VALUES ('".$product->getName()."', '".$product->getIngredients()."', '".$product->getProductType()."',
@@ -55,27 +55,27 @@ class Manipulator{
       $forK = "ordine_all_ingrosso";
     }
     if ($orderType == "Servizio") return false;
-    $queryVerify = "SELECT nr_prodotti,count(*) AS 'N' FROM ".$table1." WHERE
-                    ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."';";
+    $queryVerify = "SELECT nr_prodotti FROM ".$table1." WHERE
+                    ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."'";
     $result = $this->dbM->submitQuery($queryVerify)->fetch_assoc(); // QUERY SBAGLIATA
     $number = $result["N"];
     $newNumber = (int)$result["nr_prodotti"]+1;
 
-    if ($number == 0) {
+    if ((int)$result["nr_prodotti"] == 0) {
       $query = "INSERT INTO `".$table1."` (`".$forK."`, `prodotto`, `nr_prodotti`)
-                    VALUES (".$orderKey.", '".$prodKey."', 1);";
+                    VALUES (".$orderKey.", '".$prodKey."', 1)";
 
     }
     else {
       $query = "UPDATE `".$table1."` SET `nr_prodotti` = '".$newNumber."'
-                     WHERE ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."';";
+                     WHERE ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."'";
     }
 
     return $this->dbM->submitQuery($query);
   }
 
   function insertRequest($request){
-    require_once("Request.php");
+    require_once("../models/Request.php");
     $allOk = true;
     if($this->dbM->getStatus()==true){
       switch($request->getType()){
@@ -134,7 +134,7 @@ class Manipulator{
                    '".$request->getResourceNeeded()."',
                    '".$request->getStaffNumber()."',
                    '".$request->getDeliveryAdress()."',
-                   '".$request->getUser()->getEmail().",
+                   '".$request->getUser()->getEmail()."',
                    '".$request->getService()."')";
         return $this->dbM->submitQuery($query);
         break;

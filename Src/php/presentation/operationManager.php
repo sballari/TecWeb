@@ -1,19 +1,16 @@
 <?php
-session_start();
-if(file_exists("../class/DBmanager.php") && file_exists("CommonHtmlElement.php") && file_exists("../class/Manipulator.php") && file_exists("../class/Factory.php") && file_exists("../class/User.php") && file_exists("../class/Product.php") && file_exists("../class/Service.php") && file_exists("../class/RetailOrder.php") && file_exists("../class/MassiveOrder.php")){
-  require_once("../class/DBmanager.php");
+  session_start();
+  require_once("../services/DBmanager.php");
   require_once("CommonHtmlElement.php");
-  require_once("../class/Manipulator.php");
-  require_once("../class/Factory.php");
-  require_once("../class/User.php");
-  require_once("../class/Request.php");
-  require_once("../class/RetailOrder.php");
-  require_once("../class/MassiveOrder.php");
-    require_once("../class/Product.php");
-  require_once("../class/Service.php");}
-else{
-  echo "Error: One of the files does not esist.";
-  exit;}
+  require_once("../services/Manipulator.php");
+  require_once("../services/Factory.php");
+  require_once("../models/User.php");
+  require_once("../models/Request.php");
+  require_once("../models/RetailOrder.php");
+  require_once("../models/MassiveOrder.php");
+  require_once("../models/Product.php");
+  require_once("../models/Service.php");
+
   $h = new CommonHtmlElement();
   $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -21,53 +18,47 @@ else{
   $f = new Factory($d);
   $m = new Manipulator($d);
 
-if(isset($_POST['richiestaDettaglio'])){
-  $req = $f->getRequestList($_SESSION['Email']);
-  if(isset($_POST['request'])){
-
+  /*Viene eseguito appena l'utente cliente sceglie un ordine dalla storia dei ordini
+  e preme il submit button richiestaDettaglio vissualizzato come "Richiesta dettagliata".*/
+  if(isset($_POST['richiestaDettaglio'])){
+    $req = $f->getRequestList($_SESSION['Email']);
+    if(isset($_POST['request'])){
       $pos = substr($_POST['request'], 7);
-
       $x = $req[$pos-1];
-
-      $_SESSION['richiestaDettaglio'] = serialize($x);
+      $_SESSION['richiestaDettaglio'] = serialize($x);  //Viene salvata $x in SESSION per poter accederla in richiestaDettagliata.php
       header("Location: richiestaDettagliata.php");
     }
     else{
-    $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";
-    header("Location: areaPersonale.php");
+      $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";  //Questo messaggio viene visualizzato in areaPersonale.php
+      header("Location: areaPersonale.php");
+    }
   }
 
-}
 
-
-
-if(isset($_POST['annullaRichiesta'])){
-  $req = $f->getRequestList($_SESSION['Email']);
-  if(isset($_POST['request'])){
+  /*Viene eseguito appena l'utente cliente sceglie un ordine dalla storia dei ordini
+  e preme il submit button annullaRichiesta vissualizzato come "Annulla richiesta"*/
+  if(isset($_POST['annullaRichiesta'])){
+    $req = $f->getRequestList($_SESSION['Email']);
+    if(isset($_POST['request'])){
       $pos = substr($_POST['request'], 7);
       $x = $req[$pos-1];
 
-        $currentD = "".date("Y-m-d ");
-        $deliveryD = "".$x->getDeliveryDateTime();
-        if($deliveryD > $currentD){
-
-          $_SESSION['richiestaAnnullata'] = serialize($x);
-          $_SESSION['submitPremuto']="annullaRichiesta";
-          header("Location: ConfirmPage.php");
-
-        }
-        else{
-          $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. La richiesta da annullare deve essere in lavorazione e l'annulla deve essere fatta almeno un giorno prima della consegna.";
-          header("Location: areaPersonale.php");
-        }
+      $currentD = "".date("Y-m-d ");
+      $deliveryD = "".$x->getDeliveryDateTime();
+      if($deliveryD > $currentD){
+        $_SESSION['richiestaAnnullata'] = serialize($x);
+        $_SESSION['submitPremuto']="annullaRichiesta";
+        header("Location: ConfirmPage.php");
       }
-
-
+      else{
+        $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. La richiesta da annullare deve essere in lavorazione e l'annulla deve essere fatta almeno un giorno prima della consegna.";
+        header("Location: areaPersonale.php");
+      }
+    }
     else{
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter procedere con l'operazione di annulla.";
       header("Location: areaPersonale.php");
     }
-
   }
 
 
@@ -81,7 +72,7 @@ if(isset($_POST['annullaRichiesta'])){
   $ErrNumeroProdotti = $ErrDataRitiro = $ErrOraRitiro = "";
 
   if(isset($_POST['prenota'])){
-      $_SESSION['submitPremuto']="prenotaRichiesta";
+    $_SESSION['submitPremuto']="prenotaRichiesta";
       //$dataRitiro = clean_input($_POST['dataRitiro']);
       //if (!preg_match("//", $dataRitiro)) {		//******** YOU HAVE TO FIX IT*******
         //$ErrDataRitiro = "Invalid date format";
@@ -111,13 +102,11 @@ if(isset($_POST['annullaRichiesta'])){
             $r->insertProduct($p);
           }
         }
-
         break;
 
       case "All_ingrosso":
         $requestDate = date("Y-m-d H:i:s");
         $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
-
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $r = new MassiveOrder($_POST['indirizzoConsegna'], $_POST['periodicita'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);
 
@@ -133,31 +122,29 @@ if(isset($_POST['annullaRichiesta'])){
       case "Servizio":
         $requestDate = date("Y-m-d H:i:s");
         $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
-
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $p = $f->getProduct($_POST['listaProdotti']);
-
         $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $date, "in_lavorazione", $usr, $deliveryDate, NULL);
-
         break;
-      //}
     }
-
-  $_SESSION['richiestaPrenotata'] = serialize($r);
-
-   header("Location: ConfirmPage.php");
+    $_SESSION['richiestaPrenotata'] = serialize($r);
+    header("Location: ConfirmPage.php");
   }
+
 
 
   if(isset($_POST['nuovoProd'])){
     $_SESSION['submitPremuto']="nuovoProd";
     //Il contatore conta i prodotti aggiunti.
+    if(!isset($_SESSION['contatore'])){
+      $_SESSION['contatore'] = 0;
+    }
     $c = $_SESSION['contatore'];
     $controllo = 0;
     for($i=1; $i<=$c && $controllo == 0; $i++){
       if($_SESSION['listaProdotti'.$c] == $_POST['listaProdotti']){
         $controllo=1;
-        break;
+
       }
     }
     if($controllo == 0){
@@ -167,12 +154,11 @@ if(isset($_POST['annullaRichiesta'])){
       $_SESSION[$_POST['listaProdotti']] = $_POST['numeroProdotti'];
     }
     else{
+
       $_SESSION[$_POST['listaProdotti']] = $_SESSION[$_POST['listaProdotti']] + $_POST['numeroProdotti'];
     }
     header("Location: areaPersonale.php");
 }
-
-
 
 
 
@@ -181,7 +167,6 @@ if(isset($_POST['annullaRichiesta'])){
       case "annullaRichiesta":
         if(isset($_SESSION['richiestaAnnullata'])){
           $m = new Manipulator($d);
-
           $r = unserialize($_SESSION['richiestaAnnullata']);
           $b = $m->removeRequest($r->getKey(), $r->getType());
           unset($_SESSION['richiestaAnnullata']);
@@ -192,43 +177,41 @@ if(isset($_POST['annullaRichiesta'])){
           else{
             $_SESSION['messaggioConfirm'] = "La richiesta &egrave stata rimossa.";
             header("Location: ConfirmPage.php");
-
           }
         }
-
         break;
+
       case "prenotaRichiesta":
-       if(isset($_SESSION['richiestaPrenotata'])){
+        if(isset($_SESSION['richiestaPrenotata'])){
          $r = unserialize($_SESSION['richiestaPrenotata']);
          $m = new Manipulator($d);
          $b = $m->insertRequest($r);
-
-          unset($_SESSION['richiestaPrenotata']);
-          $c = $_SESSION['contatore'];
-    		for($i=1; $i<=$c; $i++){
-    			unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
-    			unset($_SESSION['listaProdotti'.$i]);
-    		}
-        unset($_SESSION['contatore']);
-        if($b==false){
-          $_SESSION['messaggioConfirm'] = "Qualcosa &egrave; andato storto!";
-          header("Location: ConfirmPage.php");
-        }
-        else{
-          $_SESSION['messaggioConfirm'] = "La richiesta &egrave stata inserita.";
-          header("Location: ConfirmPage.php");
-        }
-      }
-      break;
+         unset($_SESSION['richiestaPrenotata']);
+         $c = $_SESSION['contatore'];
+    	   for($i=1; $i<=$c; $i++){
+    			 unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
+    			 unset($_SESSION['listaProdotti'.$i]);
+    		 }
+         unset($_SESSION['contatore']);
+         if($b==false){
+           $_SESSION['messaggioConfirm'] = "Qualcosa &egrave; andato storto!";
+           header("Location: ConfirmPage.php");
+         }
+         else{
+           $_SESSION['messaggioConfirm'] = "La richiesta &egrave stata inserita.";
+           header("Location: ConfirmPage.php");
+         }
+       }
+       break;
 
       case "logout":
         unset($_SESSION['Email']);
         header("Location: home.php");
         break;
+
       case "closeaccount":
         $m = new Manipulator($d);
         $b = $m->removeUser($_SESSION['Email']);
-
         if($b==false){
           $_SESSION['messaggioConfirm'] = "<p>Qualcosa &egrave; andato storto.</p>";
           header("Location: ConfirmPage.php");
@@ -238,48 +221,43 @@ if(isset($_POST['annullaRichiesta'])){
           header("Location: home.php");
         }
         break;
-
-  }
-  unset($_SESSION['submitPremuto']);
-}
-
-
-if(isset($_POST['annulla'])){
-  switch( $_SESSION['submitPremuto']){
-    case "annullaRichiesta":
-      if(isset($_SESSION['richiestaAnnullata'])){
-        unset($_SESSION['richiestaAnnullata']);
-        $_SESSION['messaggioConfirm'] = "La richiesta non &egrave stata rimossa.";
-        header("Location: ConfirmPage.php");
-      }
-
-      break;
-    case "prenotaRichiesta":
-      if(isset($_SESSION['richiestaPrenotata'])){
-        unset($_SESSION['richiestaPrenotata']);
-        $c = $_SESSION['contatore'];
-      for($i=1; $i<=$c; $i++){
-        unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
-        unset($_SESSION['listaProdotti'.$i]);
-      }
-      unset($_SESSION['contatore']);
-
-      $_SESSION['messaggioConfirm'] = "La richiesta non &egrave non e stata inserita.";
-      header("Location: ConfirmPage.php");
-    }
-        break;
-
-    case "logout":
-      header("Location: areaPersonale.php");
-      break;
-    case "closeaccount":
-      header("Location: areaPersonale.php");
-      break;
-
     }
     unset($_SESSION['submitPremuto']);
-}
+  }
 
 
+  if(isset($_POST['annulla'])){
+    switch( $_SESSION['submitPremuto']){
+      case "annullaRichiesta":
+        if(isset($_SESSION['richiestaAnnullata'])){
+          unset($_SESSION['richiestaAnnullata']);
+          $_SESSION['messaggioConfirm'] = "La richiesta non &egrave stata rimossa.";
+          header("Location: ConfirmPage.php");
+        }
+        break;
 
+      case "prenotaRichiesta":
+        if(isset($_SESSION['richiestaPrenotata'])){
+          unset($_SESSION['richiestaPrenotata']);
+          $c = $_SESSION['contatore'];
+          for($i=1; $i<=$c; $i++){
+            unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
+            unset($_SESSION['listaProdotti'.$i]);
+          }
+          unset($_SESSION['contatore']);
+          $_SESSION['messaggioConfirm'] = "La richiesta non &egrave non e stata inserita.";
+          header("Location: ConfirmPage.php");
+        }
+        break;
+
+      case "logout":
+        header("Location: areaPersonale.php");
+        break;
+
+      case "closeaccount":
+        header("Location: areaPersonale.php");
+        break;
+    }
+    unset($_SESSION['submitPremuto']);
+  }
 ?>

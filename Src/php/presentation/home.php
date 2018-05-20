@@ -1,22 +1,16 @@
 <!DOCTYPE HTML>
 <html lang ="it">
-<?php
-      if(file_exists("CommonHtmlElement.php")){
-        require_once ("CommonHtmlElement.php");}
-      else{
-        echo "Error: file does not esist.";
-        exit;}
-      $h = new CommonHtmlElement();
-      $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
- ?>
-<body onload='creaStatistiche()'>
+  <?php
+    require_once("CommonHtmlElement.php");
+    $h = new CommonHtmlElement();
+    $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
+  ?>
+  <body onload='creaStatistiche()'>
     <div id="top"></div>
 		<?php
-            $h->createheader("home");
-            $h->printInternalMenu("home");       
+      $h->createheader("home");
+      $h->printInternalMenu("home");
     ?>
-
-
 
     <div id="content">
         <div id="storia" class="contentElement Right">

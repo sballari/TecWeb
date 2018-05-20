@@ -1,15 +1,15 @@
 <?php
-session_start();
-  require_once("../class/DBmanager.php");
+  session_start();
+  require_once("../services/DBmanager.php");
   require_once("CommonHtmlElement.php");
-  require_once("../class/Manipulator.php");
-  require_once("../class/Factory.php");
-  require_once("../class/User.php");
-  require_once("../class/Request.php");
-  require_once("../class/RetailOrder.php");
-  require_once("../class/MassiveOrder.php");
-  require_once("../class/Product.php");
-  require_once("../class/Service.php");
+  require_once("../services/Manipulator.php");
+  require_once("../services/Factory.php");
+  require_once("../models/User.php");
+  require_once("../models/Request.php");
+  require_once("../models/RetailOrder.php");
+  require_once("../models/MassiveOrder.php");
+  require_once("../models/Product.php");
+  require_once("../models/Service.php");
 
   $h = new CommonHtmlElement();
   $h->printHead("Operation manager", "Operation manager", "operation");
@@ -170,18 +170,20 @@ if(isset($_POST['cancellaRichiesta'])){
           header("Location: areaPersonaleImpiegato.php");
         }
 
-
-        $_SESSION['richiestaCambiata'] = serialize($x);
-        $_SESSION['buttonPremuto'] = "cambiaStato";
-        header("Location: ConfirmPageImpiegato.php");
+        if($x->getStatus() == "in_lavorazione"){
+          $_SESSION['richiestaCambiata'] = serialize($x);
+          $_SESSION['buttonPremuto'] = "cambiaStato";
+          header("Location: ConfirmPageImpiegato.php");
+        }
+        else{
+          $_SESSION['messaggioAreaImp'] = "La richiesta scelta e gia in stato passato.";
+          header("Location: areaPersonaleImpiegato.php");
+        }
       }
-    else{
-
-
-      $_SESSION['messaggioAreaImp'] = "Devi selezionare una richiesta per poter procedere con l'operazione di cambia stato.";
-      header("Location: areaPersonaleImpiegato.php");
-    }
-
+      else{
+        $_SESSION['messaggioAreaImp'] = "Devi selezionare una richiesta per poter procedere con l'operazione di cambia stato.";
+        header("Location: areaPersonaleImpiegato.php");
+      }
     }
 
 
@@ -260,7 +262,7 @@ if(isset($_POST['cancellaRichiesta'])){
               header("Location: ConfirmPageImpiegato.php");
             }
             else{
-              $_SESSION['messaggioConfirmImp'] = "La richiesta &egrave stata cabiato in stato di lavorazione.";
+              $_SESSION['messaggioConfirmImp'] = "La richiesta &egrave stata cabiato in stato passato.";
               header("Location: ConfirmPageImpiegato.php");
 
             }

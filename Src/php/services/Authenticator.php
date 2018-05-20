@@ -1,5 +1,5 @@
 <?php
-require_once("User.php");
+require_once("../models/User.php");
 require_once("Factory.php");
 require_once("DBmanager.php");
 

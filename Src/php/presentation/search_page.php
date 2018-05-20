@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html lang ="it"></html>
-<?php
-    session_start();
-    require_once ("CommonHtmlElement.php");
-    require_once("../class/Factory.php");
-    require_once("../class/DBmanager.php");
+  <?php
+    //session_start();
+    require_once("CommonHtmlElement.php");
+    require_once("../services/Factory.php");
+    require_once("../services/DBmanager.php");
 
     $h = new CommonHtmlElement();
     $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -24,7 +24,7 @@
     <div id="content">
     <div id="productlist">
     <?php
-        
+
         $c = $f->searchProdotti($_GET['search']);
         echo "<h2>Trovati ".count($c)." prodotti corrispondenti.</h2>";
         foreach($c as $p){
@@ -32,13 +32,13 @@
         }
     ?>
 
-        
+
     </div>
     </div>
 
     <?php
-    $h->createStatisticDiv();
-	  $h->printContatti();
+      $h->createStatisticDiv();
+	    $h->printContatti();
       $h->printFooter();
       $h->printMobileMenu("search");
     ?>
@@ -46,8 +46,3 @@
 
 </body>
 </html>
-
-
-
-
-

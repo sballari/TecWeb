@@ -1,7 +1,7 @@
 <?php
 require_once("DBmanager.php");
-require_once("User.php");
-require_once("Product.php");
+require_once("../models/User.php");
+require_once("../models/Product.php");
 class Factory {
   private $dbM;
 
@@ -30,6 +30,8 @@ class Factory {
     }
     else return false;
   }
+
+
   function getUserList($userType){
       if ($this->dbM->getStatus()==true){
           $result = $this->dbM->submitQuery("SELECT * FROM utente WHERE tipo_utente='".$userType."'");
@@ -179,7 +181,7 @@ public function getRequest($key, $usrType){
 
          switch($tipoUtente){
 					 case "Servizio":
-             require_once("Service.php");
+             require_once("../models/Service.php");
 						 $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio WHERE utente = ".$email);
              $arrRet = array();
              while ($s= $result->fetch_assoc()){
@@ -196,7 +198,7 @@ public function getRequest($key, $usrType){
             return $arrRet;
 					 break;
 					 case "All_ingrosso":
-             require_once("MassiveOrder.php");
+             require_once("../models/MassiveOrder.php");
 						 $result = $this->dbM->submitQuery("SELECT * FROM ordine_all_ingrosso WHERE utente = ".$email);
              $arrRet = array();
              while ($s = $result->fetch_assoc()){
@@ -219,7 +221,7 @@ public function getRequest($key, $usrType){
              return $arrRet;
 					 break;
 					 case "Al minuto":
-             require_once("RetailOrder.php");
+             require_once("../models/RetailOrder.php");
 						 $result = $this->dbM->submitQuery("SELECT * FROM prenotazione WHERE utente = ".$email);
              $arrRet = array();
              while ($s = $result->fetch_assoc()){
@@ -251,7 +253,7 @@ function getTypeRequestList($typeR){
 
       switch($typeR){
         case "Al minuto":
-          require_once("RetailOrder.php");
+          require_once("../models/RetailOrder.php");
           $result = $this->dbM->submitQuery("SELECT * FROM prenotazione JOIN composizione_al_minuto ON prenotazione.codice =  composizione_al_minuto.prenotazione ");
           $arrRet = array();
           $previousKey = NULL;
@@ -276,7 +278,7 @@ function getTypeRequestList($typeR){
           break;
 
         case "All_ingrosso":
-          require_once("MassiveOrder.php");
+          require_once("../models/MassiveOrder.php");
           $result = $this->dbM->submitQuery("SELECT * FROM ordine_all_ingrosso JOIN composizione_all_ingrosso ON ordine_all_ingrosso.codice =  composizione_all_ingrosso.ordine_all_ingrosso ");
           $arrRet = array();
           $previousKey = NULL;
@@ -303,7 +305,7 @@ function getTypeRequestList($typeR){
           break;
 
         case "Servizio":
-          require_once("Service.php");
+          require_once("../models/Service.php");
           $result = $this->dbM->submitQuery("SELECT * FROM richiesta_servizio ");
           $arrRet = array();
           while ($s= $result->fetch_assoc()){
