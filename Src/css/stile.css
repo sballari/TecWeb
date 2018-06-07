@@ -35,11 +35,18 @@ button:hover {
   margin-bottom: 0.5em;
 	}
 
-
+#search-container {
+  width: 100%;
+  position: relative
+}
 #search-container input {
+    float: left;
+    width: 100%;
     border: 1px solid black;
     border-right: 0;
     padding: 0.5em;
+    position: absolute;  
+    cursor: pointer;
 }
 #search-container label {
   padding : 0;
