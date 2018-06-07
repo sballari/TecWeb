@@ -50,6 +50,7 @@ button:hover {
 }
 #search-container label {
   padding : 0;
+  width: 0;
 }
 
 #search-container button{
