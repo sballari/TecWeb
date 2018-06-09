@@ -11,7 +11,7 @@ abstract class Order extends Request {
 		return $this->products;
 	}
 	function insertProduct(Product $prod){
-		$this->products[] = $prod;
+		$this->products[count($this->products)] = $prod;
 	}
 	function insertProducts($arrayP){
 		$this->products = array_merge($this->products, $arrayP);

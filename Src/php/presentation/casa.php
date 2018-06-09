@@ -21,8 +21,10 @@
         </div>
         <div id="productlist">
             <h3>I NOSTRI PRODOTTI</h3>
+
       			<?php
-      			   require_once("../services/Factory.php");
+                echo "test".$_SESSION["kot"];
+               require_once("../services/Factory.php");
       			   require_once("../services/DBmanager.php");
                $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       				 $d->connect();

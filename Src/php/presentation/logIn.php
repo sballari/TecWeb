@@ -26,78 +26,45 @@
       }
 	    $h->createheader("logIn");
       $h->printInternalMenu("logIn");
-
-	    function cleanInput($data) {
-		    $data = trim($data);
-		    $data = htmlentities($data);
-		    $data = strip_tags($data);
-	      return $data;
-	    }
-
-	    //Variables for login form.
-	    $ErrLogin = $ErrEm = $ErrPassw = "";
-	    $email = $password = "";
-
-	    if(isset($_POST['email']) && isset($_POST['password'])){
-
-        $email = cleanInput($_POST['email']);
-		    if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		      $ErrEm = "Validation message: Invalid email format";
-		    }
-
-		    $password = cleanInput($_POST['password']);
-		    if(!preg_match("//",$password)) {		//******** YOU HAVE TO FIXED*******
-          $ErrPassw = "Validation message: Invalid password format";
-		    }
-
-		    if($ErrEm == "" && $ErrPassw == ""){
-		      require_once("../services/Authenticator.php");
-			    $a = new Authenticator($d);
-          $b = $a->validateUser($email, $password);
-			    if($b==false){
-            $ErrLogin = "La password o l'Email non sono corretti. Prova con  Email e password diverse.";
-          }
-			    else{
-				    $_SESSION['Email'] = $email;
-            $u = $f->getUser($_SESSION['Email']);
-            $t = $u->getUserType();
-            if($t == "Impiegato"){
-              header("Location: areaPersonaleImpiegato.php");
-            }
-            else{
-              header("Location: areaPersonale.php");
-            }
-			    }
-		    }
-	    }
       $d->disconnect();
     ?>
-    <div id='content'>
-      <div id='info' class='contentElement'>
+    <div id="content">
+      <div id="info" class="contentElement">
       	<h3>INFO</h3>
         <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
           <strong>nome, cognome, tipo di utente, email, password</strong>.
         </br>
-          <a href="signUp.php">Vai alla pagina di  <span lang='en'>Sign up</span></a>.
+          <a href="signUp.php">Vai alla pagina di  <span lang="en">Sign up</span></a>.
         </p>
       </div>
-      <div id='form' class='contentElement'>
-      	<form action='' method='POST'>
+      <div id="form" class="contentElement">
+      	<form action="logInOperationManager.php" method="POST">
       	<fieldset>
         	<legend>Form di accesso:</legend>
-          <?php
-        	  echo $ErrLogin."</br>";
-            echo "<div id=email>";
-            echo "<label for='email'>Email: </label>";
-        	  echo "<input type='email' name='email' placeholder='mickey.mouse@gmail.com' required><span class='err'>".$ErrEm."</span>";
-            echo "</div>";
-            echo "<div id=password>";
-            echo "<label for='password'>Password: </label>";
-        	  echo "<input type='password' name='password' placeholder='insert your password' required ><span class='err'>".$ErrPassw."</span>";
-            echo "</div>";
-          ?>
+
+        	<p><span class="err"><?php
+          if(isset($_SESSION["ErrLogin"])){
+          echo $_SESSION["ErrLogin"]."</br>";
+          unset($_SESSION["ErrLogIn"]);
+          } ?></span></p>
+          <div id="email">
+          <label for="Email">Email: </label>
+        	<input type="email" id="Email" name="email" placeholder="mickey.mouse@gmail.com" required><span class="err"><?php
+          if(isset($_SESSION["ErrEm"])){
+          echo $_SESSION["ErrEm"];
+          unset($_SESSION["ErrEm"]);
+          } ?></span>
+          </div>
+          <div id="password">
+          <label for="Password">Password: </label>
+        	<input type="password" id="Password" name="password" placeholder="insert your password" required ><span class="err"><?php
+          if(isset($_SESSION["ErrPassw"])){
+          echo $_SESSION["ErrPassw"];
+          unset($_SESSION["ErrPassw"]);
+          } ?></span>
+          </div>
           </br>
-        	<button type='submit' name = 'login' >Log in</button>
+        	<button type="submit" name = "login" >Log in</button>
       	</fieldset>
       	</form>
     	</div>

@@ -204,7 +204,7 @@
   			 echo "</tr>";
   			 $id++;
   		 }
-  		 if($_SESSION['operazione'] == "ordini"){
+  		 if(isset($_SESSION['operazione']) && $_SESSION['operazione'] == "ordini"){
   		   $_SESSION['iD'] = $id;
        }
   		 echo "</table>";
@@ -234,7 +234,7 @@
   			 echo "</tr>";
   			 $id++;
   		 }
-  		 if($_SESSION['operazione'] == "ordini"){
+  		 if(isset($_SESSION['operazione']) && $_SESSION['operazione'] == "ordini"){
   		   $_SESSION['iD'] = $id;
   	   }
   		 echo "</table>";
@@ -313,6 +313,9 @@
   	echo "<button type='submit' name='richiestaDettaglio' >Richiesta dettagliata</button>";
   	echo "</form>";
   	echo "</div>";
+    if(isset($_SESSION['operazione'])){
+      unset($_SESSION['operazione']);
+    }
   	$d->disconnect();
   }
 
@@ -500,11 +503,10 @@
   		   break;
     }
     echo "</br>";
-    echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='text' name='dataRitiro' required>";
+    echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='date' name='dataRitiro' required>";
     echo "</br>";
-    echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='text' name='oraRitiro' required>";
+    echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='time' name='oraRitiro' required>";
     echo "</br>";
-    echo "<button type='reset' name='reset'>Resetta</button>";
     echo "<button type='submit' name='prenota'>Prenota</button>";
     echo "</br>";
     echo "</fieldset>";

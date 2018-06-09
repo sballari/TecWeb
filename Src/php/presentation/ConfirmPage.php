@@ -52,6 +52,7 @@
           $h->printInternalMenu("ConfirmPage");
           echo "<div id='content'>";
           echo "<div id='info' class='contentElement'>";
+          echo "".$_SESSION["kot"];
           if(isset($_SESSION['messaggioConfirm'])){
             echo "".$_SESSION['messaggioConfirm'];
             unset($_SESSION['messaggioConfirm']);
@@ -92,6 +93,7 @@
           }
           else{
             echo "".$_SESSION['messaggio'];
+
           }
         }
       }

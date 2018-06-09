@@ -42,12 +42,12 @@
 
      if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['tipoUtente']) && isset($_POST['emailSignup']) && isset($_POST['passwordSignup'])){
 			 $nome = cleanInput($_POST["nome"]);
-			 if(!preg_match("//",$nome)) {		//******** YOU HAVE TO FIX IT*******
+			 if(!preg_match("/^[a-zA-Z]*$/",$nome)) {
 				 $ErrNome = "Errore: nome non valido";
 			 }
 
 			 $cognome = cleanInput($_POST["cognome"]);
-			 if(!preg_match("//",$cognome)) {		//******** YOU HAVE TO FIX IT*******
+			 if(!preg_match("/^[a-zA-Z]*$/",$cognome)) {
 				 $ErrCognome = "Errore: cognome non valido";
 			 }
 
@@ -59,8 +59,8 @@
 			 }
 
 				$passwordSignup = cleanInput($_POST["passwordSignup"]);
-				if (!preg_match("//",$passwordSignup)) {		//******** YOU HAVE TO FIXIT*******
-					$ErrPassword = "Errore: password non valida";
+				if (!preg_match("/^(\w{4,10})*$/",$passwordSignup)) {
+					$ErrPassword = "Errore: password non valida. La password deve avere da 4 alle 10 caratteri alfanumerici.";
 				}
 
 				if($ErrNome == "" && $ErrCognome == "" && $ErrEmail == "" && $ErrPassword == ""){

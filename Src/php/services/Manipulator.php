@@ -57,18 +57,18 @@ class Manipulator{
     if ($orderType == "Servizio") return false;
     $queryVerify = "SELECT nr_prodotti FROM ".$table1." WHERE
                     ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."'";
+    $result=array();
     $result = $this->dbM->submitQuery($queryVerify)->fetch_assoc(); // QUERY SBAGLIATA
-    $number = $result["N"];
-    $newNumber = (int)$result["nr_prodotti"]+1;
-
-    if ((int)$result["nr_prodotti"] == 0) {
+    $number = (int)$result["nr_prodotti"];
+    $newNumber = $number+1;
+    $_SESSION["kot"]=$result["nr_prodotti"];
+    if ($number == 0) {
       $query = "INSERT INTO `".$table1."` (`".$forK."`, `prodotto`, `nr_prodotti`)
                     VALUES (".$orderKey.", '".$prodKey."', 1)";
 
     }
     else {
-      $query = "UPDATE `".$table1."` SET `nr_prodotti` = '".$newNumber."'
-                     WHERE ".$forK." = '".$orderKey."' AND prodotto='".$prodKey."'";
+      $query = "UPDATE ".$table1."SET nr_prodotti = ".$newNumber." WHERE ".$forK." = ".$orderKey." AND prodotto=".$prodKey."";
     }
 
     return $this->dbM->submitQuery($query);
