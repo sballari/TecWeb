@@ -48,10 +48,10 @@ button:hover {
     position: absolute;  
     cursor: pointer;
 }
-#search-container label {
+/* #search-container label {
   padding : 0;
   width: 0;
-}
+} */
 
 #search-container button{
   background: #ddd;
