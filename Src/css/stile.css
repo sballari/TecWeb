@@ -57,6 +57,7 @@ button:hover {
   background: #ddd;
   border: black solid 1px;
   cursor: pointer;
+  display: inline;
   padding: 0.5em;
 }
 
