@@ -170,9 +170,9 @@ class CommonHtmlElement{
 		echo "<li>";
 			echo "<div id='search-contatiner' class='onlyDesktop'>";
 			echo "<form action='search_page.php'>";
-					echo "<label for='searchInput' class='aiuti'>Cerca </label>";
+					echo "<label id='searchLabel' class='aiuti' for='searchInput'>Cerca </label>";
 					echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
-					echo "<button type='submit'>Cerca</button>";
+					echo "<button id='searchButton' type='submit'>Cerca</button>";
 			echo "</form>";
 			echo "</div>";
 		echo "</li>";
