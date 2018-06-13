@@ -187,7 +187,7 @@ class CommonHtmlElement{
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
 		echo "<div class='header' id='top'>";
-			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
@@ -199,7 +199,7 @@ class CommonHtmlElement{
 
 	public function createBottomHeader(){
 		echo "<div class='header'>";
-			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 		echo "</div>";
