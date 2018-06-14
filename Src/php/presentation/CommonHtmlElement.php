@@ -170,9 +170,9 @@ class CommonHtmlElement{
 		echo "<li>";
 			echo "<div id='search-contatiner' class='onlyDesktop'>";
 			echo "<form action='search_page.php'>";
-					echo "<label for='searchInput' class='aiuti'>Cerca </label>";
+					echo "<label id='searchLabel' class='aiuti' for='searchInput'>Cerca </label>";
 					echo "<input id='searchInput' type='search' name='search' placeholder='Cerca prodotti...'>";
-					echo "<button type='submit'>Cerca</button>";
+					echo "<button id='searchButton' type='submit'>Cerca</button>";
 			echo "</form>";
 			echo "</div>";
 		echo "</li>";
@@ -182,12 +182,12 @@ class CommonHtmlElement{
 
 	public function createheader($page){
 
-		echo "<div id='accessBar' class='onlyDesktop'>
+		echo "<div id='accessBar'>
 			<a href ='#content'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
 		echo "<div class='header' id='top'>";
-			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 			echo "<div id='menu' class='onlyDesktop' >";
@@ -199,7 +199,7 @@ class CommonHtmlElement{
 
 	public function createBottomHeader(){
 		echo "<div class='header'>";
-			echo "<a href='home.php'><img  class='logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
+			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 		echo "</div>";

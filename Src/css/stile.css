@@ -11,7 +11,9 @@ margin: auto;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 14px;
 }
-
+button {
+  color: black;
+}
 button:hover {
   background: #ccc;
 }
@@ -35,30 +37,30 @@ button:hover {
   margin-bottom: 0.5em;
 	}
 
-#search-container {
-  width: 100%;
-  position: relative
-}
-#search-container input {
-    float: left;
-    width: 100%;
-    border: 1px solid black;
-    border-right: 0;
-    padding: 0.5em;
-    position: absolute;  
-    cursor: pointer;
-}
-#search-container label {
-  padding : 0;
-  width: 0;
-}
 
-#search-container button{
+#searchButton {
   background: #ddd;
   border: black solid 1px;
   cursor: pointer;
+  display: block; 
+  height: 100%;
   padding: 0.5em;
 }
+
+#searchInput {
+    float: left;
+    width: 80%;
+    border: 1px solid black;
+    border-right: 0;
+    padding: 0.5em;
+}
+#searchLabel {
+  padding : 0;
+  width: 0;
+  display: block;
+}
+
+
 
 #menu ul {
 	list-style-type: none;
