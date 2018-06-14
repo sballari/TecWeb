@@ -45,7 +45,7 @@
         	<p><span class="err"><?php
           if(isset($_SESSION["ErrLogin"])){
           echo $_SESSION["ErrLogin"]."</br>";
-          unset($_SESSION["ErrLogIn"]);
+          unset($_SESSION["ErrLogin"]);
           } ?></span></p>
           <div id="email">
           <label for="Email">Email: </label>

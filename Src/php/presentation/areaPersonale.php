@@ -61,7 +61,7 @@
               header("Location: ConfirmPage.php");
             }
             else{
-              if(isset($_SESSION['submitPremuto'])){
+              if(isset($_SESSION['submitPremuto']) && isset($_SESSION['contatore'])){
                 $c = $_SESSION['contatore'];
                 for($i=1; $i<=$c; $i++){
                   unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
