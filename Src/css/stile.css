@@ -195,6 +195,7 @@ h2, h3{
   position:absolute;
   height:0;
   overflow:hidden;
+  font-size: 0;
 }
 
 .onlyMobile{
