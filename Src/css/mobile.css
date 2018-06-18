@@ -96,60 +96,19 @@ span {
 	border: 0;
 }
 
-#internalNavBar{
+/* #internalNavBar{
   margin: 0;
   border: 0;
   width: 100%;
   text-align: center;
-}
-
-
-#hamburger{
-  float: right;
-}
-
-#mobileMenu {
-  width: 100vw;
-  text-align: center;
-  height: 130vh;
-}
-
-#mobileMenu h3 {
-  font-size: 3em;
-}
+} */
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
 }
 
-#mobileMenu ul {
-	list-style-type: none;
-	overflow: hidden;
-  border: 0;
-}
 
-#mobileMenu li {
-  width: 100%;
-	float:left;
-  display: block;
-  border-right: 1px solid brown;
-}
 
-#mobileMenu li a {
-	display: block;
-	color: brown;
-  padding:0.3em;
-	text-decoration: none;
-  font-size: 4em;
-}
-
-#mobileMenu li span{
-	display: block;
-  background-color: brown;
-  color: white;
-  padding:0.3em;
-  font-size: 4em;
-}
 
 #logNav{
   border-top: 1px brown solid;
@@ -217,3 +176,166 @@ fieldset{
   width: 100%;
   text-align: left;
 }
+
+
+
+
+/* CODICE CSS PER IL MOBILE MENU */
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 50px;
+  left: 50px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+#mobileMenuList
+{
+  position: absolute;
+  width: 90vw;
+  margin: -100px 0 0 -50px;
+  padding: 3em;
+  padding-top: 15em;
+  
+  background: #ededed;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+/* #hamburger{
+  float: right;
+}
+
+#mobileMenu {
+  width: 100vw;
+  text-align: center;
+  height: 130vh;
+}
+
+#mobileMenu h3 {
+  font-size: 3em;
+}
+
+
+*/
+
+#mobileMenuList li {
+  width: 100%;
+	float:left;
+  display: block;
+  border-right: 1px solid brown;
+}
+
+
+#mobileMenuList li span{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: brown;
+  color: white;
+  padding:0.3em;
+} 
+
+#mobileMenuList a
+{
+  display: block;
+	color: brown;
+  padding:0.3em;
+	text-decoration: none;
+  
+}
+
+#mobileMenu a :hover
+{
+  display: block;
+	color: brown;
+  padding:0.3em;
+	text-decoration: none;
+  
+}
+
+
+
+
+  

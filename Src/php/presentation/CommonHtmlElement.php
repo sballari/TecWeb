@@ -133,7 +133,7 @@ class CommonHtmlElement{
 	}
 
 	public function generateMenu($page, $boolS){
-		echo "<ul>";
+		if ($boolS) echo "<ul>";
 		switch($page){
 			case "home":
 					echo "<li><span> Home </span></li>";
@@ -177,7 +177,7 @@ class CommonHtmlElement{
 			echo "</div>";
 		echo "</li>";
 		}
-	 echo "</ul>";
+		if ($boolS) echo "</ul>";
 	}
 
 	public function createheader($page){
@@ -188,20 +188,11 @@ class CommonHtmlElement{
     	</div>";
 		echo "<div class='header' id='top'>";
 			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
-			echo "<a href='#headerSpace'> <img  id='hamburger' class='onlyMobile' src='../../img/menu-hamburger.png' alt='pulsante menu'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
-			echo "<div id='menu' class='onlyDesktop' >";
+			echo "<nav role='navigation' id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page, true);
-		  echo "</div>";
+		  echo "</nav >";
 			$this->printBricioleDiPane($page);
-		echo "</div>";
-	}
-
-	public function createBottomHeader(){
-		echo "<div class='header'>";
-			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
-			echo "<a href='#top'> <img  id='close' class='onlyMobile' src='../../img/close.png' alt='pulsante menu'> </a>";
-			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
 		echo "</div>";
 	}
 
@@ -335,15 +326,25 @@ class CommonHtmlElement{
 	}
 
 	public function printMobileMenu($page){
-		echo  "<div class='onlyMobile' id='mobileMenu'>";
-    echo  "    <div id='headerSpace'> </div>";
-		$this->createBottomHeader();
-    echo  "    <div id='linkEsterni'>";
-    $this->generateMenu($page,false);
-    echo  "    </div>";
-    $this->printInternalMenuMobile($page);
+	echo  "<nav role='navigation' class='onlyMobile' id='mobileMenu'>";
+	echo  "<div id='menuToggle'>";
+	echo  "<input type='checkbox' />";
+	echo  "
+				<span></span>
+				<span></span>
+				<span></span>
+	";
+	echo "<ul id='mobileMenuList'>";
+    	//echo  "    <div id='headerSpace'> </div>";
+		//$this->createBottomHeader();
+    	//echo  "    <div id='linkEsterni'>";
+    	$this->generateMenu($page,false);
+    	//echo  "    </div>";
+    	$this->printInternalMenuMobile($page);
 		$this->generateLogInLink($page);
-		echo "</div>";
+	echo "</ul>";
+	echo "</div>";
+	echo "</nav>";
 	}
 
 	public function printInternalMenu($page){

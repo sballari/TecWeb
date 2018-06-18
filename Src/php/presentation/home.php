@@ -6,10 +6,14 @@
     $h->printHead("home", "home della pasticceria i tesori di squitty", "home");
   ?>
   <body onload='creaStatistiche()'>
+    <?php
+        $h->printMobileMenu("home");
+    ?>
     <div id="top"></div>
-		<?php
-      $h->createheader("home");
-      $h->printInternalMenu("home");
+        <?php
+        
+        $h->createheader("home");
+        $h->printInternalMenu("home");
     ?>
 
     <div id="content">
@@ -42,7 +46,6 @@
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("home");
     ?>
 </body>
 </html>
