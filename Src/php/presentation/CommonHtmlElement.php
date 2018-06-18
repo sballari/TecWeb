@@ -196,10 +196,13 @@ class CommonHtmlElement{
 		echo "</div>";
 	}
 
-	public function generateLogInLink($page){
-		echo "<div class='logNav'>";
-		echo "<h3>AREA PERSONALE</h3>";
-		echo "<ul>";
+	public function generateLogInLink($page, $mobile=false){
+		if (!$mobile) echo "<div class='logNav'>";
+		else echo "<li>";
+			echo "<h3>AREA PERSONALE</h3>";
+		if ($mobile) echo "</li>";
+		else echo "<ul>";
+		
 		switch($page){
 			case "logIn":
 				echo "<li><span>Accedi</span></li>";
@@ -297,8 +300,8 @@ class CommonHtmlElement{
 				}
 			break;
 		}
-		echo "</ul>";
-		echo "</div>";
+		if (!$mobile) echo "</ul>";
+		if (!$mobile) echo "</div>";
 	}
 
 	public function printContatti(){
@@ -335,13 +338,9 @@ class CommonHtmlElement{
 				<span></span>
 	";
 	echo "<ul id='mobileMenuList'>";
-    	//echo  "    <div id='headerSpace'> </div>";
-		//$this->createBottomHeader();
-    	//echo  "    <div id='linkEsterni'>";
     	$this->generateMenu($page,false);
-    	//echo  "    </div>";
     	$this->printInternalMenuMobile($page);
-		$this->generateLogInLink($page);
+		$this->generateLogInLink($page, true);
 	echo "</ul>";
 	echo "</div>";
 	echo "</nav>";
@@ -354,9 +353,9 @@ class CommonHtmlElement{
 		$this->generateLogInLink($page);
     echo "</div>";
 	}
-	public function printListLinkInterni($page){
+	public function printListLinkInterni($page, $mob = false){
 
-		echo "<ul>";
+		if (!$mob) echo "<ul>";
 		switch($page){
 			case "home":
 					echo "<li><a href='#storia'>Storia</a></li>";
@@ -473,17 +472,16 @@ class CommonHtmlElement{
 			break;
 		}
 			echo "	  <li><a href='#contatti'>Contatti</a></li>";
-			echo "		</ul>";
+			if (!$mob) 	echo "		</ul>";
 
 
 
 	}
 	public function printInternalMenuMobile($page){
-		echo "<div id='mobileInterni'>";
-		echo "<a href ='#content' class='aiuti'>Vai al contenuto</a>";
-		echo "		<h3>LINK INTERNI</h3>";
-		$this->printListLinkInterni($page);
-		echo "</div>";
+		
+		echo "<li><a href ='#content' class='aiuti'>Vai al contenuto</a></li>";
+		echo "	<li><h3>LINK INTERNI</h3></li>";
+		$this->printListLinkInterni($page, true);
 }
 
 public function printListaProdotti($Type){
