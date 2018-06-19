@@ -13,6 +13,9 @@
       $h->printHead("singUp", "area personale", "login, signup");
  ?>
  <body onload='creaStatistiche()'>
+ <?php
+        $h->printMobileMenu("singUp");
+    ?>
    <?php
 	   session_start();
      if(isset($_SESSION['Email'])){
@@ -105,7 +108,6 @@
 	    $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("singUp");
       $d->disconnect();
     ?>
 

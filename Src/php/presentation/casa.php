@@ -6,6 +6,9 @@
     $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("home");
+    ?>
     <?php
   	   $h->createheader("casa");
        $h->printInternalMenu("casa");
@@ -43,7 +46,6 @@
        $h->createStatisticDiv();
 		   $h->printContatti();
        $h->printFooter();
-       $h->printMobileMenu("casa");
     ?>
   </body>
 </html>

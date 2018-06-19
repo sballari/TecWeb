@@ -9,6 +9,9 @@
       $h->printHead("LogIn", "area personale", "login, signup");
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("logIn");
+    ?>
     <?php
 	    session_start();
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -74,7 +77,7 @@
 		  $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("logIn");
+
     ?>
 
   </body>

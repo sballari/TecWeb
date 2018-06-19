@@ -6,6 +6,9 @@
       $h->printHead("casa", "pagina dedicata ai prodotti per la casa", "casa");
  ?>
 <body onload='creaStatistiche()'>
+<?php
+        $h->printMobileMenu("sitemap");
+    ?>
     <div id="accessBar">
     </div>
 
@@ -37,7 +40,6 @@
       $h->createStatisticDiv();
 	    $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("sitemap");
     ?>
 
 

@@ -6,6 +6,9 @@
     $h->printHead("catering", "pagina dedicata ai servizi catering", "catering");
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("catering");
+    ?>
     <?php
       $h->createheader("catering");
       $h->printInternalMenu("catering");
@@ -41,7 +44,6 @@
         $h->createStatisticDiv();
 			  $h->printContatti();
         $h->printFooter();
-        $h->printMobileMenu("catering");
       ?>
   </body>
 </html>

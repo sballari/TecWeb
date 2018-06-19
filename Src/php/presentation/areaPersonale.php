@@ -16,7 +16,9 @@
     $disp = new ElementDisplayer();
   ?>
   <body onload='creaStatistiche()'>
-
+    <?php
+        $h->printMobileMenu("account");
+    ?>
 		<?php
 			$h->createheader("account");
       $h->printInternalMenu("account");
@@ -81,7 +83,6 @@
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("account");
     ?>
   </body>
 </html>

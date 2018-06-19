@@ -16,6 +16,9 @@
     $disp = new ElementDisplayer();
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("casa");
+    ?>
     <a name="top"></a>
     <div id="accessBar">
     </div>
@@ -105,7 +108,7 @@
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("casa");
+
     ?>
    </body>
  </html>
