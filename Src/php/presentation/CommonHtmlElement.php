@@ -202,7 +202,7 @@ class CommonHtmlElement{
 			echo "<h3>AREA PERSONALE</h3>";
 		if ($mobile) echo "</li>";
 		else echo "<ul>";
-		
+
 		switch($page){
 			case "logIn":
 				echo "<li><span>Accedi</span></li>";
@@ -274,7 +274,7 @@ class CommonHtmlElement{
 			break;
 
 			default:
-				session_start();
+			
 				if(isset($_SESSION['Email'])){
 
 					$d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
@@ -478,7 +478,7 @@ class CommonHtmlElement{
 
 	}
 	public function printInternalMenuMobile($page){
-		
+
 		echo "<li><a href ='#content' class='aiuti'>Vai al contenuto</a></li>";
 		echo "	<li><h3>LINK INTERNI</h3></li>";
 		$this->printListLinkInterni($page, true);

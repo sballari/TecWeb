@@ -39,7 +39,7 @@
         </p>
     </div>
 	  <div class="contentElement">
-				<form id="form" action="signUpOperationManager.php"  method="POST">
+				<form id="form" action="../operationManagers/signUpOperationManager.php"  method="POST">
 					<fieldset>
             <legend>Creazione account:</legend>
             <p><span class="err"><?php
@@ -50,22 +50,30 @@
 
             <div id="nome">
   						<label for="Nome">Nome: </label>
-  						<input type="text" name="nome" id="Nome" placeholder="insert your name" required><span class="err">
+  						<input type="text" name="nome" id="Nome" placeholder="insert your name"  value="<?php $datiInseriti=array();
+              if(isset($_SESSION["datiIn"])){
+              $datiInseriti=unserialize($_SESSION["datiIn"]);
+              echo $datiInseriti[0]."";
+              }?>" required><span class="err">
               <?php
               if(isset($_SESSION["ErrNome"])){
               echo $_SESSION["ErrNome"]."</br>";
               unset($_SESSION["ErrNome"]);
               } ?></span>
               </div>
+
               <div id="cognome">
   						<label for="Cognome">Cognome: </label>
-  						<input type="text" id="Cognome" name="cognome"  placeholder="insert your surname" required><span class="err">
+  						<input type="text" id="Cognome" name="cognome"  placeholder="insert your surname"  value="<?php if(isset($_SESSION["datiIn"])){
+              echo $datiInseriti[1]."";
+              }?>" required><span class="err">
               <?php
               if(isset($_SESSION["ErrCognome"])){
               echo $_SESSION["ErrCognome"]."</br>";
               unset($_SESSION["ErrCognome"]);
               } ?><span>
               </div>
+
               <div id="tipo">
   						<label for="tipoUtente">Tipo utente: </label>
   						<select name="tipoUtente" required>
@@ -76,25 +84,32 @@
   							<option value="Impiegato">Impiegato</option>
   							</select>
               </div>
+
               <div id="email">
   						<label for="Email">Email: </label>
-  						<input type="email" id="Email" name="emailSignup" placeholder="mickey.mouse@gmail.com" required><span class="err">
+  						<input type="email" id="Email" name="emailSignup" placeholder="mickey.mouse@gmail.com"  value="<?php if(isset($_SESSION["datiIn"])){
+              echo $datiInseriti[3]."";
+              }?>" required><span class="err">
               <?php
               if(isset($_SESSION["ErrEmail"])){
               echo $_SESSION["ErrEmail"]."</br>";
               unset($_SESSION["ErrEmail"]);
               } ?></span>
               </div>
+
               <div id="password">
   						<label for="Password">Password: </label>
-  						<input type="password" id="Password" name="passwordSignup" placeholder="insert your password" required><span class="err">
+  						<input type="password" id="Password" name="passwordSignup" placeholder="insert your password"  value="<?php if(isset($_SESSION["datiIn"])){
+              echo $datiInseriti[4]."";
+              unset($_SESSION["datiIn"]);
+              }?>" required><span class="err">
               <?php
               if(isset($_SESSION["ErrPassword"])){
               echo $_SESSION["ErrPassword"]."</br>";
               unset($_SESSION["ErrPassword"]);
               } ?></span>
               </div>
-            
+
 						<button type="submit" name="createAccount">Create account</button>
 					</fieldset>
 				</form>
