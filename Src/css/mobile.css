@@ -2,15 +2,12 @@
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 1.3em;
 }
 
 html,body{
-  font-size: 0.5em;
+  max-width: 100vw;
 }
-span {
-  font-size: 1em;
-}
+
 
 .onlyMobile{
   position: static;
@@ -36,32 +33,14 @@ span {
 }
 
 .header h1{
-  float: left;
-  font-size: 4em;
+  font-size: 1.8  em;
   width: 70vw;
-  text-align: left;
+  text-align: right;
 }
-
-#hamburger, #close {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  height: 10vw;
-  float: right;
-  width: 10vw;
-  
-}
-
-/* #close{
-  float:right;
-  height: 5em;
-  width: 5em;
-  padding-right: 1em;
-  margin-top: 2em;
-} */
 
 #briciole{
-  font-size: 2em;
   margin-bottom: 0.5em;
+  text-align: center;
 }
 
 
@@ -79,15 +58,16 @@ span {
   padding-bottom: 0;
   width: 100vw;
 }
-#contentElement p{
+
+#contentElement p, .bottomElement p{
   margin: 0;
   padding: 0;
 }
-.contentElement img {
+.contentElement img, .bottomElement img {
   max-width: 100vw;
 }
 
-.contentElement.Left img, .contentElement.Right img{
+.contentElement.Left img, .contentElement.Right img, .bottomElement{
 	float: none;
   display: block;
   margin-left: auto;
@@ -96,48 +76,32 @@ span {
 	border: 0;
 }
 
-/* #internalNavBar{
-  margin: 0;
-  border: 0;
-  width: 100%;
-  text-align: center;
-} */
 
 #logNav ul li,#internalNavBar ul li {
   border: 0px 0px 0px 0px;
 }
 
-
-
-
 #logNav{
   border-top: 1px brown solid;
   padding-top: 0.5em;
 }
-
-
-
-
 .product img{
   max-width: 100%;
   width:100%;
 }
 
-
-
-
-
+/* 
 .bottomElement {
   border-left: 0;
   border-right: 0;
   margin:0.5em 0.3em 0.3em 0.3em;
   padding-bottom: 0.5em;
 
-}
+} */
 
 .bottomElement button {
   width: 60vw;
-  margin-bottom: 0.5em;  
+  margin-bottom: 0.1em;  
   float: left;
 
 }
@@ -148,8 +112,8 @@ span {
 }
 
 #up_arrow{
-  height: 7em;
-  width: 7em;
+  height: 5em;
+  width: 5em;
   left: 43.48%;
 }
 
@@ -160,15 +124,12 @@ span {
 
 #form input,select,textarea{
   float: right;
-  font-size: 1em;
+  /* font-size: 1em; */
+
 }
 
 fieldset{
   border:0;
-}
-
-#form ,#info{
-  font-size: 2.5em;
 }
 
 #form div{
@@ -177,7 +138,18 @@ fieldset{
   text-align: left;
 }
 
-
+/* .bottomElement {
+  margin: 0;  
+  border: 0;
+  padding: 0;
+}
+.bottomElement :first-line {
+  padding-top: 0.5em;
+  border-top: 1px solid brown;
+}
+#footer {
+  border: 0;
+} */
 
 
 /* CODICE CSS PER IL MOBILE MENU */
@@ -185,8 +157,8 @@ fieldset{
 {
   display: block;
   position: relative;
-  top: 50px;
-  left: 50px;
+  top: 3.2em;
+  left: 2em;
   
   z-index: 1;
   
@@ -196,8 +168,8 @@ fieldset{
 #menuToggle input
 {
   display: block;
-  width: 40px;
-  height: 32px;
+  width: 5em;
+  height: 3em;
   position: absolute;
   top: -7px;
   left: -5px;
@@ -213,12 +185,12 @@ fieldset{
 #menuToggle span
 {
   display: block;
-  width: 33px;
+  width: 2.5em;
   height: 4px;
   margin-bottom: 5px;
   position: relative;
   
-  background: #cdcdcd;
+  background: black;
   border-radius: 3px;
   
   z-index: 1;
@@ -264,9 +236,9 @@ fieldset{
 {
   position: absolute;
   width: 90vw;
-  margin: -100px 0 0 -50px;
+  margin: -100px 0 0 -4em;
   padding: 3em;
-  padding-top: 15em;
+  padding-top: 10em;
   
   background: #ededed;
   list-style-type: none;
@@ -283,22 +255,6 @@ fieldset{
 {
   transform: none;
 }
-/* #hamburger{
-  float: right;
-}
-
-#mobileMenu {
-  width: 100vw;
-  text-align: center;
-  height: 130vh;
-}
-
-#mobileMenu h3 {
-  font-size: 3em;
-}
-
-
-*/
 
 #mobileMenuList li {
   width: 100%;

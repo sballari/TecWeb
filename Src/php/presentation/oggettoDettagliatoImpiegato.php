@@ -20,6 +20,9 @@
     $disp = new ElementDisplayer();
   ?>
   <body>
+  <?php
+        $h->printMobileMenu("oggettoDettagliatoImpiegato");
+    ?>
     <div id="accessBar">
     </div>
 
@@ -90,7 +93,6 @@
 
 	     $h->printContatti();
        $h->printFooter();
-       $h->printMobileMenu("casa");
      ?>
    </body>
 </html>

@@ -6,6 +6,9 @@
     $h->printHead("ristorante", "pagina dedicata ai prodotti per ristoranti e hotel", "ristorante, hotel, ingrosso");
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("ristorante");
+    ?>
     <?php
       $h->createheader("ristorante");
       $h->printInternalMenu("ristorante");
@@ -38,7 +41,6 @@
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("ristorante");
     ?>
   </body>
 </html>

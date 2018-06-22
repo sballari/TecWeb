@@ -20,6 +20,9 @@
     $h->printHead("richiesta", "dettagli della richiesta", "richiesta, dolci, dettagli");
   ?>
   <body onload='creaStatistiche()'>
+  <?php
+        $h->printMobileMenu("richiestaDettagliata");
+    ?>
     <div id="accessBar">
     </div>
     <?php
@@ -77,7 +80,6 @@
         $h->createStatisticDiv();
 	      $h->printContatti();
         $h->printFooter();
-        $h->printMobileMenu("casa");
       ?>
   </body>
 </html>

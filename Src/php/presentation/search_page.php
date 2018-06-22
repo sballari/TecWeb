@@ -14,6 +14,9 @@
 
  ?>
 <body onload='creaStatistiche()'>
+<?php
+        $h->printMobileMenu("search");
+    ?>
     <div id="accessBar">
     </div>
 
@@ -40,7 +43,7 @@
       $h->createStatisticDiv();
 	    $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("search");
+
     ?>
 
 
