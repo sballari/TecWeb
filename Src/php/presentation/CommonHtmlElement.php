@@ -189,7 +189,7 @@ class CommonHtmlElement{
 		echo "<div class='header'>";
 			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
-			echo "<nav id='menu' class='onlyDesktop' >";
+			echo "<nav aria-label='primary' id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page, true);
 		  echo "</nav >";
 			$this->printBricioleDiPane($page);
@@ -329,7 +329,7 @@ class CommonHtmlElement{
 	}
 
 	public function printMobileMenu($page){
-	echo  "<nav  class='onlyMobile' id='mobileMenu'>";
+	echo  "<nav  aria-label='secondary' class='onlyMobile' id='mobileMenu'>";
 	echo  "<div id='menuToggle'>";
 	echo  "<input type='checkbox' />";
 	echo  "
