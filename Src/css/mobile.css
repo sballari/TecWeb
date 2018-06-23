@@ -55,14 +55,17 @@ html,body{
   margin-right: 0;
   padding: 0;
   width: 100%;
-
+  padding-bottom: 0.5em;
 }
 #content {
   float: none;
   padding-bottom: 0;
   width: 100vw;
 }
-
+#footer a {
+  text-align: center;
+  padding-left: 1em;
+}
 #contentElement p, .bottomElement p, #footer p, #pstat, ul{
   margin: 1em;
   padding: 0;
@@ -106,8 +109,6 @@ html,body{
 .bottomElement button {
   width: 60vw;
   margin-bottom: 0.1em;  
-  float: left;
-
 }
 
 #contatti li{
@@ -142,18 +143,6 @@ fieldset{
   text-align: left;
 }
 
-/* .bottomElement {
-  margin: 0;  
-  border: 0;
-  padding: 0;
-}
-.bottomElement :first-line {
-  padding-top: 0.5em;
-  border-top: 1px solid brown;
-}
-*/
-
- 
 
 
 /* CODICE CSS PER IL MOBILE MENU */
