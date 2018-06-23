@@ -119,26 +119,34 @@ html,body{
   left: 43.48%;
 }
 
+
+
+/* CODICE CSS PER FORM */
 #form button, #form label{
   float: left;
   text-align: left;
 }
+#form{
+  padding-left: 0.5em;
+}
 
 #form input,select,textarea{
-  float: right;
-  /* font-size: 1em; */
-
+  float: left;
 }
 
-fieldset{
+/* fieldset{
   border:0;
-}
+} */
 
-#form div{
+/* #form div{
   float: left;
   width: 100%;
   text-align: left;
-}
+} */
+
+
+
+
 
 /* CODICE CSS PER IL MOBILE MENU */
 #menuToggle
