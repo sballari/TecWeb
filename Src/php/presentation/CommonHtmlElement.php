@@ -124,8 +124,8 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
 		echo "\n";
-		echo '<link rel="stylesheet" media="screen and (max-width:681px), only screen and (max-device-width:681px)"
-		 			href="../../css/mobile.css" type="text/css" />';
+		echo '<link rel="stylesheet" media="screen and (max-width:681px)" href="../../css/mobile.css" type="text/css" />';
+		// , only screen and (max-device-width:681px) questa seconda parte non lo fa validare
 		echo "\n";
 		echo "<script src='gestioneCookie.js'></script>";
 		echo '</head>';
@@ -332,7 +332,7 @@ class CommonHtmlElement{
 	echo  "<nav  aria-label='secondary' class='onlyMobile' id='mobileMenu'>";
 	echo  "<div id='menuToggle'>";
 	echo  "<input id='ckM' type='checkbox' />";
-	echo "<label id='MenuCheckbox' class='aiuti' for='ckM'/>Spunta per il menu</label>";
+	echo "<label id='MenuCheckbox' class='aiuti' for='ckM'>Spunta per il menu</label>";
 	echo  "
 				<span></span>
 				<span></span>
