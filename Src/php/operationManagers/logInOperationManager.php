@@ -20,6 +20,10 @@
 
     if(isset($_POST['email']) && isset($_POST['password'])){
 
+      $datiInseriti=array($_POST["email"], $_POST["password"]);
+      $da=serialize($datiInseriti);
+      $_SESSION["datiInseriti"]=$da;
+
       $email = cleanInput($_POST['email']);
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION["ErrEm"] = "Validation message: Invalid email format";
@@ -36,22 +40,24 @@
         $b = $a->validateUser($email, $password);
         if($b==false){
           $_SESSION["ErrLogin"] = "La password o l'Email non sono corretti. Prova con  Email e password diverse.";
-          header("Location: logIn.php");
+          header("Location: ../presentation/logIn.php");
         }
         else{
           $_SESSION['Email'] = $email;
           $u = $f->getUser($_SESSION['Email']);
           $t = $u->getUserType();
           if($t == "Impiegato"){
-            header("Location: areaPersonaleImpiegato.php");
+            header("Location: ../presentation/areaPersonaleImpiegato.php");
+            unset($_SESSION["datiInseriti"]);
           }
           else{
-            header("Location: areaPersonale.php");
+            header("Location: ../presentation/areaPersonale.php");
+            unset($_SESSION["datiInseriti"]);
           }
         }
       }
       else{
-        header("Location: logIn.php");
+        header("Location: ../presentation/logIn.php");
       }
     }
     $d->disconnect();

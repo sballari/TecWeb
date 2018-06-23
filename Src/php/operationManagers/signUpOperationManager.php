@@ -18,6 +18,11 @@
    $nome = $cognome = $tipoUtente = $emailSignup = $passwordSignup = "";
 
    if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["tipoUtente"]) && isset($_POST["emailSignup"]) && isset($_POST["passwordSignup"])){
+
+     $datiInseriti=array($_POST["nome"], $_POST["cognome"], $_POST["tipoUtente"], $_POST["emailSignup"], $_POST["passwordSignup"]);
+     $data=serialize($datiInseriti);
+     $_SESSION["datiIn"]=$data;
+
      $nome = cleanInput($_POST["nome"]);
      if(!preg_match("/^[a-zA-Z]*$/",$nome)) {
        $_SESSION["ErrNome"] = "Errore: nome non valido";
@@ -48,22 +53,24 @@
 
         if($b==FALSE){
           $ErrSignup = "L'Email inserita non &egrave; disponibile. Inserire un Email diversa.";
-          header("Location: signUp.php");
+          header("Location: ../presentation/signUp.php");
         }
         else{
           $_SESSION['Email'] = $emailSignup;
           $u = $f->getUser($_SESSION['Email']);
           $t = $u->getUserType();
           if($t == "Impiegato"){
-            header("Location: areaPersonaleImpiegato.php");
+            header("Location: ../presentation/areaPersonaleImpiegato.php");
+            unset($_SESSION["datiIn"]);
           }
           else{
-            header("Location: areaPersonale.php");
+            header("Location: ../presentation/areaPersonale.php");
+            unset($_SESSION["datiIn"]);
           }
         }
       }
       else{
-        header("Location: signUp.php");
+        header("Location: ../presentation/signUp.php");
       }
     }
  ?>

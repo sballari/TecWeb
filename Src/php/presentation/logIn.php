@@ -41,7 +41,7 @@
         </p>
       </div>
       <div id="form" class="contentElement">
-      	<form action="logInOperationManager.php" method="POST">
+      	<form action="../operationManagers/logInOperationManager.php" method="POST">
       	<fieldset>
         	<legend>Form di accesso:</legend>
 
@@ -50,18 +50,27 @@
           echo $_SESSION["ErrLogin"]."</br>";
           unset($_SESSION["ErrLogin"]);
           } ?></span></p>
+
           <div id="email">
           <label for="Email">Email: </label>
-        	<input type="email" id="Email" name="email" placeholder="mickey.mouse@gmail.com" required><span class="err"><?php
-          if(isset($_SESSION["ErrEm"])){
+        	<input type="email" id="Email" name="email" placeholder="mickey.mouse@gmail.com" value="<?php $datiInseriti=array(); 
+          if(isset($_SESSION["datiInseriti"])){
+          $datiInseriti=unserialize($_SESSION["datiInseriti"]);
+          echo $datiInseriti[0]."";
+          }?>" required><span class="err">
+          <?php if(isset($_SESSION["ErrEm"])){
           echo $_SESSION["ErrEm"];
           unset($_SESSION["ErrEm"]);
           } ?></span>
           </div>
+
           <div id="password">
           <label for="Password">Password: </label>
-        	<input type="password" id="Password" name="password" placeholder="insert your password" required ><span class="err"><?php
-          if(isset($_SESSION["ErrPassw"])){
+        	<input type="password" id="Password" name="password" placeholder="insert your password" value="<?php if(isset($_SESSION["datiInseriti"])){
+          echo $datiInseriti[1]."";
+          unset($_SESSION["datiInseriti"]);
+          }?>" required ><span class="err">
+          <?php if(isset($_SESSION["ErrPassw"])){
           echo $_SESSION["ErrPassw"];
           unset($_SESSION["ErrPassw"]);
           } ?></span>

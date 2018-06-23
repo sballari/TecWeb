@@ -1,7 +1,6 @@
 <?php
   session_start();
   require_once("../services/DBmanager.php");
-  require_once("CommonHtmlElement.php");
   require_once("../services/Manipulator.php");
   require_once("../services/Factory.php");
   require_once("../models/User.php");
@@ -11,8 +10,6 @@
   require_once("../models/Product.php");
   require_once("../models/Service.php");
 
-  $h = new CommonHtmlElement();
-  $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
   $d->connect();
   $f = new Factory($d);
@@ -26,11 +23,11 @@
       $pos = substr($_POST['request'], 7);
       $x = $req[$pos-1];
       $_SESSION['richiestaDettaglio'] = serialize($x);  //Viene salvata $x in SESSION per poter accederla in richiestaDettagliata.php
-      header("Location: richiestaDettagliata.php");
+      header("Location: ../presentation/richiestaDettagliata.php");
     }
     else{
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter visualizzare la richiesta dettagliatta.";  //Questo messaggio viene visualizzato in areaPersonale.php
-      header("Location: areaPersonale.php");
+      header("Location: ../presentation/areaPersonale.php");
     }
   }
 
@@ -48,16 +45,16 @@
       if($deliveryD > $currentD){
         $_SESSION['richiestaAnnullata'] = serialize($x);
         $_SESSION['submitPremuto']="annullaRichiesta";
-        header("Location: ConfirmPage.php");
+        header("Location: ../presentation/ConfirmPage.php");
       }
       else{
         $_SESSION['messaggioArea'] = "Non &egrave; possibile rimuovere la richiesta. La richiesta da annullare deve essere in lavorazione e l'annulla deve essere fatta almeno un giorno prima della consegna.";
-        header("Location: areaPersonale.php");
+        header("Location: ../presentation/areaPersonale.php");
       }
     }
     else{
       $_SESSION['messaggioArea'] = "Devi selezionare una richiesta per poter procedere con l'operazione di annulla.";
-      header("Location: areaPersonale.php");
+      header("Location: ../presentation/areaPersonale.php");
     }
   }
 
@@ -73,16 +70,7 @@
 
   if(isset($_POST['prenota'])){
     $_SESSION['submitPremuto']="prenotaRichiesta";
-      //$dataRitiro = clean_input($_POST['dataRitiro']);
-      //if (!preg_match("//", $dataRitiro)) {		//******** YOU HAVE TO FIX IT*******
-        //$ErrDataRitiro = "Invalid date format";
-      //}
 
-      //$oraRitiro = clean_input($_POST['oraRitiro']);
-      //if (!preg_match("//",$oraRitiro)) {		//******** YOU HAVE TO FIX IT*******
-        //$ErrOraRitiro= "Invalid time format";
-      //}
-      //if(($ErrNumeroProdotti = "") && ($ErrDataRitiro = "") && ($ErrOraRitiro = "")){
     $m = new Manipulator($d);
     $usr = $f->getUser($_SESSION['Email']);
     $usrType = $usr->getUserType();
@@ -128,7 +116,7 @@
         break;
     }
     $_SESSION['richiestaPrenotata'] = serialize($r);
-    header("Location: ConfirmPage.php");
+    header("Location: ../presentation/ConfirmPage.php");
   }
 
 
@@ -157,7 +145,7 @@
 
       $_SESSION[$_POST['listaProdotti']] = $_SESSION[$_POST['listaProdotti']] + $_POST['numeroProdotti'];
     }
-    header("Location: areaPersonale.php");
+    header("Location: ../presentation/areaPersonale.php");
 }
 
 
@@ -172,11 +160,11 @@
           unset($_SESSION['richiestaAnnullata']);
           if($b==false){
             $_SESSION['messaggioConfirm'] = "Qualcosa &egrave; andato storto!";
-            header("Location: ConfirmPage.php");
+            header("Location: ../presentation/ConfirmPage.php");
           }
           else{
             $_SESSION['messaggioConfirm'] = "La richiesta &egrave stata rimossa.";
-            header("Location: ConfirmPage.php");
+            header("Location: ../presentation/ConfirmPage.php");
           }
         }
         break;
@@ -195,18 +183,18 @@
          unset($_SESSION['contatore']);
          if($b==false){
            $_SESSION['messaggioConfirm'] = "Qualcosa &egrave; andato storto!";
-           header("Location: ConfirmPage.php");
+           header("Location: ../presentation/ConfirmPage.php");
          }
          else{
            $_SESSION['messaggioConfirm'] = "La richiesta &egrave stata inserita.";
-           header("Location: ConfirmPage.php");
+           header("Location: ../presentation/ConfirmPage.php");
          }
        }
        break;
 
       case "logout":
         unset($_SESSION['Email']);
-        header("Location: home.php");
+        header("Location: ../presentation/home.php");
         break;
 
       case "closeaccount":
@@ -214,11 +202,11 @@
         $b = $m->removeUser($_SESSION['Email']);
         if($b==false){
           $_SESSION['messaggioConfirm'] = "<p>Qualcosa &egrave; andato storto.</p>";
-          header("Location: ConfirmPage.php");
+          header("Location: ../presentation/ConfirmPage.php");
         }
         else{
           unset($_SESSION['Email']);
-          header("Location: home.php");
+          header("Location: ../presentation/home.php");
         }
         break;
     }
@@ -232,7 +220,7 @@
         if(isset($_SESSION['richiestaAnnullata'])){
           unset($_SESSION['richiestaAnnullata']);
           $_SESSION['messaggioConfirm'] = "La richiesta non &egrave stata rimossa.";
-          header("Location: ConfirmPage.php");
+          header("Location: ../presentation/ConfirmPage.php");
         }
         break;
 
@@ -246,16 +234,16 @@
           }
           unset($_SESSION['contatore']);
           $_SESSION['messaggioConfirm'] = "La richiesta non &egrave non e stata inserita.";
-          header("Location: ConfirmPage.php");
+          header("Location: ../presentation/ConfirmPage.php");
         }
         break;
 
       case "logout":
-        header("Location: areaPersonale.php");
+        header("Location: ../presentation/areaPersonale.php");
         break;
 
       case "closeaccount":
-        header("Location: areaPersonale.php");
+        header("Location: ../presentation/areaPersonale.php");
         break;
     }
     unset($_SESSION['submitPremuto']);

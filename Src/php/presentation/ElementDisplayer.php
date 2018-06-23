@@ -295,7 +295,7 @@
   	$req = $f->getRequestList($_SESSION['Email']);
 
   	echo "<div class='contentElement'>";
-  	echo "<form action = 'operationManager.php' method = 'POST'>";
+  	echo "<form action = '../operationManagers/operationManager.php' method = 'POST'>";
   	switch($t){
   		case "Servizio":
   			$this->printStoriaOrdiniServizio($req);
@@ -326,7 +326,7 @@
   	$f = new Factory($d);
 
   	echo "<div class='contentElement'>";
-  	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+  	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
 
   	$req = $f->getTypeRequestList("Servizio");
   	$this->printStoriaOrdiniServizio($req);
@@ -359,7 +359,7 @@
   	$usr = $f->getEntireUserList();
   	$d->disconnect();
   	echo "<div class='contentElement'>";
-  	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+  	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
   	if($usr==false){
   		echo "Something went wrong! Try again.";
   	}
@@ -399,7 +399,7 @@
   	$prod = $f->getEntireProductList();
   	$d->disconnect();
   	echo "<div id='formOrdini' class='contentElement'>";
-  	echo "<form action = 'operationManagerImpiegato.php' method = 'POST'>";
+  	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
   	echo "<button type='submit' name='aggiuntaProdotto'>Aggiungi un nuovo prodotto</button></br>";
   	echo "</br></br>";
   	echo "<table>
@@ -435,7 +435,7 @@
     $d->disconnect();
 
     echo "<div id='ordineForm' class='contentElement'>";
-    echo "<form action='operationManager.php' method='POST' >";
+    echo "<form action='../operationManagers/operationManager.php' method='POST' >";
     echo "<fieldset>";
     if($usrType!=="Servizio"){
   	   echo "<legend>Lista prodotti</legend>";
@@ -464,7 +464,7 @@
          echo "</br>";
          echo "</fieldset>";
   		   echo "</form>";
-  		   echo "<form action='operationManager.php' method='POST' >";
+  		   echo "<form action='../operationManagers/operationManager.php' method='POST' >";
   		   echo "<fieldset>";
   		   echo "<legend>Dati prenotazione</legend>";
   		   echo "</br>";
@@ -479,7 +479,7 @@
   		   echo "</br>";
   		   echo "</fieldset>";
   		   echo "</form>";
-  		   echo "<form action='operationManager.php' method='POST' >";
+  		   echo "<form action='../operationManagers/operationManager.php' method='POST' >";
   		   echo "<fieldset>";
   		   echo "<legend>Dati prenotazione</legend>";
   		   echo "</br>";

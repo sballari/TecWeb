@@ -90,7 +90,7 @@
                   echo "<p>Sei sicuro di voler eliminare il suo account <strong>definitivamente</strong>?</p>";
                   break;
               }
-              echo "<form action='operationManagerImpiegato.php' method='POST'>";
+              echo "<form action='../operationManagers/operationManagerImpiegato.php' method='POST'>";
               echo "<fieldset>";
               echo "<legend>Conferma o annulla la sua operazione</legend>";
               echo "<button type='submit' name='conferma'>Conferma</button>";
