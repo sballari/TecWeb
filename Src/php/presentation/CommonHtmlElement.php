@@ -331,13 +331,15 @@ class CommonHtmlElement{
 	public function printMobileMenu($page){
 	echo  "<nav  aria-label='secondary' class='onlyMobile' id='mobileMenu'>";
 	echo  "<div id='menuToggle'>";
-	echo  "<input type='checkbox' />";
+	echo  "<input id='ckM' type='checkbox' />";
+	echo "<label id='MenuCheckbox' class='aiuti' for='ckM'/>Spunta per il menu</label>";
 	echo  "
 				<span></span>
 				<span></span>
 				<span></span>
 	";
 	echo "<ul id='mobileMenuList'>";
+		echo "<li><a href ='#content' class='aiuti'>Skip</a></li>";
     	$this->generateMenu($page,false);
     	$this->printInternalMenuMobile($page);
 		$this->generateLogInLink($page, true);
@@ -478,8 +480,6 @@ class CommonHtmlElement{
 
 	}
 	public function printInternalMenuMobile($page){
-
-		echo "<li><a href ='#content' class='aiuti'>Vai al contenuto</a></li>";
 		echo "	<li><h1>LINK INTERNI</h1></li>";
 		$this->printListLinkInterni($page, true);
 }
