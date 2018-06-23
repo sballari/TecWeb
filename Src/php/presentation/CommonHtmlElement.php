@@ -118,7 +118,7 @@ class CommonHtmlElement{
 		echo "\n";
 		//echo '<meta name="language" content="italian it"/>';
 		//echo "\n";
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>';
+		echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>';
 		echo "\n";
 		echo '<link rel="stylesheet" media="screen" href="../../css/stile.css" type="text/css"/>';
 		echo "\n";
@@ -186,10 +186,10 @@ class CommonHtmlElement{
 			<a href ='#content'>Vai al contenuto</a>
 			<a href='#top'><img  id='up_arrow' src='../../img/up_arrow.png' alt='Pulsante Torna Su'></a>
     	</div>";
-		echo "<div class='header' id='top'>";
+		echo "<div class='header'>";
 			echo "<a href='home.php'><img  class='onlyDesktop logo' src='../../img/logo.png' alt='logo i tesori di Squitty'> </a>";
 			echo "<h1>I tesori di <span lang='it'>Squitty</span></h1>";
-			echo "<nav role='navigation' id='menu' class='onlyDesktop' >";
+			echo "<nav id='menu' class='onlyDesktop' >";
 			$this->generateMenu($page, true);
 		  echo "</nav >";
 			$this->printBricioleDiPane($page);
@@ -199,7 +199,7 @@ class CommonHtmlElement{
 	public function generateLogInLink($page, $mobile=false){
 		if (!$mobile) echo "<div class='logNav'>";
 		else echo "<li>";
-			echo "<h3>AREA PERSONALE</h3>";
+			echo "<h1>AREA PERSONALE</h1>";
 		if ($mobile) echo "</li>";
 		else echo "<ul>";
 
@@ -329,7 +329,7 @@ class CommonHtmlElement{
 	}
 
 	public function printMobileMenu($page){
-	echo  "<nav role='navigation' class='onlyMobile' id='mobileMenu'>";
+	echo  "<nav  class='onlyMobile' id='mobileMenu'>";
 	echo  "<div id='menuToggle'>";
 	echo  "<input type='checkbox' />";
 	echo  "
@@ -480,7 +480,7 @@ class CommonHtmlElement{
 	public function printInternalMenuMobile($page){
 
 		echo "<li><a href ='#content' class='aiuti'>Vai al contenuto</a></li>";
-		echo "	<li><h3>LINK INTERNI</h3></li>";
+		echo "	<li><h1>LINK INTERNI</h1></li>";
 		$this->printListLinkInterni($page, true);
 }
 

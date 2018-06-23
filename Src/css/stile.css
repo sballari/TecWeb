@@ -236,8 +236,8 @@ h2, h3{
     background-color: antiquewhite;
 }
 
-.logNav h3{
-  text-align: center;
+.logNav h1{
+  font-size: 1em;
 }
 
 .logNav ul{
