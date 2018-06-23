@@ -16,6 +16,9 @@
     $disp = new ElementDisplayer();
   ?>
   <body>
+    <?php
+        $h->printMobileMenu("home");
+    ?>
     <a name="top"></a>
     <div id="accessBar">
     </div>
@@ -101,7 +104,6 @@
 
     $h->printContatti();
     $h->printFooter();
-    $h->printMobileMenu("casa");
   ?>
 </body>
 </html>
