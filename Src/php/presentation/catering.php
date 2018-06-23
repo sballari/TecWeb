@@ -19,8 +19,8 @@
             <h3>SERVIZIO CATERING ED EVENTI</h3>
             <p>
                 Che sia il diciottesimo di vostro figlio o che sia la presentazione del nuovo prodotto di punta della vostra
-                azienda in una prestigiosa cantina, noi ci siamo. Offriamo servizi di Catering pensati ad hoc per ogni occazione.</br>
-                Iscriviti al nostro portale telematico ed inserisci le tue richieste. Stai certo che saremo in grado di proporti la soluzione pi&ugrave; adatta alle tue esigenze.</br>
+                azienda in una prestigiosa cantina, noi ci siamo. Offriamo servizi di Catering pensati ad hoc per ogni occazione.
+                Iscriviti al nostro portale telematico ed inserisci le tue richieste. Stai certo che saremo in grado di proporti la soluzione pi&ugrave; adatta alle tue esigenze.
                 Sar&agrave; una festa Topomitica.
             </p>
         </div>
