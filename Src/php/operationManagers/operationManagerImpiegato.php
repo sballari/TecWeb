@@ -1,7 +1,6 @@
 <?php
   session_start();
   require_once("../services/DBmanager.php");
-  require_once("CommonHtmlElement.php");
   require_once("../services/Manipulator.php");
   require_once("../services/Factory.php");
   require_once("../models/User.php");
@@ -11,8 +10,6 @@
   require_once("../models/Product.php");
   require_once("../models/Service.php");
 
-  $h = new CommonHtmlElement();
-  $h->printHead("Operation manager", "Operation manager", "operation");
   $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
   $d->connect();
   $f = new Factory($d);

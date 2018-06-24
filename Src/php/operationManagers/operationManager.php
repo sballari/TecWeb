@@ -74,8 +74,9 @@
     $m = new Manipulator($d);
     $usr = $f->getUser($_SESSION['Email']);
     $usrType = $usr->getUserType();
-    $co = $_SESSION['contatore'];
-
+    if(isset($_SESSION["contatore"])){
+      $co = $_SESSION['contatore'];
+    }
     switch($usrType){
       case "Al minuto":
         $requestDate = date("Y-m-d H:i:s");
@@ -112,7 +113,7 @@
         $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $p = $f->getProduct($_POST['listaProdotti']);
-        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $date, "in_lavorazione", $usr, $deliveryDate, NULL);
+        $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);
         break;
     }
     $_SESSION['richiestaPrenotata'] = serialize($r);
@@ -175,12 +176,14 @@
          $m = new Manipulator($d);
          $b = $m->insertRequest($r);
          unset($_SESSION['richiestaPrenotata']);
-         $c = $_SESSION['contatore'];
-    	   for($i=1; $i<=$c; $i++){
-    			 unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
-    			 unset($_SESSION['listaProdotti'.$i]);
-    		 }
-         unset($_SESSION['contatore']);
+         if(isset($_SESSION["contatore"])){
+           $c = $_SESSION['contatore'];
+    	     for($i=1; $i<=$c; $i++){
+    			   unset($_SESSION[$_SESSION['listaProdotti'.$i]]);
+    			   unset($_SESSION['listaProdotti'.$i]);
+    		   }
+           unset($_SESSION['contatore']);
+         }
          if($b==false){
            $_SESSION['messaggioConfirm'] = "Qualcosa &egrave; andato storto!";
            header("Location: ../presentation/ConfirmPage.php");

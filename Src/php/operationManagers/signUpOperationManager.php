@@ -25,12 +25,12 @@
 
      $nome = cleanInput($_POST["nome"]);
      if(!preg_match("/^[a-zA-Z]*$/",$nome)) {
-       $_SESSION["ErrNome"] = "Errore: nome non valido";
+       $_SESSION["ErrNome"] = "Errore: nome non valido. Il nome deve contenere solo caratteri.";
      }
 
      $cognome = cleanInput($_POST["cognome"]);
      if(!preg_match("/^[a-zA-Z]*$/",$cognome)) {
-       $_SESSION["ErrCognome"] = "Errore: cognome non valido";
+       $_SESSION["ErrCognome"] = "Errore: cognome non valido. Il cognome deve contenere solo caratteri.";
      }
 
      $tipoUtente = $_POST['tipoUtente'];

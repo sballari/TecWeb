@@ -24,8 +24,8 @@
           header("Location: areaPersonale.php");
         }
       }
-	    $h->createheader("SignUp");
-      $h->printInternalMenu("SignUp");
+	    $h->createheader("signUp");
+      $h->printInternalMenu("signUp");
       $d->disconnect();
     ?>
     <div id="content">
