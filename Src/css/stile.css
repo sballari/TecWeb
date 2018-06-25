@@ -212,9 +212,7 @@ h2, h3{
 #internalNavBar ul {
     list-style-type: none;
     background-color: lightyellow;
-    border-width: 1px 1px 1px 1px;
-    border-color: brown;
-    border-style: solid;
+    border: 1px solid brown;
 }
 
 #internalNavBar ul:first-child{margin-bottom: 0.5em;}
@@ -259,7 +257,6 @@ h2, h3{
 }
 
 .product{
-  padding-left: 1em;
   background-color: lightyellow;
   padding: 1em;
   overflow: hidden;
