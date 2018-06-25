@@ -124,9 +124,8 @@ class CommonHtmlElement{
 		echo "\n";
 		echo '<link rel="stylesheet" media="print" href="../../css/print.css" type="text/css" />';
 		echo "\n";
-		echo '<link rel="stylesheet" media="screen and (max-width:681px), only screen and (max-device-width:681px)" href="../../css/mobile.css" type="text/css" />';
-
-		// , only screen and (max-device-width:681px) questa seconda parte non lo fa validare
+		echo '<link rel="stylesheet" media="screen and (max-width:681px)" href="../../css/mobile.css" type="text/css" />';
+		echo "<meta name='viewport' content='width=device-width, initial-scale=1.0' >";
 		echo "\n";
 		echo "<script src='gestioneCookie.js'></script>";
 		echo '</head>';
