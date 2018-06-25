@@ -9,6 +9,7 @@
   width: 100%;
   overflow: visible;
 }
+
 #accessBar a{
   display: block;
 }
@@ -101,7 +102,7 @@
 
 .bottomElement button {
   width: 60vw;
-  margin-bottom: 0.1em;  
+  margin-bottom: 0.1em;
 }
 
 #contatti li{
@@ -151,6 +152,7 @@
   position: relative;
   top: 3.2em;
   left: 2em;
+  width: 0;
   
   z-index: 1;
   

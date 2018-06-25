@@ -37,8 +37,8 @@
       <file leaf-file-name="mobile.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/mobile.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+            <state relative-caret-position="390">
+              <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -70,6 +70,7 @@
       <find>float: right</find>
       <find>float</find>
       <find>h1</find>
+      <find>width</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,12 +191,12 @@
       <workItem from="1529759146494" duration="374000" />
       <workItem from="1529839862508" duration="8000" />
       <workItem from="1529946864492" duration="873000" />
-      <workItem from="1529953052749" duration="5440000" />
+      <workItem from="1529953052749" duration="6949000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13992000" />
+    <option name="totallyTimeSpent" value="15501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2728" y="-8" width="1936" height="1056" extended-state="6" />
@@ -392,8 +393,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/mobile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        <state relative-caret-position="390">
+          <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
         </state>
       </provider>
     </entry>
