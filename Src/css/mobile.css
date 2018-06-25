@@ -4,10 +4,6 @@
   border: 0;
 }
 
-html {
-  overflow-x: hidden;
-}
-
 .onlyMobile{
   position: static;
   width: 100%;
@@ -36,7 +32,7 @@ html {
   width: 78vw;
   display: block;
   float: right;
-  text-align: right;
+  text-align: center;
 }
 
 #briciole{
