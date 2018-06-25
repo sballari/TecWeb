@@ -38,18 +38,9 @@ button:hover {
 	}
 
 
-#searchButton {
-  background: #ddd;
-  border: black solid 1px;
-  cursor: pointer;
-  display: block; 
-  height: 100%;
-  padding: 0.5em;
-}
-
 #searchInput {
     float: left;
-    width: 80%;
+    width: auto;
     border: 1px solid black;
     border-right: 0;
     padding: 0.5em;
@@ -60,11 +51,19 @@ button:hover {
   display: block;
 }
 
+#searchButton {
+  background: #ddd;
+  border: black solid 1px;
+  cursor: pointer;
+  height: 100%;
+  float: right;
+  padding: 0.5em;
+}
 
 
 #menu ul {
-	list-style-type: none;
-	overflow: hidden;
+  list-style-type: none;
+  overflow: hidden;
   margin-bottom: 0.2em;
   margin-left: 0.4em;
 }
