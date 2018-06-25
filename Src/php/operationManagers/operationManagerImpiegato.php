@@ -184,6 +184,25 @@ if(isset($_POST['cancellaRichiesta'])){
 
 
 
+    if(isset($_POST['cancellaProdotto'])){
+      $req = $f->getEntireProductList();
+      if(isset($_POST['prodotto'])){
+          $pos = substr($_POST['prodotto'], 8);
+          $x = $req[$pos-1];
+
+          $_SESSION['prodottoCancellato'] = serialize($x);
+          $_SESSION['buttonPremuto'] = "cancellaProdotto";
+          header("Location: ../presentation/ConfirmPageImpiegato.php");
+        }
+      else{
+        $_SESSION['messaggioAreaImp'] = "Devi selezionare un prodotto per poter procedere con l'operazione di cancella.";
+        header("Location: ../presentation/areaPersonaleImpiegato.php");
+      }
+    }
+
+
+
+
 
   if(isset($_POST['conferma'])){
     switch( $_SESSION['buttonPremuto']){
@@ -260,6 +279,29 @@ if(isset($_POST['cancellaRichiesta'])){
               }
             }
             break;
+
+            case "cancellaProdotto":
+              if(isset($_SESSION['prodottoCancellato'])){
+                $m = new Manipulator($d);
+
+                $ut = unserialize($_SESSION['prodottoCancellato']);
+                $e = $ut->getName();
+
+                $b = $m->removeProduct($e);
+
+                unset($_SESSION['prodottoCancellato']);
+                if($b==false){
+                  $_SESSION['messaggioConfirmImp'] = "Qualcosa &egrave; andato storto!";
+                  header("Location: ../presentation/ConfirmPageImpiegato.php");
+                }
+                else{
+                  $_SESSION['messaggioConfirmImp'] = "Il prodotto &egrave stato rimosso.";
+                  header("Location: ../presentation/ConfirmPageImpiegato.php");
+
+                }
+              }
+              break;
+
       case "logout":
         unset($_SESSION['Email']);
         header("Location: home.php");
@@ -308,6 +350,15 @@ if(isset($_POST['annulla'])){
           }
 
           break;
+
+    case "cancellaProdotto":
+      if(isset($_SESSION['prodottoCancellato'])){
+        unset($_SESSION['prodottoCancellato']);
+        $_SESSION['messaggioConfirmImp'] = "Il prodotto non &egrave stato rimosso.";
+        header("Location: ../presentation/ConfirmPageImpiegato.php");
+      }
+      break;
+
     case "logout":
       header("Location: ../presentation/areaPersonaleImpiegato.php");
       break;

@@ -400,7 +400,6 @@
   	$d->disconnect();
   	echo "<div id='formOrdini' class='contentElement'>";
   	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
-  	echo "<button type='submit' name='aggiuntaProdotto'>Aggiungi un nuovo prodotto</button></br>";
   	echo "</br></br>";
   	echo "<table>
   			<tr>
@@ -422,7 +421,6 @@
   	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button></br>";
   	echo "</br></br>";
   	echo "<button type='submit' name='prodottoDettagliato'>Prodotto dettagliato</button>";
-  	echo "<button type='submit' name='modificaProdotto'>Modifica prodotto</button></br></br>";
   	echo "</form>";
   	echo "</div>";
   }
