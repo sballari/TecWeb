@@ -20,7 +20,7 @@ class CommonHtmlElement{
 	}
 	function createProductDiv($x,$ricerca=false ,$evidenzia=''){
 		echo "<div class='product'>";
-		echo "<h4>" . $this->evidenziaTesto($x->getName(), $evidenzia) . "</h4>";
+		echo "<h3>" . $this->evidenziaTesto($x->getName(), $evidenzia) . "</h3>";
 		$relativeImagePath = "'../../".$x->getImage()."'";
 		echo "<img src=".$relativeImagePath." alt='".$x->getName()."'>";
 		echo "<p> <strong>Ingredienti</strong>: " . $this->evidenziaTesto($x->getIngredients() ,$evidenzia). "</p>";
@@ -309,7 +309,7 @@ class CommonHtmlElement{
 
 	public function printContatti(){
 	echo  "<div id='contatti' class='bottomElement'>";
-    echo  "	<h3>CONTATTI</h3>";
+    echo  "	<h2>CONTATTI</h2>";
     echo  "    <p>";
     echo  "        Sempre a vostra disposizione, ci potete trovare ai seguenti recapiti:";
     echo  "    </p>";

@@ -133,6 +133,8 @@
 }
 button{
   margin-top: 1em;
+  clear:left;
+  float: left;
 }
 
 /* fieldset{

@@ -19,9 +19,7 @@
     <?php
         $h->printMobileMenu("home");
     ?>
-    <a name="top"></a>
-    <div id="accessBar">
-    </div>
+
 
 		<?php
 			$h->createheader("ConfirmPage");
@@ -34,6 +32,7 @@
         echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
         <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
         <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
+        echo "</div>";
         echo "</div>";
       }
       else{
@@ -92,6 +91,7 @@
               echo "<button type='submit' name='annulla'>Annulla</button>";
  		          echo "</fieldset>";
               echo  "</form>";
+              echo "</div>";
               echo "</div>";
           }
           else{
