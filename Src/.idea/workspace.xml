@@ -10,58 +10,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-25">
-              <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="casa.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="77" selection-end-line="5" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ristorante.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="mobile.css" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/css/mobile.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stile.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/stile.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1114">
-              <caret line="313" column="7" lean-forward="true" selection-start-line="313" selection-start-column="7" selection-end-line="313" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DBmanager.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/php/services/DBmanager.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="97" selection-start-line="21" selection-start-column="97" selection-end-line="21" selection-end-column="97" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.39211136">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="home.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="casa.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="451">
+                  <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ristorante.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file leaf-file-name="mobile.css" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/css/mobile.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="900">
+                  <caret line="120" column="22" selection-start-line="120" selection-start-column="18" selection-end-line="120" selection-end-column="22" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="mobile.css" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/css/mobile.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="238">
+                  <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="logIn.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/php/presentation/logIn.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="305">
+                  <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -71,6 +79,7 @@
       <find>float</find>
       <find>h1</find>
       <find>width</find>
+      <find>form</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -80,10 +89,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/php/presentation/casa.php" />
         <option value="C:/php-7.2.6/php.ini" />
         <option value="$PROJECT_DIR$/css/stile.css" />
+        <option value="$PROJECT_DIR$/php/presentation/casa.php" />
         <option value="$PROJECT_DIR$/css/mobile.css" />
+        <option value="$PROJECT_DIR$/php/presentation/logIn.php" />
       </list>
     </option>
   </component>
@@ -191,12 +201,14 @@
       <workItem from="1529759146494" duration="374000" />
       <workItem from="1529839862508" duration="8000" />
       <workItem from="1529946864492" duration="873000" />
-      <workItem from="1529953052749" duration="6949000" />
+      <workItem from="1529953052749" duration="7154000" />
+      <workItem from="1529997078085" duration="86000" />
+      <workItem from="1530031282158" duration="1797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15501000" />
+    <option name="totallyTimeSpent" value="17589000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2728" y="-8" width="1936" height="1056" extended-state="6" />
@@ -206,16 +218,16 @@
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.1487779" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="right" id="Remote Host" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14427084" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10208333" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -232,6 +244,82 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="77" selection-start-line="5" selection-start-column="77" selection-end-line="5" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/stile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5321">
+          <caret line="313" column="7" selection-start-line="313" selection-start-column="7" selection-end-line="313" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/services/DBmanager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="97" selection-start-line="21" selection-start-column="97" selection-end-line="21" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/mobile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2397">
+          <caret line="141" column="4" lean-forward="true" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="77" selection-end-line="5" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/stile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5321">
+          <caret line="313" column="7" lean-forward="true" selection-start-line="313" selection-start-column="7" selection-end-line="313" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/services/DBmanager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="97" selection-start-line="21" selection-start-column="97" selection-end-line="21" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/mobile.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -360,20 +448,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/php/presentation/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-25">
+        <state relative-caret-position="51">
           <caret line="3" column="42" selection-start-line="3" selection-start-column="42" selection-end-line="3" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="77" lean-forward="true" selection-start-line="5" selection-start-column="77" selection-end-line="5" selection-end-column="77" />
         </state>
       </provider>
     </entry>
@@ -384,17 +462,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/ristorante.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/casa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/css/stile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1114">
-          <caret line="313" column="7" lean-forward="true" selection-start-line="313" selection-start-column="7" selection-end-line="313" selection-end-column="7" />
+        <state relative-caret-position="808">
+          <caret line="313" column="7" selection-start-line="313" selection-start-column="7" selection-end-line="313" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/mobile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="154" column="10" selection-start-line="154" selection-start-column="10" selection-end-line="154" selection-end-column="10" />
+        <state relative-caret-position="238">
+          <caret line="32" column="14" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/presentation/logIn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
         </state>
       </provider>
     </entry>

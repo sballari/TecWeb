@@ -33,7 +33,7 @@
     ?>
     <div id="content">
       <div id="info" class="contentElement">
-      	<h3>INFO</h3>
+      	<h2>INFO</h2>
         <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
           <strong>nome, cognome, tipo di utente, email, password</strong>.
         </br>
