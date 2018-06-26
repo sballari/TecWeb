@@ -39,7 +39,7 @@
           $t = $u->getUserType();
           $d->disconnect();
           echo "<div id='info' class='contentElement'>";
-          echo "<h3>INFO</h3>";
+          echo "<h2>INFO</h2>";
           echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
           echo "</div>";
           if(!isset($_GET) || count($_GET)==0){

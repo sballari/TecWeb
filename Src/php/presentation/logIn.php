@@ -36,7 +36,6 @@
       	<h2>INFO</h2>
         <p>Se non hai ancora un account non aspettare, creane uno! Per creare un nuovo account devi fornire i seguenti dati:
           <strong>nome, cognome, tipo di utente, email, password</strong>.
-        </br>
           <a href="signUp.php">Vai alla pagina di  <span lang="en">Sign up</span></a>.
         </p>
       </div>
@@ -75,7 +74,6 @@
           unset($_SESSION["ErrPassw"]);
           } ?></span>
           </div>
-          </br>
         	<button type="submit" name = "login" >Log in</button>
       	</fieldset>
       	</form>

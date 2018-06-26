@@ -119,16 +119,20 @@
 
 
 /* CODICE CSS PER FORM */
-#form button, #form label{
+#form button, input, select, textarea, legend, label, #ordineForm button,
+ input, select, textarea, legend, label {
   float: left;
   text-align: left;
-}
-#form{
-  padding-left: 0.5em;
+  margin-left: 1em;
 }
 
-#form input,select,textarea{
+
+#form label, #ordineForm label{
+  clear:left;
   float: left;
+}
+button{
+  margin-top: 1em;
 }
 
 /* fieldset{

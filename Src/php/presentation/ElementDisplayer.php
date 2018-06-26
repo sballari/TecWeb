@@ -443,7 +443,7 @@
     }
     echo "<div>";
   	echo "<label for='listaProdotti'>Prodotto:</label>  ";
-  	echo "<select name='listaProdotti'  required>";
+  	echo "<select id='listaProdotti' name='listaProdotti'  required>";
   	echo "<option value=''>--</option>";
   	foreach ($prod as $x) {
   		echo "<option value='" . $x->getName() . "'>" . $x->getName() . "</option>";
@@ -456,7 +456,7 @@
   	   case "Al minuto":
 
   			 echo "<label for='numeroProdotti'>Numero prodotti:</label>";
-  			 echo "<input type='number' name='numeroProdotti' required>";
+  			 echo "<input id='numeroProdotti' type='number' name='numeroProdotti' required>";
 
   		   echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
          echo "</br>";
@@ -466,8 +466,8 @@
   		   echo "<fieldset>";
   		   echo "<legend>Dati prenotazione</legend>";
   		   echo "</br>";
-  			 echo "<label for='decrizioneUtente'>Descrizione utente:</label>";
-  			 echo "<textarea name='decrizioneUtente' rows='5' cols='30'>Dolce con la scritta Buon compleanno.</textarea>";
+  			 echo "<label for='descrizioneUtente'>Descrizione utente:</label>";
+  			 echo "<textarea id='descrizioneUtente' name='descrizioneUtente' rows='5' cols='30'>Dolce con la scritta Buon compleanno.</textarea>";
   		   echo "</br>";
   		   break;
 
@@ -501,9 +501,9 @@
   		   break;
     }
     echo "</br>";
-    echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input type='date' name='dataRitiro' required>";
+    echo "<label for='dataRitiro'>Data ritiro/consegna/evento:</label><input id='dataRitiro' type='date' name='dataRitiro' required>";
     echo "</br>";
-    echo "<label for='oraRitiro'>Ora ritiro/consegna/evento x:</label><input type='time' name='oraRitiro' required>";
+    echo "<label for='oraRitiro'>Ora ritiro/consegna/evento</label><input id='oraRitiro' type='time' name='oraRitiro' required>";
     echo "</br>";
     echo "<button type='submit' name='prenota'>Prenota</button>";
     echo "</br>";

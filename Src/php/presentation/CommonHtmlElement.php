@@ -53,10 +53,10 @@ class CommonHtmlElement{
 
 				if (isset($_SESSION['Email'])){
 					$percorso = "Area Personale";
-					if (isset($_GET['operazione']) and $_GET['operazione']=='storia') $percorso = $percorso.">>Storia Ordini";
-					if (isset($_GET['operazione']) and $_GET['operazione']=='prenotazione') $percorso = $percorso.">>Prenotazione";
-					if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso.">>Prodotti";
-					if (!isset($_GET['operazione'])) $percorso = $percorso.">>Prenotazione";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='storia') $percorso = $percorso."&gt;&gt;Storia Ordini";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='prenotazione') $percorso = $percorso."&gt;&gt;Prenotazione";
+					if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso."&gt;&gt;Prodotti";
+					if (!isset($_GET['operazione'])) $percorso = $percorso."&gt;&gt;Prenotazione";
 				}
 				else {$percorso = "Pagina di Errore";}
 				break;
