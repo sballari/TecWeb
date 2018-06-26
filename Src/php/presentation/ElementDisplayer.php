@@ -500,11 +500,11 @@
   		   break;
 
   	   case "Servizio":
-  		   echo "<label for='personaleRichiesto'>Personale richiesto:</label><input type='number' name='personaleRichiesto' required>";
+  		   echo "<label for='personaleRichiesto'>Personale richiesto:</label><input id='personaleRichiesto' type='number' name='personaleRichiesto' required>";
   		
-  		   echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
+  		   echo "<label for='risorseNecessarie'>Risorse necessarie:</label><textarea id='risorseNecessarie' name='risorseNecessarie' rows='5' cols='30' required> 5 tavole, 20 sedie. </textarea>";
   		
-  		   echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input type='text' name='indirizzoEvento' required>";
+  		   echo "<label for='indirizzoEvento'>Indirizzo evento:</label><input id='indirizzoEvento' type='text' name='indirizzoEvento' required>";
   		
   		   break;
     }
