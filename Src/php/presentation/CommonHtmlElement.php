@@ -127,7 +127,10 @@ class CommonHtmlElement{
 		echo '<link rel="stylesheet" media="screen and (max-width:681px)" href="../../css/mobile.css" type="text/css" />';
 		echo "<meta name='viewport' content='width=device-width, initial-scale=1.0' >";
 		echo "\n";
-		echo "<script src='gestioneCookie.js'></script>";
+		echo "<script src='../../js/gestioneCookie.js'></script>";
+		echo '<!--[if lt IE 9]>
+    			<script src="../../js/html5shiv.js"></script>
+  		<![endif]-->';
 		echo '</head>';
 		echo "\n";
 	}
