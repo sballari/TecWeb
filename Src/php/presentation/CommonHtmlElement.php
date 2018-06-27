@@ -12,7 +12,7 @@ class CommonHtmlElement{
 	public function createStatisticDiv(){
 		echo "
 			<div id='statD' class='bottomElement'>
-			<h3>INFO NAVIGAZIONE</h3>
+			<h2>INFO NAVIGAZIONE</h2>
 			<p id='pStat'>per poter visuallizare dati statistici &egrave; necessario abilitare <abbr lang='en' title = 'JavaScript'>JS</abbr></p>
 			</div>
 

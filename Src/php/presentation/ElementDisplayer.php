@@ -18,10 +18,10 @@
   	  switch ($tipo){
   		  case 'Servizio':
 				echo "<table>";
-				echo "<caption class='aiuti'>Nella tabella viene fornito i dettagli del Servizio selezionata. Ogni riga descrive una caratteristica del servizio.
-				In ordine sono numero, nome, descrizione, numero personale richiesto, numero risorse richieste, indirizzo evento, data di ricezione della richiesta,
-				data dell'evento, stato della richiesta</caption>";  
-  				echo "<caption>Dettagli Servizio numero ".$Richiesta->getKey()." </caption>";
+				
+  				echo "<caption><span class='aiuti'>Nella tabella viene fornito i dettagli del Servizio selezionata. Ogni riga descrive una caratteristica del servizio.
+				  In ordine sono numero, nome, descrizione, numero personale richiesto, numero risorse richieste, indirizzo evento, data di ricezione della richiesta,
+				  data dell'evento, stato della richiesta</span>Dettagli Servizio numero ".$Richiesta->getKey()." </caption>";
   				echo "<tr>
   						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
   						<td>".$Richiesta->getKey()."</td>
