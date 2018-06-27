@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang ="it"></html>
+<html lang ="it">
   <?php
     session_start();
     require_once("../services/DBmanager.php");
@@ -23,8 +23,6 @@
   <?php
         $h->printMobileMenu("oggettoDettagliatoImpiegato");
     ?>
-    <div id="accessBar">
-    </div>
 
     <?php
   	   $h->createheader("oggettoDettagliatoImpiegato");
@@ -33,7 +31,7 @@
          $h->printInternalMenu("errore");
          echo "<div id='content'>";
          echo "<div class='contentElement'>";
-         echo "<h3>ERRORE</h3>";
+         echo "<h2>ERRORE</h2>";
          echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
             <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
             <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
@@ -47,7 +45,7 @@
            $h->printInternalMenu("errore");
            echo "<div id='content'>";
            echo "<div class='contentElement'>";
-           echo "<h3>ERRORE</h3>";
+           echo "<h2>ERRORE</h2>";
            echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
             <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
             <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
@@ -58,7 +56,7 @@
            $h->printInternalMenu("oggettoDettagliatoImpiegato");
            echo "<div id='content'>";
            echo "<div id='info' class='contentElement'>";
-           echo "<h3>INFO</h3>";
+           echo "<h2>INFO</h2>";
            echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
            echo "</div>";
 
@@ -80,14 +78,14 @@
            }
            else{
              echo "<div class='contentElement'>
-                    <h3>ERRORE</h3>
+                    <h2>ERRORE</h2>
                     <p> per poter visualizzare un oggetto dettagliato deve prima selezionare un oggetto.
                      Ci dispiace per il disagio.
                     Le auguriamo una formaggiosa giornata.
                 </div>";
            }
            echo "</div>";
-           echo "</div>";
+           
          }
        }
 

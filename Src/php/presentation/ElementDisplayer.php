@@ -405,8 +405,8 @@
   	$d->disconnect();
   	echo "<div id='formOrdini' class='contentElement'>";
   	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
-  	echo "</br></br>";
-  	echo "<table>
+  	
+	  echo "<table aria-label='tabella Prodotti'>
   			<tr>
   			<th scope='col' abbr='selezione' >Seleziona</th>
   			<th scope='col' abbr='nome' >Nome</th>
@@ -422,9 +422,9 @@
   		$id++;
   	}
   	echo "</table>";
-  	echo "</br></br>";
-  	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button></br>";
-  	echo "</br></br>";
+  	
+  	echo "<button type='submit' name='cancellaProdotto'>Cancella prodotto</button>";
+  	
   	echo "<button type='submit' name='prodottoDettagliato'>Prodotto dettagliato</button>";
   	echo "</form>";
   	echo "</div>";
