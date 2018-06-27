@@ -64,9 +64,9 @@ class CommonHtmlElement{
 
 					if (isset($_SESSION['Email'])){
 						$percorso = "Area Personale Impiegato";
-						if (isset($_GET['operazione']) and $_GET['operazione']=='ordini') $percorso = $percorso.">>Ordini";
-						if (isset($_GET['operazione']) and $_GET['operazione']=='utenti') $percorso = $percorso.">>Utenti";
-						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso.">>Prodotti";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='ordini') $percorso = $percorso."&gt;&gt;Ordini";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='utenti') $percorso = $percorso."&gt;&gt;Utenti";
+						if (isset($_GET['operazione']) and $_GET['operazione']=='prodotti') $percorso = $percorso."&gt;&gt;Prodotti";
 
 					}
 					else {$percorso = "Pagina di Errore";}

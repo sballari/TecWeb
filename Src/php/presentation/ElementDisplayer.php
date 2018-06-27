@@ -62,9 +62,8 @@
   		    break;
   		  case "All_ingrosso":
   			  echo "<table>";
-			 echo "<caption class'aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine selezionato. Ogni riga descrive una caratteristica dell&rsquo;ordine.
-			 In ordine sono numero, periodicit&agrave;, indirizzo di consegna, ora e data di ricezine, ora e data di consegna e stato.</caption>";
-  			  echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+  			  echo "<caption><span class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine selezionato. Ogni riga descrive una caratteristica dell&rsquo;ordine.
+				In ordine sono numero, periodicit&agrave;, indirizzo di consegna, ora e data di ricezine, ora e data di consegna e stato.</span>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
   			  echo "<tr>
   						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
   						<td>".$Richiesta->getKey()."</td>
@@ -94,9 +93,8 @@
   		    break;
   		  case "Al minuto":
 				echo "<table>";
-				echo "<caption class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine al minuto selezionato. Ogni riga descrive una caratteristica dell&rsquo;ordine.
-  			  In ordine sono chiave, note utente, data e ora di ricezione, data e ora di ritiro, stato.</caption>";
-  			  echo "<caption>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
+  			  echo "<caption><span class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine al minuto selezionato. Ogni riga descrive una caratteristica dell&rsquo;ordine.
+  			  In ordine sono chiave, note utente, data e ora di ricezione, data e ora di ritiro, stato.</span>Dettagli ordine all'ingrosso codice ".$Richiesta->getKey()." </caption>";
   			  echo "<tr>
   						<th scope = 'row' abbr='numero'>Numero Richiesta</th>
   						<td>".$Richiesta->getKey()."</td>
@@ -129,8 +127,8 @@
 
   	    echo "<div class='contentElement'>";
 		echo "<table>";
-			echo "<caption class='aiuti'>Nella tabella viene fornito i dettagli del utente selezionato. Ogni riga descrive una caratteristica dell'utente.</caption>";
-  			echo "<caption>Dettagli Utente </caption>";
+			
+  			echo "<caption><span class='aiuti'>Nella tabella viene fornito i dettagli del utente selezionato. Ogni riga descrive una caratteristica dell'utente.</span>Dettagli Utente </caption>";
   			echo "<tr>
   						<th scope = 'row' abbr='nome'>Nome utente</th>
   						<td>".$utente->getName()."</td>
@@ -162,8 +160,7 @@
      public function printProdottoDettagliatoDiv($prodotto){
        echo "<div class='contentElement'>";
 	   echo "<table>";
-	   echo "<caption class='aiuti'>Nella tabella viene fornito i dettagli del prodotto selezionato. Ogni riga descrive una caratteristica del prodotto.</caption>";
-  		 echo "<caption>Dettagli Prodotto </caption>";
+  		 echo "<caption><span class='aiuti'>Nella tabella viene fornito i dettagli del prodotto selezionato. Ogni riga descrive una caratteristica del prodotto.</span>Dettagli Prodotto </caption>";
   		 echo "<tr>
   						<th scope = 'row' abbr='nome'>Nome</th>
   						<td>".$prodotto->getName()."</td>
@@ -193,7 +190,7 @@
      public function printStoriaOrdiniServizio($req){
        $id=1;
   		 echo "<p>Tabella degli ordini servizio</p>";
-		   echo "<table >
+		   echo "<table aria-label='tabella ordini servizio'>
 		   <caption class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine effettuato. Ogni riga descrive una caratteristica del prodotto a partire da spunta di selezione, codice, data e ora, stato.</caption>
   		   <tr>
   		   <th scope = 'col' abbr='selezione'>Seleziona</th>
@@ -204,7 +201,7 @@
   		 foreach ($req as $x) {
 			   echo "<tr>";
 			   echo "<td>".$id."
-			   <input id='request' type='radio' name='request' value='request" . $id . "' ><label for='request' class='aiuti'>Inserisci richiesta</label></td>";//TODO
+			   <input id='request". $id ."' type='radio' name='request' value='request" . $id . "' ><label for='request". $id ."' class='aiuti'>Inserisci richiesta</label></td>";//TODO
   			 echo "<td>" . $x->getKey() . "</td>";
   			 echo "<td>" . $x->getDeliveryDateTime() . "</td>";
   			 echo "<td>" . $x->getStatus() . "</td>";
@@ -225,7 +222,7 @@
   			 $id=1;
   		 }
   		 echo "<p>Tabella degli ordini all'ingrosso</p>";
-		   echo "<table >
+		   echo "<table aria-label='tabella ordini ingrosso'>
 		   <caption class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine effettuato. Ogni riga descrive una caratteristica del prodotto a partire da spunta di selezione, codice, data e ora, stato.</caption>
   		   <tr>
   		   <th scope = 'col' abbr='selezione'>Seleziona</th>
@@ -235,7 +232,7 @@
   		   </tr>";
   		 foreach ($req as $x) {
   			 echo "<tr>";
-  			 echo "<td>".$id."<input id='request' type='radio' name='request' value='request" . $id . "'><label for='request' class='aiuti'>Inserisci richiesta</label></td>";
+  			 echo "<td>".$id."<input id='request". $id ."' type='radio' name='request' value='request" . $id . "'><label for='request". $id ."' class='aiuti'>Inserisci richiesta</label></td>";
   			 echo "<td>" . $x->getKey() . "</td>";
   			 echo "<td>" . $x->getDeliveryDateTime() . "</td>";
   			 echo "<td>" . $x->getStatus() . "</td>";
@@ -256,7 +253,7 @@
   		   $id=1;
   	   }
   	   echo "<p>Tabella degli ordini al minuto</p>";
-		 echo "<table >
+		 echo "<table aria-label='tabella ordini al minuto'>
 		 	<caption class='aiuti'>Nella tabella viene fornito i dettagli dell&rsquo;ordine effettuato. Ogni riga descrive una caratteristica del prodotto a partire da spunta di selezione, codice, data e ora, stato.</caption>
   		   <tr>
   		   <th scope = 'col' abbr='selezione'>Seleziona</th>
@@ -266,7 +263,7 @@
   		   </tr>";
   	   foreach ($req as $x) {
   		   echo "<tr>";
-  		   echo "<td>".$id."<input id='request' type='radio' name='request' value='request" . $id . "'><label for='request' class='aiuti'>Inserisci richiesta</label></td>";
+  		   echo "<td>".$id."<input id='request". $id ."' type='radio' name='request' value='request" . $id . "'><label for='request". $id ."' class='aiuti'>Inserisci richiesta</label></td>";
   		   echo "<td>" . $x->getKey() . "</td>";
   		   echo "<td>" . $x->getDeliveryDateTime() . "</td>";
   		   echo "<td>" . $x->getStatus() . "</td>";
@@ -278,9 +275,8 @@
 
   	public function printComposizioneOrdineTable($ordine){
   		echo "<table>";
-		echo "<caption class='aiuti'>La tabella indica i prodotti che compongono l&#39;ordine richiesto. Ogni riga rappresenta un prodotto.
-		I dati forniti in ogni riga sono, in ordine, nome del prodotto e quantit&agrave; ordinata.</caption>";
-  		echo "<caption>Composizione Ordine</caption>";
+  		echo "<caption><span class='aiuti'>La tabella indica i prodotti che compongono l&#39;ordine richiesto. Ogni riga rappresenta un prodotto.
+		  I dati forniti in ogni riga sono, in ordine, nome del prodotto e quantit&agrave; ordinata.</span>Composizione Ordine</caption>";
   		echo "
   			<tr>
   				<th scope='col' abbr='prod'>Nome Prodotto</th>
@@ -375,7 +371,7 @@
   	}
   	else{
   		echo "<div id='tabelaUtenti'>";
-  		echo "<table>
+  		echo "<table aria-label='tabella utenti'>
   				<tr>
   				<th scope='col' abbr='selezione' >Seleziona</th>
   				<th scope='col' abbr='email' >Email</th>
@@ -384,7 +380,7 @@
   	$id = 1;
   	foreach ($usr as $x) {
   		echo "<tr>";
-  		echo "<td>".$id."<input id='request' type='radio' name='utente' value='utente" . $id . "'><label for='request' class='aiuti'>Inserisci richiesta</label></td>";
+  		echo "<td>".$id."<input id='request" . $id . "' type='radio' name='utente' value='utente" . $id . "'><label for='request". $id ."' class='aiuti'>Inserisci richiesta</label></td>";
   		echo "<td>" . $x->getEmail() . "</td>";
   		echo "<td>" . $x->getUserType() . "</td>";
   		echo "</tr>";
@@ -393,7 +389,6 @@
   	echo "</table>";
   	echo "</div>";
   	}
-  	echo "</br></br>";
   	echo "<button type='submit' name='cancellaUtente'>Cancella l'utente</button>";
   	echo "<button type='submit' name='utenteDettagliato'>Utente dettagliato</button>";
   	echo "</form>";
@@ -420,7 +415,7 @@
   	$id=1;
   	foreach ($prod as $x) {
   		echo "<tr>";
-  		echo "<td>".$id."<input id='prodotto' type='radio' name='prodotto' value='prodotto" . $id . "'><label for='prodotto' class='aiuti'>Inserisci richiesta</label></td>";
+  		echo "<td>".$id."<input id='prodotto". $id ."' type='radio' name='prodotto' value='prodotto" . $id . "'><label for='prodotto". $id ."' class='aiuti'>Inserisci richiesta</label></td>";
   		echo "<td>" . $x->getName() . "</td>";
   		echo "<td>" . $x->getProductType() . "</td>";
   		echo "</tr>";
@@ -481,7 +476,7 @@
   		   break;
 
   	   case "All_ingrosso":
-  		   echo "<label for='numeroProdotti'>Numero prodotti:</label><input type='number' name='numeroProdotti' required>";
+  		   echo "<label for='numeroProdotti'>Numero prodotti:</label><input id='numeroProdotti' type='number' name='numeroProdotti' required>";
   		   echo "<button type='submit' name='nuovoProd'>Inserisci prodotto</button>";
   		
   		   echo "</fieldset>";
@@ -490,9 +485,9 @@
   		   echo "<fieldset>";
   		   echo "<legend>Dati prenotazione</legend>";
   		
-  		   echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input type='text' name='indirizzoConsegna' required>";
+  		   echo "<label for ='indirizzoConsegna'>Indirizzo consegna:</label><input id='indirizzoConsegna' type='text' name='indirizzoConsegna' required>";
   		
-  		   echo "<label for='periodicita'>Periodicita:</label><select name='periodicita' required>";
+  		   echo "<label for='periodicita'>Periodicita:</label><select id='periodicita' name='periodicita' required>";
          echo "<option value=''>--</option>";
   		   echo "<option value='settimanale'>settimanale </option>";
   		   echo "<option value='mensile'>mensile</option>";

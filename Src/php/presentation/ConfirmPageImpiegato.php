@@ -19,9 +19,7 @@
   <?php
         $h->printMobileMenu("casa");
     ?>
-    <a name="top"></a>
-    <div id="accessBar">
-    </div>
+    
 
 		<?php
 			$h->createheader("ConfirmPageImpiegato");
@@ -30,7 +28,7 @@
         $h->printInternalMenu("errore");
         echo "<div id='content'>";
         echo "<div class='contentElement'>";
-        echo "<h3>ERRORE</h3>";
+        echo "<h2>ERRORE</h2>";
         echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
         <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
         <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
@@ -44,7 +42,7 @@
           $h->printInternalMenu("errore");
           echo "<div id='content'>";
           echo "<div class='contentElement'>";
-          echo "<h3>ERRORE</h3>";
+          echo "<h2>ERRORE</h2>";
           echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
           <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
           <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";

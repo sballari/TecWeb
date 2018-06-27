@@ -20,10 +20,6 @@
   <?php
         $h->printMobileMenu("accountImpiegato");
     ?>
-    <a name="top"></a>
-    <div id="accessBar">
-    </div>
-
 		<?php
 			$h->createheader("accountImpiegato");
 
@@ -31,7 +27,7 @@
         $h->printInternalMenu("errore");
         echo "<div id='content'>";
         echo "<div class='contentElement'>";
-        echo "<h3>ERRORE</h3>";
+        echo "<h2>ERRORE</h2>";
         echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
         <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
         <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
@@ -46,7 +42,7 @@
           $h->printInternalMenu("errore");
           echo "<div id='content'>";
           echo "<div class='contentElement'>";
-          echo "<h3>ERRORE</h3>";
+          echo "<h2>ERRORE</h2>";
           echo "<p>Non sei autenticato presso il nostro sistema! Procedere alla creazione di un account o all'accesso.
           <a href='logIn.php'>Vai alla pagina di <span lang='en'>Log in</span></a> ,
           <a href='signUp.php'>Vai alla pagina di  <span lang='en'>Sign up</span></a>.</p>";
@@ -57,7 +53,7 @@
           $h->printInternalMenu("accountImpiegato");
           echo "<div id='content'>";
           echo "<div id='info' class='contentElement'>";
-          echo "<h3>INFO</h3>";
+          echo "<h2>INFO</h2>";
           echo "<p>Bentornato " . $_SESSION['Email'].", utente di tipo : ".$u->getUserType()."</p>";
           echo "</div>";
           if(!isset($_GET) || count($_GET)==0){
@@ -69,11 +65,11 @@
             }
             else{
               echo "<div id='messaggio' class='contentElement'>";
-              echo "<p>Nella lista dei link interni si trovano i seguenti link: Ordini, Utenti, Prodotti.</br> Tramite il link Ordini potra visualizzare la tabella
+              echo "<p>Nella lista dei link interni si trovano i seguenti link: Ordini, Utenti, Prodotti. Tramite il link Ordini potra visualizzare la tabella
               dei ordini in base di tipo del ordine scelto. Dopo aver scelto un ordine potra: visualizzarlo in modo piu dettagliato, cambiare lo stato del ordine
-              da in_lavorazione in passato, cancellare l'ordine.</br> Tramite il link Utenti potra visualizzare la tabella dei utenti. Dopo aver scelto un utente
-              potra: visualizzarlo in modo piu dettagliato o cancellare l'utente.</br> Tramite il link Prodotti potra visualizzare la tabella dei prodotti.
-              Dopo aver scelto un prodotto potra: visualizzarlo in modo piu dettagliato, modificare o cancellare l'prodotto.</br> ";
+              da in_lavorazione in passato, cancellare l'ordine. Tramite il link Utenti potra visualizzare la tabella dei utenti. Dopo aver scelto un utente
+              potra: visualizzarlo in modo piu dettagliato o cancellare l'utente. Tramite il link Prodotti potra visualizzare la tabella dei prodotti.
+              Dopo aver scelto un prodotto potra: visualizzarlo in modo piu dettagliato, modificare o cancellare l'prodotto. ";
               echo "</div>";
             }
           }
@@ -99,7 +95,6 @@
       $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("accountImpiegato");
     ?>
   </body>
 </html>
