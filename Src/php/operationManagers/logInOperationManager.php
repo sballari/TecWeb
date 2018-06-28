@@ -26,12 +26,12 @@
 
       $email = cleanInput($_POST['email']);
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION["ErrEm"] = "Validation message: Invalid email format";
+        $_SESSION["ErrEm"] = "Validazione: formato email non valido. Esempio: abc@dom.it";
       }
 
       $password = cleanInput($_POST['password']);
       if(!preg_match("/^(\w{4,10})*$/",$password)) {
-        $_SESSION["ErrPassw"] = "Validation message: Invalid password format. Password must have from 4 to 10 alfanumeric characters.";
+        $_SESSION["ErrPassw"] = "Validazione: <span lang='en'>Password</span> inserita non valida. La <span lang='engl'>password</span> deve avere da 4 a 10 caratteri.";
       }
 
       if(!isset($_SESSION["ErrEm"]) && !isset($_SESSION["ErrPassw"])){
