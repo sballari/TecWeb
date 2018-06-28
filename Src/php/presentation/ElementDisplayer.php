@@ -371,7 +371,8 @@
   	}
   	else{
   		echo "<div id='tabelaUtenti'>";
-  		echo "<table aria-label='tabella utenti'>
+		  echo "<table aria-label='tabella utenti'>
+		  		<caption>Scrolla a sinistra e destra per vedere la tabella in larghezza. O ruota il dispositivo se sei col telefono.</caption>
   				<tr>
   				<th scope='col' abbr='selezione' >Seleziona</th>
   				<th scope='col' abbr='email' >Email</th>
@@ -407,6 +408,7 @@
   	echo "<form action = '../operationManagers/operationManagerImpiegato.php' method = 'POST'>";
   	
 	  echo "<table aria-label='tabella Prodotti'>
+	  <caption>Scrolla a sinistra e destra per vedere la tabella in larghezza. O ruota il dispositivo se sei col telefono.</caption>
   			<tr>
   			<th scope='col' abbr='selezione' >Seleziona</th>
   			<th scope='col' abbr='nome' >Nome</th>

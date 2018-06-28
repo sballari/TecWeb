@@ -148,8 +148,12 @@ button{
 } */
 
 
-
-
+#tabelaUtenti, #formOrdini   {
+  overflow-x: scroll;
+}
+#tabelaUtenti caption, #formOrdini  caption {
+  max-width: 98vw;
+}
 
 /* CODICE CSS PER IL MOBILE MENU */
 #menuToggle
