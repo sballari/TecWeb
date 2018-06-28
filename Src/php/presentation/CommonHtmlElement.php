@@ -202,7 +202,7 @@ class CommonHtmlElement{
 	public function generateLogInLink($page, $mobile=false){
 		if (!$mobile) echo "<div class='logNav'>";
 		else echo "<li>";
-			echo "<h1>AREA PERSONALE</h1>";
+			echo "<strong>AREA PERSONALE</strong>";
 		if ($mobile) echo "</li>";
 		else echo "<ul>";
 
@@ -483,7 +483,7 @@ class CommonHtmlElement{
 
 	}
 	public function printInternalMenuMobile($page){
-		echo "	<li><h1>LINK INTERNI</h1></li>";
+		echo "	<li><strong>LINK INTERNI</strong></li>";
 		$this->printListLinkInterni($page, true);
 }
 
