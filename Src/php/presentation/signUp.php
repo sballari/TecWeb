@@ -10,6 +10,7 @@
   ?>
   <body onload='creaStatistiche()'>
     <?php
+      $h->printMobileMenu("SignUp");
 	    session_start();
       $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
       $d->connect();
@@ -30,9 +31,8 @@
     ?>
     <div id="content">
       <div id="info" class="contentElement">
-      	<h3>INFO</h3>
-        <p>Se disponi gi&agrave di un account proccedere al seguente bottone.
-        </br>
+      	<h2>INFO</h2>
+        <p>Se disponi gi&agrave; di un account proccedere al seguente bottone.
           <a href="logIn.php">Vai alla pagina di  <span lang="en">Log in</span></a>.
         </p>
       </div>
@@ -43,7 +43,7 @@
 
         	<p><span class="err"><?php
           if(isset($_SESSION["ErrSignup"])){
-          echo $_SESSION["ErrSignup"]."</br>";
+          echo $_SESSION["ErrSignup"];
           unset($_SESSION["ErrSignup"]);
           } ?></span></p>
 
@@ -70,11 +70,11 @@
           unset($_SESSION["ErrCognome"]);
           } ?></span>
           </div>
-          </br>
+          
 
           <div id="tipo">
             <label for="tipoUtente">Tipo utente</label>
-            <select name="tipoUtente" required>
+            <select id="tipoUtente" name="tipoUtente" required>
               <option value="">--</option>
               <option value="Al minuto">Al minuto</option>
               <option value="All_ingrosso">All'ingrosso</option>
@@ -106,7 +106,6 @@
           unset($_SESSION["ErrPassword"]);
           } ?></span>
           </div>
-          </br>
         	<button type="submit" name = "createAccount" >Create account</button>
       	</fieldset>
       	</form>
@@ -117,7 +116,6 @@
 		  $h->createStatisticDiv();
       $h->printContatti();
       $h->printFooter();
-      $h->printMobileMenu("signUp");
     ?>
 
   </body>
