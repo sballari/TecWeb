@@ -25,7 +25,7 @@ button:hover {
   }
 .header{
   overflow: hidden;
-  background-color: lightyellow;
+  background-color: #ffffeb;
   border: 1px solid brown;
 }
 
@@ -103,7 +103,8 @@ text-decoration: none;
 }
 
 #menu li a:hover {
-  background-color:antiquewhite;
+  background-color:brown;
+  color:white;
 }
 
 .header h1{
@@ -138,7 +139,7 @@ h2, h3{
   padding-left:0.5em;
   padding-bottom: 0.5em;
   border: solid 1px brown;
-	background-color: lightyellow;
+	background-color: #ffffeb;
   width: 100%;
 }
 
@@ -159,7 +160,7 @@ h2, h3{
 .contentElement {
 	padding: 1em;
 	overflow: hidden;
-  background-color: lightyellow;
+  background-color: #ffffeb;
   border: 1px brown solid;
   margin-bottom: 1em;
 
@@ -219,7 +220,7 @@ h2, h3{
 
 #internalNavBar ul {
     list-style-type: none;
-    background-color: lightyellow;
+    background-color: #ffffeb;
     border: 1px solid brown;
 }
 
@@ -238,7 +239,8 @@ h2, h3{
 }
 
 #internalNavBar li a:hover{
-    background-color: antiquewhite;
+    background-color: brown;
+    color: white;
 }
 
 .logNav h1{
@@ -265,7 +267,7 @@ h2, h3{
 }
 
 .product{
-  background-color: lightyellow;
+  background-color: #ffffeb;
   padding: 1em;
   overflow: hidden;
   border: 1px solid brown;
