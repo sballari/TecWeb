@@ -5,7 +5,7 @@
     require_once("../services/Factory.php");
 
     session_start();
-    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+    $d = new DBmanager("localhost", "root", "", "sballari");
     $d->connect();
     $f = new Factory($d);
 

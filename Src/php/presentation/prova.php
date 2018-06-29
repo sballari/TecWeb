@@ -7,7 +7,7 @@ require_once("../models/MassiveOrder.php");
 //include "../class/Authenticator.php";
 
 
-$dbM = new DBmanager("localhost","root","","i_tesori_di_squitty_mod" );
+$dbM = new DBmanager("localhost","root","","sballari" );
 $dbM->connect();
 //$fact = new Factory($dbM);
 //$serviceList = $fact->getRequestList("cristina.polletto@gmail.com");

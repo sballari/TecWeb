@@ -7,7 +7,7 @@
     require_once("../services/DBmanager.php");
 
     $h = new CommonHtmlElement();
-    $d = new DBmanager("localhost", "root", "", "i_tesori_di_squitty_mod");
+    $d = new DBmanager("localhost", "root", "", "sballari");
     $d->connect();
     $f = new Factory($d);
     $h->printHead('ricerca', "ricerca", "ricerca, dolci, risultati");
