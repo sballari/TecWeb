@@ -3,7 +3,7 @@
     require_once("../models/User.php");
     require_once("../services/Manipulator.php");
     require_once("../services/DBmanager.php");
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
     $d->connect();
     $f = new Factory($d);
 

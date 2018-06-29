@@ -295,7 +295,7 @@
 
 
   public function printStoriaOrdini($t){
-  	$d = new DBmanager("localhost", "root", "", "sballari");
+  	$d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
   	$d->connect();
   	$f = new Factory($d);
   	$req = $f->getRequestList($_SESSION['Email']);
@@ -327,7 +327,7 @@
 
 
   public function printTabellaOrdini(){
-  	$d = new DBmanager("localhost", "root", "", "sballari");
+  	$d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
   	$d->connect();
   	$f = new Factory($d);
 
@@ -359,7 +359,7 @@
 
   public function printTabellaUtenti(){
 
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
   	$d->connect();
   	$f = new Factory($d);
   	$usr = $f->getEntireUserList();
@@ -399,7 +399,7 @@
 
   public function printTabellaProdotti(){
 
-  	$d = new DBmanager("localhost", "root", "", "sballari");
+  	$d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
   	$d->connect();
   	$f = new Factory($d);
   	$prod = $f->getEntireProductList();
@@ -433,7 +433,7 @@
   }
 
   public function printFormPrenotazione($usrType){
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
     $d->connect();
     $f = new Factory($d);
     $prod = $f->getProductList($usrType);

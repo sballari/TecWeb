@@ -29,7 +29,7 @@
             <?php
 				      require_once("../services/Factory.php");
 					    require_once("../services/DBmanager.php");
-				      $d = new DBmanager("localhost", "root", "", "sballari");
+				      $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
 				      $d->connect();
 			       	$f = new Factory($d);
 				      $prod = $f->getProductList("Servizio");

@@ -10,7 +10,7 @@
   require_once("../models/Product.php");
   require_once("../models/Service.php");
 
-  $d = new DBmanager("localhost", "root", "", "sballari");
+  $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
   $d->connect();
   $f = new Factory($d);
   $m = new Manipulator($d);

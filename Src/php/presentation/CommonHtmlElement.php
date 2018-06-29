@@ -280,7 +280,7 @@ class CommonHtmlElement{
 
 				if(isset($_SESSION['Email'])){
 
-					$d = new DBmanager("localhost", "root", "", "sballari");
+					$d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
 					$d->connect();
 					$f = new Factory($d);
 					$u = $f->getUser($_SESSION['Email']);
@@ -488,7 +488,7 @@ class CommonHtmlElement{
 }
 
 public function printListaProdotti($Type){
-	$d = new DBmanager("localhost", "root", "", "sballari");
+	$d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
 	$d->connect();
 	$f = new Factory($d);
 	$prod = $f->getProductList($Type);

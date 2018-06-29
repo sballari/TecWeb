@@ -5,7 +5,7 @@
     require_once("../services/Factory.php");
 
     session_start();
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
     $d->connect();
     $f = new Factory($d);
 
@@ -16,7 +16,7 @@
       return $data;
     }
 
-    $email = $password = "";
+    $email = $password = "Sheishioc1eith6a";
 
     if(isset($_POST['email']) && isset($_POST['password'])){
 

@@ -7,7 +7,7 @@
     require_once("../services/DBmanager.php");
 
     $h = new CommonHtmlElement();
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
     $d->connect();
     $f = new Factory($d);
     $h->printHead('ricerca', "ricerca", "ricerca, dolci, risultati");

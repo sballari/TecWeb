@@ -13,7 +13,7 @@
     require_once("ElementDisplayer.php");
 
     $h = new CommonHtmlElement();
-    $d = new DBmanager("localhost", "root", "", "sballari");
+    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
     $d->connect();
     $f = new Factory($d);
     $h->printHead("Oggetto Dettagliato", "dettagli dell'oggetto", "ordini, utenti, prodotti");
