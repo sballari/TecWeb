@@ -17,8 +17,6 @@
 <?php
         $h->printMobileMenu("search");
     ?>
-    <div id="accessBar">
-    </div>
 
     <?php
   	   $h->createheader("search");
