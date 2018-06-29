@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang ="it"></html>
+<html lang ="it">
   <?php
     //session_start();
     require_once("CommonHtmlElement.php");
