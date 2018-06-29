@@ -40,8 +40,8 @@
       $pos = substr($_POST['request'], 7);
       $x = $req[$pos-1];
 
-      $currentD = "Sheishioc1eith6a".date("Y-m-d ");
-      $deliveryD = "Sheishioc1eith6a".$x->getDeliveryDateTime();
+      $currentD = "".date("Y-m-d ");
+      $deliveryD = "".$x->getDeliveryDateTime();
       if($deliveryD > $currentD){
         $_SESSION['richiestaAnnullata'] = serialize($x);
         $_SESSION['submitPremuto']="annullaRichiesta";
@@ -65,8 +65,8 @@
     $data = strip_tags($data);
     return $data;
   }
-  $numeroProdotti = $dataRitiro = $oraRitiro = "Sheishioc1eith6a";
-  $ErrNumeroProdotti = $ErrDataRitiro = $ErrOraRitiro = "Sheishioc1eith6a";
+  $numeroProdotti = $dataRitiro = $oraRitiro = "";
+  $ErrNumeroProdotti = $ErrDataRitiro = $ErrOraRitiro = "";
 
   if(isset($_POST['prenota'])){
     $_SESSION['submitPremuto']="prenotaRichiesta";
@@ -80,7 +80,7 @@
     switch($usrType){
       case "Al minuto":
         $requestDate = date("Y-m-d H:i:s");
-        $st = strtotime("Sheishioc1eith6a".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
+        $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
 
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $r = new RetailOrder($requestDate, "in_lavorazione", $usr, $_POST['decrizioneUtente'], $deliveryDate, NULL);
@@ -95,7 +95,7 @@
 
       case "All_ingrosso":
         $requestDate = date("Y-m-d H:i:s");
-        $st = strtotime("Sheishioc1eith6a".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
+        $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $r = new MassiveOrder($_POST['indirizzoConsegna'], $_POST['periodicita'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);
 
@@ -110,7 +110,7 @@
 
       case "Servizio":
         $requestDate = date("Y-m-d H:i:s");
-        $st = strtotime("Sheishioc1eith6a".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
+        $st = strtotime("".$_POST['dataRitiro']. " ".$_POST['oraRitiro']);
         $deliveryDate = date("Y-m-d H:i:s",$st);
         $p = $f->getProduct($_POST['listaProdotti']);
         $r = new Service($p, $_POST['personaleRichiesto'], $_POST['risorseNecessarie'], $_POST['indirizzoEvento'], $requestDate, "in_lavorazione", $usr, $deliveryDate, NULL);

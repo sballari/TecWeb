@@ -16,7 +16,7 @@
       return $data;
     }
 
-    $email = $password = "Sheishioc1eith6a";
+    $email = $password = "";
 
     if(isset($_POST['email']) && isset($_POST['password'])){
 
