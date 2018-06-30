@@ -304,7 +304,7 @@ if(isset($_POST['cancellaRichiesta'])){
 
       case "logout":
         unset($_SESSION['Email']);
-        header("Location: home.php");
+        header("Location: ../presentation/home.php");
         break;
       case "closeaccount":
         $m = new Manipulator($d);
