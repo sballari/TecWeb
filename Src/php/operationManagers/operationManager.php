@@ -131,7 +131,7 @@
     $c = $_SESSION['contatore'];
     $controllo = 0;
     for($i=1; $i<=$c && $controllo == 0; $i++){
-      if($_SESSION['listaProdotti'.$i] == $_POST['listaProdotti']){
+      if($_SESSION['listaProdotti'.$c] == $_POST['listaProdotti']){
         $controllo=1;
 
       }
