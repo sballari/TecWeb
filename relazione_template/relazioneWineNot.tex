@@ -1,0 +1,220 @@
+\input{StyleLatex/global.tex}
+\input{StyleLatex/layout.tex}
+\input{res/local}
+
+\title{\textbf{Relazione progetto TecWeb}}
+\author{Roditori Pungenti}
+
+\date{02 Luglio 2018}
+
+\begin{document}
+
+%\maketitle
+
+\makeFrontPage
+
+\tableofcontents
+
+\newpage
+
+\section{Abstract}
+
+L’azienda dolciaria “I TESORI DI SQUITTY” possiede un negozio situato nel centro cittadino e un laboratorio industriale in periferia.\\
+Lo scopo del progetto è quello di progettare e sviluppare un sito web che funga da vetrina e di erogare un servizio automatizzato di ordinazioni.\\
+
+Qui di seguito sono elencati tutti i livelli di accessibilità possibili per il sito, raggruppati secondo le seguenti nomenclature:
+\begin{itemize}
+	\item \textbf{Unauthenticated user}: identifica qualsiasi utente;
+	\item \textbf{Authenticated user}: identifica un utente con account "al minuto"/"all'ingrosso"/"servizio" che ha effettuato l'accesso al portale web;
+	\item \textbf{Authenticated administrator}: identifica un utente con account impiegato che ha effettuato l'accesso al portale web.
+\end{itemize}
+
+L'\textbf{unauthenticated user} può accedere alle pagine \textit{Home}, \textit{Per la tua casa}, \textit{Per il tuo ristorante}, \textit{Catering ed Eventi}, \textit{Accedi}, \textit{Registrati}:
+\begin{itemize}
+	\item \textbf{Home}: in questa pagina può trovare la storia dell'azienda dolciaria, nonchè numerose informazioni sia sul punto vendita che sullo stabilimento produttivo.
+
+	\item \textbf{Per la tua casa}: in questa pagina può visualizzare l'immagine, gli ingredienti e la descrizione di tutti i prodotti disponibili per il commercio al dettaglio.
+
+	\item \textbf{Per il tuo ristorante}: in questa pagina può consultare il catalogo,con relativa descrizione, dei prodotti disponibili per il commercio all'ingrosso.
+
+	\item \textbf{Catering ed Eventi}: in questa pagina può visualizzare i servizi erogati dall'azienda.
+
+	\item \textbf{Registrati}: in questa pagina l'utente non autenticato può effettuare la registrazione, scegliendo fra le tipologie utente: al minuto, all'ingrosso, servizio.
+
+	\item \textbf{Accedi}: in questa pagina l'utente può autenticarsi, previo inserimento delle credenziali.\\
+	Egli verrà reindirizzato alla propria area privata.
+\end{itemize}
+
+L'\textbf{authenticated user} può accedere alle sua area personale, suddivisa in \textit{Prenotazione}, \textit{Storia degli ordini}, \textit{Prodotti}.
+
+\begin{itemize}
+	\item \textbf{Prenotazione}: in questa pagina può prenotare un prodotto/servizio previo inserimento dei dati necessari, quali: quantità, data e ora di ritiro ecc...
+
+	\item \textbf{Storia degli ordini}: in questa pagina l'utente autenticato può consultare lo storico delle prenotazioni effettuate, visualizzarne i dettagli e annallarle.
+
+	\item \textbf{Prodotti}: in questa pagina può visualizzare il catalogo dei prodotti ordinabili compatibili con la propria tipologia di account.
+\end{itemize}
+
+Gli \textbf{authenticated administrator}, con account di tipo "Impiegato", hanno accesso alle sezioni: \textit{Ordini},\textit{Utenti}, \textit{Prodotti}.
+
+\begin{itemize}
+	\item \textbf{Ordini:} in questa pagina l'impiegato può consultare le ordinazioni divise per tipologia, visualizzarne i dettagli, cambiarne lo stato (in lavorazione ecc..) ed eliminarle.
+
+	\item \textbf{Utenti:} in questa pagina l'impiegato visualizza l'elenco di tutti gli utenti registrati al portale web, compresi i dati anagrafici e le credenziali d'accesso e procedere alla loro eliminazione.
+
+	\item \textbf{Prodotti:} in questa pagina l'impiegato può visualizzare i dettagli di tutti i prodotti e i servizi offerti da I Tesori di Squitty ed eliminarli.
+\end{itemize}
+
+\subsection{Analisi}
+
+\subsubsection{Utenti destinatari}
+
+\begin{itemize}
+	\item \textbf{Individuazione delle categorie di utenti}
+
+	\item \textbf{Definizione di gruppo omogeneo di utenti}
+
+	\item \textbf{Individuazione degli obiettivi per classe d'utenza}
+\end{itemize}
+
+%inserire immagini ...
+
+\subsubsection{Base informativa}
+
+\subsection{Progettazione}
+
+\subsection{Fase di test}
+
+Ogni funzionalità implementata nel sito web è stata oggetto di test per verificarne il corretto funzionamento.
+
+\subsection{Validazione}
+
+Gli strumenti utilizzati sono stati \textbf{W3C Markup Validation Service} (per validazione XHTML), \textbf{W3C CSS Validator} (per validazione CSS), \textbf{Total Validator} (per validazione accessibilità).
+
+\section{Struttura del progetto}
+
+Per gestire la complessità del progetto e mantenere la separazione fra contenuto-stile-comportamento i file che compongono il portale sono stati raggruppati e situati in ... cartelle diverse:
+
+\begin{itemize}
+	\item \textbf{css:} questa cartella contiene tutti i file riguardanti il css, opportunamente diviso in tre file, per desktop, mobile e stampa;
+	\item \textbf{php:} questa cartella contiene i file php del sito web;
+	\item \textbf{img:} questa cartella contiene tutte le immagini, i loghi e le icone del sito web;
+	\item \textbf{php/...:} questa cartella contiene il file di connessione al database e il file con le funzioni ausiliarie utilizzate nelle pagine php del sito web;
+	\item \textbf{js:} questa pagina contiene tutti gli script javascript del progetto, compresa la gestione dei coockies.
+	\item \textbf{utility:} questa cartella contiene un eseguibile utile per ricevere le mail che sarebbero spedite dal sito web, in modo da poter verificare il corretto funzionamento del recupero password.
+\end{itemize}
+
+\section{Gestione dei dati}
+
+Il sito web si appoggia su una base di dati di tipo MySQL. Il database immagazzina tutti i dati inseriti negli appositi form del sito web, rendendoli disponibili ad ogni query eseguita in una pagina. Tutte le modifiche che avvengono tramite query MySQL vengono lanciate da pagine web PHP. La struttura del database è come segue:
+
+\begin{itemize}
+	\item \textbf{Annata:} in questa tabella vengono immagazzinate tutte le
+	informazioni sulle annate dei vini presenti nell'enoteca. La tabella è strutturata come segue:
+	\begin{itemize}
+		\item \textbf{Anno:} indica l'anno ed è univoco;
+		\item \textbf{Descrizione:} descrive l'annata;
+		\item \textbf{Qualità:} descrive la qualità dell'annata;
+		\item \textbf{Migliore:} indica se fa parte delle migliori annate dell'enoteca.
+	\end{itemize}	
+	\item \textbf{Utenti:} in questa tabella vengono immagazzinate tutte le informazioni sugli utenti presenti nell'enoteca. La tabella è strutturata come segue:
+	\begin{itemize}
+		\item \textbf{Id\_user:} indica l'id dell'utente ed è univoco;
+		\item \textbf{Nome:} indica il nome completo;
+		\item \textbf{Username:} indica l'username per la login;
+		\item \textbf{Password:} indica la password per la login;
+		\item \textbf{Email:} indica l'email;
+		\item \textbf{Admin:} indica se l'utente è l'amministratore.
+	\end{itemize}
+	\item \textbf{Vini:} in questa tabella vengono immagazzinate tutte le informazioni sui vini presenti nell'enoteca. La tabella è strutturata come segue:
+	\begin{itemize}
+		\item \textbf{Id\_wine:} indica l'id del vino ed è univoco;
+		\item \textbf{Nome:} indica il nome;
+		\item \textbf{Tipologia:} indica la tipologia;
+		\item \textbf{Descrizione:} indica la descrizione;
+		\item \textbf{Denominazione:} indica la denominazione;
+		\item \textbf{Annata:} indica l'annata;
+		\item \textbf{Vitigno:} indica i vitigni con cui è realizzato il vino;
+		\item \textbf{Abbinamento:} indica gli abbinamenti;
+		\item \textbf{Degustazione:} indica quando è consigliato degustare il vino;
+		\item \textbf{Gradazione:} indica la gradazione alcolica (in percentuale);
+		\item \textbf{Formato:} indica il formato (in litri) della bottiglia.
+	\end{itemize}
+\end{itemize}
+
+\section{Accessibilità}
+
+La corretta sequenzialità di lettura è facilitata dall'introduzione di elementi
+tabindex. La presenza di colori a contrasto elevato ne facilita la lettura anche da persone con capacità visive limitate. Il sito web inoltre implementa un layout responsive, nel completo rispetto dei vigenti standard di accessibilità.\\
+Nel sito web sono presenti aiuti alla navigazione, come i pulsanti "torna su", qualora fosse necessario. Non sono inoltre presenti contenuti a rischio di epilessia o che possano indurre l'utente in uno stato
+confusionale.\\
+Abbiamo inoltre limitato l'utilizzo di Javascript soltanto alla gestione dei coockies. Questa scelta è stata fatta perseguendo la non intrusività dello scripting.\\
+
+Il sito è stato creato facendo attenzione a separare contenuto; tutte le pagine sono in italiano anche se possono contenere parole in inglese contenute in un contenitore con attributo lang=”eng”. Inoltre tutte le pagine vengono generate in modo dinamico tramite php.
+Per rendere il sito più accessibile sono stati inseriti i seguenti tool:
+⦁	Link per andare direttamente al contenuto all’interno di una access bar;
+⦁	Tab index regolato in modo da poter accedere ai contenuti in ordine coerente;
+⦁	Freccia “Torna su” fissata a fondo pagina;
+⦁	Presenti i meta tag per facilitare l’acesso ai motori di ricerca e dare in modo sintetico tutte
+	le informazioni riguardanti il sito;
+⦁	Link alla pagina corrente evidenziato e non cliccabile nella barra di navigazione;
+⦁	Link cliccabili in tutta l’area del contenitore nel quale sono contenuti e non solo nel link stesso;
+⦁	Sitemap gerarchica di tutte le pagine;
+⦁	Briciole di pane con percorso effettuato per arrivare alla pagina;
+⦁	Contenuti con colori in contrasto con lo sfondo dei contenitori per agevolare la lettura
+⦁	Link di navigazione interna alle pagine;
+⦁	Link già visitati di colorazione diversa rispetto a quelli non ancora visitati
+⦁	Immagini chiaramente separate dal testo.
+⦁	Menu’ mobile only html5 + css
+⦁	Html5 shiv
+
+\section{Compatibilità browser}
+
+Il presente sito web è stato testato sui principali browser. Dai test effettuati, non sono emerse particolari problematiche che possano influire negativamente sulla navigazione o sull'usabilità del sito.
+Di seguito si riporta un breve riepilogo delle principali piattaforme testate:
+	\begin{itemize}
+		\item \textbf{Edge}: il sito viene visualizzato ed è interagibile correttamente;
+		\item \textbf{Firefox}: il sito viene visualizzato ed è interagibile correttamente;
+		\item \textbf{Chrome}: il sito viene visualizzato ed è interagibile correttamente;
+	\end{itemize}
+
+\section{Organizzazione del gruppo di lavoro}
+
+La seguente tabella indica quali sono state le principali mansioni di ogni componente del gruppo. Ogni componente,tuttavia , ha contribuito almeno in parte ad ogni fase di sviluppo del progetto.
+
+\subsection{Alessio Gobbo}
+
+\begin{itemize}
+	\item HTML
+	\item PHP 
+	\item CSS Desktop, Mobile
+	\item stesura relazione
+\end{itemize}
+
+\subsection{Simone Ballarin}
+
+\begin{itemize}
+	\item PHP 
+	\item CSS Desktop, Mobile
+	\item HTML
+	\item Validazione
+\end{itemize}
+
+\subsection{Gerta Lleshi}
+
+\begin{itemize}
+	\item PHP
+	\item Database
+	\item Javascript
+	\item HTML
+\end{itemize}
+
+\subsection{Riccardo Dario}
+
+\begin{itemize}
+	\item CSS Stampa
+	\item Accessibilità
+	\item Stesura relazione
+\end{itemize}
+
+\end{document}
