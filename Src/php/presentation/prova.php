@@ -7,7 +7,7 @@ require_once("../models/MassiveOrder.php");
 //include "../class/Authenticator.php";
 
 
-$dbM = new DBmanager("localhost","sballari","Sheishioc1eith6a","sballari" );
+$dbM = new DBmanager("localhost","sballari","cheA6e0fU4bB25bx","sballari" );
 $dbM->connect();
 //$fact = new Factory($dbM);
 //$serviceList = $fact->getRequestList("cristina.polletto@gmail.com");

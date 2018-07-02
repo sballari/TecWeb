@@ -10,7 +10,7 @@
     require_once("ElementDisplayer.php");
     $h = new CommonHtmlElement();
     $h->printHead("Pagina di conferma cliente", "pagina dedicata alla conferma delle operazioni eseguite dal cliente", "conferma, annulla");
-    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
+    $d = new DBmanager("localhost", "sballari", "cheA6e0fU4bB25bx", "sballari");
     $d->connect();
     $f = new Factory($d);
     $disp = new ElementDisplayer();

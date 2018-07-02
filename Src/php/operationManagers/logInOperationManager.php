@@ -5,7 +5,7 @@
     require_once("../services/Factory.php");
 
     session_start();
-    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
+    $d = new DBmanager("localhost", "sballari", "cheA6e0fU4bB25bx", "sballari");
     $d->connect();
     $f = new Factory($d);
 
