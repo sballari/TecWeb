@@ -11,7 +11,7 @@
 
     $h = new CommonHtmlElement();
     $h->printHead("Area personale impiegato", "pagina dedicata ai impiegati della pasticceria", "gestione ordini, aggiunta prodotti, utenti");
-    $d = new DBmanager("localhost", "sballari", "Sheishioc1eith6a", "sballari");
+    $d = new DBmanager("localhost", "sballari", "cheA6e0fU4bB25bx", "sballari");
     $d->connect();
     $f = new Factory($d);
     $disp = new ElementDisplayer();
