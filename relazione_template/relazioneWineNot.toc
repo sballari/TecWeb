@@ -1,0 +1,17 @@
+\select@language {italian}
+\select@language {italian}
+\contentsline {section}{\numberline {1}Abstract}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Analisi}{3}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Utenti destinatari}{3}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}Base informativa}{4}{subsubsection.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.3}Progettazione}{4}{subsubsection.1.1.3}
+\contentsline {subsection}{\numberline {1.2}Validazione}{6}{subsection.1.2}
+\contentsline {section}{\numberline {2}Struttura del progetto}{7}{section.2}
+\contentsline {section}{\numberline {3}Gestione dei dati}{8}{section.3}
+\contentsline {section}{\numberline {4}Accessibilit\IeC {\`a}}{8}{section.4}
+\contentsline {section}{\numberline {5}Compatibilit\IeC {\`a} browser}{9}{section.5}
+\contentsline {section}{\numberline {6}Organizzazione del gruppo di lavoro}{9}{section.6}
+\contentsline {subsection}{\numberline {6.1}Alessio Gobbo}{9}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Simone Ballarin}{9}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Gerta Lleshi}{10}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Riccardo Dario}{10}{subsection.6.4}

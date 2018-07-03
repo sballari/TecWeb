@@ -74,12 +74,26 @@ Si sono d'apprima individuati gli utenti destinatari, tramite i seguenti step:
 \begin{itemize}
 	\item \textbf{Individuazione delle categorie di utenti}
 
+		\begin{figure}[h!]
+			\includegraphics[width=1\linewidth]{StyleLatex/img/catUt.png}
+		\end{figure}
+
 	\item \textbf{Definizione di gruppo omogeneo di utenti}
 
+	\begin{figure}[h!]
+		\includegraphics[width=1\linewidth]{StyleLatex/img/GrOm.png}
+	\end{figure}
+
+	\newpage
+
 	\item \textbf{Individuazione degli obiettivi per classe d'utenza}
+
+	\begin{figure}[h!]
+		\includegraphics[width=1\linewidth]{StyleLatex/img/obiettivi.png}
+	\end{figure}
+
 \end{itemize}
 
-%inserire immagini ...
 
 \subsubsection{Base informativa}
 
@@ -95,16 +109,39 @@ Si è poi stilata una base informativa da cui attingere, andando a definire:
 	\item contatti
 \end{itemize} 
 
-\subsection{Progettazione}
+\subsubsection{Progettazione}
+
+La progettazione è stata effettuata perseguendo il paradigma della programmazione ad oggetti.\\
+L'architettura si suddivide in 3 aree principali: backend, communication protocol, frontend.
+
+Per quanto concerne il backend, esso implementa la logica di business e si interfaccia con il database, garantendo la persistenza.
+
+\begin{figure}[h!]
+	\includegraphics[width=1\linewidth]{StyleLatex/PHP_backend.jpg}
+\end{figure}
+
+\newpage
+
+Questo "package" modella gli oggetti che rappresentano lo stato delle entità contenute nel database e dei dati inseriti tramite il layer di presentazione.
+
+\begin{figure}[h!]
+	\includegraphics[width=1\linewidth]{StyleLatex/PHP_comunication_protocol.jpg}
+\end{figure}
+
+
+
+\begin{figure}[h!]
+	\includegraphics[width=1\linewidth]{StyleLatex/PHP_frontend.jpg}
+\end{figure}
 
 \subsection{Validazione}
 
-Gli strumenti utilizzati per la validazione sono: \textbf{W3C Markup Validation Service} (per validazione HTML), \textbf{W3C CSS Validator} (per validazione CSS), \textbf{Total Validator} (per validazione accessibilità).
-Tutte le pagine sono state validate con successo, essendo prive anche di warning.
+Gli strumenti utilizzati per la validazione sono: \textbf{W3C Markup Validation Service} (per validazione HTML), \textbf{W3C CSS Validator} (per validazione CSS), \textbf{Total Validator} (per validazione accessibilità).\\
+Essendo prive di errori e warning, tutte le pagine sono state validate con successo.
 
-%immagini badge validatori ...
-
-
+\begin{figure}[h!]
+	\includegraphics[width=0.2\linewidth]{StyleLatex/badge-html5.png}
+\end{figure}
 
 \section{Struttura del progetto}
 
@@ -114,50 +151,82 @@ Per gestire la complessità del progetto e mantenere la separazione fra contenut
 	\item \textbf{css:} questa cartella contiene tutti i file riguardanti il css, opportunamente divisi in tre file, per desktop, mobile e stampa;
 	\item \textbf{php:} questa cartella contiene i file php del sito web;
 	\item \textbf{img:} questa cartella contiene tutte le immagini, i loghi e le icone del sito web;
-	\item \textbf{js:}  questa pagina contiene tutti gli script javascript del progetto.
+	\item \textbf{js:}  questa pagina contiene il codice javascript del progetto, ovvero la sola gestione dei coockies.
 \end{itemize}
+
+\newpage
 
 \section{Gestione dei dati}
 
 Il sito web si appoggia su una base di dati di tipo MySQL. Tutte le interazioni vengono lanciate da codice PHP tramite la libreria mysqli.\\
 La struttura del database è la seguente:
 
-%inserisci immagine ERTecWeb.jpeg
+\begin{figure}[h!]
+	\includegraphics[width=1\linewidth]{StyleLatex/ERTecWeb.jpeg}
+\end{figure}
 
 \section{Accessibilità}
 
-La corretta sequenzialità di lettura è facilitata dall'introduzione di elementi tabindex. La presenza di colori a contrasto elevato ne facilita la lettura anche da persone con capacità visive limitate. Il sito web inoltre implementa un layout responsive, nel completo rispetto dei vigenti standard di accessibilità.\\
-Nel sito web sono presenti aiuti alla navigazione, come i pulsanti "torna su", qualora fosse necessario. Non sono inoltre presenti contenuti a rischio di epilessia o che possano indurre l'utente in uno stato confusionale.\\
-Abbiamo inoltre limitato l'utilizzo di Javascript soltanto alla gestione dei coockies. Questa scelta è stata fatta perseguendo la non intrusività dello scripting.\\
-Tutte le pagine sono in italiano, le poche parole in inglese sono state inserite in uno <span></span> con attributo lang=”eng”.
-
-Sono state adottate anche le seguenti misure:
+Sono state adottate le seguenti misure in modo da perseguire l'accessibilità:
 \begin{itemize}
-	\item Link per andare direttamente al contenuto all’interno di una access bar;
-	\item Tab index regolato in modo da poter accedere ai contenuti in ordine coerente;
+	\item Link all’interno di un'access bar per andare direttamente al contenuto;
+	\item Link salta menù in ogni menù;
+	\item Tab index per poter accedere in ordine sequenzialmente corretto ai contenuti;
 	\item Freccia “Torna su” fissata a fondo pagina;
-	\item Presenti i meta tag per facilitare l’acesso ai motori di ricerca e fornire in modo sintetiche le info sul portale web;
+	\item Presenti i meta tag per facilitare l’acesso ai motori di ricerca e fornire in modo sintetico le info sul portale web;
+	\item Tutte le pagine sono in italiano, le poche parole in inglese sono state inserite in uno <span></span> con attributo lang=”eng”.
+	\item L'utilizzo limitato di codice Javascript persegue la non intrusività dello scripting.
 	\item Link alla pagina corrente evidenziato e non cliccabile nella barra di navigazione;
+	\item Il sito web inoltre implementa un layout responsive, nel completo rispetto dei vigenti standard di accessibilità.
 	\item Link cliccabili in tutta l’area del contenitore nel quale sono contenuti e non solo nel link stesso;
 	\item Sitemap gerarchica di tutte le pagine;
 	\item Percorso seguito per raggiungere la pagina corrente;
-	\item Contenuti dai colori contrastanti rispetto ai loro contenitori,agevolare la lettura;
 	\item Link di navigazione interna alle pagine;
 	\item Link già visitati di colorazione diversa rispetto a quelli non ancora visitati;
 	\item Immagini chiaramente separate dal testo;
 	\item Utilizzo del tool HTML5 shiv: esso permette alle versioni di IE < 9 di riconoscere i tag html5 e permetterne lo styling.
+	\item La presenza di colori a contrasto elevato facilita la lettura anche a 	persone con capacità visive limitate.
+	
 \end{itemize}
+
+Relativamente a quest'ultimo punto sono stati effettuati i dovuti test tramite color contrast checker.\\
+Qui di seguito riportiamo gli schemi colori presi in esame:\\
+
+\begin{tabular}{l|l}
+	\hline
+	 \textbf{Oggetto} & \textbf{Contrast ratio}  \\
+	\hline
+	  Contenuto pagine & 20.76:1  \\
+	\hline
+	Menù/briciole & 7.08:1 \\
+	\hline
+	Menù(voci inattive) & 7.00:1 \\
+	\hline
+	Link non visitati & 8.49:1 \\
+	\hline
+	Link visitati & 10.88:1 \\
+	\hline
+	Bottoni & 15.46:1 \\
+\end{tabular}\\
+Per ognuno schema, l'esito del test è stato il seguente:\\
+\begin{tabular}{l|l}
+	\hline
+	 \textbf{WCAG AA} & Pass  \\
+	\hline
+	 \textbf{WCAG AAA} & Pass  \\
+	\hline
+\end{tabular}
 
 
 \section{Compatibilità browser}
 
 Il presente sito web è stato testato sui principali browser. Dai test effettuati, non sono emerse particolari problematiche che possano influire negativamente sulla navigazione o sull'usabilità del sito.
 Di seguito si riporta un breve riepilogo delle principali piattaforme testate:
-	\begin{itemize}
-		\item \textbf{Edge}: il sito viene visualizzato ed è interagibile correttamente;
-		\item \textbf{Firefox}: il sito viene visualizzato ed è interagibile correttamente;
-		\item \textbf{Chrome}: il sito viene visualizzato ed è interagibile correttamente;
-	\end{itemize}
+	\begin{enumerate}
+		\item \textbf{Chrome}
+		\item \textbf{Edge}
+		\item \textbf{Firefox}
+	\end{enumerate}
 
 \section{Organizzazione del gruppo di lavoro}
 
@@ -169,7 +238,7 @@ La seguente tabella indica quali sono state le principali mansioni di ogni compo
 	\item HTML
 	\item PHP 
 	\item CSS Desktop, Mobile
-	\item stesura relazione
+	\item Stesura relazione
 \end{itemize}
 
 \subsection{Simone Ballarin}
