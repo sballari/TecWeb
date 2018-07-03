@@ -22,7 +22,7 @@
 L’azienda dolciaria “I TESORI DI SQUITTY” possiede un negozio situato nel centro cittadino e un laboratorio industriale in periferia.\\
 Lo scopo del progetto è quello di progettare e sviluppare un sito web che funga da vetrina e di erogare un servizio automatizzato di ordinazioni.\\
 
-Qui di seguito sono elencati tutti i livelli di accessibilità possibili per il sito, raggruppati secondo le seguenti nomenclature:
+Qui di seguito sono elencati tutti i livelli di accessibilità possibili per il sito:
 \begin{itemize}
 	\item \textbf{Unauthenticated user}: identifica qualsiasi utente;
 	\item \textbf{Authenticated user}: identifica un utente con account "al minuto"/"all'ingrosso"/"servizio" che ha effettuato l'accesso al portale web;
@@ -69,6 +69,8 @@ Gli \textbf{authenticated administrator}, con account di tipo "Impiegato", hanno
 
 \subsubsection{Utenti destinatari}
 
+Si sono d'apprima individuati gli utenti destinatari, tramite i seguenti step:
+
 \begin{itemize}
 	\item \textbf{Individuazione delle categorie di utenti}
 
@@ -81,92 +83,71 @@ Gli \textbf{authenticated administrator}, con account di tipo "Impiegato", hanno
 
 \subsubsection{Base informativa}
 
+Si è poi stilata una base informativa da cui attingere, andando a definire:
+
+\begin{itemize}
+	\item logo dell'azienda 
+	\item storia dell'azienda 
+	\item descrizione dello stabilimento 
+	\item descrizione del negozio
+	\item i prodotti
+	\item i servizi
+	\item contatti
+\end{itemize} 
+
 \subsection{Progettazione}
-
-\subsection{Fase di test}
-
-Ogni funzionalità implementata nel sito web è stata oggetto di test per verificarne il corretto funzionamento.
 
 \subsection{Validazione}
 
-Gli strumenti utilizzati sono stati \textbf{W3C Markup Validation Service} (per validazione XHTML), \textbf{W3C CSS Validator} (per validazione CSS), \textbf{Total Validator} (per validazione accessibilità).
+Gli strumenti utilizzati per la validazione sono: \textbf{W3C Markup Validation Service} (per validazione HTML), \textbf{W3C CSS Validator} (per validazione CSS), \textbf{Total Validator} (per validazione accessibilità).
+Tutte le pagine sono state validate con successo, essendo prive anche di warning.
+
+%immagini badge validatori ...
+
+
 
 \section{Struttura del progetto}
 
-Per gestire la complessità del progetto e mantenere la separazione fra contenuto-stile-comportamento i file che compongono il portale sono stati raggruppati e situati in ... cartelle diverse:
+Per gestire la complessità del progetto e mantenere la separazione fra contenuto,stile e comportamento i file che compongono il portale sono stati raggruppati e suddivisi in 4 cartelle diverse:
 
 \begin{itemize}
-	\item \textbf{css:} questa cartella contiene tutti i file riguardanti il css, opportunamente diviso in tre file, per desktop, mobile e stampa;
+	\item \textbf{css:} questa cartella contiene tutti i file riguardanti il css, opportunamente divisi in tre file, per desktop, mobile e stampa;
 	\item \textbf{php:} questa cartella contiene i file php del sito web;
 	\item \textbf{img:} questa cartella contiene tutte le immagini, i loghi e le icone del sito web;
-	\item \textbf{php/...:} questa cartella contiene il file di connessione al database e il file con le funzioni ausiliarie utilizzate nelle pagine php del sito web;
-	\item \textbf{js:} questa pagina contiene tutti gli script javascript del progetto, compresa la gestione dei coockies.
-	\item \textbf{utility:} questa cartella contiene un eseguibile utile per ricevere le mail che sarebbero spedite dal sito web, in modo da poter verificare il corretto funzionamento del recupero password.
+	\item \textbf{js:}  questa pagina contiene tutti gli script javascript del progetto.
 \end{itemize}
 
 \section{Gestione dei dati}
 
-Il sito web si appoggia su una base di dati di tipo MySQL. Il database immagazzina tutti i dati inseriti negli appositi form del sito web, rendendoli disponibili ad ogni query eseguita in una pagina. Tutte le modifiche che avvengono tramite query MySQL vengono lanciate da pagine web PHP. La struttura del database è come segue:
+Il sito web si appoggia su una base di dati di tipo MySQL. Tutte le interazioni vengono lanciate da codice PHP tramite la libreria mysqli.\\
+La struttura del database è la seguente:
 
-\begin{itemize}
-	\item \textbf{Annata:} in questa tabella vengono immagazzinate tutte le
-	informazioni sulle annate dei vini presenti nell'enoteca. La tabella è strutturata come segue:
-	\begin{itemize}
-		\item \textbf{Anno:} indica l'anno ed è univoco;
-		\item \textbf{Descrizione:} descrive l'annata;
-		\item \textbf{Qualità:} descrive la qualità dell'annata;
-		\item \textbf{Migliore:} indica se fa parte delle migliori annate dell'enoteca.
-	\end{itemize}	
-	\item \textbf{Utenti:} in questa tabella vengono immagazzinate tutte le informazioni sugli utenti presenti nell'enoteca. La tabella è strutturata come segue:
-	\begin{itemize}
-		\item \textbf{Id\_user:} indica l'id dell'utente ed è univoco;
-		\item \textbf{Nome:} indica il nome completo;
-		\item \textbf{Username:} indica l'username per la login;
-		\item \textbf{Password:} indica la password per la login;
-		\item \textbf{Email:} indica l'email;
-		\item \textbf{Admin:} indica se l'utente è l'amministratore.
-	\end{itemize}
-	\item \textbf{Vini:} in questa tabella vengono immagazzinate tutte le informazioni sui vini presenti nell'enoteca. La tabella è strutturata come segue:
-	\begin{itemize}
-		\item \textbf{Id\_wine:} indica l'id del vino ed è univoco;
-		\item \textbf{Nome:} indica il nome;
-		\item \textbf{Tipologia:} indica la tipologia;
-		\item \textbf{Descrizione:} indica la descrizione;
-		\item \textbf{Denominazione:} indica la denominazione;
-		\item \textbf{Annata:} indica l'annata;
-		\item \textbf{Vitigno:} indica i vitigni con cui è realizzato il vino;
-		\item \textbf{Abbinamento:} indica gli abbinamenti;
-		\item \textbf{Degustazione:} indica quando è consigliato degustare il vino;
-		\item \textbf{Gradazione:} indica la gradazione alcolica (in percentuale);
-		\item \textbf{Formato:} indica il formato (in litri) della bottiglia.
-	\end{itemize}
-\end{itemize}
+%inserisci immagine ERTecWeb.jpeg
 
 \section{Accessibilità}
 
-La corretta sequenzialità di lettura è facilitata dall'introduzione di elementi
-tabindex. La presenza di colori a contrasto elevato ne facilita la lettura anche da persone con capacità visive limitate. Il sito web inoltre implementa un layout responsive, nel completo rispetto dei vigenti standard di accessibilità.\\
-Nel sito web sono presenti aiuti alla navigazione, come i pulsanti "torna su", qualora fosse necessario. Non sono inoltre presenti contenuti a rischio di epilessia o che possano indurre l'utente in uno stato
-confusionale.\\
+La corretta sequenzialità di lettura è facilitata dall'introduzione di elementi tabindex. La presenza di colori a contrasto elevato ne facilita la lettura anche da persone con capacità visive limitate. Il sito web inoltre implementa un layout responsive, nel completo rispetto dei vigenti standard di accessibilità.\\
+Nel sito web sono presenti aiuti alla navigazione, come i pulsanti "torna su", qualora fosse necessario. Non sono inoltre presenti contenuti a rischio di epilessia o che possano indurre l'utente in uno stato confusionale.\\
 Abbiamo inoltre limitato l'utilizzo di Javascript soltanto alla gestione dei coockies. Questa scelta è stata fatta perseguendo la non intrusività dello scripting.\\
+Tutte le pagine sono in italiano, le poche parole in inglese sono state inserite in uno <span></span> con attributo lang=”eng”.
 
-Il sito è stato creato facendo attenzione a separare contenuto; tutte le pagine sono in italiano anche se possono contenere parole in inglese contenute in un contenitore con attributo lang=”eng”. Inoltre tutte le pagine vengono generate in modo dinamico tramite php.
-Per rendere il sito più accessibile sono stati inseriti i seguenti tool:
-⦁	Link per andare direttamente al contenuto all’interno di una access bar;
-⦁	Tab index regolato in modo da poter accedere ai contenuti in ordine coerente;
-⦁	Freccia “Torna su” fissata a fondo pagina;
-⦁	Presenti i meta tag per facilitare l’acesso ai motori di ricerca e dare in modo sintetico tutte
-	le informazioni riguardanti il sito;
-⦁	Link alla pagina corrente evidenziato e non cliccabile nella barra di navigazione;
-⦁	Link cliccabili in tutta l’area del contenitore nel quale sono contenuti e non solo nel link stesso;
-⦁	Sitemap gerarchica di tutte le pagine;
-⦁	Briciole di pane con percorso effettuato per arrivare alla pagina;
-⦁	Contenuti con colori in contrasto con lo sfondo dei contenitori per agevolare la lettura
-⦁	Link di navigazione interna alle pagine;
-⦁	Link già visitati di colorazione diversa rispetto a quelli non ancora visitati
-⦁	Immagini chiaramente separate dal testo.
-⦁	Menu’ mobile only html5 + css
-⦁	Html5 shiv
+Sono state adottate anche le seguenti misure:
+\begin{itemize}
+	\item Link per andare direttamente al contenuto all’interno di una access bar;
+	\item Tab index regolato in modo da poter accedere ai contenuti in ordine coerente;
+	\item Freccia “Torna su” fissata a fondo pagina;
+	\item Presenti i meta tag per facilitare l’acesso ai motori di ricerca e fornire in modo sintetiche le info sul portale web;
+	\item Link alla pagina corrente evidenziato e non cliccabile nella barra di navigazione;
+	\item Link cliccabili in tutta l’area del contenitore nel quale sono contenuti e non solo nel link stesso;
+	\item Sitemap gerarchica di tutte le pagine;
+	\item Percorso seguito per raggiungere la pagina corrente;
+	\item Contenuti dai colori contrastanti rispetto ai loro contenitori,agevolare la lettura;
+	\item Link di navigazione interna alle pagine;
+	\item Link già visitati di colorazione diversa rispetto a quelli non ancora visitati;
+	\item Immagini chiaramente separate dal testo;
+	\item Utilizzo del tool HTML5 shiv: esso permette alle versioni di IE < 9 di riconoscere i tag html5 e permetterne lo styling.
+\end{itemize}
+
 
 \section{Compatibilità browser}
 
