@@ -215,7 +215,7 @@ public function getRequest($key, $usrType){
                $arrP = $this->getOrderProductList($k, "All_ingrosso");
 
                $element->insertProducts($arrP);
-			   $element->getProducts()[0]->getName();
+		//	   $element->getProducts()[0]->getName();
                $arrRet[] = $element;
              }
              return $arrRet;
