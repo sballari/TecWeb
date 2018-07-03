@@ -65,7 +65,7 @@
 
           <div id="password">
           <label for="Password">Password: </label>
-        	<input type="password" id="Password" name="password" placeholder="insert your password" value="<?php if(isset($_SESSION["datiInseriti"])){
+        	<input type="password" id="Password" name="password" placeholder="inserisci la tua password" value="<?php if(isset($_SESSION["datiInseriti"])){
           echo $datiInseriti[1]."";
           unset($_SESSION["datiInseriti"]);
           }?>" required ><span class="err">
@@ -74,7 +74,7 @@
           unset($_SESSION["ErrPassw"]);
           } ?></span>
           </div>
-        	<button type="submit" name = "login" >Log in</button>
+        	<button type="submit" name = "login" >Accedi</button>
       	</fieldset>
       	</form>
     	</div>

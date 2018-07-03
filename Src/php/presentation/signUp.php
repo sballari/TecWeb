@@ -49,7 +49,7 @@
 
           <div id="nome">
           <label for="Nome">Nome: </label>
-        	<input type="text" id="Nome" name="nome" placeholder="insert your name" value="<?php $datiIn=array();
+        	<input type="text" id="Nome" name="nome" placeholder="inserisci il tuo nome" value="<?php $datiIn=array();
           if(isset($_SESSION["datiIn"])){
           $datiIn=unserialize($_SESSION["datiIn"]);
           echo $datiIn[0]."";
@@ -62,7 +62,7 @@
 
           <div id="cognome">
           <label for="Cognome">Cognome: </label>
-        	<input type="text" id="Cognome" name="cognome" placeholder="insert your surname" value="<?php if(isset($_SESSION["datiIn"])){
+        	<input type="text" id="Cognome" name="cognome" placeholder="inserisci il tuo cognome" value="<?php if(isset($_SESSION["datiIn"])){
           echo $datiIn[1]."";
           }?>" required ><span class="err">
           <?php if(isset($_SESSION["ErrCognome"])){
@@ -97,7 +97,7 @@
 
           <div id="password">
           <label for="Password">Password: </label>
-        	<input type="password" id="Password" name="passwordSignup" placeholder="insert your password" value="<?php if(isset($_SESSION["datiIn"])){
+        	<input type="password" id="Password" name="passwordSignup" placeholder="inserisci una password" value="<?php if(isset($_SESSION["datiIn"])){
           echo $datiIn[4]."";
           unset($_SESSION["datiIn"]);
           }?>" required ><span class="err">
@@ -106,7 +106,7 @@
           unset($_SESSION["ErrPassword"]);
           } ?></span>
           </div>
-        	<button type="submit" name = "createAccount" >Create account</button>
+        	<button type="submit" name = "createAccount" >Crea Account</button>
       	</fieldset>
       	</form>
     	</div>

@@ -175,7 +175,7 @@ public function getRequest($key, $usrType){
 
 		if ($this->dbM->getStatus()==true){
         $user = $this->getUser($userEmail);
-        if ($user==false) {echo "Error: email doesn't exist"; return false;}
+        if ($user==false) {echo "Errore: l'email non esiste"; return false;}
 				$tipoUtente = $user->getUserType();
 				$email = "'".$userEmail."'";
 
