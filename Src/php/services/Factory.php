@@ -115,7 +115,9 @@ class Factory {
 
   public function getProduct($key){
     if ($this->dbM->getStatus()==true){
+      error_log( "SELECT * FROM Prodotto WHERE nome='".$key."'");
       $result = $this->dbM->submitQuery("SELECT * FROM Prodotto WHERE nome='".$key."'");
+      
       $product = $result->fetch_assoc();
       return new Product ( $product['imagePath'],
                            $product['descrizione'],
