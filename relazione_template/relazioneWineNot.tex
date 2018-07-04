@@ -22,48 +22,6 @@
 L’azienda dolciaria “I TESORI DI SQUITTY” possiede un negozio situato nel centro cittadino e un laboratorio industriale in periferia.\\
 Lo scopo del progetto è quello di progettare e sviluppare un sito web che funga da vetrina e di erogare un servizio automatizzato di ordinazioni.\\
 
-Qui di seguito sono elencati tutti i livelli di accessibilità possibili per il sito:
-\begin{itemize}
-	\item \textbf{Unauthenticated user}: identifica qualsiasi utente;
-	\item \textbf{Authenticated user}: identifica un utente con account "al minuto"/"all'ingrosso"/"servizio" che ha effettuato l'accesso al portale web;
-	\item \textbf{Authenticated administrator}: identifica un utente con account impiegato che ha effettuato l'accesso al portale web.
-\end{itemize}
-
-L'\textbf{unauthenticated user} può accedere alle pagine \textit{Home}, \textit{Per la tua casa}, \textit{Per il tuo ristorante}, \textit{Catering ed Eventi}, \textit{Accedi}, \textit{Registrati}:
-\begin{itemize}
-	\item \textbf{Home}: in questa pagina può trovare la storia dell'azienda dolciaria, nonchè numerose informazioni sia sul punto vendita che sullo stabilimento produttivo.
-
-	\item \textbf{Per la tua casa}: in questa pagina può visualizzare l'immagine, gli ingredienti e la descrizione di tutti i prodotti disponibili per il commercio al dettaglio.
-
-	\item \textbf{Per il tuo ristorante}: in questa pagina può consultare il catalogo,con relativa descrizione, dei prodotti disponibili per il commercio all'ingrosso.
-
-	\item \textbf{Catering ed Eventi}: in questa pagina può visualizzare i servizi erogati dall'azienda.
-
-	\item \textbf{Registrati}: in questa pagina l'utente non autenticato può effettuare la registrazione, scegliendo fra le tipologie utente: al minuto, all'ingrosso, servizio.
-
-	\item \textbf{Accedi}: in questa pagina l'utente può autenticarsi, previo inserimento delle credenziali.\\
-	Egli verrà reindirizzato alla propria area privata.
-\end{itemize}
-
-L'\textbf{authenticated user} può accedere alle sua area personale, suddivisa in \textit{Prenotazione}, \textit{Storia degli ordini}, \textit{Prodotti}.
-
-\begin{itemize}
-	\item \textbf{Prenotazione}: in questa pagina può prenotare un prodotto/servizio previo inserimento dei dati necessari, quali: quantità, data e ora di ritiro ecc...
-
-	\item \textbf{Storia degli ordini}: in questa pagina l'utente autenticato può consultare lo storico delle prenotazioni effettuate, visualizzarne i dettagli e annallarle.
-
-	\item \textbf{Prodotti}: in questa pagina può visualizzare il catalogo dei prodotti ordinabili compatibili con la propria tipologia di account.
-\end{itemize}
-
-Gli \textbf{authenticated administrator}, con account di tipo "Impiegato", hanno accesso alle sezioni: \textit{Ordini},\textit{Utenti}, \textit{Prodotti}.
-
-\begin{itemize}
-	\item \textbf{Ordini:} in questa pagina l'impiegato può consultare le ordinazioni divise per tipologia, visualizzarne i dettagli, cambiarne lo stato (in lavorazione ecc..) ed eliminarle.
-
-	\item \textbf{Utenti:} in questa pagina l'impiegato visualizza l'elenco di tutti gli utenti registrati al portale web, compresi i dati anagrafici e le credenziali d'accesso e procedere alla loro eliminazione.
-
-	\item \textbf{Prodotti:} in questa pagina l'impiegato può visualizzare i dettagli di tutti i prodotti e i servizi offerti da I Tesori di Squitty ed eliminarli.
-\end{itemize}
 
 \subsection{Analisi}
 
@@ -122,17 +80,61 @@ Per quanto concerne il backend, esso implementa la logica di business e si inter
 
 \newpage
 
-Questo "package" modella gli oggetti che rappresentano lo stato delle entità contenute nel database e dei dati inseriti tramite il layer di presentazione.
+Questo "package" contiene una serie di classi utili al passaggio di informazioni attraverso i vari strati dell'architettura del sito. Questi rappresentano elementi creati dall'utente o ricavati dalla base di dati e che vengono poi usati come linguaggio comune sia dalla logica di presentazione, sia dalla logica di business. Queste classi non posseggono logica, ma solo stato.
 
 \begin{figure}[h!]
 	\includegraphics[width=1\linewidth]{StyleLatex/PHP_comunication_protocol.jpg}
 \end{figure}
 
+Per finire, il frontend contiene una serie di file .php che creano dinamicamente il contenuto html delle pagine presenti nel portale.
+Queste possono essere consultabili da ogni utente o solo da una specifica tipologia. Sono presenti anche file php conteneti funzioni che creano il codice HTML in comune (vedi CommonHTMLElement e ElementDisplayer) e file che fungono da controller quali (OperationManager e OperationManaagerImpiegati).
+I file che generano HTML sono presenti nella cartella presentation, mentre i controllori sono nella cartella OperationManagers.
+
+Qui di seguito sono elencati tutti i livelli di accessibilità possibili per il sito:
+\begin{itemize}
+	\item \textbf{Unauthenticated user}: identifica qualsiasi utente;
+	\item \textbf{Authenticated user}: identifica un utente con account "al minuto"/"all'ingrosso"/"servizio" che ha effettuato l'accesso al portale web;
+	\item \textbf{Authenticated administrator}: identifica un utente con account impiegato che ha effettuato l'accesso al portale web.
+\end{itemize}
+
+L'\textbf{unauthenticated user} può accedere alle pagine \textit{Home}, \textit{Per la tua casa}, \textit{Per il tuo ristorante}, \textit{Catering ed Eventi}, \textit{Accedi}, \textit{Registrati}:
+\begin{itemize}
+	\item \textbf{Home}: in questa pagina può trovare la storia dell'azienda dolciaria, nonchè numerose informazioni sia sul punto vendita che sullo stabilimento produttivo.
+
+	\item \textbf{Per la tua casa}: in questa pagina può visualizzare l'immagine, gli ingredienti e la descrizione di tutti i prodotti disponibili per il commercio al dettaglio.
+
+	\item \textbf{Per il tuo ristorante}: in questa pagina può consultare il catalogo,con relativa descrizione, dei prodotti disponibili per il commercio all'ingrosso.
+
+	\item \textbf{Catering ed Eventi}: in questa pagina può visualizzare i servizi erogati dall'azienda.
+
+	\item \textbf{Registrati}: in questa pagina l'utente non autenticato può effettuare la registrazione, scegliendo fra le tipologie utente: al minuto, all'ingrosso, servizio.
+
+	\item \textbf{Accedi}: in questa pagina l'utente può autenticarsi, previo inserimento delle credenziali.\\
+	Egli verrà reindirizzato alla propria area privata.
+\end{itemize}
+
+L'\textbf{authenticated user} può accedere alle sua area personale, suddivisa in \textit{Prenotazione}, \textit{Storia degli ordini}, \textit{Prodotti}.
+
+\begin{itemize}
+	\item \textbf{Prenotazione}: in questa pagina può prenotare un prodotto/servizio previo inserimento dei dati necessari, quali: quantità, data e ora di ritiro ecc...
+
+	\item \textbf{Storia degli ordini}: in questa pagina l'utente autenticato può consultare lo storico delle prenotazioni effettuate, visualizzarne i dettagli e annallarle.
+
+	\item \textbf{Prodotti}: in questa pagina può visualizzare il catalogo dei prodotti ordinabili compatibili con la propria tipologia di account.
+\end{itemize}
+
+Gli \textbf{authenticated administrator}, con account di tipo "Impiegato", hanno accesso alle sezioni: \textit{Ordini},\textit{Utenti}, \textit{Prodotti}.
+
+\begin{itemize}
+	\item \textbf{Ordini:} in questa pagina l'impiegato può consultare le ordinazioni divise per tipologia, visualizzarne i dettagli, cambiarne lo stato (in lavorazione ecc..) ed eliminarle.
+
+	\item \textbf{Utenti:} in questa pagina l'impiegato visualizza l'elenco di tutti gli utenti registrati al portale web, compresi i dati anagrafici e le credenziali d'accesso e procedere alla loro eliminazione.
+
+	\item \textbf{Prodotti:} in questa pagina l'impiegato può visualizzare i dettagli di tutti i prodotti e i servizi offerti da I Tesori di Squitty ed eliminarli.
+\end{itemize}
 
 
-\begin{figure}[h!]
-	\includegraphics[width=1\linewidth]{StyleLatex/PHP_frontend.jpg}
-\end{figure}
+Begin{itemize}
 
 \subsection{Validazione}
 
@@ -207,7 +209,13 @@ Qui di seguito riportiamo gli schemi colori presi in esame:\\
 	Link visitati & 10.88:1 \\
 	\hline
 	Bottoni & 15.46:1 \\
+	\hline 
 \end{tabular}\\
+\newline
+\newline
+\\
+\\
+\\
 Per ognuno schema, l'esito del test è stato il seguente:\\
 \begin{tabular}{l|l}
 	\hline
